@@ -1,0 +1,105 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<title>Comaex Scada</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static "css/base.css" %}">
+    
+
+<body class="w3-content" style="max-width:1200px">
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top" style="max-width:1200px">
+  <div id="myNavbar" class="w3-bar w3-white w3-card">
+    <a href="/" class="w3-bar-item w3-button w3-wide">LOGO</a>
+    <!-- Right-sided navbar links -->
+    <div id="barMenu" class="w3-right w3-hide-small">
+   
+    {% for menu, submenu in menus.items %}
+<a id="m{{menu.id}}" {% if submenu %} onclick="myUser({{menu.id}})" {% endif %}{% if not submenu %} href="{{ menu.get_absolute_url }}" {% endif %}
+class="loop1 w3-bar-item w3-button w3-hover-blue"><strong><i class='{{menu.fafa}}' aria-hidden="true"></i>&nbsp;&nbsp;
+{% if menu.slug == 'user' %}{{user}}{% else %}{{menu.title}}{% endif %}</strong>
+{% if submenu %}&nbsp;<i class="fa fa-angle-down fa-1x" aria-hidden="true"></i>{% endif %}</a>
+       <div id="s{{menu.id}}" class="w3-dropdown-content w3-bar-block w3-border w3-border-blue" style="width:200px">
+        {% for sub in submenu %}
+        <a href="{{ sub.get_absolute_url }}" class="w3-bar-item w3-button w3-hover-blue" style="z-index: 2">
+            <i class='{{sub.subfafa}}' aria-hidden="true"></i>&nbsp;&nbsp;{{sub.subtitle}}</a>
+        {% endfor %}
+        </div>
+{% endfor %}
+    </div>
+      
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open('sidebar')">
+    <i class="fa fa-bars" style="color:blue"></i></a>
+      
+      {% block product_bar %}{% endblock product_bar %}
+      
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-blue w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="sidebar">
+  <a href="javascript:void(0)" onclick="w3_close('sidebar')" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+    
+     {% for menu, submenu in menus.items %}
+<a id="mm{{menu.id}}" {% if submenu %} onclick="mySide({{menu.id}})" {% endif %}{% if not submenu %} href="{{ menu.get_absolute_url }}" {% endif %}class="loop2 w3-bar-item w3-button w3-hover-gray"><strong><i class='{{menu.fafa}}' aria-hidden="true"></i>&nbsp;&nbsp;
+{% if menu.slug == 'user' %}{{user}}{% else %}{{menu.title}}{% endif %}</strong>
+{% if submenu %}&nbsp;<i class="fa fa-angle-down fa-1x" aria-hidden="true"></i>{% endif %}</a>
+    
+     <div id="ss{{menu.id}}" class="w3-hide w3-bar-block w3-border w3-border-blue" style="width:200px">
+      {% for sub in submenu %}
+      <a href="{{ sub.get_absolute_url }}" class="w3-bar-item w3-button w3-hover-white" style="z-index: 2">&nbsp;&nbsp;&nbsp;&nbsp;
+      <i class='{{sub.subfafa}}' aria-hidden="true"></i>{{sub.subtitle}}</a>
+      {% endfor %}
+     </div>
+{% endfor %}
+    
+</nav>
+    
+{% block product_menu %}{% endblock product_menu %}
+{% block products %}{% endblock products %}
+{% block home %}{% endblock home %}
+
+<!-- Footer -->
+<footer class="w3-container w3-center w3-padding-16" style="background-color:#373538">  <!-- #615550 -->
+  <div class="w3-xlarge w3-section" style="color:white">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+      <a href="#" class="w3-button w3-medium w3-margin-right w3-right w3-border w3-round w3-border-white"><i class="fa fa-arrow-up w3-margin-right"></i><strong>to the top</strong></a>
+  </div>
+    <p class="w3-text-white"><strong>Control Management Exellence</strong></p>
+    
+    <!--<a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a>-->
+    
+</footer>
+    
+<!--<div id="cookWind" class="w3-display-container w3-pale-yellow w3-border" style="position: fixed; 
+  bottom:0px;
+  left:0px;
+  z-index:9; width:100%; height:80px; margin:0px 0px 0px 0px">
+    <span onclick="document.getElementById('cookWind').style.display='none'" class="w3-button w3-display-topright w3-border w3-round w3-border-black w3-margin"><strong>OK</strong></span>
+  <p>Этот веб-сайт использует файлы cookies, чтобы улучшить работу сайта и ваше взаимодействие с сайтом. При помощи файлов cookies мы собираем и временно храним некоторые личные данные. Вы можете изменить настройки cookies в вашем браузере. Подробнее: Политика конфиденциальности
+
+Читать далее: https://ee.sputniknews.ru/radio/20190621/16850002/Mezhevich-estontsy-ne-ponimayut-chto-seychas-situatsiya-khuzhe-chem-v-90-e-gody.html</p>
+   
+</div>-->
+   
+   {% block register %}{% endblock register %}
+   {% block login %}{% endblock login %}
+   {% block content %}{% endblock content %}
+    
+    <script type="text/javascript" src="{% static "css/base.js" %}"></script>
+    
+</body>
+</html>
