@@ -38,6 +38,7 @@
 
 
 2. Git put:
+   $ git init
    $ git status
    $ git add --all
    $ git commit -m "Projectthree app, first commit"

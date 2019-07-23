@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="{% static "css/base.css" %}">
     
 
-<body class="w3-content" style="max-width:1200px">
+<body class="w3-content" style="max-width:1200px; background-color: #f1f1f1">
 
 <!-- Navbar (sit on top) -->
 <div class="w3-top" style="max-width:1200px">
@@ -63,8 +63,6 @@ class="loop1 w3-bar-item w3-button w3-hover-blue"><strong><i class='{{menu.fafa}
     
 </nav>
     
-{% block product_menu %}{% endblock product_menu %}
-{% block products %}{% endblock products %}
 {% block home %}{% endblock home %}
 
 <!-- Footer -->
@@ -84,19 +82,6 @@ class="loop1 w3-bar-item w3-button w3-hover-blue"><strong><i class='{{menu.fafa}
     
 </footer>
     
-<!--<div id="cookWind" class="w3-display-container w3-pale-yellow w3-border" style="position: fixed; 
-  bottom:0px;
-  left:0px;
-  z-index:9; width:100%; height:80px; margin:0px 0px 0px 0px">
-    <span onclick="document.getElementById('cookWind').style.display='none'" class="w3-button w3-display-topright w3-border w3-round w3-border-black w3-margin"><strong>OK</strong></span>
-  <p>Этот веб-сайт использует файлы cookies, чтобы улучшить работу сайта и ваше взаимодействие с сайтом. При помощи файлов cookies мы собираем и временно храним некоторые личные данные. Вы можете изменить настройки cookies в вашем браузере. Подробнее: Политика конфиденциальности
-
-Читать далее: https://ee.sputniknews.ru/radio/20190621/16850002/Mezhevich-estontsy-ne-ponimayut-chto-seychas-situatsiya-khuzhe-chem-v-90-e-gody.html</p>
-   
-</div>-->
-   
-   {% block register %}{% endblock register %}
-   {% block login %}{% endblock login %}
    {% block content %}{% endblock content %}
     
     <script type="text/javascript" src="{% static "css/base.js" %}"></script>

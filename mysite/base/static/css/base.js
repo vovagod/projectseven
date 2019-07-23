@@ -26,20 +26,6 @@ function w3_close(ident) {
 }
 
 
-// Highlighting menu items
- $(document).ready(function(){
-     var y = document.getElementById("catIdent").innerHTML;
-     var y1 = document.getElementById("catIdent1").innerHTML;
-     if(y === 'none' && y1 === 'none'){ return; }
-     if (y !== 'all' && y1 !== 'all'){
-        document.getElementById('all').style.color='black';
-        document.getElementById('all1').style.color='black';
-    }
-        document.getElementById(y).style.color='red';
-        document.getElementById(y1).style.color='red';
- });
-
-
 // Gorizontal bar menu function
 function myUser(m) {
 var user = document.getElementById('m'+m);
@@ -111,74 +97,126 @@ user.style.color = 'white';
 }
 }
 
-
 // Slideshow characteristic Images
 function charImage(im) {
 var expandImg = document.getElementById("im"+im).style.display = "block";
 }
 
-// Window resize function
-//var ratioFlag = 0;
+//
+function styleSet(l, sz, cl, tp, lf, mr){
+    if (sz !== 'undefined'){
+        l.style.fontSize = sz+'px';
+    }
+    if (cl !== 'undefined'){
+        l.style.color = cl;
+    }
+    if (tp !== 'undefined'){
+        l.style.top = tp+'%';
+    }
+    if (lf !== 'undefined'){
+        l.style.left = lf+'%';
+    }
+     if (mr !== 'undefined'){
+        l.style.marginBottom = mr+'px';
+    }
+}
+
+function sizeCount(w, l, sz, cl, tp, lf, mr){
+    
+    for (i = 0; i < l.length; i++) {
+if (w > 993){
+    styleSet(l[i], sz[0], cl, tp, lf, mr[0])
+    continue;
+}
+if (w > 601){
+    styleSet(l[i], sz[1], cl, tp, lf, mr[1])
+    continue;
+}
+    else{
+        styleSet(l[i], sz[2], cl, tp, lf, mr[2])
+        continue;
+    }
+} 
+}
+
+// RESIZE FUNCTIONS
 function resSize(){
     var w = window.innerWidth;
-    
-    $(document).ready(function(){    
         
-// Image aligning
-var x = document.getElementsByClassName("w3-third");
-        if (x.style === undefined){ return; }
-var y = document.getElementsByClassName("w3-twothird");
-        if (y.style === undefined){ return; }
-for (i = 0; i < x.length; i++) {
+// Menu text resizing when window width is 601 or 993px
+var l = document.getElementsByClassName("loop1");
+// Text size of top gorizontal menu
+var sz = [15, 12, 10];
+var mr = [16, 0, -16];
+var un = 'undefined';
+sizeCount(w, l, sz, un, un, un, un);
+              
+// Top, right sentense on slider module
+var x = document.getElementsByClassName("loop3");
+        var sz = [36, 24, 12];
+        var cl = 'blue';
+        var tp = 2;
+        var lf = 5;
+        sizeCount(w, x, sz, cl, tp, lf, un);
+        
+// Bottom, right sentense on slider module
+var z = document.getElementsByClassName("loop4");   
+        var sz = [18, 12, 6];
+        var cl = 'green';
+        var tp = 50;
+        var lf = 7;       
+         sizeCount(w, z, sz, cl, tp, lf, un);
+        
+// Slider module management section (arrows, circlles)
+var v = document.getElementsByClassName("loop5"); 
+         sizeCount(w, v, un, un, un, un, mr);
+    
+// Text resizing for characteristic module
+    var sz1 = [21, 18, 15];
+    var sz2 = [18, 15, 13];
+    var sz3 = [16, 14, 12];
+var n1 = document.getElementsByClassName("loop8"); 
+         sizeCount(w, n1, sz1, un, un, un, 0);
+var n2 = document.getElementsByClassName("loop9"); 
+         sizeCount(w, n2, sz2, un, un, un, 0);
+var n3 = document.getElementsByClassName("loop10"); 
+         sizeCount(w, n3, sz3, un, un, un, 0);
+    
+        
+// Image vertical aligning for characteristic module
+var p = document.getElementsByClassName("loop6");
+var r = document.getElementsByClassName("loop7");
+for (i = 0; i < r.length; i++) {
 if (w < 601){
-x[i].style.marginTop = '10px';
+p[i].style.marginTop = '5px';
 }
 else{
-x[i].style.marginTop = (y[i].offsetHeight - x[i].offsetHeight)/2.0 + 'px';
+    var dif = (r[i].offsetHeight - p[i].offsetHeight)/2.0;
+    p[i].style.marginTop = dif + 'px';
+    if (dif < 0){
+        p[i].style.marginTop = '5px';
+        }
 }
 }
     
+//
 var top_height = document.getElementById("myNavbar").offsetHeight; 
-    
     var headerShow = document.getElementById('headerShow');
     if (headerShow !== null) {
     headerShow.style.marginTop = top_height + 20 + 'px'; 
     }
-    
-var sidebarwidth = document.getElementById('prod_list');
-    if (sidebarwidth === null){ return; }
-if (w < 601){
-    sidebarwidth.style.marginLeft = '0px';
 }
-else{
-    sidebarwidth.style.marginLeft = '250px';
-}
-
-var sideBar = document.getElementById('sideBar');
-sideBar.style.top = top_height + 6 + 'px'; 
-    });
-    
-}
-
-resSize();
-
-window.addEventListener("resize", function(){
-resSize();
-});
 
 
 // Slider show function
 var slideIndex = 1;
 showDivs(slideIndex);
-
 function plusDivs(n) {
   showDivs(slideIndex += n);
 }
-
 function currentDiv(n) {
   showDivs(slideIndex = n);
 }
-
 function showDivs(n) {
   var i;
   var x = document.getElementsByClassName("mySlides");
@@ -193,11 +231,11 @@ function showDivs(n) {
     z[i].style.display = "none";  
   }
   for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" w3-white", "");
+    dots[i].className = dots[i].className.replace(" w3-blue", "");
   }
   x[slideIndex-1].style.display = "block";  
   z[slideIndex-1].style.display = "block"; 
-  dots[slideIndex-1].className += " w3-white";
+  dots[slideIndex-1].className += " w3-blue";
 }
 
 function myTimer() {
@@ -206,23 +244,17 @@ function myTimer() {
 
 var myVar = setInterval(myTimer, 4000);
 
-// Product detail card slider function
-function currentProd(n) {
-  showProd(slideIndex = n);
-}
+window.addEventListener("resize", function(){
+resSize();
+   //  console.log('resize is running...');
+});
 
-function showProd(n) {
-  var i;
-  var x = document.getElementsByClassName("ProdSlides");
-  var dots = document.getElementsByClassName("demoProd");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
+document.addEventListener('readystatechange', event => {
+  if (event.target.readyState === 'interactive') {
+   // initLoader();
   }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  else if (event.target.readyState === 'complete') {
+    resSize();
+   //   console.log('readystatechange is running...');
   }
-  x[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " w3-opacity-off";
-}
+});
