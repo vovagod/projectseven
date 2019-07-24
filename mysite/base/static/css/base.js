@@ -147,7 +147,7 @@ function resSize(){
 var l = document.getElementsByClassName("loop1");
 // Text size of top gorizontal menu
 var sz = [15, 12, 10];
-var mr = [16, 0, -16];
+var mr = [16, 0, 0];
 var un = 'undefined';
 sizeCount(w, l, sz, un, un, un, un);
               
