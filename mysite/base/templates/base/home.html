@@ -215,20 +215,18 @@ style="width:100%; cursor:zoom-in;" onclick="charImage({{forloop.counter}});" ti
  {% if messages %}
 <div class="w3-panel w3-display-container w3-pale-green w3-border w3-margin">
     <span class="w3-button w3-large w3-display-topright" onclick="this.parentElement.style.display='none'">&times;</span>
-   
     {% for message in messages %}
     <h4>Success! &nbsp;&nbsp;&nbsp;&nbsp; {{ message }}</h4>
     {% endfor %}
-
 </div>
 {% endif %}
 
   <form id="contact" class="w3-container w3-card w3-section w3-white w3-text-blue" method='POST' style="padding-top:38px">{% csrf_token %}
-     <h2 class="w3-center">Contact Us</h2>
+     <h2 class="w3-center">Напишите нам</h2>
     <div class="container">
        {% for field in form %}
        {{ field.errors }}
-       {{ field.label_tag }}<br>{{ field }}<br>
+       <br>{{ field }}<br>
        {% endfor %}
         <button class="w3-third" type="submit"><strong>{% trans "Submit" %}</strong></button><br>
     </div>
