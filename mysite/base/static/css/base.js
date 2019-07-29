@@ -97,6 +97,19 @@ user.style.color = 'white';
 }
 }
 
+// Put input fields with w3-class
+var clas = document.getElementsByTagName('input'); 
+var fa = document.getElementsByClassName('w3-xxlarge');
+var fafa = ['fa fa-user', 'fa fa-envelope-o', 'fa fa-phone', 'fa fa-pencil'];
+ for (i = 0; i < clas.length; i++) {
+     if (fa[i] === 'undefined') { continue; }
+     clas[i].className = 'w3-input w3-border';
+ }
+// Put i-class with fa-fa-icon
+for (i = 0; i < fa.length; i++) {
+    fa[i].className = "w3-xxlarge " + fafa[i];
+}
+
 // Slideshow characteristic Images
 function charImage(im) {
 var expandImg = document.getElementById("im"+im).style.display = "block";
@@ -105,19 +118,19 @@ var expandImg = document.getElementById("im"+im).style.display = "block";
 //
 function styleSet(l, sz, cl, tp, lf, mr){
     if (sz !== 'undefined'){
-        l.style.fontSize = sz+'px';
+        l.style.fontSize = sz+'px'; // font-size
     }
     if (cl !== 'undefined'){
-        l.style.color = cl;
+        l.style.color = cl;  // color
     }
     if (tp !== 'undefined'){
-        l.style.top = tp+'%';
+        l.style.top = tp+'%'; // margin-top for display
     }
     if (lf !== 'undefined'){
-        l.style.left = lf+'%';
+        l.style.left = lf+'%'; // margin-left for display
     }
      if (mr !== 'undefined'){
-        l.style.marginBottom = mr+'px';
+        l.style.marginBottom = mr+'px';// margin-bottom
     }
 }
 
@@ -172,15 +185,22 @@ var v = document.getElementsByClassName("loop5");
          sizeCount(w, v, un, un, un, un, mr);
     
 // Text resizing for characteristic module
-    var sz1 = [21, 18, 15];
+    var sz1 = [23, 18, 15];
     var sz2 = [18, 15, 13];
     var sz3 = [16, 14, 12];
+    var sz4 = [16, 14, 12];
+// Title size
 var n1 = document.getElementsByClassName("loop8"); 
          sizeCount(w, n1, sz1, un, un, un, 0);
+// Subtitle size
 var n2 = document.getElementsByClassName("loop9"); 
          sizeCount(w, n2, sz2, un, un, un, 0);
+// Sentence size
 var n3 = document.getElementsByClassName("loop10"); 
          sizeCount(w, n3, sz3, un, un, un, 0);
+// Description size
+var n4 = document.getElementsByClassName("loop11"); 
+         sizeCount(w, n4, sz4, un, un, un, 0);
     
         
 // Image vertical aligning for characteristic module
@@ -203,7 +223,7 @@ else{
 var top_height = document.getElementById("myNavbar").offsetHeight; 
     var headerShow = document.getElementById('headerShow');
     if (headerShow !== null) {
-    headerShow.style.marginTop = top_height + 20 + 'px'; 
+    headerShow.style.marginTop = top_height + 15 + 'px'; 
     }
 }
 
@@ -246,15 +266,12 @@ var myVar = setInterval(myTimer, 4000);
 
 window.addEventListener("resize", function(){
 resSize();
-   //  console.log('resize is running...');
 });
 
 document.addEventListener('readystatechange', event => {
   if (event.target.readyState === 'interactive') {
-   // initLoader();
   }
   else if (event.target.readyState === 'complete') {
     resSize();
-   //   console.log('readystatechange is running...');
   }
 });

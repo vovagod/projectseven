@@ -354,6 +354,14 @@ https://ru.wikibooks.org/wiki/Настройка_межсетевого_экра
     $ sudo chmod -R 770 /var/www/
     $ usermod -a -G varwwwusers ubuntu
 
+24. HTML:
+    
+    Два пробела — введите &ensp;
+    Четыре пробела — введите &emsp;
+    Интервал табуляции — введите &nbsp;&nbsp;&nbsp;&nbsp;
+    HTML Symbols:
+    &#127760; &phone; &#9990; &#9993; &#127968; &#128222; &#128232; &#128269;
+    &#128722; &#128231;
 
     
 

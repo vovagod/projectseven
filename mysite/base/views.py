@@ -9,6 +9,9 @@ from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import FormView
 from django.shortcuts import render, get_object_or_404, redirect
 
+from django.shortcuts import render_to_response # remove after
+from django.conf import settings #
+
 from mysite.mixins import NextUrlMixin, RequestFormAttachMixin
 from mysite.base.forms import ContactForm
 
@@ -18,13 +21,27 @@ from .models import Base, Menu, SubMenu, Contact
 def baseviewreverse(request):
     return redirect('/about/')
 
+def emailview(request):
+    msg = {'letter':'/media/letter.png',
+           'guest':'Гость',
+           'url':'',
+           'logo': '/media/logo.png',
+           #'logo':'https://yadi.sk/i/L12LLX_CucQmNg/logo.png',
+           'website':'/media/website.png',
+           'phone':'/media/phone.png',
+           'email':'/media/email.png',
+           'address':'/media/address.png',
+           }
+    return render_to_response('base/email.html', msg,
+                              content_type="text/html")
+
 
 class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
     print('We are in BaseView function')
    
     form_class = ContactForm
     success_url = '/#contact'
-    success_message = "Your request was reseived successfully"
+    success_message = "Ваш запрос успешно получен"
     template_name = 'base/home.html'
     model = Base
 

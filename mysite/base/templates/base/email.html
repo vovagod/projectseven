@@ -1,16 +1,104 @@
-<!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<style>
+    
+table.fixed { 
+    table-layout:fixed; 
+    }
+table.fixed td {
+    overflow: hidden;
+    }
+    
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  text-align: center;
+  padding: 5px;
+}
+    th.span {
+        color:blue;
+    }
+    h3 {
+        padding: 10px 0px 0px 0px;
+    }
+    p {
+        text-align: left;
+        margin: 10px 0px 10px 0px;
+    }
+    #header {
+        border-style: solid;
+        border-color: gainsboro;
+        border-width: 0px 0px 2px 0px;
+    }
+    #footer {
+        border-style: solid;
+        border-color: gainsboro;
+        border-width: 2px 0px 0px 0px;
+        margin-top: 7px;
+    } 
+    #bulls{
+        font-size: 36px;
+    }
+    span.info span {
+        font-size: 18px;
+    }
+
+</style>
+    
+</head>
 <body>
-
-
-<h2 style="color:red">HTML Images:</h2>
-
-<p style="color:blue">HTML images are defined with the img tag:</p>
-<p style="color:green">{{msg}}</p>
-
-<p>MEDIA URL:{{MEDIA_URL}}</p>
-
-<img src="base/w3schools.jpg" alt="W3Schools.com" width="104" height="142">
+    
+<table class='fixed'>
+     <col width="width:100%" />
+     <col width="48px" />
+     <col width="130px" />
+    <!-- HEADER -->
+  <tr id='header'>
+    <th style='text-align: left'><a href="{{web_url}}" title='Посетить сайт'><img src="{{logo}}" alt="Comaex WebScada"></a></th>
+      <th style='text-align: right'><img src="{{letter}}" alt="Comaex WebScada"></th>
+      <th style='font-size: 12px'>Служба сообщений
+          <span>&bull;</span>
+          <span>Comaex</span>
+          <span>&bull;</span>
+      </th>
+  </tr>
+    <!-- BODY -->
+  <tr id='center'>
+      <td><h3>Дорогой, {{guest}}</h3>
+          <p>&emsp;Спасибо за интерес к продуктам нашей компании.</p>
+          <p>Мы получили ваше сообщение и в ближайшее время свяжемся с вами.</p>
+          <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
+      </td>
+    </tr>
+    <!-- BULLS -->
+  <tr id='bulls'>
+    <td style='width:50%'>
+        <span style='color:green'>&bull;</span>
+        <span style='color:yellow'>&bull;</span>
+        <span style='color:red'>&bull;</span>
+      </td>
+  </tr>
+    
+    
+    <!-- FOOTER -->
+  <tr id='footer'>
+      <td style='font-size: 12px'>
+          <span>Компания Comaex - системы удаленного управления и контроля</span><br>
+          <span class='info'><span>&#127968;</span> Москва, Сиреневый бульвар 32<br>
+          <span style='color:red'>&phone;</span>&nbsp;+7(985) 482-85-88 &nbsp;&bull;&nbsp;
+          <span>&#9993;</span> info@comaex.com &nbsp;&bull;&nbsp;
+          <span style='font-size: 16px'>&#127760;</span><a href="{{web_url}}" title='Посетить сайт'>&nbsp;comaex.com</a></span><br>
+          
+          <!--<span style='font-size: 16px'>&#127760; &phone; &#9990; &#9993; &#127968; &#128222; &#128232; &#128269;
+          &#128722; &#128231;</span>-->
+      </td>
+  </tr>
+</table>
 
 </body>
 </html>

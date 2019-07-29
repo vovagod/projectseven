@@ -2,13 +2,14 @@
 {% load i18n %}
 <!DOCTYPE html>
 <html>
-<title>Comaex Scada</title>
+<title>Comaex</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="{% static 'css/icon.png'  %}" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 <link rel="stylesheet" href="{% static "css/base.css" %}">
     
 
@@ -17,7 +18,8 @@
 <!-- Navbar (sit on top) -->
 <div class="w3-top" style="max-width:1200px">
   <div id="myNavbar" class="w3-bar w3-white w3-card">
-    <a href="/" class="w3-bar-item w3-button w3-wide">LOGO</a>
+    <a href="/" class="w3-bar-item w3-btn" style="padding: 4px 10px 4px 10px">
+        <img src="{% static 'css/logo.png'  %}" alt="Comaex WebScada"></a>
     <!-- Right-sided navbar links -->
     <div id="barMenu" class="w3-right w3-hide-small">
    
@@ -67,16 +69,35 @@ class="loop1 w3-bar-item w3-button w3-hover-blue"><strong><i class='{{menu.fafa}
 
 <!-- Footer -->
 <footer class="w3-container w3-center w3-padding-16" style="background-color:#373538">  <!-- #615550 -->
-  <div class="w3-xlarge w3-section" style="color:white">
+  
+    <table class="w3-table w3-centered">
+       <tr>
+           <th><p>First Name</p></th>
+          <th><p class="w3-text-white"><strong>Control &bull; Management &bull; Exellence</strong></p></th>
+          <th style="color:white"><a href="#" class="w3-button w3-medium w3-margin-right w3-right w3-border w3-round w3-border-white">
+              <i class="fa fa-arrow-up w3-margin-right"></i><strong>to the top</strong></a></th>
+       </tr>
+       <tr>
+          <td><div class="w3-xlarge w3-section" style="color:white">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
     <i class="fa fa-instagram w3-hover-opacity"></i>
     <i class="fa fa-snapchat w3-hover-opacity"></i>
     <i class="fa fa-pinterest-p w3-hover-opacity"></i>
     <i class="fa fa-twitter w3-hover-opacity"></i>
     <i class="fa fa-linkedin w3-hover-opacity"></i>
-      <a href="#" class="w3-button w3-medium w3-margin-right w3-right w3-border w3-round w3-border-white"><i class="fa fa-arrow-up w3-margin-right"></i><strong>to the top</strong></a>
-  </div>
-    <p class="w3-text-white"><strong>Control Management Exellence</strong></p>
+  </div></td>
+           <td> <div class="w3-row">
+                <div class="w3-half">
+                <p>w3-half</p>
+                </div>
+                <div class="w3-half">
+                <p>w3-half</p>
+                </div>
+                </div> 
+           </td>
+           <td><p>50</p></td>
+       </tr>
+   </table>
     
     <!--<a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a>-->
     
