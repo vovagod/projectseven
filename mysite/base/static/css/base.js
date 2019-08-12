@@ -6,7 +6,6 @@ function onClick(element) {
   captionText.innerHTML = element.alt;
 }
 
-
 // Toggle between showing and hiding the sidebar when clicking the menu icon
 function w3_open(ident) {
     var sidebar = document.getElementById(ident);
@@ -24,7 +23,6 @@ function w3_close(ident) {
     if (sidebar === null){ return; }
     sidebar.style.display = "none";
 }
-
 
 // Gorizontal bar menu function
 function myUser(m) {
@@ -103,7 +101,7 @@ var fa = document.getElementsByClassName('w3-xxlarge');
 var fafa = ['fa fa-user', 'fa fa-envelope-o', 'fa fa-phone', 'fa fa-pencil'];
  for (i = 0; i < clas.length; i++) {
      if (fa[i] === 'undefined') { continue; }
-     clas[i].className = 'w3-input w3-border';
+     clas[i].className = 'w3-input w3-border w3-round';
  }
 // Put i-class with fa-fa-icon
 for (i = 0; i < fa.length; i++) {
@@ -185,9 +183,9 @@ var v = document.getElementsByClassName("loop5");
          sizeCount(w, v, un, un, un, un, mr);
     
 // Text resizing for characteristic module
-    var sz1 = [23, 18, 15];
-    var sz2 = [18, 15, 13];
-    var sz3 = [16, 14, 12];
+    var sz1 = [24, 20, 17];
+    var sz2 = [20, 16, 14];
+    var sz3 = [18, 15, 13];
     var sz4 = [16, 14, 12];
 // Title size
 var n1 = document.getElementsByClassName("loop8"); 

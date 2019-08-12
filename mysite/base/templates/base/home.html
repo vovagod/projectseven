@@ -80,7 +80,6 @@
      </div>
      {% endfor %}
 </div>
-
 {% endif %}
 
 
@@ -217,14 +216,14 @@ style="width:100%; cursor:zoom-in;" onclick="charImage({{forloop.counter}});" ti
 <div class="w3-panel w3-display-container w3-pale-yellow w3-border">
     <span class="w3-button w3-large w3-display-right" onclick="this.parentElement.style.display='none'">&#10060;</span>
     {% for message in messages %}
-    <h4>Удача! &ensp; {{ message }}</h4>
+    <p class="loop9">Удача! &ensp; {{ message }}</p>
     {% endfor %}
 </div>
 {% endif %}
 
   <form id="contact" class="w3-container w3-card-4 w3-section w3-white w3-text-blue" method='POST' style="padding-top:38px">
       {% csrf_token %}
-     <h2 class="w3-center">Напишите нам</h2>
+     <h3 class="w3-center">Напишите нам</h3>
     <div class="container">
        {% for field in form %}
         <div class="w3-row w3-section">

@@ -1,5 +1,11 @@
 /* base css settings */
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+body,p,h1,h2,h3,h4,h5,h6 {
+    font-family: "Raleway", sans-serif;
+    color: #373538;
+}
+#menuT{
+    color: #373538; 
+}
 
 body, html {
   height: 100%;

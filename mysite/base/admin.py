@@ -19,7 +19,7 @@ class SubMenuAdmin(admin.ModelAdmin):
 
 
 class BaseAdmin(admin.ModelAdmin):
-    list_display = ['title','timestamp' ]
+    list_display = ['menu', 'title','timestamp' ]
     fields = (('menu', 'title'),
               ('slug'),
               ('subtitle', 'sentence'),
