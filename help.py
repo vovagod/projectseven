@@ -18,6 +18,9 @@
     mkdir project
     cd project
 
+    # To create a virtual environment for python 2.7:
+    virtualenv -p python2.7 env
+
     # Create a virtualenv to isolate our package dependencies locally
     project$ python3 -m venv myvenv
     project$ source myvenv/bin/activate  # On Windows use `myvenv\Scripts\activate`

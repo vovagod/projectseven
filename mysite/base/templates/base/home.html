@@ -9,20 +9,25 @@
     <div id="headerShow" class="w3-content w3-display-container" style="max-width:1200px; margin-top:50px">
 <!-- SLIDER MODULE -->
 {% for slide in content.base %}
-<img class="mySlides w3-animate-opacity" src="{{ slide.image.url }}" alt="{{ slide.description }}"
-     style="width:100%">
+<img class="mySlides w3-animate-opacity" src="{{ slide.image.url }}" alt="{{ slide.description }}" style="width:100%">
 <div class="myText" style="font-weight:bold">
-<p class="loop3 w3-display-position" style="margin-top:0px">{{slide.title}}</p>
-<p class="loop4 w3-display-position">
-    <a href="#jeans" class="w3-button w3-padding-large w3-round-large" style="background-color:#373538">{{slide.description}}</a></p>
+<p class="loop3 w3-display-position" style="color:{{slide.data1}}; margin-top:0px">{% filter linebreaksbr %}{{slide.title|linebreaksbr}}{% endfilter %}</p>
+<p class="loop4 w3-display-position" data-data4="{{slide.data4}}">
+    <a href="{{slide.urllink}}" class="w3-btn w3-padding-small w3-round-large w3-left-align" style="background-color:{{slide.data3}}; color:{{slide.data2}}; font-style: italic;" target="_blank">{% filter linebreaksbr %}{{slide.description|linebreaksbr}}{% endfilter %}&rarr;</a></p>
 </div>
 {% endfor %}
 <div class="loop5 w3-center w3-container w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-<div class="w3-left w3-hover-text-yellow" style="color:blue" onclick="plusDivs(-1)">&#10094;</div>
-<div class="w3-right w3-hover-text-yellow" style="color:blue" onclick="plusDivs(1)">&#10095;</div>
+<!--<div id="arrow-left" class="arrow-left w3-left w3-hover-text-yellow" onclick="plusDivs(-1)">&#10094;</div>
+<div id="arrow-right" class="arrow-right w3-right w3-hover-text-yellow" onclick="plusDivs(1)">&#10095;</div>-->
+    <!--<div class="w3-button w3-padding-small w3-round-large" style="background-color:white">-->
 {% for circle in content.base %}
-<span class="demo w3-badge w3-border w3-border-blue w3-transparent w3-hover-white" onclick="currentDiv({{forloop.counter}})"></span>
+    
+<div class="arrow-left w3-left w3-hover-text-yellow" onclick="plusDivs(-1)">&#10094;</div>
+<div class="arrow-right w3-right w3-hover-text-yellow" onclick="plusDivs(1)">&#10095;</div>
+    
+<span class="demo" onclick="currentDiv({{forloop.counter}})"></span>
 {% endfor %}
+    <!--</div>-->
 </div>
         
         <!-- Slideshow next/previous buttons -->

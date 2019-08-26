@@ -136,15 +136,15 @@ function sizeCount(w, l, sz, cl, tp, lf, mr){
     
     for (i = 0; i < l.length; i++) {
 if (w > 993){
-    styleSet(l[i], sz[0], cl, tp, lf, mr[0])
+    styleSet(l[i], sz[0], cl, tp[0], lf, mr[0])
     continue;
 }
 if (w > 601){
-    styleSet(l[i], sz[1], cl, tp, lf, mr[1])
+    styleSet(l[i], sz[1], cl, tp[1], lf, mr[1])
     continue;
 }
     else{
-        styleSet(l[i], sz[2], cl, tp, lf, mr[2])
+        styleSet(l[i], sz[2], cl, tp[2], lf, mr[2])
         continue;
     }
 } 
@@ -162,21 +162,21 @@ var mr = [16, 0, 0];
 var un = 'undefined';
 sizeCount(w, l, sz, un, un, un, un);
               
-// Top, right sentense on slider module
+// Top, left sentense on slider module
 var x = document.getElementsByClassName("loop3");
-        var sz = [36, 24, 12];
-        var cl = 'blue';
-        var tp = 2;
-        var lf = 5;
-        sizeCount(w, x, sz, cl, tp, lf, un);
+        var sz = [32, 24, 14];
+        var cl = 'blue'; // unused
+        var tp = [2, 2, 2];
+        var lf = 10;
+        sizeCount(w, x, sz, un, tp, lf, un);
         
-// Bottom, right sentense on slider module
+// Bottom, left sentense on slider module
 var z = document.getElementsByClassName("loop4");   
-        var sz = [18, 12, 6];
-        var cl = 'green';
-        var tp = 50;
-        var lf = 7;       
-         sizeCount(w, z, sz, cl, tp, lf, un);
+        var sz = [16, 14, 7];
+        var cl = 'green';  // unused
+        var tp = [55, 50, 40];
+        var lf = 5;       
+         sizeCount(w, z, sz, un, tp, lf, un);
         
 // Slider module management section (arrows, circlles)
 var v = document.getElementsByClassName("loop5"); 
@@ -238,30 +238,74 @@ function currentDiv(n) {
 function showDivs(n) {
   var i;
   var x = document.getElementsByClassName("mySlides");
-  //  if (x.style === undefined){ return; }
   var z = document.getElementsByClassName("myText");
-  //  if (z.style === undefined){ return; }
+  var data4 = document.getElementsByClassName("loop4");
   var dots = document.getElementsByClassName("demo");
+    
   if (n > x.length) {slideIndex = 1}
   if (n < 1) {slideIndex = x.length}
+    
+    var arrow_right = document.getElementsByClassName("arrow-right");
+    var arrow_left = document.getElementsByClassName("arrow-left");
+    
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";  
-    z[i].style.display = "none";  
-  }
+    z[i].style.display = "none"; 
+  } 
+    
   for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" w3-blue", "");
+      attr_color = data4[i].getAttribute('data-data4');
+     // dots[i].className = dots[i].className.replace(" w3-blue", "");
+  
+      dots[i].className = "demo w3-badge w3-border w3-border-blue w3-transparent w3-hover-yellow";
+      
+      arrow_right[i].style.display = 'none';
+      arrow_right[i].style.color = attr_color;
+      arrow_left[i].style.display = 'none';
+      arrow_left[i].style.color = attr_color;
   }
   x[slideIndex-1].style.display = "block";  
   z[slideIndex-1].style.display = "block"; 
-  dots[slideIndex-1].className += " w3-blue";
+  // dots[slideIndex-1].className += " w3-blue";
+    
+    dots[slideIndex-1].className += " w3-"+data4[slideIndex-1].getAttribute('data-data4');
+    
+    arrow_right[slideIndex-1].style.display = 'block';
+    arrow_left[slideIndex-1].style.display = 'block';
 }
 
+var myVar;
 function myTimer() {
   plusDivs(1);
+    if (s === false){
+        clearInterval(myVar);
+        s = true;
+        SliderStart();
+    }
 } 
 
-var myVar = setInterval(myTimer, 4000);
+var s = false;
+var t = 4000;
+function SliderStart(){
+    if (s === false){ t = 500; }
+    else { t = 4000; }
+    myVar = setInterval(myTimer, t);
+}
 
+function SliderStop(){
+    clearInterval(myVar);
+}
+
+var el = document.getElementById("headerShow");
+el.addEventListener("mouseover", SliderStop);
+el.addEventListener("mouseout", function(){
+    s = false;
+    SliderStart();
+});
+
+SliderStart();
+
+// RESIZE LISTENERS
 window.addEventListener("resize", function(){
 resSize();
 });

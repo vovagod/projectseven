@@ -109,17 +109,24 @@ class Base(models.Model):
     sentence        = models.CharField(max_length=120, blank=True, verbose_name=_('Предложение'),
                                        help_text=_("Введите предложение"))
     description     = models.TextField(verbose_name=_('Текст'), help_text=_("Введите текст"))
-    #urlpath         = models.URLField(max_length=200, blank=True)
     image           = models.ImageField(upload_to=upload_image_path, null=True, blank=True,
                                         verbose_name=_('Изображение'), help_text=_("Выберете изображение"))
     filenum         = models.PositiveSmallIntegerField(default=0, verbose_name=_('Файл'),
                                                        help_text=_("Номер файла"))
     urllink         = models.URLField(max_length=200, blank=True, verbose_name=_('Ссылка'),
                                       help_text=_("Введите ссылку на ресурс"))
-    #active          = models.BooleanField(default=True)
     timestamp       = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата'), help_text=_("Дата/время создания контекста"))
     flag            = models.BooleanField(default=False, verbose_name=_('Флаг'),
                                           help_text=_("Флаг..")) # User Library
+    data1           = models.CharField(max_length=30, blank=True, verbose_name=_('Доп.данные1'),
+                                       help_text=_("Введите дополнительные данные 1"))
+    data2           = models.CharField(max_length=30, blank=True, verbose_name=_('Доп.данные2'),
+                                       help_text=_("Введите дополнительные данные 2"))
+    data3           = models.CharField(max_length=30, blank=True, verbose_name=_('Доп.данные3'),
+                                       help_text=_("Введите дополнительные данные 3"))
+    data4           = models.CharField(max_length=30, blank=True, verbose_name=_('Доп.данные4'),
+                                       help_text=_("Введите дополнительные данные 4"))
+    
 
     #objects = BaseManager()
     #objects = ProductQuerySet.as_manager()
