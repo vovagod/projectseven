@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from collections import OrderedDict
+from markdown import markdown
 
 
 
@@ -109,8 +110,13 @@ class Base(models.Model):
     sentence        = models.CharField(max_length=120, blank=True, verbose_name=_('Предложение'),
                                        help_text=_("Введите предложение"))
     description     = models.TextField(verbose_name=_('Текст'), help_text=_("Введите текст"))
+    description2    = models.TextField(blank=True, verbose_name=_('Текст2'), help_text=_("Введите текст2"))
+    description3    = models.TextField(blank=True, verbose_name=_('Текст3'), help_text=_("Введите текст3"))
+    desc_html       = models.TextField(blank=True, editable=True)
     image           = models.ImageField(upload_to=upload_image_path, null=True, blank=True,
                                         verbose_name=_('Изображение'), help_text=_("Выберете изображение"))
+    image2          = models.ImageField(upload_to=upload_image_path, null=True, blank=True,
+                                        verbose_name=_('Изображение2'), help_text=_("Выберете изображение2"))
     filenum         = models.PositiveSmallIntegerField(default=0, verbose_name=_('Файл'),
                                                        help_text=_("Номер файла"))
     urllink         = models.URLField(max_length=200, blank=True, verbose_name=_('Ссылка'),
@@ -118,13 +124,13 @@ class Base(models.Model):
     timestamp       = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата'), help_text=_("Дата/время создания контекста"))
     flag            = models.BooleanField(default=False, verbose_name=_('Флаг'),
                                           help_text=_("Флаг..")) # User Library
-    data1           = models.CharField(max_length=30, blank=True, verbose_name=_('Доп.данные1'),
+    data1           = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные1'),
                                        help_text=_("Введите дополнительные данные 1"))
-    data2           = models.CharField(max_length=30, blank=True, verbose_name=_('Доп.данные2'),
+    data2           = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные2'),
                                        help_text=_("Введите дополнительные данные 2"))
-    data3           = models.CharField(max_length=30, blank=True, verbose_name=_('Доп.данные3'),
+    data3           = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные3'),
                                        help_text=_("Введите дополнительные данные 3"))
-    data4           = models.CharField(max_length=30, blank=True, verbose_name=_('Доп.данные4'),
+    data4           = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные4'),
                                        help_text=_("Введите дополнительные данные 4"))
     
 
@@ -135,6 +141,10 @@ class Base(models.Model):
         ordering = ['id']
         verbose_name = _('Содержание страницы')
         verbose_name_plural = _('Содержание страницы')
+
+    def save(self):
+        self.desc_html = markdown(self.description)
+        super(Base, self).save()
 
 
     #def get_absolute_url(self):

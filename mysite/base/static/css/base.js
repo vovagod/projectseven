@@ -157,24 +157,24 @@ function resSize(){
 // Menu text resizing when window width is 601 or 993px
 var l = document.getElementsByClassName("loop1");
 // Text size of top gorizontal menu
-var sz = [15, 12, 10];
-var mr = [16, 0, 0];
+var sz = [15, 13, 11]; // size
+var mr = [16, 0, 0]; // margin-bottom
 var un = 'undefined';
 sizeCount(w, l, sz, un, un, un, un);
               
 // Top, left sentense on slider module
 var x = document.getElementsByClassName("loop3");
-        var sz = [32, 24, 14];
-        var cl = 'blue'; // unused
-        var tp = [2, 2, 2];
-        var lf = 10;
+        var sz = [32, 24, 14]; 
+        var cl = 'blue'; // color-unused
+        var tp = [2, 2, 2]; //margin-top
+        var lf = 10; // margin-left
         sizeCount(w, x, sz, un, tp, lf, un);
         
 // Bottom, left sentense on slider module
 var z = document.getElementsByClassName("loop4");   
         var sz = [16, 14, 7];
         var cl = 'green';  // unused
-        var tp = [55, 50, 40];
+        var tp = [55, 50, 40]; 
         var lf = 5;       
          sizeCount(w, z, sz, un, tp, lf, un);
         

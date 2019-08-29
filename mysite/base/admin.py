@@ -24,9 +24,11 @@ class BaseAdmin(admin.ModelAdmin):
               ('slug'),
               ('subtitle', 'sentence'),
               ('description'),
-              #('urlpath'),
+              ('description2'),
+              ('description3'),
               ('urllink', 'filenum', 'flag'),
               ('image'),
+              ('image2'),
               ('data1', 'data2', 'data3', 'data4'),
               )
     prepopulated_fields = {'slug': ('title', )}
