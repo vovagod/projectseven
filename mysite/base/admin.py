@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Base, Menu, SubMenu, Contact
+from .models import Base, Menu, SubMenu, Contact, Image
 
 class MenuAdmin(admin.ModelAdmin):
     list_display = ['title']
@@ -17,6 +17,15 @@ class SubMenuAdmin(admin.ModelAdmin):
               ('subcolor'),
               )
 
+class ImageInline(admin.StackedInline):
+    model = Image
+    extra = 1
+    fields = (('name', 'image'),
+              ('title', 'sentence'),
+              ('description'),
+              )
+    exclude = ('slug',)
+    #prepopulated_fields = {'slug': ('title', )}
 
 class BaseAdmin(admin.ModelAdmin):
     list_display = ['menu', 'title','timestamp' ]
@@ -24,14 +33,18 @@ class BaseAdmin(admin.ModelAdmin):
               ('slug'),
               ('subtitle', 'sentence'),
               ('description'),
-              ('description2'),
-              ('description3'),
+              #('description2'),
+              #('description3'),
               ('urllink', 'filenum', 'flag'),
               ('image'),
-              ('image2'),
+              #('image2'),
               ('data1', 'data2', 'data3', 'data4'),
               )
-    prepopulated_fields = {'slug': ('title', )}
+    prepopulated_fields = {'slug': ('menu', )}
+
+    inlines = [
+        ImageInline,
+    ]
 
 
 class ContactAdmin(admin.ModelAdmin):

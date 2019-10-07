@@ -28,9 +28,9 @@
 {% endif %}
 
 
-{% if content.submenu.subslug == '#description' %}
+{% if content.submenu.subslug == '#about' %}
 <!-- ABOUT MODULE -->
-<div id="description" class="w3-container w3-card w3-section w3-white" style="padding-top:38px">
+<div id="about" class="w3-container w3-card w3-section w3-white" style="padding-top:38px">
 {% for about in content.base %}
 <p class="loop8 w3-center">{% ifchanged %}{{ about.title }}{% endifchanged %}</p>
     <div style="padding: 0px 24px 12px 24px">
@@ -39,43 +39,29 @@
       <p class="loop11">{% filter linebreaksbr %}{{about.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
     </div>
     
+    
+{% for image in images %}
+{% if image.name_id == about.id %}
 <!--  MODAL1  -->
-<div id="id01" class="w3-modal">
+<div id="id0{{forloop.counter}}" class="w3-modal">
   <div class="w3-modal-content">
-      <span onclick="document.getElementById('id01').style.display='none'"
+      <span onclick="document.getElementById('id0{{forloop.counter}}').style.display='none'"
         class="w3-button w3-display-topright">&#10060;</span>
          <div class="w3-row w3-container">
             <div class="w3-half w3-animate-zoom w3-padding-16">
-             <img src="{{about.image.url}}" title="{{about.data1}}" style="width:100%">
-                 <p class="loop11 w3-center">{{about.data1}}</p>
+                {% if image.image %}
+             <img src="{{image.image.url}}" title="{{image.title}}" style="width:100%">{% endif %}
+                 <p class="loop11 w3-center">{{about.title}}</p>
              </div>
               <div class="w3-half w3-padding-large">
-                <p class="loop10 w3-center">{{about.data2}}</p>
-                <p class="loop11">{% filter linebreaksbr %}{{about.description2|linebreaksbr}}{% endfilter %}</p>
+                <p class="loop10 w3-center">{{about.sentence}}</p>
+                <p class="loop11">{% filter linebreaksbr %}{{about.description|linebreaksbr}}{% endfilter %}</p>
               </div>
         </div>
   </div>
-</div> 
-    
-<!--  MODAL2  -->
-<div id="id02" class="w3-modal">
-  <div class="w3-modal-content">
-      <span onclick="document.getElementById('id02').style.display='none'"
-        class="w3-button w3-display-topright">&#10060;</span>
-         <div class="w3-row w3-container">
-            <div class="w3-half w3-animate-zoom w3-padding-16">
-             <img src="{{about.image2.url}}" title="{{about.data3}}" style="width:100%">
-                 <p class="loop11 w3-center">{{about.data3}}</p>
-             </div>
-              <div class="w3-half w3-padding-large">
-                <p class="loop10 w3-center">{{about.data4}}</p>
-                <p class="loop11">{% filter linebreaksbr %}{{about.description3|linebreaksbr}}{% endfilter %}</p>
-              </div>
-        </div>
-  </div>
-</div> 
-    
-    
+</div>
+{% endif %}
+{% endfor %}
 {% endfor %}
 </div>
 {% endif %}
@@ -111,9 +97,9 @@
 
 
 
-{% if content.submenu.subslug == '#specifications' %}
+{% if content.submenu.subslug == '#specification' %}
 <!-- SPECIFICATIONS MODULE -->
-<div id="specifications" class="w3-container w3-card w3-white" style="padding-top:38px; margin-top:16px">
+<div id="specification" class="w3-container w3-card w3-white" style="padding-top:38px; margin-top:16px">
 {% for about in content.base %}
 <p class="loop8 w3-center">{% ifchanged %}{{ about.title }}{% endifchanged %}</p>
      <div style="padding: 0px 24px 12px 24px">
@@ -125,7 +111,7 @@
 </div>
 {% endif %}
 
-{% if content.submenu.subslug == '#specifications_images' %}
+{% if content.submenu.subslug == '#specification_images' %}
 <!-- SPECIFICATIONS IMAGES MODULE -->
 {% for image in content.base %}
 
@@ -133,27 +119,37 @@
 <span onclick="this.parentElement.style.display='none'" class="w3-button w3-border w3-large w3-display-topright" title='закрыть окно'>&#10060;</span>
 <img src="{{image.image.url}}" alt="{{image.title}}" style="width:100%">
      <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
+         <p class="loop10 w3-padding">{{image.sentence}}</p>
         <p class="loop11">{{image.description}}</p>
     </div>
+    
+    {% for image2 in images %}
+    {% if image2.name_id == image.id %}
+    <img src="{{image2.image.url}}" alt="{{image2.title}}" style="width:100%">
+     <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
+         <p class="loop10 w3-padding">{{image2.sentence}}</p>
+        <p class="loop11">{{image2.description}}</p>
+    </div>
+    {% endif %}
+    {% endfor %}
+    
 </div>
 
-<div class="w3-row-padding w3-white w3-padding-16 w3-container w3-card w3-topbar" style="border-top-width: 2px!important">
-   
-<div class="loop6 w3-third w3-center">
+
+<div class="w3-row-padding w3-white w3-padding-16 w3-container w3-card w3-topbar" style="border-top-width: 2px!important"> 
+<div class="loop6 w3-display-container w3-third w3-center">
 <img class="Apdemo w3-border w3-opacity w3-hover-opacity-off" src="{{image.image.url}}" alt="{{image.title}}"
-style="width:100%; cursor:zoom-in;" onclick="charImage({{forloop.counter}});" title="{{image.title}}. Открыть в новом окне">
-    <span>&#128269;</span>
+style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" title="{{image.title}}. Открыть в новом окне">
+         <!--<span id="z{{forloop.counter}}" class="w3-display-middle w3-tag w3-round w3-white w3-border w3-border-black" style="display:none; font-size: 20px">&#128269;</span>-->
 </div>
    
 <div class="loop7 w3-twothird">
 <p class="loop8 w3-center">{{image.title}}</p>
-<!--<p class="loop9 w3-padding">{{image.subtitle}}</p>-->
+<p class="loop9 w3-padding">{{image.subtitle}}</p>
 <p class="loop11 w3-text-grey">{{image.description|truncatewords:20}}</p>
 </div>
 </div>
-
 {% endfor %}
-
 {% endif %}
 
 

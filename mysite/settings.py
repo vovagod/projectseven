@@ -71,7 +71,8 @@ TEMPLATES = [
 
 STATICFILES_DIRS = [
     "/mysite/base/static",
-]
+    os.path.join(BASE_DIR, "mysite/base/static", "media"),
+    ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -79,24 +80,24 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-#DATABASES = {
-    #'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
-#}
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'projectseven_db',
-        'USER': 'admin',
-        'PASSWORD': '12345',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'projectseven_db',
+        #'USER': 'admin',
+        #'PASSWORD': '12345',
+        #'HOST': '127.0.0.1',
+        #'PORT': '5432',
+    #}
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -144,10 +145,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-#STATICFILES_DIRS = [
-    #os.path.join(BASE_DIR, "static_my_proj"),
-#]
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'css')
 
 
@@ -155,6 +152,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 RAW_IMAGE_ROOT = os.path.join(BASE_DIR, 'static', 'media/raw_image')
 LOGO_IMAGE = os.path.join(BASE_DIR, 'static', 'media/logo.jpg')
-#print('MEDIA_ROOT:{}'.format(MEDIA_ROOT))
+print('MEDIA_ROOT:{}'.format(MEDIA_ROOT))
 
 #PROTECTED_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "protected_media")

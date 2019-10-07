@@ -29,7 +29,7 @@ from mysite.base.views import baseviewreverse, emailview #urlmapper
 urlpatterns = [
     #re_path(r'^favicon\.ico$', favicon_view),
     path('admin/', admin.site.urls),
-    path('about/', include('mysite.base.urls'), name='about'),
+    path('home/', include('mysite.base.urls'), name='about'),
     path('', baseviewreverse),
     path('email', emailview),
     #re_path(r'^favicon\.ico$', favicon_view),

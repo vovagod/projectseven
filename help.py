@@ -55,6 +55,8 @@
 
    Git get:
    $ git clone https://github.com/vovagod/projectthree.git
+   $ rm -rf .git - форсированное удаление git
+   $ rm -r .git - удаление git из папки
    
 
 3. Requirements:
@@ -366,5 +368,22 @@ https://ru.wikibooks.org/wiki/Настройка_межсетевого_экра
     &#127760; &phone; &#9990; &#9993; &#127968; &#128222; &#128232; &#128269;
     &#128722; &#128231;
 
+25. Projectseven
+    gorizontal menu: описание возможности применение контакты новости
     
+
+26. Django get related objects ManyToMany relationships
+
+    class CartToys(models.Model):
+        name = models.CharField(max_length=350)
+        quantity = models.IntegerField()
+
+    class Cart(models.Model):
+        cart_item = models.ManyToManyField(CartToys)
+
+    cart = Cart.objects.first()
+    objects = cart.cart_item.all() # this line return all related objects for CartToys
+    # and in reverse
+    cart_toy = CartToys.objects.first()
+    carts = cart_toy.cart_set.all() # this line return all related objects for Cart
 

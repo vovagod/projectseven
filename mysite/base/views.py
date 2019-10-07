@@ -15,11 +15,11 @@ from django.conf import settings #
 from mysite.mixins import NextUrlMixin, RequestFormAttachMixin
 from mysite.base.forms import ContactForm
 
-from .models import Base, Menu, SubMenu, Contact
+from .models import Base, Menu, SubMenu, Contact, Image
 
 
 def baseviewreverse(request):
-    return redirect('/about/')
+    return redirect('/home/')
 
 def emailview(request):
     msg = {'letter':'/media/letter.png',
@@ -50,11 +50,19 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
 
     def get_context_data(self, *args, **kwargs):
-        print('We are in get context data function of BaseView')
+        print('We are in get context data function of BaseView...')
         start = time.time()
         context = super(BaseView, self).get_context_data(*args, **kwargs)
         context['menus'] = Menu.objects.obj_auth(self.request)
         context['contents'] = SubMenu.objects.obj_contents(self.request)
+        for b in context['contents']:
+            print('CONTENTS:{}'.format(b['base']))
+            for c in b['base']:
+                print('BASE:{}'.format(c.id))
+        context['images'] = Image.objects.obj_images(self.request)
+        for a in context['images']:
+            print('IMAGES:{}'.format(a.name_id))
+            
         end = time.time()
         res = end - start
         print("BASEVIEW,START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
