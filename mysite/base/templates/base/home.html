@@ -51,11 +51,11 @@
             <div class="w3-half w3-animate-zoom w3-padding-16">
                 {% if image.image %}
              <img src="{{image.image.url}}" title="{{image.title}}" style="width:100%">{% endif %}
-                 <p class="loop11 w3-center">{{about.title}}</p>
+                 <p class="loop11 w3-center">{{image.title}}</p>
              </div>
               <div class="w3-half w3-padding-large">
-                <p class="loop10 w3-center">{{about.sentence}}</p>
-                <p class="loop11">{% filter linebreaksbr %}{{about.description|linebreaksbr}}{% endfilter %}</p>
+                <p class="loop10 w3-center">{{image.sentence}}</p>
+                <p class="loop11">{% filter linebreaksbr %}{{image.description|linebreaksbr}}{% endfilter %}</p>
               </div>
         </div>
   </div>
