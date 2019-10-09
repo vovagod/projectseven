@@ -185,6 +185,8 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = Base.objects.get(id=self.name_id).slug
+        if not self.image:
+            self.image = 'no_image.png'
         #print('IMAGE_SLUG:{}'.format(self.slug))
         super(Image, self).save(*args, **kwargs)
     
