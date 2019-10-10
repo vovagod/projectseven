@@ -46,7 +46,7 @@
 <div id="id0{{forloop.counter}}" class="w3-modal">
   <div class="w3-modal-content">
       <span onclick="document.getElementById('id0{{forloop.counter}}').style.display='none'"
-        class="w3-button w3-display-topright">&#10060;</span>
+        class="w3-button w3-border w3-display-topright">&#10060;</span>
          <div class="w3-row w3-container">
             <div class="w3-half w3-animate-zoom w3-padding-16">
                 {% if image.image %}
@@ -105,7 +105,7 @@
      <div style="padding: 0px 24px 12px 24px">
         <p class="loop9">{% ifchanged %}{{about.subtitle}}{% endifchanged %}</p>
           <p class="loop10">{% ifchanged %}{{about.sentence}}{% endifchanged %}</p>
-        <p class="loop11">{{ about.description }}</p>
+        <p class="loop11">{% filter linebreaksbr %}{{about.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
      </div>
 {% endfor %}
 </div>
@@ -114,21 +114,22 @@
 {% if content.submenu.subslug == '#specification_images' %}
 <!-- SPECIFICATIONS IMAGES MODULE -->
 {% for image in content.base %}
-
-<div id="im{{forloop.counter}}" class="w3-display-container w3-white w3-margin w3-border w3-hide-small" style="display: none">
-<span onclick="this.parentElement.style.display='none'" class="w3-button w3-border w3-large w3-display-topright" title='закрыть окно'>&#10060;</span>
+<div id="im{{forloop.counter}}" class="w3-display-container w3-white w3-margin w3-border w3-border-blue w3-hide-small" style="display: none">
+   
+<span onclick="this.parentElement.style.display='none'" class="w3-button w3-border w3-border-blue w3-large w3-display-topright" title='закрыть окно'>&#10060;</span>
 <img src="{{image.image.url}}" alt="{{image.title}}" style="width:100%">
+    <p class="loop13 w3-display-middle w3-opacity w3-center w3-text-pink"><b>Скриншот экрана {{image.title}}</b></p>
      <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
-         <p class="loop10 w3-padding">{{image.sentence}}</p>
-        <p class="loop11">{{image.description}}</p>
+         {% if image.sentence %}<p class="loop10 w3-padding"><b>&emsp;{{image.sentence}}</b></p>{% endif %}
+        <p class="loop11 w3-padding">{{image.description}}</p>
     </div>
     
     {% for image2 in images %}
     {% if image2.name_id == image.id %}
     <img src="{{image2.image.url}}" alt="{{image2.title}}" style="width:100%">
      <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
-         <p class="loop10 w3-padding">{{image2.sentence}}</p>
-        <p class="loop11">{{image2.description}}</p>
+         {% if image2.sentence %}<p class="loop10 w3-padding"><b>&emsp;{{image2.sentence}}</b></p>{% endif %}
+        <p class="loop11 w3-padding">{{image2.description}}</p>
     </div>
     {% endif %}
     {% endfor %}
@@ -136,17 +137,17 @@
 </div>
 
 
-<div class="w3-row-padding w3-white w3-padding-16 w3-container w3-card w3-topbar" style="border-top-width: 2px!important"> 
+<div id="{{image.slug}}" class="w3-row-padding w3-white w3-padding-16 w3-container w3-card w3-topbar" style="border-top-width: 2px!important"> 
 <div class="loop6 w3-display-container w3-third w3-center">
 <img class="Apdemo w3-border w3-opacity w3-hover-opacity-off" src="{{image.image.url}}" alt="{{image.title}}"
-style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" title="{{image.title}}. Открыть в новом окне">
+style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" title="Экран раздела {{image.title}}. Открыть в новом окне">
          <!--<span id="z{{forloop.counter}}" class="w3-display-middle w3-tag w3-round w3-white w3-border w3-border-black" style="display:none; font-size: 20px">&#128269;</span>-->
 </div>
    
 <div class="loop7 w3-twothird">
-<p class="loop8 w3-center">{{image.title}}</p>
-<p class="loop9 w3-padding">{{image.subtitle}}</p>
-<p class="loop11 w3-text-grey">{{image.description|truncatewords:20}}</p>
+<p class="loop8 w3-center" style="color:{{image.data1}}">{{image.title}}</p>
+    <p class="loop9 w3-padding"><i class="fa fa-thermometer-full"></i>&emsp;{{image.subtitle}}</p>
+<p class="loop11 w3-text-grey">{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr|truncatewords:20}}{% endfilter %}</p>
 </div>
 </div>
 {% endfor %}

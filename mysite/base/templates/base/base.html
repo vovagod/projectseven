@@ -53,7 +53,7 @@ class="loop1 w3-button w3-bar-item w3-hover-white"><b style="border-bottom:2px s
 
 <!-- Sidebar on small screens when clicking the menu icon -->
 <nav class="w3-sidebar w3-bar-block w3-white w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="sidebar">
-  <a href="javascript:void(0)" onclick="w3_close('sidebar')" class="w3-button w3-large w3-right">&#10060;</a>
+  <a href="javascript:void(0)" onclick="w3_close('sidebar')" class="w3-button w3-border w3-large w3-right">&#10060;</a>
     
      {% for menu, submenu in menus.items %}
 <a id="m{{forloop.counter|add:100}}" {% if not submenu %} href="{{ menu.get_absolute_url }}" {% endif %} class="loop2 w3-button w3-bar-item w3-hover-white"><b style="border-bottom:2px solid" onclick="myUser({{forloop.counter|add:100}})" class="w3-hover-text-indigo w3-border-white w3-hover-border-indigo" data-attr="w3-text-indigo w3-border-indigo"><i class='{{menu.fafa}}' aria-hidden="true"></i>&nbsp;&nbsp;
@@ -61,7 +61,7 @@ class="loop1 w3-button w3-bar-item w3-hover-white"><b style="border-bottom:2px s
     {% if submenu %}&nbsp;<i class="fa fa-angle-down fa-1x" aria-hidden="true"></i>{% endif %}</b></a>
     
     {% if submenu %}
-     <div id="s{{forloop.counter|add:100}}" class="loop3 w3-hide w3-bar-block w3-border w3-border-indigo" style="width:200px">
+     <div id="s{{forloop.counter|add:100}}" class="loop3 w3-hide w3-bar-block w3-border w3-light-grey w3-border-indigo" style="width:200px">
       {% for sub in submenu %}
       <a href="{{ sub.get_absolute_url }}" onclick="subLink(this.parentElement)" class="w3-bar-item w3-button w3-hover-indigo" style="z-index: 2">&nbsp;&nbsp;&nbsp;&nbsp;
           <i class='{{sub.subfafa}}' aria-hidden="true"></i><b>{{sub.subtitle}}</b></a>

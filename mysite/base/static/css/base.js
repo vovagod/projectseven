@@ -222,6 +222,7 @@ var v = document.getElementsByClassName("loop5");
     var sz3 = [18, 15, 13];
     var sz4 = [16, 14, 12];
     var sz5 = [13, 11, 9];
+    var sz6 = [45, 35, 25];
 // Title size
 var n1 = document.getElementsByClassName("loop8"); 
          sizeCount(w, n1, sz1, undef, un, undef, nl);
@@ -237,6 +238,8 @@ var n4 = document.getElementsByClassName("loop11");
 // Footer menu text
 var n5 = document.getElementsByClassName("loop12"); 
          sizeCount(w, n5, sz5, undef, un, undef, nl);
+var n6 = document.getElementsByClassName("loop13"); 
+         sizeCount(w, n6, sz6, undef, un, undef, nl);
     
         
 // Image vertical aligning for characteristic module
