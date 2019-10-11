@@ -296,9 +296,9 @@ function showDivs(n) {
     
   for (i = 0; i < dots.length; i++) {
       var attr_color = data4[i].getAttribute('data-data4');
-     // dots[i].className = dots[i].className.replace(" w3-blue", "");
+      dots[i].className = dots[i].className.replace(" w3-indigo", "");
   
-      dots[i].className = "demo w3-badge w3-border w3-border-blue w3-transparent w3-hover-yellow";
+      dots[i].className = "demo w3-badge w3-border w3-border-indigo w3-transparent w3-hover-yellow";
       
       arrow_right[i].style.display = 'none';
       arrow_right[i].style.color = attr_color;
@@ -307,7 +307,7 @@ function showDivs(n) {
   }
   x[slideIndex-1].style.display = "block";  
   z[slideIndex-1].style.display = "block"; 
-  // dots[slideIndex-1].className += " w3-blue";
+   dots[slideIndex-1].className += " w3-indigo";
     
     dots[slideIndex-1].className += " w3-"+data4[slideIndex-1].getAttribute('data-data4');
     
