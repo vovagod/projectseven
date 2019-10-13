@@ -1,5 +1,5 @@
 /* base css settings */
-body,p,code,h1,h2,h3,h4,h5,h6 {
+body,p,h1,h2,h3,h4,h5,h6 {
     font-family: "Tahoma", sans-serif;
     color: #373538;
 }

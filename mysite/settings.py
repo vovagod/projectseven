@@ -26,6 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DOMAIN = '127.0.0.1:8000'
 
 # Application definition
 

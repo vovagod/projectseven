@@ -1,9 +1,5 @@
 var w;
-var h;
 var previous_m = 1;
-var top_height;
-var scrollPast;
-var AppSizes = [0,0]; // heigh1, heigh2
 
 // Modal Image Gallery
 function onClick(element) {
@@ -56,15 +52,6 @@ function subLink(m) {
     userSub.className = userSub.className.replace(" w3-show", "");
 }
 
-// Closing the open screenshorts
-function screenShotsClose(){
-    var screenShots = document.getElementsByClassName(ClassMark(document.getElementById('screenshot'),3));
-    var i;
-for (i = 0; i < screenShots.length; i++) {
-    screenShots[i].parentElement.style.display='none';
-}
-}
-
 // Gorizontal and LeftSide bar menu function
 function myUser(m) {
 var user = document.getElementById('m'+m); 
@@ -76,8 +63,6 @@ var menuLoop1 = document.getElementsByClassName(ClassMark(user,3));
 var userChildAttr = user.childNodes[0].getAttribute('data-attr');
 var userSub_prev = document.getElementById('s'+previous_m );
 var prev = ClassMark(document.getElementById('m'+previous_m).childNodes[0],0); 
-    
-screenShotsClose();
     
 var i;
 for (i = 0; i < menuLoop1.length; i++) {
@@ -154,19 +139,13 @@ for (i = 0; i < fa.length; i++) {
 
 // Slideshow characteristic Images
 function charImage(im) {
-    if (w < 601){ 
-        alert('Мала ширина экрана. Переверните устройство.');
-        return; }
-    item = document.getElementById("image"+im);
-    item.style.display = "block";
-    var href = '#image'+im;
-    let coordY = item.getBoundingClientRect().top + window.pageYOffset;
+    document.getElementById("im"+im).style.display = "block";
+    var href = '#im'+im;
     window.location=href;
-    window.scrollTo(0, coordY-top_height);
 }
 
 
-// Resize computation block
+// resize computation block
 function styleSet(l, sz, cl, tp, lf, mr){
     if (sz !== 'undefined'){
         l.style.fontSize = sz+'px'; // font-size
@@ -206,7 +185,6 @@ if (w > 601){
 // RESIZE FUNCTIONS
 function resSize(){
     window.w = window.innerWidth;
-    window.h = window.innerHeight;
         
 // Menu text resizing when window width is 601 or 993px
 var l = document.getElementsByClassName("loop1");
@@ -241,13 +219,13 @@ var v = document.getElementsByClassName("loop5");
 // Text resizing for characteristic module
     var sz1 = [24, 20, 17];
     var sz2 = [20, 16, 14];
-    var sz3 = [18, 14, 12];
-    var sz4 = [15, 14, 13];
+    var sz3 = [18, 15, 13];
+    var sz4 = [16, 14, 12];
     var sz5 = [13, 11, 9];
     var sz6 = [45, 35, 25];
 // Title size
 var n1 = document.getElementsByClassName("loop8"); 
-         sizeCount(w, n1, sz1, undef, un, undef, un);
+         sizeCount(w, n1, sz1, undef, un, undef, nl);
 // Subtitle size
 var n2 = document.getElementsByClassName("loop9"); 
          sizeCount(w, n2, sz2, undef, un, undef, nl);
@@ -260,9 +238,9 @@ var n4 = document.getElementsByClassName("loop11");
 // Footer menu text
 var n5 = document.getElementsByClassName("loop12"); 
          sizeCount(w, n5, sz5, undef, un, undef, nl);
-// Watermarks on screenshorts
 var n6 = document.getElementsByClassName("loop13"); 
          sizeCount(w, n6, sz6, undef, un, undef, nl);
+    
         
 // Image vertical aligning for characteristic module
 var p = document.getElementsByClassName("loop6");
@@ -280,43 +258,12 @@ else{
 }
 }
     
-// Menu bar height calculation
- window.top_height = document.getElementById("myNavbar").offsetHeight; 
+//
+var top_height = document.getElementById("myNavbar").offsetHeight; 
     var headerShow = document.getElementById('headerShow');
     if (headerShow !== null) {
     headerShow.style.marginTop = top_height+15+'px'; 
     }
-    
-// Application text vertical aligning 
-function appResize(x,y){
-    for (i = 0; i < x.length; i++){
-      var TextDiff = (y - (x[i].clientHeight));
-      if (TextDiff === 0){ continue; }
-      x[i].style.marginBottom = TextDiff + 'px'; //parseInt(x[i].style.fontSize, 10) + 'px';
-      //  console.log('AppSizes childNodes:'+x[i].style.fontSize);
-  }
-}
-    
-var x = document.getElementsByClassName('appText');
-var TextH = [];
-for (i = 0; i < x.length; i++) {
-     TextH[i] = (x[i].clientHeight);
-}
-var TextMax = TextH.sort(function(a, b){return b - a});
-if (h > w && AppSizes[0] === 0){  // height1, height > width
-    // set height
-    window.AppSizes[0]=TextMax[0]; 
-}
-if (w > h && AppSizes[1] === 0){  // height2, width > height
-    // set width
-    window.AppSizes[1]=TextMax[0]; 
-}
-if (h > w){
-    appResize(x, AppSizes[0]);
-} else {
-    appResize(x, AppSizes[1]);
-}
-    
 }
 
 
@@ -367,38 +314,6 @@ function showDivs(n) {
     arrow_right[slideIndex-1].style.display = 'block';
     arrow_left[slideIndex-1].style.display = 'block';
 }
-
-
-
-// Scrolling down
-const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]'))
-
-anchors.forEach(function(item) {
-  item.addEventListener('click', function(e) {
-    e.preventDefault();
-      var itemHref = item.toString().split('/').slice(-1);
-      if (itemHref == "#"){ 
-          window.location = itemHref;
-          return; 
-      }
-    let coordY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top + window.pageYOffset;
-    let scroller = setInterval(function() {
-        let scrollBy = 15;
-        var scrollNow = window.pageYOffset || document.documentElement.scrollTop;
-       
-      if(scrollNow < coordY && scrollNow !== scrollPast) {
-          window.scrollPast = scrollNow;
-          window.scrollBy(0, scrollBy);
-      } else {
-           clearInterval(scroller);
-           window.location = itemHref;
-           window.scrollTo(0, coordY-top_height);
-      }
-    }, 0.1); 
-  });
-});
-
-
 
 var myVar;
 function myTimer() {

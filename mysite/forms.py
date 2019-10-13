@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from mysite.base.models import Base
 
 User = get_user_model()
 
@@ -28,6 +29,19 @@ class ContactForm(forms.Form):
                     }
                 )
             )
+
+
+#class MyBaseForm(forms.ModelForm):
+    
+    #class Meta:
+        #model = Base
+        #fields = '__all__'
+
+    #def clean_urllink(self):
+        #print('MyBaseForm:{}'.format(self))
+        # do something that validates your data
+        #return self.cleaned_data["urllink"]
+
 
     # def clean_email(self):
     #     email = self.cleaned_data.get("email")

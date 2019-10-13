@@ -11,6 +11,10 @@ from django.utils.translation import ugettext as _
 from collections import OrderedDict
 from markdown import markdown
 
+#from django.dispatch import receiver
+#from django.db.models.signals import pre_save, post_save
+#from django.core.exceptions import ValidationError
+
 
 
 def get_filename_ext(filepath):
@@ -118,7 +122,7 @@ class Base(models.Model):
     filenum     = models.PositiveSmallIntegerField(default=0, verbose_name=_('Файл'),
                                                        help_text=_("Номер файла"))
     urllink     = models.URLField(max_length=200, blank=True, verbose_name=_('Ссылка'),
-                                      help_text=_("Введите ссылку на ресурс"))
+                                  help_text=_("Введите ссылку на ресурс"))
     timestamp   = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата'), help_text=_("Дата/время создания контекста"))
     flag        = models.BooleanField(default=False, verbose_name=_('Флаг'),
                                           help_text=_("Флаг..")) # User Library
@@ -138,18 +142,47 @@ class Base(models.Model):
 
 
     def save(self):
+        print('SAVE FUNCTION')
         self.desc_html = markdown(self.description)
         if not self.image:
             self.image = 'no_image.png'
         super(Base, self).save()
 
+    #def clean_url(self):
+        #print('CLEAN FUNCTION')
+        #if self.cleaned_data["urllink"] is None:
+            #raise forms.ValidationError(u"You need set some urllink.")
+
+    #def full_clean(self, exclude=None, validate_unique=True):
+        #print('CLEAN FIELDS:{}'.format(self.__dict__))
+        #pass
+    
     
     def get_absolute_url_cat(self):
         return 'home/'
 
 
+    def get_slider_url(self):
+        if self.flag:
+            url = self.urllink.split('/')
+            #print('URL:{}'.format(url[-1]))
+            return url[-1]
+        return self.urllink
+
+
     def __str__(self):
         return self.title
+
+#@receiver(pre_save)
+#def pre_save_handler(sender, instance, *args, **kwargs):
+    #print('INSTANCE:{}'.format(instance.__dict__))
+    #instance.full_clean()
+
+#def base_presave(sender, instance, **kwargs):
+    #print('INSTANCE:{}'.format(instance.__dict__))
+    #return
+
+#pre_save.connect(base_presave, sender=Base)
 
     
 class ImageManager(models.Manager):
@@ -165,8 +198,8 @@ class Image(models.Model):
                                     verbose_name=_('Изображение'), help_text=_("Выберете изображение"))
     slug        = models.SlugField(unique=False, default='imageslug', verbose_name=_('Слаг'),
                                    help_text=_("Слаг.."))
-    title       = models.CharField(max_length=120, blank=True, verbose_name=_('Подзаголовок'),
-                                   help_text=_("Введите подзаголовок"))
+    title       = models.CharField(max_length=120, blank=True, verbose_name=_('Заголовок'),
+                                   help_text=_("Введите заголовок"))
     sentence    = models.CharField(max_length=120, blank=True, verbose_name=_('Предложение'),
                                    help_text=_("Введите предложение"))
     description = models.TextField(verbose_name=_('Текст'), help_text=_("Введите текст"))

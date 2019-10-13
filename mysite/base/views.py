@@ -26,7 +26,6 @@ def emailview(request):
            'guest':'Гость',
            'url':'',
            'logo': '/media/logo.png',
-           #'logo':'https://yadi.sk/i/L12LLX_CucQmNg/logo.png',
            'website':'/media/website.png',
            'phone':'/media/phone.png',
            'email':'/media/email.png',
@@ -50,27 +49,27 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
 
     def get_context_data(self, *args, **kwargs):
-        print('We are in get context data function of BaseView...')
-        start = time.time()
+        #print('We are in get context data function of BaseView...')
+        #start = time.time()
         context = super(BaseView, self).get_context_data(*args, **kwargs)
         context['menus'] = Menu.objects.obj_auth(self.request)
         context['contents'] = SubMenu.objects.obj_contents(self.request)
-        for b in context['contents']:
-            print('CONTENTS:{}'.format(b['base']))
-            for c in b['base']:
-                print('BASE:{}'.format(c.id))
+        #for b in context['contents']:
+            #print('CONTENTS:{}'.format(b['base']))
+            #for c in b['base']:
+                #print('BASE:{}'.format(c.id))
         context['images'] = Image.objects.obj_images(self.request)
-        for a in context['images']:
-            print('IMAGES:{}'.format(a.name_id))
+        #for a in context['images']:
+            #print('IMAGES:{}'.format(a.name_id))
             
-        end = time.time()
-        res = end - start
-        print("BASEVIEW,START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+        #end = time.time()
+        #res = end - start
+        #print("BASEVIEW,START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
         return context
 
 
     def form_valid(self, form):
-        print('Form data, self{}, form:{}'.format(self, form.cleaned_data))
+        #print('Form data, self{}, form:{}'.format(self, form.cleaned_data))
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         form.send_email()
