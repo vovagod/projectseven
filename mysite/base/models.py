@@ -203,6 +203,7 @@ class Image(models.Model):
     sentence    = models.CharField(max_length=120, blank=True, verbose_name=_('Предложение'),
                                    help_text=_("Введите предложение"))
     description = models.TextField(verbose_name=_('Текст'), help_text=_("Введите текст"))
+    desc_html   = models.TextField(blank=True, editable=True)
 
     objects = ImageManager()
 
@@ -217,6 +218,8 @@ class Image(models.Model):
 
 
     def save(self, *args, **kwargs):
+        print('DESC_HTML:{}'.format(self.desc_html))
+        self.desc_html = markdown(self.description)
         self.slug = Base.objects.get(id=self.name_id).slug
         if not self.image:
             self.image = 'no_image.png'

@@ -121,16 +121,16 @@
 <img src="{{image.image.url}}" alt="{{image.title}}" style="width:100%">
     <p class="loop13 w3-display-middle w3-opacity w3-center w3-text-pink"><b>Скриншот экрана {{image.title}}</b></p>
      <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
-         {% if image.sentence %}<p class="loop10 w3-padding"><b>&emsp;{{image.sentence}}</b></p>{% endif %}
-        <p class="loop11 w3-padding">{{image.description}}</p>
+         {% if image.sentence %}<p class="loop11 w3-padding"><b>&emsp;{{image.sentence}}</b></p>{% endif %}
+        <code class="loop11 w3-padding">{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</code>
     </div>
     
     {% for image2 in images %}
     {% if image2.name_id == image.id %}
     <img src="{{image2.image.url}}" alt="{{image2.title}}" style="width:100%">
      <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
-         {% if image2.sentence %}<p class="loop10 w3-padding"><b>&emsp;{{image2.sentence}}</b></p>{% endif %}
-        <p class="loop11 w3-padding">{{image2.description}}</p>
+         {% if image2.sentence %}<p class="loop11 w3-padding"><b>&emsp;{{image2.sentence}}</b></p>{% endif %}
+        <code class="loop11 w3-padding">{{image2.description}}</code>
     </div>
     {% endif %}
     {% endfor %}
@@ -237,14 +237,16 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
 
 {% if content.submenu.subslug == '#contact' %}
 <!-- CONTACT FORM MODULE -->
- {% if messages %}
+{% if messages %}
+<span id="success" style="padding-top:38px"></span>
 <div class="w3-panel w3-display-container w3-pale-yellow w3-border">
-    <span class="w3-button w3-large w3-display-right" onclick="this.parentElement.style.display='none'">&#10060;</span>
+    <span class="w3-button w3-medium w3-display-right" onclick="this.parentElement.style.display='none'">&#10060;</span>
     {% for message in messages %}
-    <p class="loop9">Удача! &ensp; {{ message }}</p>
+    <p class="loop9">Спасибо, &ensp; {{ message }}</p>
     {% endfor %}
-</div>
-{% endif %}
+    </div>
+
+    {% endif %}
   <form id="contact" class="w3-container w3-card-4 w3-section w3-white w3-text-blue" method='POST' style="padding-top:16px">
       {% csrf_token %}
      <p class="loop8 w3-center">Контакты</p>

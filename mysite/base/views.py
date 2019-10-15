@@ -39,8 +39,8 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
     print('We are in BaseView function')
    
     form_class = ContactForm
-    success_url = '/#contact'
-    success_message = "Ваш запрос успешно получен"
+    success_url = '/#success'
+    success_message = "Ваш запрос успешно отправлен!"
     template_name = 'base/home.html'
     model = Base
 
