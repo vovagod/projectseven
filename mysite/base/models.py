@@ -219,7 +219,6 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         print('DESC_HTML:{}'.format(self.desc_html))
-        self.desc_html = markdown(self.description)
         self.slug = Base.objects.get(id=self.name_id).slug
         if not self.image:
             self.image = 'no_image.png'

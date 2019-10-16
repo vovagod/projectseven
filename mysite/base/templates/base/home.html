@@ -130,7 +130,7 @@
     <img src="{{image2.image.url}}" alt="{{image2.title}}" style="width:100%">
      <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
          {% if image2.sentence %}<p class="loop11 w3-padding"><b>&emsp;{{image2.sentence}}</b></p>{% endif %}
-        <code class="loop11 w3-padding">{{image2.description}}</code>
+        <code class="loop11 w3-padding">{% filter linebreaksbr %}{{image2.desc_html|safe|linebreaksbr}}{% endfilter %}</code>
     </div>
     {% endif %}
     {% endfor %}
@@ -176,7 +176,7 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
           <p class="loop9 w3-center w3-padding" style="margin:0px 0px 0px 0px; color:{{image.data1}}"><b>{{image.title}}</b></p>
          <img src="{{image.image.url}}" alt="{{image.title}}" style="width:100%">
           <div id="appText" class="apptext w3-container w3-white">
-            <p class="loop11 appText w3-padding-16">{{image.description}}</p>
+            <code class="loop11 appText w3-padding-16">{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</code>
              <!-- <p><button class="w3-button w3-light-grey w3-block">Contact</button></p> -->
            </div>
         </div>

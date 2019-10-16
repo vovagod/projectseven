@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 #from django import forms
+from markdown import markdown
 
 from .models import Base, Menu, SubMenu, Contact, Image
+
 #from mysite.forms import MyBaseForm
 
 #class Base_Form(forms.ModelForm):
@@ -62,6 +64,18 @@ class BaseAdmin(admin.ModelAdmin):
     inlines = [
         ImageInline,
     ]
+
+
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save(commit=False)
+        for obj in formset.deleted_objects:
+            obj.delete()
+        for instance in instances:
+            instance.desc_html = markdown(instance.description)
+            instance.save()
+            print('SAVE_FORMSET:{}'.format(instance.desc_html))
+        formset.save_m2m()
+        
 
     #def full_clean(exclude=None, validate_unique=True):
         #print('CLEAN FIELDS')

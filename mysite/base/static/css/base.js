@@ -167,7 +167,7 @@ function charImage(im) {
 
 
 // Resize computation block
-function styleSet(l, sz, cl, tp, lf, mr){
+function styleSet(l, sz, cl, tp, lf, mb, mt){
     if (sz !== 'undefined'){
         l.style.fontSize = sz+'px'; // font-size
     }
@@ -180,24 +180,27 @@ function styleSet(l, sz, cl, tp, lf, mr){
     if (lf !== 'undefined'){
         l.style.left = lf+'%'; // margin-left for display
     }
-     if (mr !== 'undefined'){
-        l.style.marginBottom = mr+'px';// margin-bottom
+     if (mb !== 'undefined'){
+        l.style.marginBottom = mb+'px';// margin-bottom
+    }
+    if (mt !== 'undefined'){
+        l.style.marginTop = mt+'px';// margin-top
     }
 }
 
-function sizeCount(w, l, sz, cl, tp, lf, mr){
+function sizeCount(w, l, sz, cl, tp, lf, mb, mt){
     
     for (i = 0; i < l.length; i++) {
 if (w > 993){
-    styleSet(l[i], sz[0], cl, tp[0], lf, mr[0])
+    styleSet(l[i], sz[0], cl, tp[0], lf, mb[0], mt[0])
     continue;
 }
 if (w > 601){
-    styleSet(l[i], sz[1], cl, tp[1], lf, mr[1])
+    styleSet(l[i], sz[1], cl, tp[1], lf, mb[1], mt[1])
     continue;
 }
     else{
-        styleSet(l[i], sz[2], cl, tp[2], lf, mr[2])
+        styleSet(l[i], sz[2], cl, tp[2], lf, mb[2], mt[2])
         continue;
     }
 } 
@@ -212,11 +215,12 @@ function resSize(){
 var l = document.getElementsByClassName("loop1");
 // Text size of top gorizontal menu
 var sz = [15, 13, 11]; // size
-var mr = [16, 0, 0]; // margin-bottom
+var mb = [24, 0, 0]; // margin-bottom
+var mt = [24, 10, 10]; // margin-top
 var un = ['undefined', 'undefined', 'undefined'];
 var undef = 'undefined';
 var nl = [0, 0, 0];
-sizeCount(w, l, sz, undef, un, undef, un);
+sizeCount(w, l, sz, undef, un, undef, un, un);
               
 // Top, left sentense on slider module
 var x = document.getElementsByClassName("loop3");
@@ -224,7 +228,7 @@ var x = document.getElementsByClassName("loop3");
         var cl = 'blue'; // color-unused
         var tp = [2, 2, 2]; //margin-top
         var lf = 10; // margin-left
-        sizeCount(w, x, sz, undef, tp, lf, un);
+        sizeCount(w, x, sz, undef, tp, lf, un, un);
         
 // Bottom, left sentense on slider module
 var z = document.getElementsByClassName("loop4");   
@@ -232,37 +236,37 @@ var z = document.getElementsByClassName("loop4");
         var cl = 'green';  // unused
         var tp = [55, 50, 40]; 
         var lf = 5;       
-         sizeCount(w, z, sz, undef, tp, lf, un);
+         sizeCount(w, z, sz, undef, tp, lf, un, un);
         
 // Slider module management section (arrows, circlles)
 var v = document.getElementsByClassName("loop5"); 
-         sizeCount(w, v, un, undef, un, undef, mr);
+         sizeCount(w, v, un, undef, un, undef, mb, un);
     
 // Text resizing for characteristic module
-    var sz1 = [24, 20, 17];
-    var sz2 = [20, 16, 14];
-    var sz3 = [18, 14, 12];
-    var sz4 = [15, 14, 13];
+    var sz1 = [24, 19, 17];
+    var sz2 = [20, 15, 14];
+    var sz3 = [18, 14, 13];
+    var sz4 = [16, 14, 12];
     var sz5 = [13, 11, 9];
-    var sz6 = [45, 35, 25];
+    var sz6 = [45, 32, 20];
 // Title size
 var n1 = document.getElementsByClassName("loop8"); 
-         sizeCount(w, n1, sz1, undef, un, undef, un);
+         sizeCount(w, n1, sz1, undef, un, undef, mb, mt);
 // Subtitle size
 var n2 = document.getElementsByClassName("loop9"); 
-         sizeCount(w, n2, sz2, undef, un, undef, nl);
+         sizeCount(w, n2, sz2, undef, un, undef, nl, mt);
 // Sentence size
 var n3 = document.getElementsByClassName("loop10"); 
-         sizeCount(w, n3, sz3, undef, un, undef, nl);
+         sizeCount(w, n3, sz3, undef, un, undef, nl, un);
 // Description size
 var n4 = document.getElementsByClassName("loop11"); 
-         sizeCount(w, n4, sz4, undef, un, undef, nl);
+         sizeCount(w, n4, sz4, undef, un, undef, nl, mt);
 // Footer menu text
 var n5 = document.getElementsByClassName("loop12"); 
-         sizeCount(w, n5, sz5, undef, un, undef, nl);
+         sizeCount(w, n5, sz5, undef, un, undef, nl, un);
 // Watermarks on screenshorts
 var n6 = document.getElementsByClassName("loop13"); 
-         sizeCount(w, n6, sz6, undef, un, undef, nl);
+         sizeCount(w, n6, sz6, undef, un, undef, nl, un);
         
 // Image vertical aligning for characteristic module
 var p = document.getElementsByClassName("loop6");
@@ -290,17 +294,16 @@ else{
 // Application text vertical aligning 
 function appResize(x,y){
     for (i = 0; i < x.length; i++){
-      var TextDiff = (y - (x[i].clientHeight));
+      var TextDiff = (y - (x[i].children[0].clientHeight));
       if (TextDiff === 0){ continue; }
-      x[i].style.marginBottom = TextDiff + 'px'; //parseInt(x[i].style.fontSize, 10) + 'px';
-      //  console.log('AppSizes childNodes:'+x[i].style.fontSize);
+      x[i].children[0].style.marginBottom = TextDiff + parseInt(x[i].style.fontSize, 10) + 'px';
   }
 }
     
 var x = document.getElementsByClassName('appText');
 var TextH = [];
 for (i = 0; i < x.length; i++) {
-     TextH[i] = (x[i].clientHeight);
+     TextH[i] = x[i].children[0].clientHeight;
 }
 var TextMax = TextH.sort(function(a, b){return b - a});
 if (h > w && AppSizes[0] === 0){  // height1, height > width
@@ -399,7 +402,7 @@ anchors.forEach(function(item) {
 });
 
 
-
+// Slider intervalTimer
 var myVar;
 function myTimer() {
   plusDivs(1);
