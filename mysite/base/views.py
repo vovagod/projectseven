@@ -69,8 +69,19 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
 
     def form_valid(self, form):
-        #print('Form data, self{}, form:{}'.format(self, form.cleaned_data))
+        print('Form data, self{}, form:{}'.format(self, form.cleaned_data['content']))
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
+        data = form.cleaned_data['content']
+        data_list = data.split(' ')
+        print('DATA_LIST:{}'.format(data_list))
+        credentials = ['логин', 'пароль']
+        callme = ['заинтересовала', 'позвоните']
+        if any(n in data_list for n in credentials):
+            pass
+        if any(n in data_list for n in callme):
+            pass
         form.send_email()
         return super(BaseView, self).form_valid(form)
+
+    

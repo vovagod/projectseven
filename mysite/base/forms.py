@@ -9,6 +9,8 @@ from django.conf import settings
 
 from django.utils.safestring import mark_safe
 from .models import Contact
+from .fields import ListTextWidget
+
 
 
 #def ip_address_processor(request):
@@ -22,11 +24,19 @@ class ContactForm(forms.Form):
     email      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Электронная почта"}),
                                  validators=[validate_email])
     phone      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Телефон"}))
-    content    = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Сообщение"}))
+    #content    = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Сообщение"}))
+    content    = forms.CharField()
 
     def __init__(self, request, *args, **kwargs):
         self.request = request
+        choice_list = kwargs.pop('data_list', None)
+        placeholder = "Введите сообщение или выберете из списка..."
+        autocomplete = "off"
         super(ContactForm, self).__init__(*args, **kwargs)
+        self.fields['content'].widget = ListTextWidget(data_list=choice_list, name='choice-list',
+                                                       placeholder=placeholder,
+                                                       autocomplete=autocomplete,
+                                                       )
 
     def clean(self):
         print('We are in clean() of ContactForm')

@@ -118,7 +118,7 @@
 <div id="image{{forloop.counter}}" class="w3-display-container w3-white w3-margin w3-border w3-border-blue w3-hide-small" style="display: none">
    
 <span id="screenshot" onclick="this.parentElement.style.display='none'" class="w3-button w3-border w3-border-blue w3-large w3-display-topright" title='закрыть окно'>&#10060;</span>
-<img src="{{image.image.url}}" alt="{{image.title}}" style="width:100%">
+<img src="{{image.image.url}}" alt="{{image.title}}" style="width:100%" class="w3-animate-zoom">
     <p class="loop13 w3-display-middle w3-opacity w3-center w3-text-pink"><b>Скриншот экрана {{image.title}}</b></p>
      <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
          {% if image.sentence %}<p class="loop11 w3-padding"><b>&emsp;{{image.sentence}}</b></p>{% endif %}
@@ -256,7 +256,7 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
           <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-phone"></i></div>
            <div class="w3-rest">
              {{ field.errors }}
-              {{ field }}
+               {{ field }}
            </div>
         </div>
        {% endfor %}
