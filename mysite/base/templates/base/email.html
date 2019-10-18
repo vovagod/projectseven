@@ -67,8 +67,12 @@ td, th {
     <!-- BODY -->
   <tr id='center'>
       <td><h3>Дорогой, {{guest}}</h3><br>
-          <p>&emsp;Спасибо за интерес к нашей технологии.</p>
-          <p>Мы получили ваше сообщение и в ближайшее время свяжемся с вами.</p>
+          {% for key, value in messages.items %}
+          <p>&emsp;Спасибо за интерес к нашей технологии. {{value}}</p>
+          {% if key == 'credentials' %}
+          <p>Перейти на страницу входа <a href="http://comaex.ddns.net" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>
+          {% endif %}
+          {% endfor %}
           <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
       </td>
     </tr>
@@ -83,7 +87,7 @@ td, th {
     <!-- FOOTER -->
   <tr id='footer'>
       <td style='font-size: 12px'>
-          <span style="font-size: 14px;"><b>Супервизор-сервер Comaex</b></span><br>
+          <span>Супервизор-сервер Comaex</span><br>
           <span>&#127968; Москва, Сиреневый бульвар 32<br>
           <span style='color:red'>&phone;</span>&nbsp;+7(985) 482-85-88 &nbsp;&bull;&nbsp;
           &#9993; info@comaex.com &nbsp;&bull;&nbsp;

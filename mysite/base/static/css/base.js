@@ -251,10 +251,10 @@ var v = document.getElementsByClassName("loop5");
     var sz6 = [45, 32, 20];
 // Title size
 var n1 = document.getElementsByClassName("loop8"); 
-         sizeCount(w, n1, sz1, undef, un, undef, mb, mt);
+         sizeCount(w, n1, sz1, undef, un, undef, un, un);
 // Subtitle size
 var n2 = document.getElementsByClassName("loop9"); 
-         sizeCount(w, n2, sz2, undef, un, undef, nl, mt);
+         sizeCount(w, n2, sz2, undef, un, undef, un, un);
 // Sentence size
 var n3 = document.getElementsByClassName("loop10"); 
          sizeCount(w, n3, sz3, undef, un, undef, nl, un);

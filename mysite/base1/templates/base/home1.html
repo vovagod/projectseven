@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+
+{% block home %}
+
+ <span id="catIdent" style="display:none">none</span>
+ <span id="catIdent1" style="display:none">none</span>
+
+<!-- Header Section -->
+      {% include 'base/header.html' %}
+<!-- About Section -->
+      {% include 'base/about.html' %}
+<!-- Promo Section - "We know design" -->
+      {% include 'base/promo_one.html' %}
+<!-- Team Section -->
+      {% include 'base/team.html' %}
+<!-- Promo Section "Statistics" -->
+      {% include 'base/team.html' %}
+<!-- Work Section -->
+      {% include 'base/work.html' %}
+<!-- Modal for full size images on click-->
+      {% include 'base/modal_full_size.html' %}
+<!-- Skills Section -->
+      {% include 'base/skills.html' %}
+<!-- Pricing Section -->
+      {% include 'base/pricing.html' %}
+<!-- Contact Section -->
+      {% include 'base/contact.html' %}
+{% endblock home %}

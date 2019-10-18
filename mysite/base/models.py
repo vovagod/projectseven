@@ -1,19 +1,12 @@
 import os
-#import urllib 
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from django.contrib.auth.models import User
-#from django.core.files import File
-#from django.core.files.base import ContentFile
 from django.core.files import File
 from django.utils.translation import ugettext as _
 from collections import OrderedDict
 from markdown import markdown
-
-#from django.dispatch import receiver
-#from django.db.models.signals import pre_save, post_save
-#from django.core.exceptions import ValidationError
 
 
 
@@ -71,7 +64,6 @@ class SubMenuManager(models.Manager):
     
     def obj_contents(self, request):
         obj = [dict(submenu=b, base=b.base_set.all()) for b in SubMenu.objects.filter(subslug__startswith='#')]
-        #print ('OBJ:{}'.format(obj))
         return obj
     
 
@@ -125,7 +117,7 @@ class Base(models.Model):
                                   help_text=_("Введите ссылку на ресурс"))
     timestamp   = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата'), help_text=_("Дата/время создания контекста"))
     flag        = models.BooleanField(default=False, verbose_name=_('Флаг'),
-                                          help_text=_("Флаг..")) # User Library
+                                          help_text=_("Флаг..")) 
     data1       = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные1'),
                                        help_text=_("Введите дополнительные данные 1"))
     data2       = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные2'),
@@ -142,20 +134,10 @@ class Base(models.Model):
 
 
     def save(self):
-        print('SAVE FUNCTION')
         self.desc_html = markdown(self.description)
         if not self.image:
             self.image = 'no_image.png'
         super(Base, self).save()
-
-    #def clean_url(self):
-        #print('CLEAN FUNCTION')
-        #if self.cleaned_data["urllink"] is None:
-            #raise forms.ValidationError(u"You need set some urllink.")
-
-    #def full_clean(self, exclude=None, validate_unique=True):
-        #print('CLEAN FIELDS:{}'.format(self.__dict__))
-        #pass
     
     
     def get_absolute_url_cat(self):
@@ -165,7 +147,6 @@ class Base(models.Model):
     def get_slider_url(self):
         if self.flag:
             url = self.urllink.split('/')
-            #print('URL:{}'.format(url[-1]))
             return url[-1]
         return self.urllink
 
@@ -173,16 +154,6 @@ class Base(models.Model):
     def __str__(self):
         return self.title
 
-#@receiver(pre_save)
-#def pre_save_handler(sender, instance, *args, **kwargs):
-    #print('INSTANCE:{}'.format(instance.__dict__))
-    #instance.full_clean()
-
-#def base_presave(sender, instance, **kwargs):
-    #print('INSTANCE:{}'.format(instance.__dict__))
-    #return
-
-#pre_save.connect(base_presave, sender=Base)
 
     
 class ImageManager(models.Manager):
@@ -218,11 +189,9 @@ class Image(models.Model):
 
 
     def save(self, *args, **kwargs):
-        print('DESC_HTML:{}'.format(self.desc_html))
         self.slug = Base.objects.get(id=self.name_id).slug
         if not self.image:
             self.image = 'no_image.png'
-        #print('IMAGE_SLUG:{}'.format(self.slug))
         super(Image, self).save(*args, **kwargs)
     
     

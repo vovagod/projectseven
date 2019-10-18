@@ -46,16 +46,16 @@
 <div id="id0{{forloop.counter}}" class="w3-modal">
   <div class="w3-modal-content">
       <span onclick="document.getElementById('id0{{forloop.counter}}').style.display='none'"
-        class="w3-button w3-border w3-display-topright">&#10060;</span>
+        class="w3-button w3-display-topright">&#10060;</span>
          <div class="w3-row w3-container">
             <div class="w3-half w3-animate-zoom w3-padding-16">
                 {% if image.image %}
              <img src="{{image.image.url}}" title="{{image.title}}" style="width:100%">{% endif %}
-                <p class="loop11 w3-center w3-text-indigo"><b>{{image.title}}</b></p>
+                <p class="loop10 w3-center w3-text-indigo"><b>{{image.title}}</b></p>
              </div>
               <div class="w3-half w3-padding-large">
-                <p class="loop10 w3-center">{{image.sentence}}</p>
-                  <p class="loop11">{% filter linebreaksbr %}{{image.description|linebreaksbr}}{% endfilter %}</p>
+                  <p class="loop11 w3-center"><b>{{image.sentence}}</b></p>
+                  <p class="loop11 w3-left-align">{% filter linebreaksbr %}{{image.description|linebreaksbr}}{% endfilter %}</p>
               </div>
         </div>
   </div>
@@ -251,6 +251,12 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
       {% csrf_token %}
      <p class="loop8 w3-center">Контакты</p>
     <div class="container">
+        
+        <div class="loop9" style="padding: 0px 0px 16px 50px; color:#373538">
+            <span>&#9899; Звоните нам: +7 495 111-11-11</span><br>
+            <span>&#9899; Пишите нам по вопросам сотрудничества, техническим, запросу пароля на <a href="http://comaex.ddns.net" style="color:red; cursor: pointer" target=_blank>Comaex demo</a> и другим:</span>
+        </div>
+        
        {% for field in form %}
         <div class="w3-row w3-section">
           <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-phone"></i></div>

@@ -10,7 +10,7 @@ from django.views.generic.edit import FormView
 from django.shortcuts import render, get_object_or_404, redirect
 
 from django.shortcuts import render_to_response # remove after
-from django.conf import settings #
+from django.conf import settings
 
 from mysite.mixins import NextUrlMixin, RequestFormAttachMixin
 from mysite.base.forms import ContactForm
@@ -36,7 +36,6 @@ def emailview(request):
 
 
 class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
-    print('We are in BaseView function')
    
     form_class = ContactForm
     success_url = '/#success'
@@ -49,39 +48,27 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
 
     def get_context_data(self, *args, **kwargs):
-        #print('We are in get context data function of BaseView...')
-        #start = time.time()
         context = super(BaseView, self).get_context_data(*args, **kwargs)
         context['menus'] = Menu.objects.obj_auth(self.request)
         context['contents'] = SubMenu.objects.obj_contents(self.request)
-        #for b in context['contents']:
-            #print('CONTENTS:{}'.format(b['base']))
-            #for c in b['base']:
-                #print('BASE:{}'.format(c.id))
         context['images'] = Image.objects.obj_images(self.request)
-        #for a in context['images']:
-            #print('IMAGES:{}'.format(a.name_id))
-            
-        #end = time.time()
-        #res = end - start
-        #print("BASEVIEW,START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
         return context
 
 
     def form_valid(self, form):
-        print('Form data, self{}, form:{}'.format(self, form.cleaned_data['content']))
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         data = form.cleaned_data['content']
         data_list = data.split(' ')
-        print('DATA_LIST:{}'.format(data_list))
-        credentials = ['логин', 'пароль']
-        callme = ['заинтересовала', 'позвоните']
+        credentials = ['логин', 'пароль', 'вход']
+        callme = ['заинтересовала', 'позвоните', 'позвонить']
+        message = {'common':'Мы получили ваше сообщение и свяжемся с вами в ближайшее время.'}
         if any(n in data_list for n in credentials):
-            pass
+            message = {'credentials':'Для входа используйте логин: admin, пароль: admin12345.'}
+            self.success_message = "данные для входа отправлены вам на почту"
         if any(n in data_list for n in callme):
-            pass
-        form.send_email()
+            message = {'callme':'Мы свяжемся свами в ближайший час.'}
+        form.send_email(message)
         return super(BaseView, self).form_valid(form)
 
     
