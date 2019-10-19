@@ -153,6 +153,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 RAW_IMAGE_ROOT = os.path.join(BASE_DIR, 'static', 'media/raw_image')
 LOGO_IMAGE = os.path.join(BASE_DIR, 'static', 'media/logo.jpg')
-print('MEDIA_ROOT:{}'.format(MEDIA_ROOT))
+#print('MEDIA_ROOT:{}'.format(MEDIA_ROOT))
 
 #PROTECTED_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "protected_media")
