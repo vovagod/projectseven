@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from django.contrib import admin
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +25,7 @@ SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 DOMAIN = '127.0.0.1:8000'
 
@@ -70,10 +71,16 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = [
-    "/mysite/base/static",
-    os.path.join(BASE_DIR, "mysite/base/static", "media"),
-    ]
+#STATICFILES_DIRS = [
+    #"/mysite/base/static",
+    #os.path.join(BASE_DIR, "mysite/base/static", "media"),
+    #]
+
+ADMIN = os.path.dirname(os.path.abspath(admin.__file__))
+STATICFILES_DIRS = ( BASE_DIR + '/mysite/base/static/',
+                     ADMIN + '/static/admin/',
+                     )
+
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -99,6 +106,7 @@ DATABASES = {
         #'PORT': '5432',
     #}
 #}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -126,7 +134,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PASSWORD = 'ksenia96god' 
 EMAIL_HOST_USER = 'gva008@gmail.com' 
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'Comaex WebScada <comaex@gmail.com>'
+DEFAULT_FROM_EMAIL = 'Comaex server <comaex@gmail.com>'
 BASE_URL = '127.0.0.1:8000'
 
 
@@ -147,6 +155,7 @@ STATIC_URL = '/static/'
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'css')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 MEDIA_URL = '/media/'

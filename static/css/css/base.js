@@ -1,5 +1,9 @@
 var w;
+var h;
 var previous_m = 1;
+var top_height;
+var scrollPast;
+var AppSizes = [0,0]; // heigh1, heigh2
 
 // Modal Image Gallery
 function onClick(element) {
@@ -52,6 +56,15 @@ function subLink(m) {
     userSub.className = userSub.className.replace(" w3-show", "");
 }
 
+// Closing the open screenshorts
+function screenShotsClose(){
+    var screenShots = document.getElementsByClassName(ClassMark(document.getElementById('screenshot'),3));
+    var i;
+for (i = 0; i < screenShots.length; i++) {
+    screenShots[i].parentElement.style.display='none';
+}
+}
+
 // Gorizontal and LeftSide bar menu function
 function myUser(m) {
 var user = document.getElementById('m'+m); 
@@ -63,6 +76,8 @@ var menuLoop1 = document.getElementsByClassName(ClassMark(user,3));
 var userChildAttr = user.childNodes[0].getAttribute('data-attr');
 var userSub_prev = document.getElementById('s'+previous_m );
 var prev = ClassMark(document.getElementById('m'+previous_m).childNodes[0],0); 
+    
+screenShotsClose();
     
 var i;
 for (i = 0; i < menuLoop1.length; i++) {
@@ -139,14 +154,20 @@ for (i = 0; i < fa.length; i++) {
 
 // Slideshow characteristic Images
 function charImage(im) {
-    document.getElementById("im"+im).style.display = "block";
-    var href = '#im'+im;
+    if (w < 601){ 
+        alert('Мала ширина экрана. Переверните устройство.');
+        return; }
+    item = document.getElementById("image"+im);
+    item.style.display = "block";
+    var href = '#image'+im;
+    let coordY = item.getBoundingClientRect().top + window.pageYOffset;
     window.location=href;
+    window.scrollTo(0, coordY-top_height);
 }
 
 
-// resize computation block
-function styleSet(l, sz, cl, tp, lf, mr){
+// Resize computation block
+function styleSet(l, sz, cl, tp, lf, mb, mt){
     if (sz !== 'undefined'){
         l.style.fontSize = sz+'px'; // font-size
     }
@@ -159,24 +180,27 @@ function styleSet(l, sz, cl, tp, lf, mr){
     if (lf !== 'undefined'){
         l.style.left = lf+'%'; // margin-left for display
     }
-     if (mr !== 'undefined'){
-        l.style.marginBottom = mr+'px';// margin-bottom
+     if (mb !== 'undefined'){
+        l.style.marginBottom = mb+'px';// margin-bottom
+    }
+    if (mt !== 'undefined'){
+        l.style.marginTop = mt+'px';// margin-top
     }
 }
 
-function sizeCount(w, l, sz, cl, tp, lf, mr){
+function sizeCount(w, l, sz, cl, tp, lf, mb, mt){
     
     for (i = 0; i < l.length; i++) {
 if (w > 993){
-    styleSet(l[i], sz[0], cl, tp[0], lf, mr[0])
+    styleSet(l[i], sz[0], cl, tp[0], lf, mb[0], mt[0])
     continue;
 }
 if (w > 601){
-    styleSet(l[i], sz[1], cl, tp[1], lf, mr[1])
+    styleSet(l[i], sz[1], cl, tp[1], lf, mb[1], mt[1])
     continue;
 }
     else{
-        styleSet(l[i], sz[2], cl, tp[2], lf, mr[2])
+        styleSet(l[i], sz[2], cl, tp[2], lf, mb[2], mt[2])
         continue;
     }
 } 
@@ -185,16 +209,18 @@ if (w > 601){
 // RESIZE FUNCTIONS
 function resSize(){
     window.w = window.innerWidth;
+    window.h = window.innerHeight;
         
 // Menu text resizing when window width is 601 or 993px
 var l = document.getElementsByClassName("loop1");
 // Text size of top gorizontal menu
 var sz = [15, 13, 11]; // size
-var mr = [16, 0, 0]; // margin-bottom
+var mb = [24, 0, 0]; // margin-bottom
+var mt = [24, 10, 10]; // margin-top
 var un = ['undefined', 'undefined', 'undefined'];
 var undef = 'undefined';
 var nl = [0, 0, 0];
-sizeCount(w, l, sz, undef, un, undef, un);
+sizeCount(w, l, sz, undef, un, undef, un, un);
               
 // Top, left sentense on slider module
 var x = document.getElementsByClassName("loop3");
@@ -202,7 +228,7 @@ var x = document.getElementsByClassName("loop3");
         var cl = 'blue'; // color-unused
         var tp = [2, 2, 2]; //margin-top
         var lf = 10; // margin-left
-        sizeCount(w, x, sz, undef, tp, lf, un);
+        sizeCount(w, x, sz, undef, tp, lf, un, un);
         
 // Bottom, left sentense on slider module
 var z = document.getElementsByClassName("loop4");   
@@ -210,34 +236,37 @@ var z = document.getElementsByClassName("loop4");
         var cl = 'green';  // unused
         var tp = [55, 50, 40]; 
         var lf = 5;       
-         sizeCount(w, z, sz, undef, tp, lf, un);
+         sizeCount(w, z, sz, undef, tp, lf, un, un);
         
 // Slider module management section (arrows, circlles)
 var v = document.getElementsByClassName("loop5"); 
-         sizeCount(w, v, un, undef, un, undef, mr);
+         sizeCount(w, v, un, undef, un, undef, mb, un);
     
 // Text resizing for characteristic module
-    var sz1 = [24, 20, 17];
-    var sz2 = [20, 16, 14];
-    var sz3 = [18, 15, 13];
+    var sz1 = [24, 19, 17];
+    var sz2 = [20, 15, 14];
+    var sz3 = [18, 14, 13];
     var sz4 = [16, 14, 12];
     var sz5 = [13, 11, 9];
+    var sz6 = [45, 32, 20];
 // Title size
 var n1 = document.getElementsByClassName("loop8"); 
-         sizeCount(w, n1, sz1, undef, un, undef, nl);
+         sizeCount(w, n1, sz1, undef, un, undef, un, un);
 // Subtitle size
 var n2 = document.getElementsByClassName("loop9"); 
-         sizeCount(w, n2, sz2, undef, un, undef, nl);
+         sizeCount(w, n2, sz2, undef, un, undef, un, un);
 // Sentence size
 var n3 = document.getElementsByClassName("loop10"); 
-         sizeCount(w, n3, sz3, undef, un, undef, nl);
+         sizeCount(w, n3, sz3, undef, un, undef, nl, un);
 // Description size
 var n4 = document.getElementsByClassName("loop11"); 
-         sizeCount(w, n4, sz4, undef, un, undef, nl);
+         sizeCount(w, n4, sz4, undef, un, undef, nl, mt);
 // Footer menu text
 var n5 = document.getElementsByClassName("loop12"); 
-         sizeCount(w, n5, sz5, undef, un, undef, nl);
-    
+         sizeCount(w, n5, sz5, undef, un, undef, nl, un);
+// Watermarks on screenshorts
+var n6 = document.getElementsByClassName("loop13"); 
+         sizeCount(w, n6, sz6, undef, un, undef, nl, un);
         
 // Image vertical aligning for characteristic module
 var p = document.getElementsByClassName("loop6");
@@ -255,12 +284,42 @@ else{
 }
 }
     
-//
-var top_height = document.getElementById("myNavbar").offsetHeight; 
+// Menu bar height calculation
+ window.top_height = document.getElementById("myNavbar").offsetHeight; 
     var headerShow = document.getElementById('headerShow');
     if (headerShow !== null) {
     headerShow.style.marginTop = top_height+15+'px'; 
     }
+    
+// Application text vertical aligning 
+function appResize(x,y){
+    for (i = 0; i < x.length; i++){
+      var TextDiff = (y - (x[i].children[0].clientHeight));
+      if (TextDiff === 0){ continue; }
+      x[i].children[0].style.marginBottom = TextDiff + parseInt(x[i].style.fontSize, 10) + 'px';
+  }
+}
+    
+var x = document.getElementsByClassName('appText');
+var TextH = [];
+for (i = 0; i < x.length; i++) {
+     TextH[i] = x[i].children[0].clientHeight;
+}
+var TextMax = TextH.sort(function(a, b){return b - a});
+if (h > w && AppSizes[0] === 0){  // height1, height > width
+    // set height
+    window.AppSizes[0]=TextMax[0]; 
+}
+if (w > h && AppSizes[1] === 0){  // height2, width > height
+    // set width
+    window.AppSizes[1]=TextMax[0]; 
+}
+if (h > w){
+    appResize(x, AppSizes[0]);
+} else {
+    appResize(x, AppSizes[1]);
+}
+    
 }
 
 
@@ -293,9 +352,9 @@ function showDivs(n) {
     
   for (i = 0; i < dots.length; i++) {
       var attr_color = data4[i].getAttribute('data-data4');
-     // dots[i].className = dots[i].className.replace(" w3-blue", "");
+      dots[i].className = dots[i].className.replace(" w3-indigo", "");
   
-      dots[i].className = "demo w3-badge w3-border w3-border-blue w3-transparent w3-hover-yellow";
+      dots[i].className = "demo w3-badge w3-border w3-border-indigo w3-transparent w3-hover-yellow";
       
       arrow_right[i].style.display = 'none';
       arrow_right[i].style.color = attr_color;
@@ -304,7 +363,7 @@ function showDivs(n) {
   }
   x[slideIndex-1].style.display = "block";  
   z[slideIndex-1].style.display = "block"; 
-  // dots[slideIndex-1].className += " w3-blue";
+   dots[slideIndex-1].className += " w3-indigo";
     
     dots[slideIndex-1].className += " w3-"+data4[slideIndex-1].getAttribute('data-data4');
     
@@ -312,6 +371,38 @@ function showDivs(n) {
     arrow_left[slideIndex-1].style.display = 'block';
 }
 
+
+
+// Scrolling down
+const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]'))
+
+anchors.forEach(function(item) {
+  item.addEventListener('click', function(e) {
+    e.preventDefault();
+      var itemHref = item.toString().split('/').slice(-1);
+      if (itemHref == "#"){ 
+          window.location = itemHref;
+          return; 
+      }
+    let coordY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top + window.pageYOffset;
+    let scroller = setInterval(function() {
+        let scrollBy = 15;
+        var scrollNow = window.pageYOffset || document.documentElement.scrollTop;
+       
+      if(scrollNow < coordY && scrollNow !== scrollPast) {
+          window.scrollPast = scrollNow;
+          window.scrollBy(0, scrollBy);
+      } else {
+           clearInterval(scroller);
+           window.location = itemHref;
+           window.scrollTo(0, coordY-top_height);
+      }
+    }, 0.1); 
+  });
+});
+
+
+// Slider intervalTimer
 var myVar;
 function myTimer() {
   plusDivs(1);

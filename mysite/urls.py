@@ -16,27 +16,21 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, re_path, include
-
 from django.conf import settings
 from django.conf.urls.static import static
+from mysite.base.views import baseviewreverse, emailview  #urlmapper
 
-#from django.views.generic.base import RedirectView
-
-from mysite.base.views import baseviewreverse, emailview #urlmapper
-
-#favicon_view = RedirectView.as_view(url='static/favicon.ico', permanent=True)
 
 urlpatterns = [
-    #re_path(r'^favicon\.ico$', favicon_view),
     path('admin/', admin.site.urls),
     path('home/', include('mysite.base.urls'), name='about'),
     path('', baseviewreverse),
     path('email', emailview),
-    #re_path(r'^favicon\.ico$', favicon_view),
 ]
 
 
 if settings.DEBUG:
-    urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    #print('urlpatterns:{}'.format(urlpatterns))
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

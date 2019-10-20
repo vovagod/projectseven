@@ -18,8 +18,9 @@
     mkdir project
     cd project
 
-    # To create a virtual environment for python 2.7:
+    # To create a virtual environment for python 2.7 or 3+:
     virtualenv -p python2.7 env
+    virtualenv -p python3 myenv
 
     # Create a virtualenv to isolate our package dependencies locally
     project$ python3 -m venv myvenv
@@ -177,7 +178,7 @@ server {
 
 8. Gunicorn
 
-   sudo nano /etc/systemd/system/gunicorn.socket
+    sudo nano /etc/systemd/system/gunicorn.socket
     sudo systemctl start gunicorn.socket
     sudo systemctl enable gunicorn.socket
     sudo systemctl status gunicorn.socket
