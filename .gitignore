@@ -1,0 +1,14 @@
+*.pyc
+*~
+__pycache__
+myvenv
+.DS_Store
+aws_key.pem
+help.py
+raw_images
+/static/admin
+/static/css
+/static/fonts
+/static/image
+/static/img
+/static/js

@@ -14,6 +14,15 @@
 
 1.1 Project installation
 
+    # Install Python
+    sudo apt-get update
+    sudo apt-get install python3
+    
+    sudo apt install python-pip
+    
+    sudo apt install virtualenv
+    pip install virtualenv
+
     # Create the project directory
     mkdir project
     cd project
@@ -175,6 +184,12 @@ server {
     }
 }
 
+# initiate a link
+sudo ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled
+# check nginx
+sudo nginx -t
+# restaart nginx
+sudo systemctl restart nginx
 
 8. Gunicorn
 

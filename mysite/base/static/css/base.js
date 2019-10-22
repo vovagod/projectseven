@@ -244,7 +244,7 @@ var v = document.getElementsByClassName("loop5");
     
 // Text resizing for characteristic module
     var sz1 = [24, 19, 17];
-    var sz2 = [20, 15, 14];
+    var sz2 = [20, 16, 15];
     var sz3 = [18, 14, 13];
     var sz4 = [16, 14, 12];
     var sz5 = [13, 11, 9];
@@ -325,7 +325,6 @@ if (h > w){
 
 // Slider show function
 var slideIndex = 1;
-showDivs(slideIndex);
 function plusDivs(n) {
   showDivs(slideIndex += n);
 }
@@ -432,7 +431,6 @@ el.addEventListener("mouseout", function(){
     SliderStart();
 });
 
-SliderStart();
 
 // RESIZE LISTENERS
 window.addEventListener("resize", function(){
@@ -444,5 +442,7 @@ document.addEventListener('readystatechange', event => {
   }
   else if (event.target.readyState === 'complete') {
     resSize();
+      showDivs(1);
+      //SliderStart();
   }
 });
