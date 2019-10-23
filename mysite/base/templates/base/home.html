@@ -7,11 +7,11 @@
 {% for content in contents|dictsort:"submenu.id" %}
 
 {% if content.submenu.subslug == '#slider' %}
-<div id="headerShow" class="w3-content w3-display-container" style="max-width:1000px; margin-top:50px">
+<div id="headerShow" class="w3-content w3-display-container" style="max-width:1024px; margin-top:50px; display:none">
 <!-- SLIDER MODULE -->
 {% for slide in content.base %}
     <img class="mySlides w3-animate-opacity" src="{{ slide.image.url }}" alt="{{ slide.description }}" style="width:100%">
-     <div class="myText" style="font-weight:bold">
+     <div class="myText" style="font-weight:bold;">
         <p class="loop3 w3-display-position" style="color:{{slide.data1}}; margin-top:0px">{% filter linebreaksbr %}{{slide.title|linebreaksbr}}{% endfilter %}</p>
         <p class="loop4 w3-display-position" data-data4="{{slide.data4}}">
        <a href="{{slide.get_slider_url}}" class="w3-btn w3-padding-small w3-round-large w3-left-align" style="background-color:{{slide.data3}}; color:{{slide.data2}}; font-style: italic" target="{% if not slide.flag %}_blank{% else %}_self{% endif %}">{% filter linebreaksbr %}{{slide.description|linebreaksbr}}{% endfilter %}&rarr;</a></p>
@@ -188,7 +188,7 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
 
 
 {% if content.submenu.subslug == '#portfolio' %}
-<!-- PORTFOLIO MODULE -->
+<!-- PORTFOLIO MODULE (FUTURE DEVELOPMENT) -->
   <div id="portfolio" class="w3-container" style="padding-top: 50px">
     <h2 class="w3-text-green">The Apartment</h2>
     <div class="w3-display-container myApSlides">

@@ -4,7 +4,7 @@
 <html>
 <title>Comaex</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=evice-width, initial-scale=1">
 <link rel="shortcut icon" href="{% static 'css/icon.png'  %}" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="{% static "css/base.css" %}">
     
 
-<body class="w3-content" style="max-width:1000px; background-color: #f1f1f1">
+<body class="w3-content" style="max-width:1024px; background-color: #f1f1f1">
 
 <!-- Navbar (sit on top) -->
-<div class="w3-top" style="max-width:1000px">
+<div class="w3-top">
   <div id="myNavbar" class="w3-bar w3-white w3-card">
     <a href="/" class="w3-bar-item w3-btn" style="padding: 4px 10px 4px 10px">
         <img src="{% static 'css/logo.png'  %}" alt="Comaex WebScada"></a>
@@ -128,7 +128,7 @@ class="loop1 w3-button w3-bar-item w3-hover-white"><b style="border-bottom:2px s
     
    {% block content %}{% endblock content %}
     
-    <script type="text/javascript" src="{% static "css/base.js" %}"></script>
+    <script defer type="text/javascript" src="{% static "css/base.js" %}"></script>
     
 </body>
 </html>

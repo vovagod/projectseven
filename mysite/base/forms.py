@@ -50,14 +50,14 @@ class ContactForm(forms.Form):
         subject, from_email, to = 'request confirmation', 'comaex@comaex.com', self.cleaned_data.get("email")
         
         html_file = get_template('base/email.html')
-        msg = {'letter':'/media/letter.png',
+        msg = {'letter':'/static/media/letter.png',
                'guest':self.cleaned_data["fullname"],
                'messages': message,
-               'logo': '/media/logo.png',
-               'website':'/media/website.png',
-               'phone':'/media/phone.png',
-               'email':'/media/email.png',
-               'address':'/media/address.png',
+               'logo': '/static/media/logo.png',
+               'website':'/static/media/website.png',
+               'phone':'/static/media/phone.png',
+               'email':'/static/media/email.png',
+               'address':'/static/media/address.png',
                }
         text_content = 'This is an important message'
         html_content = html_file.render(msg)

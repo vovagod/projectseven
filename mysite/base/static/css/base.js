@@ -167,7 +167,7 @@ function charImage(im) {
 
 
 // Resize computation block
-function styleSet(l, sz, cl, tp, lf, mb, mt){
+function styleSet(l, sz, cl, tp, lf, mb, mt, lh){
     if (sz !== 'undefined'){
         l.style.fontSize = sz+'px'; // font-size
     }
@@ -186,21 +186,24 @@ function styleSet(l, sz, cl, tp, lf, mb, mt){
     if (mt !== 'undefined'){
         l.style.marginTop = mt+'px';// margin-top
     }
+    if (lh !== 'undefined'){
+        l.style.lineHeight = lh;// line-height
+    }
 }
 
-function sizeCount(w, l, sz, cl, tp, lf, mb, mt){
+function sizeCount(w, l, sz, cl, tp, lf, mb, mt, lh){
     
     for (i = 0; i < l.length; i++) {
 if (w > 993){
-    styleSet(l[i], sz[0], cl, tp[0], lf, mb[0], mt[0])
+    styleSet(l[i], sz[0], cl, tp[0], lf, mb[0], mt[0], lh[0])
     continue;
 }
 if (w > 601){
-    styleSet(l[i], sz[1], cl, tp[1], lf, mb[1], mt[1])
+    styleSet(l[i], sz[1], cl, tp[1], lf, mb[1], mt[1], lh[1])
     continue;
 }
     else{
-        styleSet(l[i], sz[2], cl, tp[2], lf, mb[2], mt[2])
+        styleSet(l[i], sz[2], cl, tp[2], lf, mb[2], mt[2], lh[2])
         continue;
     }
 } 
@@ -215,12 +218,13 @@ function resSize(){
 var l = document.getElementsByClassName("loop1");
 // Text size of top gorizontal menu
 var sz = [15, 13, 11]; // size
-var mb = [24, 0, 0]; // margin-bottom
-var mt = [24, 10, 10]; // margin-top
+var mb = [24, 10, 5]; // margin-bottom
+var mt = [24, 10, 5]; // margin-top
 var un = ['undefined', 'undefined', 'undefined'];
 var undef = 'undefined';
 var nl = [0, 0, 0];
-sizeCount(w, l, sz, undef, un, undef, un, un);
+var lh = [1.8, 1.7, 1.6];
+sizeCount(w, l, sz, undef, un, undef, un, un, lh);
               
 // Top, left sentense on slider module
 var x = document.getElementsByClassName("loop3");
@@ -228,7 +232,7 @@ var x = document.getElementsByClassName("loop3");
         var cl = 'blue'; // color-unused
         var tp = [2, 2, 2]; //margin-top
         var lf = 10; // margin-left
-        sizeCount(w, x, sz, undef, tp, lf, un, un);
+        sizeCount(w, x, sz, undef, tp, lf, un, un, lh);
         
 // Bottom, left sentense on slider module
 var z = document.getElementsByClassName("loop4");   
@@ -236,37 +240,37 @@ var z = document.getElementsByClassName("loop4");
         var cl = 'green';  // unused
         var tp = [55, 50, 40]; 
         var lf = 5;       
-         sizeCount(w, z, sz, undef, tp, lf, un, un);
+         sizeCount(w, z, sz, undef, tp, lf, un, un, lh);
         
 // Slider module management section (arrows, circlles)
 var v = document.getElementsByClassName("loop5"); 
-         sizeCount(w, v, un, undef, un, undef, mb, un);
+         sizeCount(w, v, un, undef, un, undef, mb, un, lh);
     
 // Text resizing for characteristic module
-    var sz1 = [24, 19, 17];
-    var sz2 = [20, 16, 15];
-    var sz3 = [18, 14, 13];
-    var sz4 = [16, 14, 12];
-    var sz5 = [13, 11, 9];
-    var sz6 = [45, 32, 20];
+    var sz1 = [24, 19, 17];  // loop8
+    var sz2 = [20, 16, 15];  // loop9
+    var sz3 = [18, 14, 13];  // loop10
+    var sz4 = [16, 14, 13];  // loop11
+    var sz5 = [13, 11, 9];   // loop12
+    var sz6 = [45, 32, 20];  // loop13
 // Title size
 var n1 = document.getElementsByClassName("loop8"); 
-         sizeCount(w, n1, sz1, undef, un, undef, un, un);
+         sizeCount(w, n1, sz1, undef, un, undef, mb, un, lh);
 // Subtitle size
 var n2 = document.getElementsByClassName("loop9"); 
-         sizeCount(w, n2, sz2, undef, un, undef, un, un);
+         sizeCount(w, n2, sz2, undef, un, undef, mb, un, lh);
 // Sentence size
 var n3 = document.getElementsByClassName("loop10"); 
-         sizeCount(w, n3, sz3, undef, un, undef, nl, un);
+         sizeCount(w, n3, sz3, undef, un, undef, nl, un, lh);
 // Description size
 var n4 = document.getElementsByClassName("loop11"); 
-         sizeCount(w, n4, sz4, undef, un, undef, nl, mt);
+         sizeCount(w, n4, sz4, undef, un, undef, nl, mt, lh);
 // Footer menu text
 var n5 = document.getElementsByClassName("loop12"); 
-         sizeCount(w, n5, sz5, undef, un, undef, nl, un);
+         sizeCount(w, n5, sz5, undef, un, undef, nl, un, lh);
 // Watermarks on screenshorts
 var n6 = document.getElementsByClassName("loop13"); 
-         sizeCount(w, n6, sz6, undef, un, undef, nl, un);
+         sizeCount(w, n6, sz6, undef, un, undef, nl, un, lh);
         
 // Image vertical aligning for characteristic module
 var p = document.getElementsByClassName("loop6");
@@ -285,6 +289,10 @@ else{
 }
     
 // Menu bar height calculation
+    var body = document.getElementsByTagName('body');
+    var w3top = document.getElementsByClassName("w3-top");
+    w3top[0].style.width = body[0].offsetWidth+'px';
+
  window.top_height = document.getElementById("myNavbar").offsetHeight; 
     var headerShow = document.getElementById('headerShow');
     if (headerShow !== null) {
@@ -443,6 +451,7 @@ document.addEventListener('readystatechange', event => {
   else if (event.target.readyState === 'complete') {
     resSize();
       showDivs(1);
+      el.style.display = 'block';
       //SliderStart();
   }
 });

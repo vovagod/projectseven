@@ -68,6 +68,8 @@
    $ rm -rf .git - форсированное удаление git
    $ rm -r .git - удаление git из папки
    
+   if Please move or remove them before you merge, make:
+   $ git clean -d -f
 
 3. Requirements:
    pip freeze > requirements.txt
