@@ -47,17 +47,26 @@ class ContactForm(forms.Form):
    
 
     def send_email(self, message):
-        subject, from_email, to = 'request confirmation', 'comaex@comaex.com', self.cleaned_data.get("email")
+        path = 'http://'+settings.DOMAIN+'/static/media/'
+        if settings.DEBUG:
+            path = '/media/'
+        subject, from_email, to = 'Request confirmation', settings.EMAIL_HOST_USER, self.cleaned_data.get("email")
         
         html_file = get_template('base/email.html')
-        msg = {'letter':'/static/media/letter.png',
+        msg = {'letter':path+'letter.png',
                'guest':self.cleaned_data["fullname"],
                'messages': message,
-               'logo': '/static/media/logo.png',
-               'website':'/static/media/website.png',
-               'phone':'/static/media/phone.png',
-               'email':'/static/media/email.png',
-               'address':'/static/media/address.png',
+               'url':'http://'+settings.DOMAIN,
+               'logo': path+'logo.png',
+               'website':path+'website.png',
+               'phone':path+'phone.png',
+               'email':path+'email.png',
+               'address':path+'address.png',
+               'mobile':settings.PHONE,
+               'mail':settings.EMAIL_HOST_USER,
+               'comaex_demo':settings.COMAEX_DEMO,
+               'domain':settings.DOMAIN,
+               'addr':settings.ADDRESS,
                }
         text_content = 'This is an important message'
         html_content = html_file.render(msg)

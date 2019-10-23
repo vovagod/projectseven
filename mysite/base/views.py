@@ -22,14 +22,22 @@ def baseviewreverse(request):
     return redirect('/home/')
 
 def emailview(request):
-    msg = {'letter':'/media/letter.png',
+    path = 'http://'+settings.DOMAIN+'/static/media/'
+    if settings.DEBUG:
+        path = '/media/'
+    msg = {'letter':path+'letter.png',
            'guest':'Гость',
-           'url':'',
-           'logo': '/media/logo.png',
-           'website':'/media/website.png',
-           'phone':'/media/phone.png',
-           'email':'/media/email.png',
-           'address':'/media/address.png',
+           'url':'http://'+settings.DOMAIN,
+           'logo': path+'logo.png',
+           'website':path+'website.png',
+           'phone':path+'phone.png',
+           'email':path+'email.png',
+           'address':path+'address.png',
+           'mobile':settings.PHONE,
+           'mail':settings.EMAIL_HOST_USER,
+           'comaex_demo':settings.COMAEX_DEMO,
+           'domain':settings.DOMAIN,
+           'addr':settings.ADDRESS,
            }
     return render_to_response('base/email.html', msg,
                               content_type="text/html")

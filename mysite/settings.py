@@ -23,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*',]
 
-DOMAIN = 'comaex.info'
+DOMAIN = 'www.comaex.info'
 
 # Application definition
 
@@ -136,6 +136,10 @@ EMAIL_HOST_USER = 'gva008@gmail.com'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'Comaex server <comaex@gmail.com>'
 BASE_URL = '127.0.0.1:8000'
+
+PHONE = '+7(985)482-85-88'
+COMAEX_DEMO = 'http://comaex.ddns.net'
+ADDRESS = 'Москва, Сиреневый бульвар 32'
 
 
 # Internationalization

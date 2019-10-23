@@ -56,8 +56,8 @@ td, th {
      <col width="130px" />
     <!-- HEADER -->
   <tr id='header'>
-    <th style='text-align: left'><a href="{{web_url}}" title='Посетить сайт'><img src="{{logo}}" alt="Comaex WebScada"></a></th>
-      <th style='text-align: right'><img src="{{letter}}" alt="Comaex WebScada"></th>
+    <th style='text-align: left'><a href="{{url}}" title='Посетить сайт' target="_blank"><img src="{{logo}}" alt="Comaex server"></a></th>
+      <th style='text-align: right'><img src="{{letter}}" alt="Comaex server"></th>
       <th style='font-size: 12px'>Служба сообщений
           <span>&bull;</span>
           <span>Comaex</span>
@@ -66,11 +66,11 @@ td, th {
   </tr>
     <!-- BODY -->
   <tr id='center'>
-      <td><h3>Дорогой, {{guest}}</h3><br>
+      <td><br><h4>Дорогой, {{guest}}</h4><br>
           {% for key, value in messages.items %}
           <p>&emsp;Спасибо за интерес к нашей технологии. {{value}}</p>
           {% if key == 'credentials' %}
-          <p>Перейти на страницу входа <a href="http://comaex.ddns.net" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>
+          <p>Перейти на страницу входа <a href="{{comaex_demo}}" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>
           {% endif %}
           {% endfor %}
           <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
@@ -88,10 +88,10 @@ td, th {
   <tr id='footer'>
       <td style='font-size: 12px'>
           <span>Супервизор-сервер Comaex</span><br>
-          <span>&#127968; Москва, Сиреневый бульвар 32<br>
-          <span style='color:red'>&phone;</span>&nbsp;+7(985) 482-85-88 &nbsp;&bull;&nbsp;
-          &#9993; info@comaex.com &nbsp;&bull;&nbsp;
-          &#127760; <a href="{{web_url}}" title='Посетить сайт'>&nbsp;http://www.comaex.info</a></span><br>
+          <span>&#127968; {{addr}}<br>
+          <span style='color:red'>&phone;</span>&nbsp;{{mobile}} &nbsp;&bull;&nbsp;
+          &#9993; {{mail}} &nbsp;&bull;&nbsp;
+          &#127760; <a href="{{url}}" title='Посетить сайт' target="_blank">&nbsp;{{domain}}</a></span><br>
           
           <!--<span style='font-size: 16px'>&#127760; &phone; &#9990; &#9993; &#127968; &#128222; &#128232; &#128269;
           &#128722; &#128231;</span>-->
