@@ -7,6 +7,12 @@
 {% for content in contents|dictsort:"submenu.id" %}
 
 {% if content.submenu.subslug == '#slider' %}
+
+<div id="headerSpin" class="w3-center" style="margin-top:85px; display:block">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+    <p class="loop9 w3-center">Загрузка...</p>
+</div>
+
 <div id="headerShow" class="w3-content w3-display-container" style="max-width:1024px; margin-top:50px; display:none">
 <!-- SLIDER MODULE -->
 {% for slide in content.base %}
@@ -219,16 +225,16 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
 
   <div class="w3-row-padding w3-section">
     <div class="w3-col s3">
-      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="/w3images/livingroom.jpg" style="width:100%;cursor:pointer" onclick="currentApDiv(1)" title="Living room">
+      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="" style="width:100%;cursor:pointer" onclick="currentApDiv(1)" title="Living room">
     </div>
     <div class="w3-col s3">
-      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="/w3images/diningroom.jpg" style="width:100%;cursor:pointer" onclick="currentApDiv(2)" title="Dining room">
+      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="" style="width:100%;cursor:pointer" onclick="currentApDiv(2)" title="Dining room">
     </div>
     <div class="w3-col s3">
-      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="/w3images/bedroom.jpg" style="width:100%;cursor:pointer" onclick="currentApDiv(3)" title="Bedroom">
+      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="" style="width:100%;cursor:pointer" onclick="currentApDiv(3)" title="Bedroom">
     </div>
     <div class="w3-col s3">
-      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="/w3images/livingroom2.jpg" style="width:100%;cursor:pointer" onclick="currentApDiv(4)" title="Second Living Room">
+      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="" style="width:100%;cursor:pointer" onclick="currentApDiv(4)" title="Second Living Room">
     </div>
   </div>
 {% endif %}
@@ -254,7 +260,7 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
         
         <div class="loop10" style="padding: 0px 0px 16px 50px; color:#373538">
             <span>&#9899; Звоните нам: +7 985 482-85-88</span><br>
-            <span>&#9899; Пишите нам по вопросам сотрудничества, техническим, запросу пароля на <a href="http://comaex.ddns.net" style="color:red; cursor: pointer" target=_blank>Comaex demo</a> и другим:</span>
+            <span>&#9899; Пишите нам по вопросам сотрудничества, техническим, запросу пароля на <a href="http://comaex.ddns.net" style="color:red; cursor: pointer" target="_blank">Comaex Demo</a> и другим:</span>
         </div>
         
        {% for field in form %}

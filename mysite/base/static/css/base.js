@@ -209,6 +209,14 @@ if (w > 601){
 } 
 }
 
+// Top bar menu take width of body width
+function topBarWidth(){
+    var body = document.getElementsByTagName('body');
+    var w3top = document.getElementsByClassName("w3-top");
+    w3top[0].style.width = body[0].offsetWidth+'px';
+}
+topBarWidth();
+
 // RESIZE FUNCTIONS
 function resSize(){
     window.w = window.innerWidth;
@@ -246,7 +254,7 @@ var z = document.getElementsByClassName("loop4");
 var v = document.getElementsByClassName("loop5"); 
          sizeCount(w, v, un, undef, un, undef, mb, un, lh);
     
-// Text resizing for characteristic module
+// Font resizing for characteristic module
     var sz1 = [24, 19, 17];  // loop8
     var sz2 = [20, 16, 15];  // loop9
     var sz3 = [18, 14, 13];  // loop10
@@ -289,9 +297,7 @@ else{
 }
     
 // Menu bar height calculation
-    var body = document.getElementsByTagName('body');
-    var w3top = document.getElementsByClassName("w3-top");
-    w3top[0].style.width = body[0].offsetWidth+'px';
+    topBarWidth();
 
  window.top_height = document.getElementById("myNavbar").offsetHeight; 
     var headerShow = document.getElementById('headerShow');
@@ -379,10 +385,8 @@ function showDivs(n) {
 }
 
 
-
 // Scrolling down
 const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]'))
-
 anchors.forEach(function(item) {
   item.addEventListener('click', function(e) {
     e.preventDefault();
@@ -451,6 +455,7 @@ document.addEventListener('readystatechange', event => {
   else if (event.target.readyState === 'complete') {
     resSize();
       showDivs(1);
+      document.getElementById("headerSpin").style.display = 'none';
       el.style.display = 'block';
       //SliderStart();
   }

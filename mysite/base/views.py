@@ -38,6 +38,7 @@ def emailview(request):
            'comaex_demo':settings.COMAEX_DEMO,
            'domain':settings.DOMAIN,
            'addr':settings.ADDRESS,
+           'title':settings.FOOTER_TITLE,
            }
     return render_to_response('base/email.html', msg,
                               content_type="text/html")

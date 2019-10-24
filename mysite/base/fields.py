@@ -4,8 +4,8 @@ class ListTextWidget(forms.TextInput):
     def __init__(self, data_list, name, placeholder, autocomplete, *args, **kwargs):
         super(ListTextWidget, self).__init__(*args, **kwargs)
         self._name = name
-        self._list = ('Меня заинтересовала ваша технология, свяжитесь со мной пожалуйста',
-                      'Прошу прислать мне логин и пароль для входа в демо Comaex',
+        self._list = ('Мне интересно, свяжитесь со мной пожалуйста',
+                      'Прошу прислать данные для входа в Comaex Demo',
                       )
         self.attrs.update({'list':'list__%s' % self._name,
                            'placeholder':placeholder,

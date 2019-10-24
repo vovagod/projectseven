@@ -42,6 +42,7 @@ class ContactForm(forms.Form):
                           phone=data['phone'], content=data['content'],
                           ipaddr=self.request.META['REMOTE_ADDR']
                           )
+        print('META:{}'.format(self.request.META['REMOTE_ADDR']))
         message.save()
         return cleaned_data
    
@@ -67,6 +68,7 @@ class ContactForm(forms.Form):
                'comaex_demo':settings.COMAEX_DEMO,
                'domain':settings.DOMAIN,
                'addr':settings.ADDRESS,
+               'title':settings.FOOTER_TITLE,
                }
         text_content = 'This is an important message'
         html_content = html_file.render(msg)
