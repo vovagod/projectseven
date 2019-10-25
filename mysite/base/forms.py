@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.core.mail import EmailMultiAlternatives
+#from django.contrib.gis.geoip import GeoIP
 
 from django.template.loader import get_template
 from django.template import Context
@@ -10,6 +11,7 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 from .models import Contact
 from .fields import ListTextWidget
+from ipware import get_client_ip
 
 
 class ContactForm(forms.Form):
@@ -38,11 +40,23 @@ class ContactForm(forms.Form):
         if data.get('email') is None:
             raise forms.ValidationError("Enter a valid email address", code='email_error')
 
+        ip, is_routable = get_client_ip(self.request)
+        if ip is None:
+            ipaddr = None
+        else:
+            ipaddr = ip
+            if is_routable:
+                routable = 'public IP'
+            else:
+                routable = 'private IP'
+        #if ipaddr and is_routable:
+            #g = GeoIP()
+            #city = g.city(ipaddr)
+        #print('City:{}'.format(city))
         message = Contact(fullname=data['fullname'], email=data['email'],
                           phone=data['phone'], content=data['content'],
-                          ipaddr=self.request.META['REMOTE_ADDR']
+                          ipaddr=ipaddr or 'Unable to get IP address',
                           )
-        print('META:{}'.format(self.request.META['REMOTE_ADDR']))
         message.save()
         return cleaned_data
    

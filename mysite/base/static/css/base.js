@@ -209,7 +209,7 @@ if (w > 601){
 } 
 }
 
-// Top bar menu take width of body width
+// Top bar menu takes width of body width
 function topBarWidth(){
     var body = document.getElementsByTagName('body');
     var w3top = document.getElementsByClassName("w3-top");

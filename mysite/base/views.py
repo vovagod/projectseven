@@ -69,8 +69,8 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
         # It should return an HttpResponse.
         data = form.cleaned_data['content']
         data_list = data.split(' ')
-        credentials = ['логин', 'пароль', 'вход']
-        callme = ['заинтересовала', 'позвоните', 'позвонить']
+        credentials = ['логин', 'пароль', 'вход', 'данные', 'входа']
+        callme = ['заинтересовала', 'позвоните', 'позвонить', 'интересно', 'свяжитесь']
         message = {'common':'Мы получили ваше сообщение и свяжемся с вами в ближайшее время.'}
         if any(n in data_list for n in credentials):
             message = {'credentials':'Для входа используйте логин: admin, пароль: admin12345.'}

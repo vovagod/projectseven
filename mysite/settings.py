@@ -127,18 +127,27 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Email settings
+# Google Email settings
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.gmail.com' 
+#EMAIL_HOST_PASSWORD = 'ksenia96god' 
+#EMAIL_HOST_USER = 'gva008@gmail.com' 
+#EMAIL_PORT = 587
+#DEFAULT_FROM_EMAIL = 'Comaex server <comaex@gmail.com>'
+#BASE_URL = '127.0.0.1:8000'
 
+
+# Yandex Email settings
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com' 
-EMAIL_HOST_PASSWORD = 'ksenia96god' 
-EMAIL_HOST_USER = 'gva008@gmail.com' 
+EMAIL_HOST = 'smtp.yandex.ru' 
+EMAIL_HOST_PASSWORD = 'comaex2019info' 
+EMAIL_HOST_USER = 'comaex.info@yandex.ru' 
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'Comaex server <comaex@gmail.com>'
+DEFAULT_FROM_EMAIL = 'Comaex server <comaex.info@yandex.ru>'
 BASE_URL = '127.0.0.1:8000'
 
-# Email footer content
 
+# Email footer content
 PHONE = '+7(985)482-85-88'
 COMAEX_DEMO = 'http://comaex.ddns.net'
 ADDRESS = 'Москва, Сиреневый бульвар 32'
