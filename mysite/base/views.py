@@ -15,7 +15,8 @@ from django.conf import settings
 from mysite.mixins import NextUrlMixin, RequestFormAttachMixin
 from mysite.base.forms import ContactForm
 
-from .models import Base, Menu, SubMenu, Contact, Image
+from .models import Base, Menu, SubMenu, Image
+from interaction.models import Contact
 
 
 def baseviewreverse(request):
@@ -73,7 +74,7 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
         callme = ['заинтересовала', 'позвоните', 'позвонить', 'интересно', 'свяжитесь']
         message = {'common':'Мы получили ваше сообщение и свяжемся с вами в ближайшее время.'}
         if any(n in data_list for n in credentials):
-            message = {'credentials':'Для входа используйте логин: admin, пароль: admin12345.'}
+            message = {'credentials':'Для входа используйте логин: user, пароль: user12345.'}
             self.success_message = "данные для входа отправлены вам на почту"
         if any(n in data_list for n in callme):
             message = {'callme':'Мы свяжемся свами в ближайший час.'}

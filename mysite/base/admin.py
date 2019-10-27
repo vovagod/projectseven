@@ -1,75 +1,39 @@
+import importlib
+from django.conf import settings
 from django.contrib import admin
-from django.core.exceptions import ValidationError
-from markdown import markdown
-from .models import Base, Menu, SubMenu, Contact, Image
+from django.apps import apps
 
+# automatic registration module
+models = apps.get_models()
+for model in models:
+    model_name = str(model.__name__)
 
-class MenuAdmin(admin.ModelAdmin):
-    list_display = ['title']
-    fields = (('title', 'slug'),
-              ('mark', 'fafa'),
-              ('color'),
-              )
-
-
-class SubMenuAdmin(admin.ModelAdmin):
-    list_display = ['subtitle']
-    fields = (('submenu'),
-              ('subtitle', 'subslug'),
-              ('submark', 'subfafa'),
-              ('subcolor'),
-              )
-
-
-class ImageInline(admin.StackedInline):
-    model = Image
-    extra = 1
-    fields = (('name', 'image'),
-              ('title', 'sentence'),
-              ('description'),
-              )
-    exclude = ('slug',)
-    
-
-class BaseAdmin(admin.ModelAdmin):
-    list_display = ['menu', 'title','timestamp' ]
-    fields = (('menu', 'title'),
-              ('slug'),
-              ('subtitle', 'sentence'),
-              ('description'),
-              ('urllink', 'filenum', 'flag'),
-              ('image'),
-              ('data1', 'data2', 'data3', 'data4'),
-              )
-    prepopulated_fields = {'slug': ('menu', )}
-
-    inlines = [
-        ImageInline,
-    ]
-
-
-    def save_formset(self, request, form, formset, change):
-        instances = formset.save(commit=False)
-        for obj in formset.deleted_objects:
-            obj.delete()
-        for instance in instances:
-            instance.desc_html = markdown(instance.description)
-            instance.save()
-            print('SAVE_FORMSET:{}'.format(instance.desc_html))
-        formset.save_m2m()
+    # filtering user apps
+    model_module = None
+    for m in settings.INSTALLED_APPS:
+        if m.split(".")[0] == 'django':
+            continue
+        try:
+            model_module = apps.get_model(app_label=m.split(".")[-1], model_name=model_name)
+            break
+        except LookupError:
+            pass
         
+    if model_module is None:
+        continue
 
+    # import and registration
+    app_list = model.__module__.split(".")
+    idx = app_list.index('models')
+    app1 = app_list[idx-1]
+    del app_list[idx]
+    
+    module = importlib.import_module('.'.join(app_list)+'.'+app1.title()+'Admin')
+    class_admin = module.str_to_class(model_name+'Admin')
+    if class_admin is None:
+        continue
+    try:
+        admin.site.register(model, class_admin)
+    except admin.sites.AlreadyRegistered:
+        pass
 
-class ContactAdmin(admin.ModelAdmin):
-    list_display = ['id', 'fullname', 'timestamp']
-    fields = (('fullname', 'email'),
-              ('phone'),
-              ('content'),
-              ('ipaddr', 'flag'),
-              )
-
-
-admin.site.register(Menu, MenuAdmin)
-admin.site.register(SubMenu, SubMenuAdmin)
-admin.site.register(Base, BaseAdmin)
-admin.site.register(Contact, ContactAdmin)

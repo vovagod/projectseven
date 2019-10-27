@@ -9,7 +9,7 @@ from django.template import Context
 from django.conf import settings
 
 from django.utils.safestring import mark_safe
-from .models import Contact
+from interaction.models import Contact
 from .fields import ListTextWidget
 from ipware import get_client_ip
 

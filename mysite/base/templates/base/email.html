@@ -18,13 +18,14 @@ table {
 
 td, th {
   text-align: center;
-  padding: 5px;
+   padding: 5px;
+    line-height: 1.7;
 }
     th.span {
         color:blue;
     }
-    h3 {
-        padding: 10px 0px 0px 0px;
+    h4 {
+        padding-top: 10px;
     }
     p {
         text-align: left;
@@ -43,6 +44,9 @@ td, th {
     } 
     #bulls{
         font-size: 36px;
+    }
+    #symbol{
+        font-size: 12px;
     }
    
 </style>
@@ -66,7 +70,7 @@ td, th {
   </tr>
     <!-- BODY -->
   <tr id='center'>
-      <td><br><h4>Дорогой, {{guest}}</h4><br>
+      <td><h4>Дорогой, {{guest}}</h4>
           {% for key, value in messages.items %}
           <p>&emsp;Спасибо за интерес к нашей технологии. {{value}}</p>
           {% if key == 'credentials' %}
@@ -89,9 +93,9 @@ td, th {
       <td style='font-size: 12px'>
           <span>{{title}}</span><br>
           <span>&#127968; {{addr}}<br>
-          <span style='color:red'>&phone;</span>&nbsp;{{mobile}} &nbsp;&bull;&nbsp;
-          &#9993; {{mail}} &nbsp;&bull;&nbsp;
-          &#127760; <a href="{{url}}" title='Посетить сайт' target="_blank">&nbsp;{{domain}}</a></span><br>
+          <span id="symbol" style='color:red'>&#9742;</span>&nbsp;{{mobile}} &nbsp;&bull;&nbsp;
+          <span id="symbol">&#9993;</span> {{mail}} &nbsp;&bull;&nbsp;
+          <span id="symbol">&#127760;</span> <a href="{{url}}" title='Посетить сайт' target="_blank">&nbsp;{{domain}}</a></span><br>
           
           <!--<span style='font-size: 16px'>&#127760; &phone; &#9990; &#9993; &#127968; &#128222; &#128232; &#128269;
           &#128722; &#128231;</span>-->

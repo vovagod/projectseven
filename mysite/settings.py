@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mysite.base',
+    'interaction',
 ]
 
 #AUTH_USER_MODEL = 'accounts.User'
@@ -130,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Google Email settings
 #EMAIL_USE_TLS = True
 #EMAIL_HOST = 'smtp.gmail.com' 
-#EMAIL_HOST_PASSWORD = 'ksenia96god' 
+#EMAIL_HOST_PASSWORD = '' 
 #EMAIL_HOST_USER = 'gva008@gmail.com' 
 #EMAIL_PORT = 587
 #DEFAULT_FROM_EMAIL = 'Comaex server <comaex@gmail.com>'
@@ -144,7 +145,7 @@ EMAIL_HOST_PASSWORD = 'comaex2019info'
 EMAIL_HOST_USER = 'comaex.info@yandex.ru' 
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'Comaex server <comaex.info@yandex.ru>'
-BASE_URL = '127.0.0.1:8000'
+#BASE_URL = '127.0.0.1:8000'
 
 
 # Email footer content
