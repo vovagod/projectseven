@@ -3,6 +3,8 @@ botocore==1.12.252
 certifi==2019.3.9
 chardet==3.0.4
 Django==2.0.13
+django-admin-actions==0.1.1
+django-ipware==2.1.0
 docutils==0.15.2
 gunicorn==19.9.0
 idna==2.8
