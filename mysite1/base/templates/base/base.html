@@ -1,0 +1,134 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<title>Comaex Info</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=evice-width, initial-scale=1">
+<link rel="shortcut icon" href="{% static 'css/icon.png'  %}" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static "css/base.css" %}">
+    
+
+<body class="w3-content" style="max-width:1024px; background-color: #f1f1f1">
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div id="myNavbar" class="w3-bar w3-white w3-card">
+    <a href="/" class="w3-bar-item w3-btn" style="padding: 4px 10px 4px 10px">
+        <img src="{% static 'css/logo.png'  %}" alt="Comaex supervisor server"></a>
+      
+    <!-- Right-sided navbar links -->
+    <div id="barMenu" class="w3-right w3-hide-small">
+   
+    {% for menu, submenu in menus.items %}
+<a id="m{{forloop.counter}}" {% if not submenu %} href="{{ menu.get_absolute_url }}" {% endif %}
+class="loop1 w3-button w3-bar-item w3-hover-white"><b style="border-bottom:2px solid" onclick="myUser({{forloop.counter}})" class="w3-hover-text-indigo w3-border-white w3-hover-border-indigo" data-attr="w3-text-indigo w3-border-indigo"><i class='{{menu.fafa}}' aria-hidden="true"></i>&nbsp;&nbsp;
+{% if menu.slug == 'user' %}{{user}}{% else %}{{menu.title}}{% endif %}
+    {% if submenu %}&nbsp;<i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>{% endif %}</b></a>
+        
+        {% if submenu %}
+       <div id="s{{forloop.counter}}" class="loop1 w3-dropdown-content w3-bar-block w3-border w3-border-indigo" style="width:200px">
+        {% for sub in submenu %}
+        <a href="{{ sub.get_absolute_url }}" onclick="subLink(this.parentElement)" class="w3-bar-item w3-button w3-hover-indigo" style="z-index: 2"><i class='{{sub.subfafa}}' aria-hidden="true"></i><b>&nbsp;&nbsp;{{sub.subtitle}}</b></a>
+        {% endfor %}
+        </div>
+        {% endif %}
+        
+{% endfor %}
+    </div>
+      
+    <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open('sidebar')">
+    <i class="fa fa-bars fa-lg" style="color:blue"></i></a>
+      
+      {% block product_bar %}{% endblock product_bar %}
+      
+  </div>
+</div>
+
+<!-- Sidebar on small screens when clicking the menu icon -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="sidebar">
+  <a href="javascript:void(0)" onclick="w3_close('sidebar')" class="w3-button w3-right">&#10060;</a>
+    
+     {% for menu, submenu in menus.items %}
+<a id="m{{forloop.counter|add:100}}" {% if not submenu %} href="{{ menu.get_absolute_url }}" {% endif %} class="loop2 w3-button w3-bar-item w3-hover-white"><b style="border-bottom:2px solid; font-size: 14px" onclick="myUser({{forloop.counter|add:100}})" class="w3-hover-text-indigo w3-border-white w3-hover-border-indigo" data-attr="w3-text-indigo w3-border-indigo"><i class='{{menu.fafa}}' aria-hidden="true"></i>&nbsp;&nbsp;
+{% if menu.slug == 'user' %}{{user}}{% else %}{{menu.title}}{% endif %}
+    {% if submenu %}&nbsp;<i class="fa fa-angle-down fa-1x" aria-hidden="true"></i>{% endif %}</b></a>
+    
+    {% if submenu %}
+     <div id="s{{forloop.counter|add:100}}" class="loop3 w3-hide w3-bar-block w3-border w3-light-grey w3-border-indigo" style="width:200px">
+      {% for sub in submenu %}
+      <a href="{{ sub.get_absolute_url }}" onclick="subLink(this.parentElement)" class="w3-bar-item w3-button w3-hover-indigo" style="z-index: 2">&nbsp;&nbsp;&nbsp;&nbsp;
+          <i class='{{sub.subfafa}}' aria-hidden="true"></i><b style="font-size: 13px">{{sub.subtitle}}</b></a>
+      {% endfor %}
+     </div>
+    {% endif %}
+    
+{% endfor %}
+    
+</nav>
+    
+{% block home %}{% endblock home %}
+
+<!-- FOOTER -->
+<footer class="w3-container w3-center w3-padding-16" style="background-color: #373538">  <!-- #615550 -->
+  
+    <table class="w3-table w3-centered">
+        
+       <tr>
+           <th style="width:33%">
+               <div class="w3-xlarge" style="color:white">
+                 <a href="#" class="w3-button w3-left w3-medium w3-round" title="Facebook">
+                   <i class="fa fa-facebook fa-lg"></i></a>
+                 <a href="#" class="w3-button w3-left w3-medium w3-round" title="В Контакте">
+                   <i class="fa fa-vk fa-lg"></i></a>
+                 <a href="#" class="w3-button w3-left w3-medium w3-round" title="LinkedIn">
+                   <i class="fa fa-linkedin fa-lg"></i></a>
+               </div>
+           </th>
+           
+          <th style="width:34%">
+             <div class="w3-row">
+                {% for menu, submenu in menus.items %}
+                  <div class="w3-half">
+                     <a id="mmm{{forloop.counter}}" {% if submenu %} onclick="myFooter({{forloop.counter}})" 
+                       {% endif %}{% if not submenu %} href="{{ menu.get_absolute_url }}" {% endif %} 
+                         class="loop1 w3-left w3-text-white w3-button w3-hover-none" style="padding: 0px 16px 0px 16px; font-weight:300">
+                          {% if submenu %}<i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>&nbsp;{% else %}-&nbsp;{% endif %}{{menu.title}}</a>
+                      
+                          <div id="sss{{forloop.counter}}" class="w3-hide">
+                             {% for sub in submenu %}
+                             <a href="{{ sub.get_absolute_url }}" onclick="subFootLink(this.parentElement)" class="loop12 w3-bar-item w3-button w3-text-white w3-left w3-hover-none" style="z-index:2; padding: 0px 16px 0px 16px; font-weight:300">
+                                 <i class='{{sub.subfafa}}' aria-hidden="true"></i>&nbsp;&nbsp;-&nbsp;{{sub.subtitle}}</a>
+                             {% endfor %}
+                         </div>
+                  </div>
+                {% endfor %}
+             </div> 
+           </th>
+           
+           <th style="color:white; width:33%">
+              <a href="#" class="w3-button w3-medium w3-right w3-border w3-round w3-border-white" title="К началу">
+              <i class="fa fa-arrow-up"></i></a>
+           </th>
+           
+       </tr>
+   </table>
+        <i class="fa fa-circle" style="color:green" aria-hidden="true"></i>&nbsp;
+        <i class="fa fa-circle" style="color:yellow" aria-hidden="true"></i>&nbsp;
+        <i class="fa fa-circle" style="color:red" aria-hidden="true"></i>
+    <h6 class="w3-text-white" style="margin-left: 0px"><strong>Control &bull; Management &bull; Exellence</strong></h6>
+    <h6 class="w3-text-white">&copy; &nbsp;2019 &nbsp;Comaex</h6>
+    <!--<a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a>-->
+    
+</footer>
+    
+   {% block content %}{% endblock content %}
+    
+    <script type="text/javascript" src="{% static "css/base.js" %}"></script>
+    
+</body>
+</html>

@@ -22,7 +22,7 @@ for model in models:
     #if model_module is None:
         #continue
 
-    print('MODEL_MODULE:{}'.format(model.__module__))
+    #print('MODEL_MODULE:{}'.format(model.__module__))
 
     # import and registration
     app_list = model.__module__.split(".")
@@ -30,13 +30,13 @@ for model in models:
     app1 = app_list[idx-1]
     del app_list[idx:]
 
-    print('APP_LIST:{}'.format(app_list))
+    #print('APP_LIST:{}'.format(app_list))
 
     try:
         module = importlib.import_module('.'.join(app_list)+'.'+app1.title()+'Admin')
     except ImportError:
         continue
-    print('CLASS_ADMIN:{}'.format(model_name+'Admin'))
+    #print('CLASS_ADMIN:{}'.format(model_name+'Admin'))
     class_admin = module.str_to_class(model_name+'Admin')
     if class_admin is None:
         continue

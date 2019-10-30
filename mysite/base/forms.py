@@ -1,16 +1,13 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.core.mail import EmailMultiAlternatives
 #from django.contrib.gis.geoip import GeoIP
 
-from django.template.loader import get_template
 from django.template import Context
-from django.conf import settings
-
 from django.utils.safestring import mark_safe
 from interaction.models import Contact
 from .fields import ListTextWidget
+from mail.sendmail import send_mail
 from ipware import get_client_ip
 
 
@@ -62,34 +59,9 @@ class ContactForm(forms.Form):
    
 
     def send_email(self, message):
-        path = 'http://'+settings.DOMAIN+'/static/media/'
-        if settings.DEBUG:
-            path = '/media/'
-        subject, from_email, to = 'Request confirmation', settings.EMAIL_HOST_USER, self.cleaned_data.get("email")
-        
-        html_file = get_template('base/email.html')
-        msg = {'letter':path+'letter.png',
-               'guest':self.cleaned_data["fullname"],
-               'messages': message,
-               'url':'http://'+settings.DOMAIN,
-               'logo': path+'logo.png',
-               'website':path+'website.png',
-               'phone':path+'phone.png',
-               'email':path+'email.png',
-               'address':path+'address.png',
-               'mobile':settings.PHONE,
-               'mail':settings.EMAIL_HOST_USER,
-               'comaex_demo':settings.COMAEX_DEMO,
-               'domain':settings.DOMAIN,
-               'addr':settings.ADDRESS,
-               'title':settings.FOOTER_TITLE,
-               }
-        text_content = 'This is an important message'
-        html_content = html_file.render(msg)
-
-        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
-        msg.attach_alternative(html_content, "text/html")
-        msg.send()
-        # send email using the self.cleaned_data dictionary
+        subject, to = 'Request confirmation', self.cleaned_data.get("email")
+        guest = self.cleaned_data["fullname"]
+        send_mail(subject, to, message, guest)
         return
+
 

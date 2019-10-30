@@ -1,0 +1,107 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+    
+table.fixed { 
+    table-layout:fixed; 
+    }
+table.fixed td {
+    overflow: hidden;
+    }
+    
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  text-align: center;
+   padding: 5px;
+    line-height: 1.7;
+}
+    th.span {
+        color:blue;
+    }
+    h4 {
+        padding-top: 10px;
+    }
+    p {
+        text-align: left;
+        margin: 10px 0px 10px 0px;
+    }
+    #header {
+        border-style: solid;
+        border-color: gainsboro;
+        border-width: 0px 0px 2px 0px;
+    }
+    #footer {
+        border-style: solid;
+        border-color: gainsboro;
+        border-width: 2px 0px 0px 0px;
+        margin-top: 7px;
+    } 
+    #bulls{
+        font-size: 36px;
+    }
+    #symbol{
+        font-size: 12px;
+    }
+   
+</style>
+    
+</head>
+<body>
+    
+<table class='fixed'>
+     <col width="width:100%" />
+     <col width="48px" />
+     <col width="130px" />
+    <!-- HEADER -->
+  <tr id='header'>
+    <th style='text-align: left'><a href="{{url}}" title='Посетить сайт' target="_blank"><img src="{{logo}}" alt="Comaex server"></a></th>
+      <th style='text-align: right'><img src="{{letter}}" alt="Comaex server"></th>
+      <th style='font-size: 12px'>Служба сообщений
+          <span>&bull;</span>
+          <span>Comaex</span>
+          <span>&bull;</span>
+      </th>
+  </tr>
+    <!-- BODY -->
+  <tr id='center'>
+      <td><h4>Дорогой, {{guest}}</h4>
+          {% for key, value in messages.items %}
+          <p>&emsp;Спасибо за интерес к нашей технологии. {{value}}</p>
+          {% if key == 'credentials' %}
+          <p>Перейти на страницу входа <a href="{{comaex_demo}}" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>
+          {% endif %}
+          {% endfor %}
+          <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
+      </td>
+    </tr>
+    <!-- BULLS -->
+  <tr id='bulls'>
+    <td style='width:50%'>
+        <span style='color:green'>&bull;</span>
+        <span style='color:yellow'>&bull;</span>
+        <span style='color:red'>&bull;</span>
+      </td>
+  </tr>
+    <!-- FOOTER -->
+  <tr id='footer'>
+      <td style='font-size: 12px'>
+          <span>{{title}}</span><br>
+          <span>&#127968; {{addr}}<br>
+          <span id="symbol" style='color:red'>&#9742;</span>&nbsp;{{mobile}} &nbsp;&bull;&nbsp;
+          <span id="symbol">&#9993;</span> {{mail}} &nbsp;&bull;&nbsp;
+          <span id="symbol">&#127760;</span> <a href="{{url}}" title='Посетить сайт' target="_blank">&nbsp;{{domain}}</a></span><br>
+          
+          <!--<span style='font-size: 16px'>&#127760; &phone; &#9990; &#9993; &#127968; &#128222; &#128232; &#128269;
+          &#128722; &#128231;</span>-->
+      </td>
+  </tr>
+</table>
+
+</body>
+</html>
