@@ -3,14 +3,14 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 
 
-def send_mail(subject, to, message, guest):
+def send_mail(subject, to, message, guest, template):
 
     from_email = settings.EMAIL_HOST_USER
     path = 'http://'+settings.DOMAIN+'/static/media/'
     if settings.DEBUG:
         path = '/media/'
         
-    html_file = get_template('base/email.html')
+    html_file = get_template('base/'+template+'.html')
     msg = {'letter':path+'letter.png',
             'guest': guest,
             'messages': message,

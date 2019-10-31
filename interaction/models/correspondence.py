@@ -16,7 +16,7 @@ class Correspondence(models.Model):
     phone        = models.CharField(max_length=120, blank=True, verbose_name=_('Телефон'))
     content      = models.TextField(max_length=1000, blank=True, verbose_name=_('Содержание письма'))
     content_html = models.TextField(blank=True, editable=True)
-    theme        = models.CharField(max_length=120, blank=True, verbose_name=_('Тема письма'))
+    theme        = models.CharField(max_length=120, blank=True, verbose_name=_('Тема корреспонденции'))
     subject      = models.CharField(max_length=120, blank=True, verbose_name=_('Предмет письма'))
     feedback     = models.CharField(max_length=120, blank=True, verbose_name=_('обратная связь'))
     timestamp    = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата'))
@@ -27,8 +27,8 @@ class Correspondence(models.Model):
     class Meta:
         app_label = 'interaction'
         ordering = ['id']
-        verbose_name = _('Корреспонденция')
-        verbose_name_plural = _('Корреспонденция')
+        verbose_name = _('Отправленная корреспонденция')
+        verbose_name_plural = _('Отправленная корреспонденция')
 
 
     def __str__(self):
@@ -37,6 +37,9 @@ class Correspondence(models.Model):
 
     def save(self):
         print('SAVE...')
+        #print('TYPE_OF_CONTENT:{}'.format(type(self.content)))
+        #if self.content == '':
+            #return
         self.content_html = markdown(self.content)
         #self.action = True
         
@@ -54,9 +57,11 @@ class Correspondence(models.Model):
   
 def send_email(sender, instance, **kwargs):
     print('SEND_EMAIL...')
-    if not instance.action:
+    if not instance.action and instance.content != '':
         print('SEND_MAIL:{}'.format(instance.__dict__))
-        send_mail(instance.theme, instance.email, instance.content_html, instance.name)
+        message = {'text':instance.content_html,}
+        template = 'correspondence'
+        send_mail(instance.theme, instance.email, message, instance.name, template)
         Correspondence.objects.filter(id=instance.id).update(action=True)
   
 

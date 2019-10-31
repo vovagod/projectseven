@@ -41,7 +41,7 @@ def emailview(request):
            'addr':settings.ADDRESS,
            'title':settings.FOOTER_TITLE,
            }
-    return render_to_response('base/email.html', msg,
+    return render_to_response('base/correspondence.html', msg,
                               content_type="text/html")
 
 
@@ -68,16 +68,20 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
+        print('SELF VALID:{}'.format(self.__dict__))
         data = form.cleaned_data['content']
         data_list = data.split(' ')
         credentials = ['логин', 'пароль', 'вход', 'данные', 'входа']
-        callme = ['заинтересовала', 'позвоните', 'позвонить', 'интересно', 'свяжитесь']
+        callme = ['заинтересовала', 'позвоните', 'позвони', 'позвонить', 'интересно', 'свяжитесь']
         message = {'common':'Мы получили ваше сообщение и свяжемся с вами в ближайшее время.'}
+        args = ['common',]
         if any(n in data_list for n in credentials):
             message = {'credentials':'Для входа используйте логин: user, пароль: user12345.'}
             self.success_message = "данные для входа отправлены вам на почту"
+            args = ['credentials',]
         if any(n in data_list for n in callme):
             message = {'callme':'Мы свяжемся свами в ближайший час.'}
+            args = ['callme',]
         form.send_email(message)
         return super(BaseView, self).form_valid(form)
 

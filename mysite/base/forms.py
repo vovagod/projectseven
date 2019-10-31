@@ -30,9 +30,13 @@ class ContactForm(forms.Form):
                                                        autocomplete=autocomplete,
                                                        )
 
-    def clean(self):
+    def clean(self, *args):
+        
         cleaned_data = super(ContactForm, self).clean()
         data = self.cleaned_data
+        #for a in args:
+            #print('CLEAN:{}'.format(a))
+        
 
         if data.get('email') is None:
             raise forms.ValidationError("Enter a valid email address", code='email_error')
@@ -53,6 +57,7 @@ class ContactForm(forms.Form):
         message = Contact(fullname=data['fullname'], email=data['email'],
                           phone=data['phone'], content=data['content'],
                           ipaddr=ipaddr or 'Unable to get IP address',
+                          #subject=data['subject'],
                           )
         message.save()
         return cleaned_data
@@ -60,8 +65,8 @@ class ContactForm(forms.Form):
 
     def send_email(self, message):
         subject, to = 'Request confirmation', self.cleaned_data.get("email")
-        guest = self.cleaned_data["fullname"]
-        send_mail(subject, to, message, guest)
+        guest, template = self.cleaned_data["fullname"], 'confirmation'
+        send_mail(subject, to, message, guest, template)
         return
 
 

@@ -13,7 +13,7 @@ from .models import Contact, Correspondence
 
 
 class ContactAdmin(DjangoObjectActions, admin.ModelAdmin):
-    list_display = ['id', 'fullname', 'email', 'phone', 'timestamp']
+    list_display = ['id', 'subject', 'fullname', 'email', 'phone', 'timestamp']
 
     search_fields = ('fullname', 'timestamp',)
     
@@ -40,7 +40,11 @@ class ContactAdmin(DjangoObjectActions, admin.ModelAdmin):
             corr_id = corr_obj.id+1
         else:
             corr_id = 1
-        corr = Correspondence(id=corr_id, person_id_id=obj.id, name=obj.fullname, email=obj.email, phone=obj.phone)
+        corr = Correspondence(id=corr_id, person_id_id=obj.id,
+                              name=obj.fullname, email=obj.email,
+                              phone=obj.phone,
+                              theme='Переписка'
+                              )
         corr.save()
         messages.info(request, _("Write a message to..."))
         return redirect(reverse_lazy('admin:interaction_correspondence_change', args=[obj.id,]))
@@ -55,7 +59,7 @@ class ContactAdmin(DjangoObjectActions, admin.ModelAdmin):
 
     
 class CorrespondenceAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'email', 'phone', 'timestamp']
+    list_display = ['id', 'theme', 'name', 'email', 'phone', 'timestamp', 'action']
     
     #fields = (('name'),
               #('email'),
