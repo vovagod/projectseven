@@ -7,7 +7,7 @@ from django.template import Context
 from django.utils.safestring import mark_safe
 from interaction.models import Contact
 from .fields import ListTextWidget
-from mail.sendmail import send_mail
+from mail.sendmail import send_mail, theme_search
 from ipware import get_client_ip
 
 
@@ -31,12 +31,8 @@ class ContactForm(forms.Form):
                                                        )
 
     def clean(self, *args):
-        
         cleaned_data = super(ContactForm, self).clean()
         data = self.cleaned_data
-        #for a in args:
-            #print('CLEAN:{}'.format(a))
-        
 
         if data.get('email') is None:
             raise forms.ValidationError("Enter a valid email address", code='email_error')
@@ -54,10 +50,11 @@ class ContactForm(forms.Form):
             #g = GeoIP()
             #city = g.city(ipaddr)
         #print('City:{}'.format(city))
+        subject, m = theme_search(data.get('content'))
         message = Contact(fullname=data['fullname'], email=data['email'],
                           phone=data['phone'], content=data['content'],
                           ipaddr=ipaddr or 'Unable to get IP address',
-                          #subject=data['subject'],
+                          subject=list(subject.keys())[0],
                           )
         message.save()
         return cleaned_data

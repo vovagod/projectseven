@@ -3,8 +3,21 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 
 
-def send_mail(subject, to, message, guest, template):
+def theme_search(data):
+    data_list = data.split(' ')
+    credentials = ['логин', 'пароль', 'вход', 'данные', 'входа']
+    callme = ['заинтересовала', 'позвоните', 'позвони', 'позвонить', 'интересно', 'свяжитесь']
+    success = "Ваш запрос успешно отправлен!"
+    message = {'common':'Мы получили ваше сообщение и свяжемся с вами в ближайшее время.',}
+    if any(n in data_list for n in credentials):
+        message = {'credentials':'Для входа используйте логин: user, пароль: user12345.',}
+        success = "Данные для входа отправлены вам на почту."
+    if any(n in data_list for n in callme):
+        message = {'callme':'Мы свяжемся свами в ближайший час.',}
+    return message, success
 
+
+def send_mail(subject, to, message, guest, template):
     from_email = settings.EMAIL_HOST_USER
     path = 'http://'+settings.DOMAIN+'/static/media/'
     if settings.DEBUG:
@@ -35,3 +48,4 @@ def send_mail(subject, to, message, guest, template):
     msg.send()
     # send email using the self.cleaned_data dictionary
     return
+

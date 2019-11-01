@@ -24,12 +24,12 @@ class Contact(models.Model):
         return self.fullname
 
 
-    def save(self):
-        print('SAVE CONTACT:{}'.format(self.__dict__))
+    #def save(self):
+        #print('SAVE CONTACT:{}'.format(self.__dict__))
         #print('TYPE_OF_CONTENT:{}'.format(type(self.content)))
         #if self.content == '':
             #return
         #self.subject = ''
         #self.action = True
-        super(Contact, self).save()
+        #super(Contact, self).save()
 

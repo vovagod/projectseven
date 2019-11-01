@@ -30,12 +30,9 @@ class ContactAdmin(DjangoObjectActions, admin.ModelAdmin):
         #'timestamp',
     #)
 
-
   
     def responce_to_person(self, request, obj):
         corr_obj = Correspondence.objects.order_by('id').last()
-        #print('CORR_OBJ:{}'.format(corr_obj.id))
-        #corr = Correspondence(person_id_id=obj.id, name=obj.fullname, email=obj.email, phone=obj.phone)
         if corr_obj:
             corr_id = corr_obj.id+1
         else:
@@ -47,7 +44,7 @@ class ContactAdmin(DjangoObjectActions, admin.ModelAdmin):
                               )
         corr.save()
         messages.info(request, _("Write a message to..."))
-        return redirect(reverse_lazy('admin:interaction_correspondence_change', args=[obj.id,]))
+        return redirect(reverse_lazy('admin:interaction_correspondence_change', args=[corr_id,]))
 
     
     responce_to_person.label = "Write to person"  # optional
@@ -102,7 +99,6 @@ class CorrespondenceAdmin(admin.ModelAdmin):
             messages.error(request, _("Email message was not entered, try again..."))
             return
         messages.info(request, _("The message was sent successfully..."))
-        #obj.content_html = markdown(obj.content)
         obj.save()
         
 

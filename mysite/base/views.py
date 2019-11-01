@@ -17,11 +17,13 @@ from mysite.base.forms import ContactForm
 
 from .models import Base, Menu, SubMenu, Image
 from interaction.models import Contact
+from mail.sendmail import theme_search
 
 
 def baseviewreverse(request):
     return redirect('/home/')
 
+# test function to check mail form
 def emailview(request):
     path = 'http://'+settings.DOMAIN+'/static/media/'
     if settings.DEBUG:
@@ -45,13 +47,14 @@ def emailview(request):
                               content_type="text/html")
 
 
+
 class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
    
     form_class = ContactForm
     success_url = '/#success'
-    success_message = "Ваш запрос успешно отправлен!"
     template_name = 'base/home.html'
     model = Base
+    
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data,)
@@ -68,21 +71,11 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-        print('SELF VALID:{}'.format(self.__dict__))
-        data = form.cleaned_data['content']
-        data_list = data.split(' ')
-        credentials = ['логин', 'пароль', 'вход', 'данные', 'входа']
-        callme = ['заинтересовала', 'позвоните', 'позвони', 'позвонить', 'интересно', 'свяжитесь']
-        message = {'common':'Мы получили ваше сообщение и свяжемся с вами в ближайшее время.'}
-        args = ['common',]
-        if any(n in data_list for n in credentials):
-            message = {'credentials':'Для входа используйте логин: user, пароль: user12345.'}
-            self.success_message = "данные для входа отправлены вам на почту"
-            args = ['credentials',]
-        if any(n in data_list for n in callme):
-            message = {'callme':'Мы свяжемся свами в ближайший час.'}
-            args = ['callme',]
+        message, self.success_message = theme_search(form.cleaned_data['content'])
         form.send_email(message)
         return super(BaseView, self).form_valid(form)
+    
+    
+    
 
     

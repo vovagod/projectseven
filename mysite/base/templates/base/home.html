@@ -243,12 +243,13 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
 
 {% if content.submenu.subslug == '#contact' %}
 <!-- CONTACT FORM MODULE -->
+<span id="success" style="padding-top:40px"></span>
 {% if messages %}
-<span id="success" style="padding-top:38px"></span>
+
 <div class="w3-panel w3-display-container w3-pale-yellow w3-border">
     <span class="w3-button w3-medium w3-display-right" onclick="this.parentElement.style.display='none'">&#10060;</span>
     {% for message in messages %}
-    <p class="loop9">Спасибо, &ensp; {{ message }}</p>
+    <p class="loop9">&ensp;{{ message }}</p>
     {% endfor %}
     </div>
 

@@ -37,22 +37,8 @@ class Correspondence(models.Model):
 
     def save(self):
         print('SAVE...')
-        #print('TYPE_OF_CONTENT:{}'.format(type(self.content)))
-        #if self.content == '':
-            #return
         self.content_html = markdown(self.content)
-        #self.action = True
-        
         super(Correspondence, self).save()
-
-
-    #def delete(self):
-        #print('DELETE...')
-        #self.content_html = markdown(self.content)
-        #self.action = True
-        
-        #super(Correspondence, self).delete()
-
 
   
 def send_email(sender, instance, **kwargs):
