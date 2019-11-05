@@ -29,6 +29,7 @@ def default_image_path():
 class MenuManager(models.Manager):
 
     def obj_auth(self, request):
+        obj = OrderedDict() # added this
         obj = {b:b.submenu_set.filter(submark=1) for b in Menu.objects.all()}
         return obj
         

@@ -19,6 +19,7 @@ from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from mysite.base.views import baseviewreverse, emailview  #urlmapper
+from promotion.views import promotionview
 
 
 urlpatterns = [
@@ -26,6 +27,7 @@ urlpatterns = [
     path('home/', include('mysite.base.urls'), name='about'),
     path('', baseviewreverse),
     path('email', emailview),
+    path('promotion', promotionview),
 ]
 
 

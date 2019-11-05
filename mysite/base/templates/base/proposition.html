@@ -3,11 +3,24 @@
 {% block core %}
 
 <td><h4>Дорогой, {{guest}}</h4>
-          {% for key, value in messages.items %}
-          <p>&emsp;Спасибо за интерес к нашей технологии. {{value}}</p>
-          {% if key == 'credentials' %}
-          <p>Перейти на страницу входа <a href="{{comaex_demo}}" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>
+    
+          {% for key in content %}
+    
+          {{ key }}
+            
+          {% if key == 'promotion' %}
+          {{value.description}}<br>
+     <img src="{{value.image.url}}" title="{{value.title}}" style="width:20%">
           {% endif %}
+    
+          {% if key == 'image' %}
+          {% for image in value %}
+          {{image.name}}<br>
+          {{image.description}}<br>
+     <img src="{{image.image.url}}" title="{{image.title}}" style="width:20%">
+          {% endfor %}
+          {% endif %}
+        
           {% endfor %}
           <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
       </td>

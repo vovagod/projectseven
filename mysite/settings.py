@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mysite.base',
     'interaction',
+    'clients',
+    'promotion',
+    'scheduler',
+    
 ]
 
 #AUTH_USER_MODEL = 'accounts.User'
@@ -141,20 +145,27 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Yandex Email settings
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.yandex.ru' 
-EMAIL_HOST_PASSWORD = 'comaex2019info' 
-EMAIL_HOST_USER = 'comaex.info@yandex.ru' 
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'Comaex server <comaex.info@yandex.ru>'
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.yandex.ru' 
+#EMAIL_HOST_PASSWORD = 'comaex2019info' 
+#EMAIL_HOST_USER = 'comaex.info@yandex.ru' 
+#EMAIL_PORT = 587
+#DEFAULT_FROM_EMAIL = 'Comaex server <comaex.info@yandex.ru>'
 #BASE_URL = '127.0.0.1:8000'
 
-
-# Email footer content
-PHONE = '+7(985)482-85-88'
-COMAEX_DEMO = 'http://comaex.ddns.net'
-ADDRESS = 'Москва, Сиреневый бульвар 32'
-FOOTER_TITLE = 'Супервизор-сервер Comaex'
+# AWS Email settings
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
+EMAIL_HOST_USER = 'AKIAZ37L3WD4CXMH5AZK' 
+EMAIL_HOST_PASSWORD = 'BPf6zVOe65C+V7LHLsYbNRy59ySdAeMACTsMXaDnWeuh'
+SUBJECT = "Amazon SES Email"
+FROM = 'comaex.info@comaex.info'
+#IAM User Name = ses-smtp-user.20191102-135328
+#SMTP Username = AKIAZ37L3WD4CXMH5AZK
+#SMTP Password = BPf6zVOe65C+V7LHLsYbNRy59ySdAeMACTsMXaDnWeuh
+#EMAIL_HOST_USER = 'comaex.info@yandex.ru' 
+EMAIL_PORT = 587
+#DEFAULT_FROM_EMAIL = 'Comaex server <comaex.info@comaex.info>'
 
 
 # Internationalization
@@ -165,6 +176,47 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+# User settings
+CATEGORIES = (
+    ('HVAC', 'HVAC'),
+    ('Smart Home', 'Smart Home'),
+    ('IoT', 'IoT'),
+    ('Facebook', 'Facebook'),
+    ('Mathematics', 'Mathematics'),
+    )
+
+SURVEY_TIME = 36
+
+
+# Email template footer content
+PHONE = '+7(985)482-85-88'
+EMAIL_ADDRESS = 'comaex.info@comaex.info'
+COMAEX_DEMO = 'http://comaex.ddns.net'
+ADDRESS = 'Москва, Сиреневый бульвар 32'
+FOOTER_TITLE = 'Супервизор-сервер Comaex'
+
+
+# email template settings
+PATH = 'http://'+DOMAIN+'/static/media/'
+if DEBUG:
+    PATH = '/media/'
+MSG = {'letter':PATH+'letter.png',
+        #'guest': guest,
+        #'messages': message,
+        'url':'http://'+DOMAIN,
+        'logo': PATH+'logo.png',
+        'website':PATH+'website.png',
+        'phone':PATH+'phone.png',
+        'email':PATH+'email.png',
+        'address':PATH+'address.png',
+        'mobile':PHONE,
+        'mail':EMAIL_ADDRESS,
+        'comaex_demo':COMAEX_DEMO,
+        'domain':DOMAIN,
+        'addr':ADDRESS,
+        'title':FOOTER_TITLE,
+        }
 
 
 # Static files (CSS, JavaScript, Images)

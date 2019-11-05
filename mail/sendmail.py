@@ -3,6 +3,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 
 
+
 def theme_search(data):
     data_list = data.split(' ')
     credentials = ['логин', 'пароль', 'вход', 'данные', 'входа']
@@ -18,28 +19,13 @@ def theme_search(data):
 
 
 def send_mail(subject, to, message, guest, template):
-    from_email = settings.EMAIL_HOST_USER
-    path = 'http://'+settings.DOMAIN+'/static/media/'
-    if settings.DEBUG:
-        path = '/media/'
-        
+    from_email = settings.FROM
     html_file = get_template('base/'+template+'.html')
-    msg = {'letter':path+'letter.png',
-            'guest': guest,
-            'messages': message,
-            'url':'http://'+settings.DOMAIN,
-            'logo': path+'logo.png',
-            'website':path+'website.png',
-            'phone':path+'phone.png',
-            'email':path+'email.png',
-            'address':path+'address.png',
-            'mobile':settings.PHONE,
-            'mail':settings.EMAIL_HOST_USER,
-            'comaex_demo':settings.COMAEX_DEMO,
-            'domain':settings.DOMAIN,
-            'addr':settings.ADDRESS,
-            'title':settings.FOOTER_TITLE,
-            }
+    
+    msg = settings.MSG
+    msg.update({'guest': guest,
+                'messages': message,
+                })
     text_content = 'This is an important message'
     html_content = html_file.render(msg)
 

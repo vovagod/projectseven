@@ -23,26 +23,12 @@ from mail.sendmail import theme_search
 def baseviewreverse(request):
     return redirect('/home/')
 
-# test function to check mail form
+
+# test function to check mailform
 def emailview(request):
-    path = 'http://'+settings.DOMAIN+'/static/media/'
-    if settings.DEBUG:
-        path = '/media/'
-    msg = {'letter':path+'letter.png',
-           'guest':'Гость',
-           'url':'http://'+settings.DOMAIN,
-           'logo': path+'logo.png',
-           'website':path+'website.png',
-           'phone':path+'phone.png',
-           'email':path+'email.png',
-           'address':path+'address.png',
-           'mobile':settings.PHONE,
-           'mail':settings.EMAIL_HOST_USER,
-           'comaex_demo':settings.COMAEX_DEMO,
-           'domain':settings.DOMAIN,
-           'addr':settings.ADDRESS,
-           'title':settings.FOOTER_TITLE,
-           }
+    msg = settings.MSG
+    msg.update({'guest':'Гость',
+                })
     return render_to_response('base/correspondence.html', msg,
                               content_type="text/html")
 

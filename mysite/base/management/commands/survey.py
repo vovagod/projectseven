@@ -26,12 +26,13 @@ from mysite.base.tasks import CycleOne
 class SurveyOne(Process):
     def __init__(self):
         Process.__init__(self)
+        self.lock = Lock()
         self.running = True
 
     def run(self):
         while self.running:
-            CycleOne()
-            time.sleep (24.0)  #(settings.BITSURVEY)
+            CycleOne(self)
+            time.sleep (settings.SURVEY_TIME)
         
     def stop(self):
         self.running = False
@@ -143,7 +144,7 @@ class Command(BaseCommand):
         import django
         django.setup()
         #logger.info('SURVEY script is started...')
-        stopFlag = Event()
+        #stopFlag = Event()
         #stopFlag1 = Event()
         try:
             a = SurveyOne()
@@ -151,17 +152,19 @@ class Command(BaseCommand):
             #c = DBValueRecord(stopFlag)
             #d = TickCounter(stopFlag1)
             a.start()
+            a.join()
             #b.start()
             #c.start()
             #d.start()
             #d.join()
         except KeyboardInterrupt:
-            logger.info('SURVEY script KeyboardInterrupt action...')
+            #logger.info('SURVEY script KeyboardInterrupt action...')
+            print('SURVEY script KeyboardInterrupt action...')
             a.terminate()
             #b.terminate()
             #c.terminate()
             #d.terminate()
-            stopFlag.set()
+            #stopFlag.set()
             #stopFlag1.set()
             pass
 
