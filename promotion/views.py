@@ -16,14 +16,16 @@ def promotionview(request):
     
     promotion = Promotion.objects.obj_contents(category)
     print('PROMOTION:{}'.format(promotion))
-
+    client = Clients.objects.get_pk('chim73@mail.ru')
     msg = settings.MSG
     msg.update({'guest':'Гость',
-                'content':Promotion.objects.obj_contents(category) #promotion[0],
+                'content':Promotion.objects.obj_contents(category),
+                'unsubscribe': client,
+                'interested': client,
                 })
         
-    for p in promotion[0]:
-        print('PROMOTION:{}'.format(p))
+    #for p in promotion[0]:
+        #print('PROMOTION:{}'.format(p))
         #send_mail(subject, client.email, promotion, client.company, template)
 
     return render_to_response('base/proposition.html', msg,

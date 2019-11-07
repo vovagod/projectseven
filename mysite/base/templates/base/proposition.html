@@ -4,11 +4,10 @@
 
 <td><h4>Дорогой, {{guest}}</h4>
     
-          {% for key in content %}
-    
-          {{ key }}
+          {% for key, value in content.items %}
             
           {% if key == 'promotion' %}
+          {{value.title}}<br>
           {{value.description}}<br>
      <img src="{{value.image.url}}" title="{{value.title}}" style="width:20%">
           {% endif %}
@@ -22,7 +21,12 @@
           {% endif %}
         
           {% endfor %}
+    
+    
           <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
+    
+           <a href="{{url}}/unsubscribe/{{unsubscribe}}" title="отписаться от рассылки" target="_blank">Отписаться</a>
+     <a href="{{url}}/interested/{{interested}}" title="мне интересно" target="_blank">Интересно</a>
       </td>
 
 {% endblock core %}

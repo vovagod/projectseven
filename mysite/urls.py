@@ -24,10 +24,11 @@ from promotion.views import promotionview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', include('mysite.base.urls'), name='about'),
+    path('home/', include('mysite.base.urls'), name='base'),
     path('', baseviewreverse),
-    path('email', emailview),
-    path('promotion', promotionview),
+    path('email', emailview),  # test view
+    path('promotion', promotionview),  # test view
+    path('unsubscribe/', include('clients.urls'), name='clients')
 ]
 
 

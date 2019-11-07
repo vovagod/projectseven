@@ -30,13 +30,14 @@ class PromotionManager(models.Manager):
     
     def obj_contents(self, category):
         #obj = OrderedDict()
-        #obj = [dict(promotion=b, image=b.images.all()) for b in Promotion.objects.filter(category=category)]
-        obj = [{b:b.images.all()} for b in Promotion.objects.filter(category=category)]
-        return obj
+        obj = [dict(promotion=b, image=b.images.all()) for b in Promotion.objects.filter(category=category)]
+        #obj = {'promotion':b, 'image':b.images.all() for b in Promotion.objects.filter(category=category)}
+        #obj = [{b:b.images.all()} for b in Promotion.objects.filter(category=category)]
+        return dict(sorted(obj[0].items()))
 
 
 class Promotion(models.Model):
-    category    = models.CharField(max_length=30, default='HVAC', choices=settings.CATEGORIES,
+    category    = models.CharField(max_length=30, default='HVAC', unique=True, choices=settings.CATEGORIES,
                                    verbose_name=_('Категория'), help_text=_("Выберете категорию деятельности"))
     title       = models.CharField(max_length=120, verbose_name=_('Заголовок'),
                                    help_text=_("Введите заголовок контекста"))

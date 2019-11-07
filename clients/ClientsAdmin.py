@@ -13,16 +13,18 @@ from .models import Clients
 
 
 class ClientsAdmin(admin.ModelAdmin):
-    list_display = ['id', 'company', 'category', 'email', 'phone', 'enable_mailing',]
+    list_display = ['company', 'category', 'email', 'phone', 'enable_mailing',]
 
     search_fields = ('company', 'category',)
 
     readonly_fields = (
         'created',
+        'uuid',
     )
     
     fields = (('category', 'company'),
               ('email', 'phone'),
+              ('uuid', 'counter'),
               ('about'),
               ('created', 'enable_mailing', 'interested', 'flag'),
               )

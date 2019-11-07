@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
+from clients.models import Clients
 
 
 
@@ -21,10 +22,12 @@ def theme_search(data):
 def send_mail(subject, to, message, guest, template):
     from_email = settings.FROM
     html_file = get_template('base/'+template+'.html')
-    
+    client = Clients.objects.get_pk(to)
     msg = settings.MSG
     msg.update({'guest': guest,
                 'messages': message,
+                'unsubscribe': client,
+                'interested': client,
                 })
     text_content = 'This is an important message'
     html_content = html_file.render(msg)

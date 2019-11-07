@@ -196,11 +196,14 @@ COMAEX_DEMO = 'http://comaex.ddns.net'
 ADDRESS = 'Москва, Сиреневый бульвар 32'
 FOOTER_TITLE = 'Супервизор-сервер Comaex'
 
+MEDIA_URL = '/static/media/'
 
 # email template settings
 PATH = 'http://'+DOMAIN+'/static/media/'
 if DEBUG:
     PATH = '/media/'
+    MEDIA_URL = '/media/'
+    DOMAIN = '127.0.0.1:8000'
 MSG = {'letter':PATH+'letter.png',
         #'guest': guest,
         #'messages': message,
@@ -229,9 +232,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-MEDIA_URL = '/static/media/'
-if DEBUG:
-    MEDIA_URL = '/media/'
+#MEDIA_URL = '/static/media/'
+#if DEBUG:
+    #MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 RAW_IMAGE_ROOT = os.path.join(BASE_DIR, 'static', 'media/raw_image')
 LOGO_IMAGE = os.path.join(BASE_DIR, 'static', 'media/logo.jpg')
