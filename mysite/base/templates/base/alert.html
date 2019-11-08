@@ -31,16 +31,8 @@ td, th {
         text-align: left;
         margin: 10px 0px 10px 0px;
     }
-    #header {
-        border-style: solid;
-        border-color: gainsboro;
-        border-width: 0px 0px 2px 0px;
-    }
-    #title {
-        color: darkblue;
-    }
     #footer {
-        border-style: solid;
+       /* border-style: solid; */
         border-color: gainsboro;
         border-width: 2px 0px 0px 0px;
         margin-top: 7px;
@@ -51,60 +43,11 @@ td, th {
     #symbol{
         font-size: 12px;
     }
-    
-    
-    .btn {
-  border: 2px solid black;
-  background-color: white;
-  color: black;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-/* Green */
-.success {
-  border-color: #4CAF50;
-  color: green;
-}
-
-.success:hover {
-  background-color: #4CAF50;
-  color: white;
-}
-    
-    /* Red */
-.danger {
-  border-color: #f44336;
-  color: red
-}
-
-.danger:hover {
-  background: #f44336;
-  color: white;
-}
    
 </style>
     
 </head>
 <body>
-    
-<table class='fixed'>
-     <col width="width:100%" />
-     <col width="48px" />
-     <col width="130px" />
-    <!-- HEADER -->
-  <tr id='header'>
-    <th style='text-align: left'><a href="{{url}}" title='Посетить сайт' target="_blank"><img src="{{logo}}" alt="Comaex server"></a></th>
-      <th style='text-align: right'><img src="{{letter}}" alt="Comaex server"></th>
-      <th style='font-size: 12px'>Служба сообщений
-          <span>&bull;</span>
-          <span>Comaex</span>
-          <span>&bull;</span>
-      </th>
-  </tr>
-</table>
     
 <table class='fixed'>
      <col width="width:100%" />
@@ -130,9 +73,6 @@ td, th {
           <span id="symbol" style='color:red'><img src="{{phone}}"></span>&nbsp;{{mobile}} &nbsp;&bull;&nbsp;
           <span id="symbol"><img src="{{email}}"></span> {{mail}} &nbsp;&bull;&nbsp;
           <span id="symbol"><img src="{{website}}"></span> <a href="{{url}}" title='Посетить сайт' target="_blank">&nbsp;{{domain}}</a></span><br>
-          
-          <!--<span style='font-size: 16px'>&#127760; &phone; &#9990; &#9993; &#127968; &#128222; &#128232; &#128269;
-          &#128722; &#128231;</span>-->
       </td>
   </tr>
 </table>

@@ -2,21 +2,25 @@
 
 {% block core %}
 
-<td><h4>Дорогой, {{guest}}</h4>
-    
-          {% for key, value in content.items %}
+<td><h4>Предложение сотрудничества</h4>
+     
+          {% for key in content %}
             
-          {% if key == 'promotion' %}
-          {{value.title}}<br>
-          {{value.description}}<br>
+          {% if key.promotion %}
+          {% for item, value in key.items %}
+    <span id='title'>{{value.title}}</span><br>
+          {% filter linebreaksbr %}{{value.desc_html|safe|linebreaksbr}}{% endfilter %}<br>
      <img src="{{value.image.url}}" title="{{value.title}}" style="width:20%">
+          {% endfor %}
           {% endif %}
     
-          {% if key == 'image' %}
-          {% for image in value %}
-          {{image.name}}<br>
-          {{image.description}}<br>
+          {% if key.image %}
+          {% for im, images in key.items %}
+          {% for image in images %}
+          {{image.title}}<br>
+          {% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}<br>
      <img src="{{image.image.url}}" title="{{image.title}}" style="width:20%">
+          {% endfor %}
           {% endfor %}
           {% endif %}
         
@@ -25,8 +29,9 @@
     
           <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
     
-           <a href="{{url}}/unsubscribe/{{unsubscribe}}" title="отписаться от рассылки" target="_blank">Отписаться</a>
-     <a href="{{url}}/interested/{{interested}}" title="мне интересно" target="_blank">Интересно</a>
-      </td>
+           <a href="{{url}}/email/unsubscribe/{{unsubscribe}}" class="btn danger" title="отписаться от рассылки" target="_blank">Отписаться</a>
+    
+           <a href="{{url}}/email/interested/{{interested}}" class="btn success" title="сделать предзаказ" target="_blank">Предзаказ</a>
+               </td>
 
 {% endblock core %}

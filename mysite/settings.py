@@ -191,7 +191,7 @@ SURVEY_TIME = 36
 
 # Email template footer content
 PHONE = '+7(985)482-85-88'
-EMAIL_ADDRESS = 'comaex.info@comaex.info'
+EMAIL_ADDRESS = 'comaex.info@yandex.ru'
 COMAEX_DEMO = 'http://comaex.ddns.net'
 ADDRESS = 'Москва, Сиреневый бульвар 32'
 FOOTER_TITLE = 'Супервизор-сервер Comaex'

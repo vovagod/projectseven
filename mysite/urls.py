@@ -28,7 +28,7 @@ urlpatterns = [
     path('', baseviewreverse),
     path('email', emailview),  # test view
     path('promotion', promotionview),  # test view
-    path('unsubscribe/', include('clients.urls'), name='clients')
+    path('email/', include('clients.urls'), name='clients'),
 ]
 
 

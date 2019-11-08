@@ -1,5 +1,6 @@
 import sys
 from django.contrib import admin
+from markdown import markdown
 from .models import Promotion, Image
 
 
@@ -29,6 +30,17 @@ class PromotionAdmin(admin.ModelAdmin):
     inlines = [
         ImageInline,
     ]
+
+
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save(commit=False)
+        for obj in formset.deleted_objects:
+            obj.delete()
+        for instance in instances:
+            instance.desc_html = markdown(instance.description)
+            instance.save()
+            print('SAVE_FORMSET:{}'.format(instance.desc_html))
+        formset.save_m2m()
 
 
 def str_to_class(str):

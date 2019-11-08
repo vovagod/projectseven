@@ -30,10 +30,10 @@ class PromotionManager(models.Manager):
     
     def obj_contents(self, category):
         #obj = OrderedDict()
-        obj = [dict(promotion=b, image=b.images.all()) for b in Promotion.objects.filter(category=category)]
-        #obj = {'promotion':b, 'image':b.images.all() for b in Promotion.objects.filter(category=category)}
+        #obj = [dict(promotion=b, image=b.images.all()) for b in Promotion.objects.filter(category=category)]
+        obj = [(dict(promotion=b), dict(image=b.images.all())) for b in Promotion.objects.filter(category=category)]
         #obj = [{b:b.images.all()} for b in Promotion.objects.filter(category=category)]
-        return dict(sorted(obj[0].items()))
+        return obj[0] #dict(sorted(obj[0].items()))
 
 
 class Promotion(models.Model):

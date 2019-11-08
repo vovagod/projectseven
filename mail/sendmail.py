@@ -25,7 +25,7 @@ def send_mail(subject, to, message, guest, template):
     client = Clients.objects.get_pk(to)
     msg = settings.MSG
     msg.update({'guest': guest,
-                'messages': message,
+                'content': message,
                 'unsubscribe': client,
                 'interested': client,
                 })
