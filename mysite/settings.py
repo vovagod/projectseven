@@ -186,6 +186,7 @@ CATEGORIES = (
     ('Mathematics', 'Mathematics'),
     )
 
+# Tick interval
 SURVEY_TIME = 36
 
 
@@ -205,8 +206,6 @@ if DEBUG:
     MEDIA_URL = '/media/'
     DOMAIN = '127.0.0.1:8000'
 MSG = {'letter':PATH+'letter.png',
-        #'guest': guest,
-        #'messages': message,
         'url':'http://'+DOMAIN,
         'logo': PATH+'logo.png',
         'website':PATH+'website.png',

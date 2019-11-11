@@ -15,7 +15,7 @@ class Scheduler(models.Model):
     
    
     id       = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=30, choices=settings.CATEGORIES, verbose_name=_('Категория рассылки'),
+    category = models.CharField(max_length=30, unique=True, choices=settings.CATEGORIES, verbose_name=_('Категория рассылки'),
                                 help_text=_("Выберете название категории"))
     tick     = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Количество тиков'),
                                                help_text=_("Введите количесво тиков, 1 тик равен 1 часу"))

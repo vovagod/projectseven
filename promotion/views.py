@@ -22,6 +22,7 @@ def promotionview(request):
                 'content':Promotion.objects.obj_contents(category),
                 'unsubscribe': client,
                 'interested': client,
+                'preorder': client,
                 })
         
     #for p in promotion[0]:

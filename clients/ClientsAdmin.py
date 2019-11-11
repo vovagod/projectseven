@@ -22,12 +22,15 @@ class ClientsAdmin(admin.ModelAdmin):
         'uuid',
     )
     
-    fields = (('category', 'company'),
+    fields = (('category', 'company', 'slug'),
               ('email', 'phone'),
               ('uuid', 'counter'),
               ('about'),
+              ('file'),
               ('created', 'enable_mailing', 'interested', 'flag'),
               )
+    
+    prepopulated_fields = {'slug': ('company', )}
 
     #readonly_fields = (
         #'action',

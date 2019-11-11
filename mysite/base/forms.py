@@ -19,6 +19,7 @@ class ContactForm(forms.Form):
     phone      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Телефон"}))
     content    = forms.CharField()
 
+
     def __init__(self, request, *args, **kwargs):
         self.request = request
         choice_list = kwargs.pop('data_list', None)

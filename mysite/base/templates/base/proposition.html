@@ -2,36 +2,42 @@
 
 {% block core %}
 
-<td><h4>Предложение сотрудничества</h4>
+<td>
+    <div id=main>
+    <h3>Предложение сотрудничества</h3>
      
           {% for key in content %}
             
           {% if key.promotion %}
           {% for item, value in key.items %}
-    <span id='title'>{{value.title}}</span><br>
-          {% filter linebreaksbr %}{{value.desc_html|safe|linebreaksbr}}{% endfilter %}<br>
-     <img src="{{value.image.url}}" title="{{value.title}}" style="width:20%">
+     <h3 id='title'>{{value.title}}</h3>
+        <p>{% filter linebreaksbr %}{{value.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
+        <a href="{{url}}" title='Посетить сайт' target="_blank">
+            <img id='img' src="{{value.image.url}}" title="{{value.title}}" style="width:100%"></a>
           {% endfor %}
           {% endif %}
     
           {% if key.image %}
           {% for im, images in key.items %}
           {% for image in images %}
-          {{image.title}}<br>
-          {% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}<br>
-     <img src="{{image.image.url}}" title="{{image.title}}" style="width:20%">
+     <h3 id='title'>{{image.title}}</h3>
+        <p>{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
+        {% if image.image %}
+        <a href="{{url}}/home/#specification" title='Посетить сайт' target="_blank">
+            <img id='img' src="{{image.image.url}}" title="{{image.title}}" style="width:100%"></a>
+        {% endif %}
           {% endfor %}
           {% endfor %}
           {% endif %}
         
           {% endfor %}
     
-    
-          <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
-    
-           <a href="{{url}}/email/unsubscribe/{{unsubscribe}}" class="btn danger" title="отписаться от рассылки" target="_blank">Отписаться</a>
-    
-           <a href="{{url}}/email/interested/{{interested}}" class="btn success" title="сделать предзаказ" target="_blank">Предзаказ</a>
-               </td>
+         <br>
+           
+    <a href="{{url}}/email/unsubscribe/{{unsubscribe}}" class="btn danger" title="отписаться от рассылки" target="_blank">Отписаться</a>
+           <a href="{{url}}/email/interested/{{interested}}" class="btn success" title="оценить идею" target="_blank">Интересно</a>
+           <a href="{{url}}/email/preorder/{{preorder}}" class="btn order" title="сделать предзаказ" target="_blank">Предзаказ</a>
+    </div>
+</td>
 
 {% endblock core %}

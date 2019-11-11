@@ -28,6 +28,7 @@ def send_mail(subject, to, message, guest, template):
                 'content': message,
                 'unsubscribe': client,
                 'interested': client,
+                'preorder': client,
                 })
     text_content = 'This is an important message'
     html_content = html_file.render(msg)

@@ -134,7 +134,7 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = Promotion.objects.get(id=self.name_id).slug
-        if not self.image:
-            self.image = 'no_image.png'
+        #if not self.image:
+            #self.image = 'no_image.png'
         super(Image, self).save(*args, **kwargs)
 
