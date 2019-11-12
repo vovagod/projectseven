@@ -11,14 +11,34 @@ app_name = 'clients'
 
 
 class FileFieldForm(forms.Form):
-    company = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Название компании"}))
-    persons = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Контактное лицо"}))
-    address = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Адрес компании"}))
-    email2  = forms.EmailField(widget=forms.TextInput(attrs={"placeholder": "Электронная почта"}),
+    
+    company = forms.CharField(label="Имя компании (измените, если не соответствует)",
+                              widget=forms.TextInput(attrs={"required":True}))
+    persons = forms.CharField(label="Контактное лицо", widget=forms.TextInput(attrs={"placeholder": "Иванов Иван",
+                                                                                     "required":True}))
+    address = forms.CharField(label="Адрес компании", widget=forms.TextInput(attrs={"placeholder": "Москва, ул.Абвгдейка, 123",
+                                                                                    "required":True}))
+    email2  = forms.EmailField(label="Эл.почта (измените, если не соответствует)",
+                               widget=forms.TextInput(attrs={"required":True}),
                                validators=[validate_email])
-    phone   = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Телефон"}))
-    file    = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True,
-                                                                     "placeholder": "Выберете файлы в формате"}))
+    phone   = forms.CharField(label="Телефон (измените, если не соответствует)",
+                              widget=forms.TextInput(attrs={"required":True}))
+    file    = forms.FileField(label="Выберете файлы в формате word, pdf, exel, jpg, png",
+                              widget=forms.ClearableFileInput(attrs={'multiple': True, "required":True}))
+
+
+
+    def __init__(self, request, *args, **kwargs):
+        self.instance = kwargs.pop('instance', None)
+        self.request = request
+        uuid = self.request.path_info.strip('/').split('/')[-1]
+        instance = Clients.objects.get(uuid=uuid)
+        print('__INIT__:{}'.format(self.request.POST.get('company')))
+        super(FileFieldForm, self).__init__(*args, **kwargs)
+        self.initial['company'] = instance.company
+        self.initial['email2'] = instance.email
+        self.initial['phone'] = instance.phone
+                                                
 
 
 class PreorderForm(ModelForm):

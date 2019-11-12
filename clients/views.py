@@ -5,8 +5,9 @@ from django.core.exceptions import ValidationError
 from django.conf import settings
 from django.http import Http404
 from mysite.mixins import RequestFormAttachMixin
-from .models import Clients, upload_image_path, get_filename_ext
+from .models import Clients
 from .forms import PreorderForm, FileFieldForm
+
 
 
 def handle_uploaded_file(path, f):
@@ -51,7 +52,7 @@ class ClientsActionView(DetailView):
 
 
 
-class ClientsPreorderView(FormView):  #RequestFormAttachMixin, 
+class ClientsPreorderView(RequestFormAttachMixin, FormView):  #RequestFormAttachMixin, 
 
     #form_class = PreorderForm
     form_class = FileFieldForm
@@ -76,12 +77,11 @@ class ClientsPreorderView(FormView):  #RequestFormAttachMixin,
             instance.phone = data['phone']
             instance.email2 = data['email2']
             instance.save()
-            #print('FORM_VALID:{}'.format(persons))
             for f in files:
                 print('F:{}'.format(f))
-                path = settings.DOMAIN+'/uploads/{company}/{filename}'.format(company=instance.slug, filename=f)
+                path = settings.MEDIA_ROOT+'/uploads/{company}/{filename}'.format(company=instance.slug,
+                                                                                  filename=str(f))
                 handle_uploaded_file(path, f)
-            #print('FORM_VALID:{}'.format(self.form_valid(form)))
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
