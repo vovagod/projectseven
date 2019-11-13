@@ -189,13 +189,15 @@ CATEGORIES = (
 # Tick interval
 SURVEY_TIME = 36
 
+# Valid extensions list
+VALID_EXTENSIONS = ['pdf', 'doc', 'docx', 'jpg', 'png', 'xlsx', 'xls']
 
 # Email template footer content
 PHONE = '+7(985)482-85-88'
 EMAIL_ADDRESS = 'comaex.info@yandex.ru'
 COMAEX_DEMO = 'http://comaex.ddns.net'
 ADDRESS = 'Москва, Сиреневый бульвар 32'
-FOOTER_TITLE = 'Супервизор-сервер Comaex'
+FOOTER_TITLE = 'Супервизор-сервера Comaex'
 
 MEDIA_URL = '/static/media/'
 

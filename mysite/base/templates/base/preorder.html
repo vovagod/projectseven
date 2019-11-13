@@ -18,11 +18,17 @@
              {{ field.errors }}
           {{ field.label_tag }}
                {{ field }}
-          
        {% endfor %}
-        <!--<input type="submit" value="Отправить"><br>-->
-           <button type="submit">
-            <strong>{% trans "Отправить" %}</strong></button><br>
+          
+           {% if messages %}
+            <ul class="messages">
+               {% for message in messages %}
+                 <li class="alert" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+               {% endfor %}
+            </ul>
+          {% endif %}
+          
+        <input type="submit" value="Отправить"><br>
             
    
   </form>

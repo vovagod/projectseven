@@ -1,5 +1,4 @@
 from django import forms
-#from .widgets import ClearableMultipleFilesInput
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.forms import ModelForm
@@ -10,7 +9,7 @@ from .models import Clients
 app_name = 'clients'
 
 
-class FileFieldForm(forms.Form):
+class PreorderForm(forms.Form):
     
     company = forms.CharField(label="Имя компании (измените, если не соответствует)",
                               widget=forms.TextInput(attrs={"required":True}))
@@ -23,7 +22,7 @@ class FileFieldForm(forms.Form):
                                validators=[validate_email])
     phone   = forms.CharField(label="Телефон (измените, если не соответствует)",
                               widget=forms.TextInput(attrs={"required":True}))
-    file    = forms.FileField(label="Выберете файлы в формате word, pdf, exel, jpg, png",
+    file    = forms.FileField(label="Выберете файлы в формате pdf, doc, docx, jpg, png, xlsx, xls",
                               widget=forms.ClearableFileInput(attrs={'multiple': True, "required":True}))
 
 
@@ -31,53 +30,12 @@ class FileFieldForm(forms.Form):
     def __init__(self, request, *args, **kwargs):
         self.instance = kwargs.pop('instance', None)
         self.request = request
-        uuid = self.request.path_info.strip('/').split('/')[-1]
-        instance = Clients.objects.get(uuid=uuid)
-        print('__INIT__:{}'.format(self.request.POST.get('company')))
-        super(FileFieldForm, self).__init__(*args, **kwargs)
+        self.uuid = self.request.path_info.strip('/').split('/')[-1]
+        instance = Clients.objects.get(uuid=self.uuid)
+        super(PreorderForm, self).__init__(*args, **kwargs)
         self.initial['company'] = instance.company
+        self.initial['persons'] = instance.persons or None
+        self.initial['address'] = instance.address or None
         self.initial['email2'] = instance.email
         self.initial['phone'] = instance.phone
                                                 
-
-
-class PreorderForm(ModelForm):
-    
-    class Meta:
-        model = Clients
-        fields = ['company', 'address', 'persons',
-                  'phone', 'email2', 'file',
-                  ]
-        #file = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
-
-
-    def __init__(self, request, *args, **kwargs):
-        self.request = request
-        super(PreorderForm, self).__init__(*args, **kwargs)
-
-
-    def clean(self, *args):
-        cleaned_data = super(PreorderForm, self).clean()
-        data = self.cleaned_data
-        uuid = self.request.path_info.strip('/').split('/')[-1]
-        #print('PREORDERFORM_CLEAN:{}'.format(self.request.path_info.strip('/').split('/')[-1]))
-        #files = request.FILES.getlist('files')
-
-        if data.get('file') is None:
-            raise forms.ValidationError("Enter a valid file format", code='file_error')
-        try:
-            instance = Clients.objects.get(uuid=uuid)
-        except Clients.DoesNotExist:
-            raise Http404("Client does not exist")
-        #f = PreorderForm(instance=instance)
-        instance.address=data['address']
-        instance.file=data['file']
-        instance.persons = data['persons']
-        instance.phone = data['phone']
-        instance.email2 = data['email2']
-        instance.save()
-        #f.save()
-                #return HttpResponseRedirect('/success/url/')
-        #else:
-            #form = PreorderForm()
-        return cleaned_data

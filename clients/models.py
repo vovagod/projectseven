@@ -12,7 +12,6 @@ def get_filename_ext(filepath):
 
 
 def upload_image_path(instance, filename):
-    print('UPLOAD_IMAGE:{}'.format(filename))
     name, ext = get_filename_ext(filename)
     final_filename = '{name}{ext}'.format(name=name, ext=ext)
     return 'uploads/{company}/{final_filename}'.format(company=instance.slug, final_filename=final_filename)
@@ -21,7 +20,6 @@ def upload_image_path(instance, filename):
 class ClientsManager(models.Manager):
     
     def get_pk(self, email):
-        print('GET_PK:{}'.format(email))
         obj = Clients.objects.get(email=email)
         return obj.uuid
     
@@ -56,7 +54,6 @@ class Clients(models.Model):
 
     class Meta:
         app_label = 'clients'
-        #ordering = ['id']
         verbose_name = _('Клиенты')
         verbose_name_plural = _('Клиенты')
 
@@ -64,8 +61,4 @@ class Clients(models.Model):
     def __str__(self):
         return self.company
     
-
-    #def save(self):
-        # make checking double mail
-        #pass
 
