@@ -5,14 +5,6 @@ from django.utils.translation import ugettext as _
 
 
 class Scheduler(models.Model):
-
-    #CATEGORIES = settings.CATEGORIES
-    #CATEGORIES = (
-    #('server', 'Server'),
-    #('facebook', 'Facebook'),
-    #('mathematics', 'Mathematics'),
-    #)
-    
    
     id       = models.AutoField(primary_key=True)
     category = models.CharField(max_length=30, unique=True, choices=settings.CATEGORIES, verbose_name=_('Категория рассылки'),

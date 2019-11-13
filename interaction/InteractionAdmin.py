@@ -5,8 +5,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from markdown import markdown
-#from django.core.exceptions import MultipleObjectsReturned
-#from admin_actions.admin import ActionsModelAdmin
 from django_object_actions import DjangoObjectActions
 from .models import Contact, Correspondence
 
@@ -24,11 +22,6 @@ class ContactAdmin(DjangoObjectActions, admin.ModelAdmin):
               ('content'),
               ('ipaddr', 'flag'),
               )
-
-    #readonly_fields = (
-        #'action',
-        #'timestamp',
-    #)
 
   
     def responce_to_person(self, request, obj):
@@ -58,13 +51,6 @@ class ContactAdmin(DjangoObjectActions, admin.ModelAdmin):
 class CorrespondenceAdmin(admin.ModelAdmin):
     list_display = ['id', 'theme', 'name', 'email', 'phone', 'timestamp', 'action']
     
-    #fields = (('name'),
-              #('email'),
-              #('phone'),
-              #('content'),
-              #('flag', 'action'),
-              #)
-
     readonly_fields = (
         'action',
         'timestamp',

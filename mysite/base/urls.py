@@ -9,6 +9,4 @@ app_name = 'base'
 
 urlpatterns = [
     path('', BaseView.as_view(), name='baseview'),
-    #path('', baseviewreverse, name='reverse'),
-    
 ]

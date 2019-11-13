@@ -2,8 +2,6 @@ import os
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-#from django.contrib.auth.models import User
-#from django.core.files import File
 from django.utils.translation import ugettext as _
 from collections import OrderedDict
 from markdown import markdown
@@ -29,11 +27,8 @@ def default_image_path():
 class PromotionManager(models.Manager):
     
     def obj_contents(self, category):
-        #obj = OrderedDict()
-        #obj = [dict(promotion=b, image=b.images.all()) for b in Promotion.objects.filter(category=category)]
         obj = [(dict(promotion=b), dict(image=b.images.all())) for b in Promotion.objects.filter(category=category)]
-        #obj = [{b:b.images.all()} for b in Promotion.objects.filter(category=category)]
-        return obj[0] #dict(sorted(obj[0].items()))
+        return obj[0] 
 
 
 class Promotion(models.Model):
@@ -134,7 +129,5 @@ class Image(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = Promotion.objects.get(id=self.name_id).slug
-        #if not self.image:
-            #self.image = 'no_image.png'
         super(Image, self).save(*args, **kwargs)
 

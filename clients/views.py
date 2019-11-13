@@ -1,17 +1,19 @@
 import pathlib
-#from django.shortcuts import render_to_response
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django.contrib import messages
 from django.conf import settings
+from django.utils.translation import ugettext as _
 from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
 from collections import namedtuple
 from mysite.mixins import RequestFormAttachMixin
+from django.utils.safestring import mark_safe
 from .models import Clients
 from .forms import PreorderForm
+from mail.sendmail import send_mail
 
 
 File = namedtuple('File', ['name'])
@@ -50,12 +52,12 @@ class ClientsActionView(DetailView):
             raise Http404("Client does not exist")
         if action == 'unsubscribe':
             Clients.objects.filter(uuid=uuid).update(enable_mailing=False)
-            self.action = 'Вы успешно отписались от рассылки'
+            self.action = _('Вы успешно отписались от рассылки')
         if action == 'interested':
             Clients.objects.filter(uuid=uuid).update(interested=True)
-            self.action = 'Благодарим вас за оценку!'
+            self.action = _('Благодарим вас за оценку!')
         if action == 'success':
-            self.action = 'Спасибо, ваш предзаказ получен!'
+            self.action = _('Спасибо, ваш предзаказ получен!')
         return self.obj
 
 
@@ -108,10 +110,13 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ClientsPreorderView, self).get_context_data(*args, **kwargs)
+        context['introduction'] = mark_safe(settings.INTRODUCTION)
         return get_common_context(context)
 
 
     def form_valid(self, form):
+        message = {'text':'Client with uuid: '+self.uuid+' has made a preorder. Congratulation!'}
+        send_mail('Preorder made', 'admin', message, 'Admin', 'correspondence')
         return HttpResponseRedirect(reverse('clients:action', args=('success', self.uuid,)))
 
     

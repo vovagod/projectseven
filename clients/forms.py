@@ -1,8 +1,6 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.forms import ModelForm
-from django.http import Http404
+from django.utils.translation import ugettext as _
 from .models import Clients
 
 
@@ -11,18 +9,18 @@ app_name = 'clients'
 
 class PreorderForm(forms.Form):
     
-    company = forms.CharField(label="Имя компании (измените, если не соответствует)",
+    company = forms.CharField(label=_("Имя компании (измените, если не соответствует)"),
                               widget=forms.TextInput(attrs={"required":True}))
-    persons = forms.CharField(label="Контактное лицо", widget=forms.TextInput(attrs={"placeholder": "Иванов Иван",
+    persons = forms.CharField(label="Контактное лицо", widget=forms.TextInput(attrs={"placeholder": _("Иванов Иван"),
                                                                                      "required":True}))
-    address = forms.CharField(label="Адрес компании", widget=forms.TextInput(attrs={"placeholder": "Москва, ул.Абвгдейка, 123",
+    address = forms.CharField(label="Адрес компании", widget=forms.TextInput(attrs={"placeholder": _("Москва, ул.Абвгдейка, 123"),
                                                                                     "required":True}))
-    email2  = forms.EmailField(label="Эл.почта (измените, если не соответствует)",
+    email2  = forms.EmailField(label=_("Эл.почта (измените, если не соответствует)"),
                                widget=forms.TextInput(attrs={"required":True}),
                                validators=[validate_email])
-    phone   = forms.CharField(label="Телефон (измените, если не соответствует)",
+    phone   = forms.CharField(label=_("Телефон (измените, если не соответствует)"),
                               widget=forms.TextInput(attrs={"required":True}))
-    file    = forms.FileField(label="Выберете файлы в формате pdf, doc, docx, jpg, png, xlsx, xls",
+    file    = forms.FileField(label=_("Выберете файлы в формате pdf, doc, docx, jpg, png, xlsx, xls"),
                               widget=forms.ClearableFileInput(attrs={'multiple': True, "required":True}))
 
 

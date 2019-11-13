@@ -3,7 +3,7 @@
 {% block core %}
 
 <td><h4>Дорогой, {{guest}}</h4>
-          {% for key, value in messages.items %}
+          {% for key, value in content.items %}
           <p>&emsp;Спасибо за интерес к нашей технологии. {{value}}</p>
           {% if key == 'credentials' %}
           <p>Перейти на страницу входа <a href="{{comaex_demo}}" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>

@@ -27,12 +27,10 @@ urlpatterns = [
     path('home/', include('mysite.base.urls'), name='base'),
     path('', baseviewreverse),
     path('email', emailview),  # test view
-    path('promotion', promotionview),  # test view
+    path('promotion/<email>', promotionview),  # test view
     path('email/', include('clients.urls'), name='clients'),
 ]
 
 
 if settings.DEBUG:
-    #urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

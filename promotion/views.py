@@ -1,33 +1,30 @@
 from django.shortcuts import render_to_response
 from django.conf import settings
-#from scheduler.models import Scheduler
+from django.utils.translation import ugettext as _
+from django.http import Http404
 from clients.models import Clients
 from promotion.models import Promotion
 from mail.sendmail import send_mail
 
 
-# Create your views here.
-def promotionview(request):
+# test view to check promotion email
+def promotionview(request, email=None):
     category = settings.CATEGORIES[0][0]
     subject = 'Business proposition'
     template = 'proposition'
-    print('CATEGORY:{}'.format(category))
     clients = Clients.objects.filter(enable_mailing=True, category=category)
-    
     promotion = Promotion.objects.obj_contents(category)
-    print('PROMOTION:{}'.format(promotion))
-    client = Clients.objects.get_pk('chim73@mail.ru')
+    try:
+        client = Clients.objects.get_pk(email)
+    except Clients.DoesNotExist:
+        raise Http404("Client does not exist")
     msg = settings.MSG
-    msg.update({'guest':'Гость',
+    msg.update({'guest':_('Гость'),
                 'content':Promotion.objects.obj_contents(category),
                 'unsubscribe': client,
                 'interested': client,
                 'preorder': client,
                 })
-        
-    #for p in promotion[0]:
-        #print('PROMOTION:{}'.format(p))
-        #send_mail(subject, client.email, promotion, client.company, template)
 
     return render_to_response('base/proposition.html', msg,
                               content_type="text/html")

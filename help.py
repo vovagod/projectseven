@@ -405,3 +405,36 @@ https://ru.wikibooks.org/wiki/Настройка_межсетевого_экра
     cart_toy = CartToys.objects.first()
     carts = cart_toy.cart_set.all() # this line return all related objects for Cart
 
+27. Settings
+
+# Google Email settings
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST_PASSWORD = '' 
+EMAIL_HOST_USER = 'gva008@gmail.com' 
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'Comaex server <comaex@gmail.com>'
+BASE_URL = '127.0.0.1:8000'
+
+# Yandex Email settings
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.yandex.ru' 
+EMAIL_HOST_PASSWORD = '' 
+EMAIL_HOST_USER = 'comaex.info@yandex.ru' 
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'Comaex server <comaex.info@yandex.ru>'
+BASE_URL = '127.0.0.1:8000'
+
+
+28. Postgres DataBase
+# Postgres
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'projectseven_db',
+        'USER': 'admin',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}

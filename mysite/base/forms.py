@@ -2,9 +2,9 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 #from django.contrib.gis.geoip import GeoIP
-
 from django.template import Context
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
 from interaction.models import Contact
 from .fields import ListTextWidget
 from mail.sendmail import send_mail, theme_search
@@ -13,17 +13,17 @@ from ipware import get_client_ip
 
 class ContactForm(forms.Form):
     
-    fullname   = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Полное имя"}))
-    email      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Электронная почта"}),
+    fullname   = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Полное имя")}))
+    email      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Электронная почта")}),
                                  validators=[validate_email])
-    phone      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Телефон"}))
+    phone      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Телефон")}))
     content    = forms.CharField()
 
 
     def __init__(self, request, *args, **kwargs):
         self.request = request
         choice_list = kwargs.pop('data_list', None)
-        placeholder = "Введите сообщение или выберете из списка..."
+        placeholder = _("Введите сообщение или выберете из списка...")
         autocomplete = "off"
         super(ContactForm, self).__init__(*args, **kwargs)
         self.fields['content'].widget = ListTextWidget(data_list=choice_list, name='choice-list',

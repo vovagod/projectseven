@@ -24,10 +24,10 @@ def baseviewreverse(request):
     return redirect('/home/')
 
 
-# test function to check mailform
+# test view to check mailform
 def emailview(request):
     msg = settings.MSG
-    msg.update({'guest':'Гость',
+    msg.update({'guest':_('Гость'),
                 })
     return render_to_response('base/correspondence.html', msg,
                               content_type="text/html")
@@ -55,8 +55,6 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
 
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
         message, self.success_message = theme_search(form.cleaned_data['content'])
         form.send_email(message)
         return super(BaseView, self).form_valid(form)

@@ -1,8 +1,5 @@
 import sys
 from django.contrib import admin
-#from django.contrib import messages
-#from django.shortcuts import redirect
-#from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from .models import Clients
 
