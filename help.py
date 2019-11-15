@@ -9,10 +9,16 @@
    add a string to file:/home/vova/projectthree/myvenv/lib/python3.5/
                         site-packages/django/contrib/admin/templates/admin/change_form.html
        <script type="text/javascript" src="{% static 'admin/js/selection.js' %}"></script>
-       
+
+
+1.01 Ubuntu
+     Rename file:
+         mv "old location" "new location"
 
 
 1.1 Project installation
+
+    python --version
 
     # Install Python
     sudo apt-get update
@@ -29,7 +35,7 @@
 
     # To create a virtual environment for python 2.7 or 3+:
     virtualenv -p python2.7 env
-    virtualenv -p python3 myenv
+    virtualenv -p python3 myvenv
 
     # Create a virtualenv to isolate our package dependencies locally
     project$ python3 -m venv myvenv
@@ -280,7 +286,8 @@ sudo nano /etc/ssh/sshd_config
  sudo systemctl enable ssh
 
  ssh webscada@rps-01
-
+# AWS SSH
+sudo ssh -i /home/vova/projectseven/aws_key.pem ubuntu@ec2-34-226-39-94.compute-1.amazonaws.com
 
 #       $OpenBSD: sshd_config,v 1.101 2017/03/14 07:19:07 djm Exp $
 

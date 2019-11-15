@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*',]
 DOMAIN = 'www.comaex.info'
 
 # Application definition
+
 INSTALLED_APPS = [
     'admin_actions',
     'django_object_actions',
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     
 ]
 
+#AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,6 +79,10 @@ TEMPLATES = [
     },
 ]
 
+#STATICFILES_DIRS = [
+    #"/mysite/base/static",
+    #os.path.join(BASE_DIR, "mysite/base/static", "media"),
+    #]
 
 ADMIN = os.path.dirname(os.path.abspath(admin.__file__))
 STATICFILES_DIRS = ( BASE_DIR + '/mysite/base/static/',
@@ -89,6 +95,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -97,8 +104,21 @@ DATABASES = {
 }
 
 
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'projectseven_db',
+        #'USER': 'admin',
+        #'PASSWORD': '12345',
+        #'HOST': '127.0.0.1',
+        #'PORT': '5432',
+    #}
+#}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -115,6 +135,25 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Google Email settings
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.gmail.com' 
+#EMAIL_HOST_PASSWORD = '' 
+#EMAIL_HOST_USER = 'gva008@gmail.com' 
+#EMAIL_PORT = 587
+#DEFAULT_FROM_EMAIL = 'Comaex server <comaex@gmail.com>'
+#BASE_URL = '127.0.0.1:8000'
+
+
+# Yandex Email settings
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.yandex.ru' 
+#EMAIL_HOST_PASSWORD = 'comaex2019info' 
+#EMAIL_HOST_USER = 'comaex.info@yandex.ru' 
+#EMAIL_PORT = 587
+#DEFAULT_FROM_EMAIL = 'Comaex server <comaex.info@yandex.ru>'
+#BASE_URL = '127.0.0.1:8000'
+
 # AWS Email settings
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
@@ -122,17 +161,22 @@ EMAIL_HOST_USER = 'AKIAZ37L3WD4CXMH5AZK'
 EMAIL_HOST_PASSWORD = 'BPf6zVOe65C+V7LHLsYbNRy59ySdAeMACTsMXaDnWeuh'
 SUBJECT = "Amazon SES Email"
 FROM = 'comaex.info@comaex.info'
+#IAM User Name = ses-smtp-user.20191102-135328
+#SMTP Username = AKIAZ37L3WD4CXMH5AZK
+#SMTP Password = BPf6zVOe65C+V7LHLsYbNRy59ySdAeMACTsMXaDnWeuh
+#EMAIL_HOST_USER = 'comaex.info@yandex.ru' 
 EMAIL_PORT = 587
+#DEFAULT_FROM_EMAIL = 'Comaex server <comaex.info@comaex.info>'
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
+
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
 
 # User settings
 CATEGORIES = (
@@ -144,19 +188,19 @@ CATEGORIES = (
     )
 
 # Tick interval(must be 3600)
-SURVEY_TIME = 3600
+SURVEY_TIME = 36
 
 # Valid extensions list
 VALID_EXTENSIONS = ['pdf', 'doc', 'docx', 'jpg', 'png', 'xlsx', 'xls']
 
 # Preorder form context
-INTRODUCTION = ("<span>&ensp;Пожалуйста заполните поля формы. "
+INTRODUCTION = ("<p>&ensp;Пожалуйста заполните поля формы. "
       "В последнем поле прикрепите файл(ы) со списком контролируемых параметров в виде"
       " листа Модбас-переменных вашего контроллера. "
       "Прикрепите в том же поле файл(ы) с мнемосхемами устройств в удобной для вас форме. "
       "На основании полученной информации, мы создадим рабочие мнемосхемы и вместе с переменными "
       "введем эти данные в сервер и пришлем вам ссылку на реальное рабочее приложение вашего заказа. "
-      "После вам останется только установить сервер на объекте и запустить его в работу.</span>"
+      "После останется только установить сервер на объекте и запустить его в работу.</p>"
      )
 
 # Email template footer content
@@ -192,10 +236,17 @@ MSG = {'letter':PATH+'letter.png',
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+#MEDIA_URL = '/static/media/'
+#if DEBUG:
+    #MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 RAW_IMAGE_ROOT = os.path.join(BASE_DIR, 'static', 'media/raw_image')
 LOGO_IMAGE = os.path.join(BASE_DIR, 'static', 'media/logo.jpg')

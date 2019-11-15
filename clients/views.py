@@ -1,3 +1,4 @@
+#import glob
 import pathlib
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
@@ -93,6 +94,12 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
             instance.save()
             path = settings.MEDIA_ROOT+'/uploads/{company}/'.format(company=instance.slug)
             pathlib.Path(path).mkdir(parents=True, exist_ok=True)
+
+            
+            #for file in glob.glob(path + "*.*"):
+                #print('FILEPATH:{}'.format(file))
+           
+            
             file_validator = FileExtensionValidator(settings.VALID_EXTENSIONS)
             for f in files:
                 try:
@@ -101,8 +108,7 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
                     err = '; '.join(e)
                     messages.add_message(request, messages.INFO, err)
                     return self.form_invalid(form)
-                path += '{filename}'.format(filename=str(f))
-                handle_uploaded_file(path, f)
+                handle_uploaded_file(path+'{filename}'.format(filename=str(f)), f)
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
