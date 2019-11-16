@@ -104,8 +104,8 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         path = instance.get_filepath()
         if not path:
             return format_html('<b>{}</b>'.format(_('None')))
-        return format_html_join('\n', '&emsp;<a href="{}" title="{}" onclick="return !window.open(this.href)" download>{}</a>',
-                           ((#settings.DOMAIN,
+        return format_html_join('\n', '&emsp;<a href="http://{}{}" title="{}" onclick="return !window.open(this.href)" download>{}</a>',
+                           ((settings.DOMAIN,
                              f[len(settings.MEDIA_ROOT):],
                              _('Download file'),
                              f.strip('/').split('/')[-1],
