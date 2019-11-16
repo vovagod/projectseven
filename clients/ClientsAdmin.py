@@ -1,8 +1,10 @@
+import os
 import sys
 import glob
 from django.contrib import admin
 from django.contrib import messages
 from django.shortcuts import redirect
+from django.conf import settings
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.utils.html import format_html_join, format_html
@@ -22,6 +24,9 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         'created',
         'uuid',
         'theme_of_mailing',
+        'downloaded_files',
+        'mailing_errors',
+        'path_to_folder',
     )
     
 
@@ -41,8 +46,10 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         }),
         (_('Actions'), {
             'fields': (
-                ('counter', 'file', 'error_mailing'),
-                'filepath',
+                ('counter', 'file'),
+                'mailing_errors',
+                'path_to_folder',
+                'downloaded_files',
             ),
         }),
         (_('Mailing'), {
@@ -77,16 +84,36 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
     theme_of_mailing.short_description = _("theme of mailing")
 
 
-    #def downloaded_files(self, instance):
-        #return format_html("<b>{}</b>",
-                           #'{}'.format(instance.get_theme())
-                           #)
-    #for file in glob.glob(path + "*.*"):
-                #print('FILEPATH:{}'.format(file))
-    #<a href="path_to_file" download="proposed_file_name">Download</a>
+    def mailing_errors(self, instance):
+        return format_html("<b>{}</b>",
+                           '{}'.format(instance.get_errors() or _('None'))
+                           )
                            
-    #downloaded_files.short_description = _("list of downloaded files")
-  
+    mailing_errors.short_description = _("mailing errors")
+
+
+    def path_to_folder(self, instance):
+        return format_html("<b>{}</b>",
+                           '{}'.format(instance.get_filepath() or _('None'))
+                           )
+                           
+    path_to_folder.short_description = _("path to folder")
+
+
+    def downloaded_files(self, instance):
+        path = instance.get_filepath()
+        if not path:
+            return format_html('<b>{}</b>'.format(_('None')))
+        return format_html_join('\n', '&emsp;<a href="{}" title="{}" onclick="return !window.open(this.href)" download>{}</a>',
+                           ((#settings.DOMAIN,
+                             f[len(settings.MEDIA_ROOT):],
+                             _('Download file'),
+                             f.strip('/').split('/')[-1],
+                             ) for f in glob.glob(path+"*.*"))
+                           )
+                           
+    downloaded_files.short_description = _("List of downloaded files")  
+
 
 
 def str_to_class(str):

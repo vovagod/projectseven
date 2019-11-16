@@ -1,15 +1,9 @@
 import os
+import glob
 import uuid
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext as _
-#from django.core.files.storage import FileSystemStorage
-
-#fs = FileSystemStorage(location='/media/photos')
-
-
-#def images_path(instance, filename):
-    #return 'uploads/{company}/{final_filename}'.format(company=instance.slug, final_filename=final_filename)
 
 
 def get_filename_ext(filepath):
@@ -21,8 +15,6 @@ def get_filename_ext(filepath):
 def upload_image_path(instance, filename):
     name, ext = get_filename_ext(filename)
     final_filename = '{name}{ext}'.format(name=name, ext=ext)
-    #path = 'uploads/{company}/{final_filename}'.format(company=instance.slug, final_filename=final_filename)
-    #fs = FileSystemStorage(location=path)
     return 'uploads/{company}/{final_filename}'.format(company=instance.slug, final_filename=final_filename)
 
 
@@ -55,10 +47,8 @@ class Clients(models.Model):
     error_mailing  = models.CharField(max_length=360, blank=True, default='Ошибок нет',
                                       verbose_name=_('Отчет об ошибке отправки'))
     file           = models.FileField(upload_to=upload_image_path, blank=True, null=True,
-                                      verbose_name=_('Файл'), help_text=_("Файл данных от клиента"))
-    filepath       = models.FilePathField(path='/static/uploads/', blank=True, null=True)
-    #file          = models.FileField(storage=fs, blank=True, null=True,
-                                      #verbose_name=_('Файл'), help_text=_("Файл данных от клиента"))
+                                      verbose_name=_('Файл'), help_text=_("Файл данных клиента"))
+    filepath       = models.CharField(max_length=120, blank=True, verbose_name=_('Путь в папке загр.файлов'))
     flag           = models.BooleanField(default=False, verbose_name=_('Флаг'))
 
     objects = ClientsManager()
@@ -74,14 +64,18 @@ class Clients(models.Model):
         return self.company
 
 
-    #def save(self, *args, **kwargs):
-        #upload_image_path(self, self.filename)
-        #self.slug = Promotion.objects.get(id=self.name_id).slug
-        #super(Image, self).save(*args, **kwargs)
-        
-
     # get theme of mailing
     def get_theme(self):
         return self.category
+
+
+    # get path of file
+    def get_filepath(self):
+        return self.filepath
+
+
+    # get errors when mailing
+    def get_errors(self):
+        return self.error_mailing
     
 

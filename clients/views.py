@@ -7,7 +7,7 @@ from django.core.validators import FileExtensionValidator
 from django.contrib import messages
 from django.conf import settings
 from django.utils.translation import ugettext as _
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from collections import namedtuple
 from mysite.mixins import RequestFormAttachMixin
@@ -18,6 +18,14 @@ from mail.sendmail import send_mail
 
 
 File = namedtuple('File', ['name'])
+
+
+def download(request, folder, file):
+    file_path = settings.MEDIA_ROOT+'/uploads/'+folder+'/'+file
+    with open(file_path, 'rb') as fh:
+        response = HttpResponse(fh.read(), content_type="application/force-download")
+        response['Content-Disposition'] = 'inline; filename= "{}"'.format(file)
+        return response
 
 
 def handle_uploaded_file(path, f):
@@ -41,7 +49,6 @@ class ClientsActionView(DetailView):
     model = Clients
     template_name = 'base/action.html'
 
-
     def get_object(self):
         uuid = self.kwargs['uuid']
         action = self.kwargs['action']
@@ -61,7 +68,6 @@ class ClientsActionView(DetailView):
             self.action = _('Спасибо, ваш предзаказ получен!')
         return self.obj
 
-
     def get_context_data(self, **kwargs):
         context = super(ClientsActionView, self).get_context_data(**kwargs)
         context['action'] = self.action
@@ -74,7 +80,6 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
 
     form_class = PreorderForm
     template_name = 'base/preorder.html'
-
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -91,14 +96,10 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
             instance.persons = data['persons']
             instance.phone = data['phone']
             instance.email2 = data['email2']
-            instance.save()
             path = settings.MEDIA_ROOT+'/uploads/{company}/'.format(company=instance.slug)
+            instance.filepath = path
+            instance.save()
             pathlib.Path(path).mkdir(parents=True, exist_ok=True)
-
-            
-            #for file in glob.glob(path + "*.*"):
-                #print('FILEPATH:{}'.format(file))
-           
             
             file_validator = FileExtensionValidator(settings.VALID_EXTENSIONS)
             for f in files:
@@ -113,19 +114,16 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
         else:
             return self.form_invalid(form)
 
-
     def get_context_data(self, *args, **kwargs):
         context = super(ClientsPreorderView, self).get_context_data(*args, **kwargs)
         context['introduction'] = mark_safe(settings.INTRODUCTION)
         return get_common_context(context)
-
 
     def form_valid(self, form):
         message = {'text':'Client with uuid: '+self.uuid+' has made a preorder. Congratulation!'}
         send_mail('Preorder made', 'admin', message, 'Admin', 'correspondence')
         return HttpResponseRedirect(reverse('clients:action', args=('success', self.uuid,)))
 
-    
     def form_invalid(self, form):
         return HttpResponseRedirect(reverse('clients:preorder', args=(self.uuid,)))
 

@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from mysite.base.views import baseviewreverse, emailview  #urlmapper
 from promotion.views import promotionview
+from clients.views import download
 
 
 urlpatterns = [
@@ -29,6 +30,7 @@ urlpatterns = [
     path('email', emailview),  # test view
     path('promotion/<email>', promotionview),  # test view
     path('email/', include('clients.urls'), name='clients'),
+    path('uploads/<folder>/<file>', download),
 ]
 
 
