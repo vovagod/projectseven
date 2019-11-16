@@ -121,7 +121,10 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
 
     def form_valid(self, form):
         message = {'text':'Client with uuid: '+self.uuid+' has made a preorder. Congratulation!'}
-        send_mail('Preorder made', 'admin', message, 'Admin', 'correspondence')
+        err = send_mail('Preorder made', 'admin', message, 'Admin', 'correspondence')
+        if err:
+            Clients.objects.filter(uuid=self.uuid).update(error_mailing=str(err)[1:-2])
+        # finalize this script later
         return HttpResponseRedirect(reverse('clients:action', args=('success', self.uuid,)))
 
     def form_invalid(self, form):

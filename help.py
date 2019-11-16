@@ -77,6 +77,11 @@
    if Please move or remove them before you merge, make:
    $ git clean -d -f
 
+   # remove folder from git
+   git rm -r --cached FolderName
+   git commit -m "Removed folder from repository"
+   git push origin master
+
 3. Requirements:
    pip freeze > requirements.txt
    pip install -r requirements.txt

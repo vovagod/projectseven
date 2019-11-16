@@ -66,10 +66,15 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         subject = 'Business proposition'
         template = 'proposition'
         message = Promotion.objects.obj_contents(obj.category)
-        send_mail(subject, obj.email, message, obj.company, template)
-        messages.info(request, _("Send message to client"))
+        err = send_mail(subject, obj.email, message, obj.company, template)
+        if err:
+            messages.error(request, _('There was an error sending an email: '))
+            messages.add_message(request, messages.ERROR, str(err)[1:-2])
+        else:
+            Clients.objects.filter(uuid=obj.uuid).update(counter=obj.counter+1)
+            messages.info(request, _("Message was successfully sent to client"))
         return redirect(reverse_lazy('admin:clients_clients_change', args=[obj.uuid,]))
-
+    
     send_to_client.label = "Send message to client"  # optional
     send_to_client.short_description = "Submit message"  # optional
 

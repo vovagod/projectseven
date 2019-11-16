@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.http import Http404
 from django.template.loader import get_template
+from smtplib import SMTPException
 from clients.models import Clients
 
 
@@ -48,6 +49,10 @@ def send_mail(subject, to, message, guest, template):
 
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
     msg.attach_alternative(html_content, "text/html")
-    msg.send()
-    return
+    err = None
+    try:
+        msg.send()
+    except SMTPException as e:
+        err = e
+    return err
 

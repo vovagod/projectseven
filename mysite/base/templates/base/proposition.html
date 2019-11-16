@@ -13,7 +13,8 @@
      <h3 id='title'>{{value.title}}</h3>
         <p>{% filter linebreaksbr %}{{value.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
         <a href="{{url}}" title='Посетить сайт' target="_blank">
-            <img id='img' src="{{value.image.url}}" title="{{value.title}}" style="width:100%"></a>
+            <img id='img' {% if debug %} src="{{value.image.url}}" {% else %} src="{{url}}{{value.image.url}}" {% endif %}
+                 title="{{value.title}}" style="width:100%"></a>
           {% endfor %}
           {% endif %}
     
@@ -24,7 +25,8 @@
         <p>{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
         {% if image.image %}
         <a href="{{url}}/home/#specification" title='Посетить сайт' target="_blank">
-            <img id='img' src="{{image.image.url}}" title="{{image.title}}" style="width:100%"></a>
+            <img id='img' {% if debug %} src="{{image.image.url}}" {% else %} src="{{url}}{{image.image.url}}" {% endif %} 
+                 title="{{image.title}}" style="width:100%"></a>
         {% endif %}
           {% endfor %}
           {% endfor %}
