@@ -40,8 +40,9 @@ class Clients(models.Model):
                                       verbose_name=_('Категория'), help_text=_("Выберете категорию деятельности"))
     persons        = models.CharField(max_length=120, blank=True, verbose_name=_('Лица компании'))
     created        = models.DateTimeField(auto_now_add=True, verbose_name=_('Создана'))
-    enable_mailing = models.BooleanField(default=True, verbose_name=_('Разрешить рассылку'))
-    interested     = models.BooleanField(default=False, verbose_name=_('Клиент заинтересован'))
+    enable_mailing = models.BooleanField(default=True, verbose_name=_('Рассылка'))
+    interested     = models.BooleanField(default=False, verbose_name=_('Интерес'))
+    preorder       = models.BooleanField(default=False, verbose_name=_('Предзаказ'))
     counter        = models.PositiveSmallIntegerField(default=0, verbose_name=_('Счетчик  отправок'),
                                                       help_text=_("Количество оправленных писем"))
     error_mailing  = models.CharField(max_length=360, blank=True, default='Ошибок нет',

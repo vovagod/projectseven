@@ -125,6 +125,7 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
         if err:
             Clients.objects.filter(uuid=self.uuid).update(error_mailing=str(err)[1:-2])
         # finalize this script later
+        Clients.objects.filter(uuid=self.uuid).update(preorder=True)
         return HttpResponseRedirect(reverse('clients:action', args=('success', self.uuid,)))
 
     def form_invalid(self, form):

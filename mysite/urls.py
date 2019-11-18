@@ -18,18 +18,23 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from mysite.base.views import baseviewreverse, emailview  #urlmapper
+from mysite.base.views import BaseRedirectView, BaseView, emailview, baseviewreverse
 from promotion.views import promotionview
 from clients.views import download
 
+app_name = 'mysite.base'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', include('mysite.base.urls'), name='base'),
-    path('', baseviewreverse),
+    path('home/', include('mysite.base.urls'), name='mysite-home'),
+    #path('', baseviewreverse),
+    path('', include('mysite.base.urls'), name='mysite-index'),
+
+    path('home', BaseView.as_view(), name='mysite-base'),
+    
     path('email', emailview),  # test view
     path('promotion/<email>', promotionview),  # test view
-    path('email/', include('clients.urls'), name='clients'),
+    path('email/', include('clients.urls'), name='mysite-clients'),
     path('uploads/<folder>/<file>', download),
 ]
 

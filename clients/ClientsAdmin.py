@@ -16,7 +16,7 @@ from mail.sendmail import send_mail
 
 
 class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
-    list_display = ['company', 'category', 'email', 'phone', 'enable_mailing',]
+    list_display = ['company', 'category', 'email', 'phone', 'enable_mailing', 'interested', 'preorder',]
 
     search_fields = ('company', 'category',)
 
@@ -41,7 +41,7 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         (_('Description'), {
             'fields': (
                 'about',
-                ('created', 'enable_mailing', 'interested', 'flag'),
+                ('created', 'enable_mailing', 'interested', 'preorder', 'flag'),
             ),
         }),
         (_('Actions'), {

@@ -38,5 +38,49 @@ def CycleOne(self):
 
     end = time.time()
     res = end - start
-    print("CYCLE_ONE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    #print("CYCLE_ONE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    return res
+
+
+# Smat Home scheduler
+def CycleTwo(self):
+    start = time.time()
+    
+
+    end = time.time()
+    res = end - start
+    #print("CYCLE_TWO, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    return res
+
+
+# IoT scheduler
+def CycleThree(self):
+    start = time.time()
+    
+
+    end = time.time()
+    res = end - start
+    #print("CYCLE_THREE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    return res
+
+
+# Facebook scheduler
+def CycleFour(self):
+    start = time.time()
+    
+
+    end = time.time()
+    res = end - start
+    #print("CYCLE_FOUR, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    return res
+
+
+# Mathematics scheduler
+def CycleFive(self):
+    start = time.time()
+    
+
+    end = time.time()
+    res = end - start
+    #print("CYCLE_FIVE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
     return res

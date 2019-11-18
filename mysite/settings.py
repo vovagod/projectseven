@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*',]
@@ -151,7 +151,11 @@ CATEGORIES = (
 
 
 # Tick interval(must be 3600)
-SURVEY_TIME = 3600
+SURVEY_TIME_ONE = 3600
+SURVEY_TIME_TWO = 30
+SURVEY_TIME_THREE = 40
+SURVEY_TIME_FOUR = 50
+SURVEY_TIME_FIVE = 60
 
 
 # Valid extensions list

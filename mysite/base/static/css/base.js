@@ -5,6 +5,31 @@ var top_height;
 var scrollPast;
 var AppSizes = [0,0]; // heigh1, heigh2
 
+var hr = window.location.href;
+console.log('HREF:'+hr);
+var host = window.location.hostname;
+console.log('HOST:'+host);
+var path = window.location.pathname;
+console.log('PATH:'+path);
+
+var n =  path.toString().search("/home/");
+console.log('N:'+n);
+
+var dect = path.slice(6,);
+console.log('DECT:'+dect);
+
+var anc =  path.toString().search("#");
+console.log('ANC:'+anc);
+
+var itHref = path.toString().split('/'); //.slice(-2);
+console.log('ITHREF:'+itHref);
+      if (itHref == "contact"){ 
+          window.location = '#'+itHref;
+          //return; 
+      }
+ window.location = '#';
+
+
 // Modal Image Gallery
 function onClick(element) {
   document.getElementById("img01").src = element.src;
