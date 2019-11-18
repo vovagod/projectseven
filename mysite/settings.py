@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*',]
@@ -64,6 +64,7 @@ MIDDLEWARE = [
 ]
 
 
+#APPEND_SLASH = True
 ROOT_URLCONF = 'mysite.urls'
 
 
@@ -102,6 +103,13 @@ DATABASES = {
     }
 }
 
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

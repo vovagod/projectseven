@@ -1,4 +1,3 @@
-#import glob
 import pathlib
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView

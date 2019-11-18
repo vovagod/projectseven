@@ -24,7 +24,7 @@
      <h3 id='title'>{{image.title}}</h3>
         <p>{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
         {% if image.image %}
-        <a href="{{url}}/home/#specification" title='Посетить сайт' target="_blank">
+        <a href="{{url}}/home/specification" title='Посетить сайт' target="_blank">
             <img id='img' {% if debug %} src="{{image.image.url}}" {% else %} src="{{url}}{{image.image.url}}" {% endif %} 
                  title="{{image.title}}" style="width:100%"></a>
         {% endif %}

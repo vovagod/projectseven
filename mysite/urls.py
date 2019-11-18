@@ -15,23 +15,19 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, re_path, include
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from mysite.base.views import BaseRedirectView, BaseView, emailview, baseviewreverse
+from mysite.base.views import BaseRedirectView, emailview
 from promotion.views import promotionview
 from clients.views import download
 
-app_name = 'mysite.base'
+app_name = 'mysite'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('mysite.base.urls'), name='mysite-home'),
-    #path('', baseviewreverse),
-    path('', include('mysite.base.urls'), name='mysite-index'),
-
-    path('home', BaseView.as_view(), name='mysite-base'),
-    
+    path('', BaseRedirectView.as_view(), name='mysite-index'),
     path('email', emailview),  # test view
     path('promotion/<email>', promotionview),  # test view
     path('email/', include('clients.urls'), name='mysite-clients'),

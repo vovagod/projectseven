@@ -8,13 +8,7 @@
       <form method='POST' enctype="multipart/form-data" style="padding-top:16px">
       {% csrf_token %}
   
-        
-        <!--<div class="loop10" style="padding: 0px 0px 16px 50px; color:#373538">
-            <span>&#9899; Звоните нам: +7 985 482-85-88</span><br>
-            <span>&#9899; Пишите нам по вопросам сотрудничества, техническим, запросу пароля на <a href="http://comaex.ddns.net" style="color:red; cursor: pointer" target="_blank">Comaex Demo</a> и другим:</span>
-        </div>-->
-          
-          <p>{{introduction}}</p><br>
+       <p>{{introduction}}</p><br>
         
        {% for field in form %}
              {{ field.errors }}
