@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from django.urls import reverse 
+from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.base import RedirectView
 from django.views.generic.edit import FormView
@@ -47,6 +47,7 @@ class BaseRedirectView(RedirectView):
 class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
    
     form_class = ContactForm
+    success_url = '/home/success/'
     template_name = 'base/home.html'
     model = Base
     
@@ -69,7 +70,7 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
     def form_valid(self, form):
         message, self.success_message = theme_search(form.cleaned_data['content'])
         form.send_email(message)
-        return HttpResponseRedirect(reverse('base:success'))
+        return super(BaseView, self).form_valid(form)
     
 
     

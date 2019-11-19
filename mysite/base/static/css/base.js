@@ -473,6 +473,3 @@ else{
     window.scrollTo(0, coordY-top_height);
 }
 }
-
-
-
