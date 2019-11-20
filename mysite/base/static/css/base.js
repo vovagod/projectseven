@@ -463,7 +463,10 @@ document.addEventListener('readystatechange', event => {
 
 // Scroll to ancor part 
 function part(){
+    
+var x = document.getElementsByTagName("li"); 
 var part = document.getElementById("part").getAttribute('data-attr');
+    
 if (part == 'None'){
     window.location = '#';
 }
@@ -472,4 +475,10 @@ else{
     let coordY = document.getElementById(part).getBoundingClientRect().top + window.pageYOffset;
     window.scrollTo(0, coordY-top_height);
 }
+    if (x[0] === undefined){
+        return;
+    }
+    if (x[0].firstChild){
+       window.location = '#contact';
+    }
 }
