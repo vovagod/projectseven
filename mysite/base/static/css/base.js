@@ -246,7 +246,7 @@ var x = document.getElementsByClassName("loop3");
 var z = document.getElementsByClassName("loop4");   
         var sz = [16, 14, 7];
         var cl = 'green';  // unused
-        var tp = [55, 50, 40]; 
+        var tp = [60, 55, 50]; 
         var lf = 5;       
          sizeCount(w, z, sz, undef, tp, lf, un, un, lh);
         
@@ -385,11 +385,23 @@ function showDivs(n) {
 }
 
 
+//const inputs = [].slice.call(document.querySelectorAll('input'))
+//inputs.forEach(function(item) {
+ //   item.addEventListener('click', function(e) {
+  //      console.log('INPUT_CLICK:'+e);
+    //     e.preventDefault();
+    //});
+//});
+                          
+
 // Scrolling down
-const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]'))
+//const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]'))
+const anchors = [].slice.call(document.querySelectorAll('a.menu'))
 anchors.forEach(function(item) {
+    console.log('ANCHORS'+item);
   item.addEventListener('click', function(e) {
-    e.preventDefault();
+      console.log('CLICK_ANCHORS'+e);
+      e.preventDefault();
       var itemHref = item.toString().split('/').slice(-1);
       if (itemHref == "#"){ 
           window.location = itemHref;
@@ -463,7 +475,7 @@ document.addEventListener('readystatechange', event => {
 
 // Scroll to ancor part 
 function part(){
-    
+    console.log('PART:');
 var x = document.getElementsByTagName("li"); 
 var part = document.getElementById("part").getAttribute('data-attr');
     
