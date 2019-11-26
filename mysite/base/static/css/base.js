@@ -333,7 +333,7 @@ if (h > w){
 } else {
     appResize(x, AppSizes[1]);
 }
-    part();
+  // part();
 }
 
 
@@ -392,19 +392,26 @@ function showDivs(n) {
     //     e.preventDefault();
     //});
 //});
+
+const button = document.querySelector('button');
+button.addEventListener('touch', function(e) {
+        console.log('BUTTON_CLICK:'+e);
+         e.preventDefault();
+    });
                           
 
 // Scrolling down
-//const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]'))
-const anchors = [].slice.call(document.querySelectorAll('a.menu'))
+const anchors = [].slice.call(document.querySelectorAll('a[href*="#"]'))
+//const anchors = [].slice.call(document.querySelectorAll('a.menu'))
 anchors.forEach(function(item) {
-    console.log('ANCHORS'+item);
+ //   console.log('ANCHORS'+item);
   item.addEventListener('click', function(e) {
-      console.log('CLICK_ANCHORS'+e);
+    //  console.log('CLICK_ANCHORS'+e);
       e.preventDefault();
       var itemHref = item.toString().split('/').slice(-1);
       if (itemHref == "#"){ 
-          window.location = itemHref;
+          //window.location = itemHref;
+          document.getElementById("headerShow").scrollIntoView(); 
           return; 
       }
     let coordY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top + window.pageYOffset;
@@ -418,6 +425,7 @@ anchors.forEach(function(item) {
       } else {
            clearInterval(scroller);
            window.location = itemHref;
+           //document.getElementById(itemHref).scrollIntoView(); 
            window.scrollTo(0, coordY-top_height);
       }
     }, 0.1); 
@@ -467,6 +475,7 @@ document.addEventListener('readystatechange', event => {
   else if (event.target.readyState === 'complete') {
     resSize();
       showDivs(1);
+      part();
       document.getElementById("headerSpin").style.display = 'none';
       el.style.display = 'block';
       //SliderStart();
@@ -475,15 +484,20 @@ document.addEventListener('readystatechange', event => {
 
 // Scroll to ancor part 
 function part(){
-    console.log('PART:');
+//var contact = document.getElementById("contact");
+//var headerShow = document.getElementById("headerShow");
 var x = document.getElementsByTagName("li"); 
 var part = document.getElementById("part").getAttribute('data-attr');
     
 if (part == 'None'){
-    window.location = '#';
+    //window.location = '#';
+    document.getElementById("headerShow").scrollIntoView(); 
 }
 else{
+   // var partPage = document.getElementById(part);
+    document.getElementById(part).scrollIntoView(); 
     window.location = '#'+part;
+    console.log('Scroll:'+part);
     let coordY = document.getElementById(part).getBoundingClientRect().top + window.pageYOffset;
     window.scrollTo(0, coordY-top_height);
 }
@@ -491,6 +505,8 @@ else{
         return;
     }
     if (x[0].firstChild){
-       window.location = '#contact';
+       document.getElementById("contact").scrollIntoView(); 
+       //window.location = '#contact';
     }
 }
+//part();
