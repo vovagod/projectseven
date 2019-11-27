@@ -40,7 +40,7 @@ class BaseRedirectView(RedirectView):
     url = '/home/'
 
     def get_redirect_url(self, *args, **kwargs):
-        cache.set('part', kwargs.get('part'), 3)
+        cache.set('part', kwargs.get('part'), 9)
         return super(BaseRedirectView, self).get_redirect_url(*args, **kwargs)
 
 

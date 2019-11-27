@@ -1,0 +1,11 @@
+{% extends "base/alert.html" %}
+
+{% block core %}
+
+<td><br><h3>Дорогой, {{object.company}}</h3>
+    <h3>{{action}}</h3><br>
+    <button type="button" class="close"
+        onclick="javascript:window.close('','_parent','');" title="Закрыть окно">Закрыть</button>
+      </td>
+
+{% endblock core %}

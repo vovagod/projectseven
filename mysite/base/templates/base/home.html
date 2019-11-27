@@ -261,8 +261,7 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
             <span>- Пишите нам по вопросам сотрудничества, техническим, запросу пароля на <a href="http://comaex.ddns.net" style="color:red; cursor: pointer" target="_blank">Comaex Demo</a> и другим:</span>
         </div>
 
-  <form method="POST">
-    {% csrf_token %}
+  <form action="" method="post"> {% csrf_token %}
      <div class="container">
        {% for field in form %}
         <div class="w3-row w3-section">

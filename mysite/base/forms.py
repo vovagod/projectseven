@@ -57,8 +57,8 @@ class ContactForm(forms.Form):
                           ipaddr=ipaddr or 'Unable to get IP address',
                           subject=list(subject.keys())[0],
                           )
-        message.save()
-        return cleaned_data
+        message.save(force_insert=True)
+        return self.cleaned_data
    
 
     def send_email(self, message):

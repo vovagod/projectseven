@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -65,6 +66,7 @@ MIDDLEWARE = [
 
 
 #APPEND_SLASH = True
+MANAGERS = ['chim73@mail.ru',]
 ROOT_URLCONF = 'mysite.urls'
 
 
@@ -177,7 +179,7 @@ INTRODUCTION = ("<p>&ensp;Пожалуйста заполните поля фо�
       "Прикрепите в том же поле файл(ы) с мнемосхемами устройств в удобной для вас форме. "
       "На основании полученной информации, мы создадим рабочие мнемосхемы и вместе с переменными "
       "введем эти данные в сервер и пришлем вам ссылку на реальное рабочее приложение вашего заказа. "
-      "После останется только установить сервер на объекте и запустить его в работу.</p>"
+      "После вам останется только установить сервер на объекте и запустить его в работу.</p>"
      )
 
 
@@ -200,13 +202,13 @@ LOGO_IMAGE = os.path.join(BASE_DIR, 'static', 'media/logo.jpg')
 
 
 # email template settings
-PATH = 'http://'+DOMAIN+'/static/media/'
+PATH = 'https://'+DOMAIN+'/static/media/'
 if DEBUG:
     PATH = '/media/'
     MEDIA_URL = '/media/'
     DOMAIN = '127.0.0.1:8000'
 MSG = {'letter':PATH+'letter.png',
-        'url':'http://'+DOMAIN,
+        'url':'https://'+DOMAIN,
         'logo': PATH+'logo.png',
         'website':PATH+'website.png',
         'phone':PATH+'phone.png',

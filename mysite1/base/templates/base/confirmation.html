@@ -1,0 +1,15 @@
+{% extends "base/email.html" %}
+
+{% block core %}
+
+<td><h4>Дорогой, {{guest}}</h4>
+          {% for key, value in content.items %}
+          <p>&emsp;Спасибо за интерес к нашей технологии. {{value}}</p>
+          {% if key == 'credentials' %}
+          <p>Перейти на страницу входа <a href="{{comaex_demo}}" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>
+          {% endif %}
+          {% endfor %}
+          <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
+      </td>
+
+{% endblock core %}
