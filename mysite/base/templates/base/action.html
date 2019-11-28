@@ -2,10 +2,11 @@
 
 {% block core %}
 
-<td><br><h3>Дорогой, {{object.company}}</h3>
+<td><br><h3>{% trans Дорогой, %} {{object.company}}</h3>
     <h3>{{action}}</h3><br>
     <button type="button" class="close"
-        onclick="javascript:window.close('','_parent','');" title="Закрыть окно">Закрыть</button>
+        onclick="javascript:window.close('','_parent','');" title="{% trans Закрыть окно %}">{% trans Закрыть %}</button>
+    <p>{% trans Или закройте страницу %}</p>
       </td>
 
 {% endblock core %}

@@ -5,7 +5,7 @@
 <td>
     <div class="container">
     <h3>Форма предзаказа</h3>
-        <span style="text-align: justify">{{introduction}}</span><br>
+        {{introduction}}<br>
         
     <form method='POST' enctype="multipart/form-data" style="padding-top:16px">
       {% csrf_token %}
@@ -22,7 +22,8 @@
                {% endfor %}
             </ul>
           {% endif %}
-          
+        
+          {{asterisk}}
         <input type="submit" value="Отправить"><br>  
    </form>
         

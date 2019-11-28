@@ -465,7 +465,7 @@ document.addEventListener('readystatechange', event => {
 
 // Scroll to ancor part 
 function part(){
-var x = document.getElementsByTagName("li"); 
+var x = document.getElementsByClassName("errorlist"); 
 var part = document.getElementById("part").getAttribute('data-attr');
     
 if (part == 'None'){
@@ -479,7 +479,7 @@ else{
     if (x[0] === undefined){
         return;
     }
-    if (x[0].firstChild){
+    if (x[0].children[0]){
        document.getElementById("success").scrollIntoView(); 
     }
 }

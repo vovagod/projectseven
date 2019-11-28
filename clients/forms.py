@@ -9,16 +9,16 @@ app_name = 'clients'
 
 class PreorderForm(forms.Form):
     
-    company = forms.CharField(label=_("Имя компании (измените, если не соответствует)"),
+    company = forms.CharField(label=_("Имя компании * "),
                               widget=forms.TextInput(attrs={"required":True}))
     persons = forms.CharField(label="Контактное лицо", widget=forms.TextInput(attrs={"placeholder": _("Иванов Иван"),
                                                                                      "required":True}))
     address = forms.CharField(label="Адрес компании", widget=forms.TextInput(attrs={"placeholder": _("Москва, ул.Абвгдейка, 123"),
                                                                                     "required":True}))
-    email2  = forms.EmailField(label=_("Эл.почта (измените, если не соответствует)"),
+    email2  = forms.EmailField(label=_("Эл.почта * "),
                                widget=forms.TextInput(attrs={"required":True}),
                                validators=[validate_email])
-    phone   = forms.CharField(label=_("Телефон (измените, если не соответствует)"),
+    phone   = forms.CharField(label=_("Телефон * "),
                               widget=forms.TextInput(attrs={"required":True}))
     file    = forms.FileField(label=_("Выберете файлы в формате pdf, doc, docx, jpg, png, xlsx, xls"),
                               widget=forms.ClearableFileInput(attrs={'multiple': True, "required":True}))

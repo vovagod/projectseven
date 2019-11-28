@@ -116,6 +116,7 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
     def get_context_data(self, *args, **kwargs):
         context = super(ClientsPreorderView, self).get_context_data(*args, **kwargs)
         context['introduction'] = mark_safe(settings.INTRODUCTION)
+        context['asterisk'] = mark_safe(settings.ASTERISK)
         return get_common_context(context)
 
     def form_valid(self, form):
