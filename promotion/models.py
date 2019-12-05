@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.conf import settings
 from django.utils.translation import ugettext as _
+from django.http import Http404
 from collections import OrderedDict
 from markdown import markdown
 
@@ -28,7 +29,11 @@ class PromotionManager(models.Manager):
     
     def obj_contents(self, category):
         obj = [(dict(promotion=b), dict(image=b.images.all())) for b in Promotion.objects.filter(category=category)]
-        return obj[0] 
+        try:
+            obj[0]
+        except IndexError:
+            return None
+        return obj[0]
 
 
 class Promotion(models.Model):

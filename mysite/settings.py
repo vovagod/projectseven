@@ -146,27 +146,47 @@ EMAIL_PORT = 587
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = True
-USE_TZ = True
+USE_L10N = False
+USE_TZ = False
+
+
+# DateTime format
+DATETIME_FORMAT = 'd-m-Y H:i' 
 
 
 # User settings
 CATEGORIES = (
-    ('HVAC', 'HVAC'),
-    ('Smart Home', 'Smart Home'),
-    ('IoT', 'IoT'),
-    ('Facebook', 'Facebook'),
-    ('Mathematics', 'Mathematics'),
+    ('HVAC', 'HVAC'), #[0][0]
+    ('Smart Home', 'Smart Home'), #[1][0]
+    ('IoT', 'IoT'), #[2][0]
+    ('Facebook', 'Facebook'), #[3][0]
+    ('Mathematics', 'Mathematics'), #[4][0]
+    ('SFUGD', 'SFUGD'), #[5][0]
     )
 
 
-# Tick interval(must be 3600)
-SURVEY_TIME_ONE = 3600
-SURVEY_TIME_TWO = 30
-SURVEY_TIME_THREE = 40
-SURVEY_TIME_FOUR = 50
-SURVEY_TIME_FIVE = 60
+# Scheduler settings
+SUBJECT_ONE = 'Business proposition'
+SUBJECT_TWO = 'Business proposition'
+SUBJECT_THREE = 'Business proposition'
+SUBJECT_FOUR = 'Business proposition'
+SUBJECT_FIVE = 'Business proposition'
+SUBJECT_SIX = 'Business proposition'
+TEMPLATE_ONE = 'proposition'
+TEMPLATE_TWO = 'proposition'
+TEMPLATE_THREE = 'proposition'
+TEMPLATE_FOUR = 'proposition'
+TEMPLATE_FIVE = 'proposition'
+TEMPLATE_SIX = 'proposition' 
 
+
+# Tick interval(must be 3600 sec)
+SURVEY_TIME_ONE = 36
+SURVEY_TIME_TWO = 10
+SURVEY_TIME_THREE = 20
+SURVEY_TIME_FOUR = 30
+SURVEY_TIME_FIVE = 40 
+SURVEY_TIME_SIX = 50 
 
 # Valid extensions list
 VALID_EXTENSIONS = ['pdf', 'doc', 'docx', 'jpg', 'png', 'xlsx', 'xls']
@@ -184,12 +204,18 @@ INTRODUCTION = _("<p style='text-align:justify'>&ensp;Пожалуйста за�
 ASTERISK = _("<p style='font-size: 14px; color:gray'>*измените, если не соответствует</p>")
 
 
-# Email template footer content
+# Comaex email template content
 PHONE = '+7(985)482-85-88'
 EMAIL_ADDRESS = 'comaex.info@yandex.ru'
 COMAEX_DEMO = 'http://comaex.ddns.net'
 ADDRESS = _('Москва, Сиреневый бульвар 32')
 FOOTER_TITLE = _('Супервизор-сервера Comaex')
+
+
+# SFUGD email template content
+SFUGD_DOMAIN = 'www.fold-up-door.com'
+SFUGD_SITE = 'http://www.fold-up-door.com'
+SFUGD_TITLE = _('Компактные ворота SFUGD')
 
 
 # Static files (CSS, JavaScript, Images)
@@ -208,6 +234,7 @@ if DEBUG:
     PATH = '/media/'
     MEDIA_URL = '/media/'
     DOMAIN = '127.0.0.1:8000'
+# Comaex email template data
 MSG = {'letter':PATH+'letter.png',
         'url':'https://'+DOMAIN,
         'logo': PATH+'logo.png',
@@ -221,5 +248,24 @@ MSG = {'letter':PATH+'letter.png',
         'domain':DOMAIN,
         'addr':ADDRESS,
         'title':FOOTER_TITLE,
-        'debug':DEBUG
+        'debug':DEBUG,
+        'name': 'Comaex',
+        'alt': 'Comaex server',
+        'heading': _('Предложение сотрудничества'),
+        'unsub':_('Отписаться'),
+        'inter':_('Интересно'),
+        'preord':_('Предзаказ'),
         }
+
+# SFUGD email template data
+SFUGD = {'url':'http://'+SFUGD_DOMAIN,
+        'logo': PATH+'sfugd.png',
+        'comaex_demo':COMAEX_DEMO,
+        'domain':SFUGD_DOMAIN,
+        'title':SFUGD_TITLE,
+        'name': 'SFUGD',
+        'alt': 'Compact door',
+        'heading': _('Компактные ворота. Патент США 8327908'),
+        'preord':_('Контакт'),
+        }
+

@@ -256,9 +256,8 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
     
  <div id="contact" class="w3-container w3-card-4 w3-section w3-white w3-text-blue" style="padding-top:16px">
       <p class="loop8 w3-center">Контакты</p>
-        <div class="loop10" style="padding: 0px 0px 16px 50px; color:#373538">
-            <span>- Звоните нам: +7 985 482-85-88</span><br>
-            <span>- Пишите нам по вопросам сотрудничества, техническим, запросу пароля на <a href="http://comaex.ddns.net" style="color:red; cursor: pointer" target="_blank">Comaex Demo</a> и другим:</span>
+        <div class="loop10" style="padding: 0px 0px 0px 30px; color:#373538">
+            <ul><li>{% trans "Звоните нам: +7 985 482-85-88" %}</li><li>{% trans "Пишите нам по вопросам сотрудничества, техническим, запросу пароля на " %}<a href="http://comaex.ddns.net" style="color:red; cursor: pointer" target="_blank">Comaex Demo</a>{% trans " и другим:" %}</li></ul>
         </div>
 
   <form action="" method="post"> {% csrf_token %}

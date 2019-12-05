@@ -1,3 +1,4 @@
+{% load i18n %}
 <html>
 <head>
 <meta charset="UTF-8">
@@ -125,11 +126,11 @@ td, th {
      <col width="130px" />
     <!-- HEADER -->
   <tr id='header'>
-    <th style='text-align: left'><a href="{{url}}" title='Посетить сайт' target="_blank"><img src="{{logo}}" alt="Comaex server"></a></th>
-      <th style='text-align: right'><img src="{{letter}}" alt="Comaex server"></th>
-      <th style='font-size: 12px'>Служба сообщений
+    <th style='text-align: left'><a href="{{url}}" title="{% trans 'Посетить сайт' %}" target="_blank"><img src="{{logo}}" alt="{{alt}}"></a></th>
+      <th style='text-align: right'><img src="{{letter}}" alt="{{alt}}"></th>
+      <th style='font-size: 12px'>{% trans "Служба сообщений" %}
           <span>&bull;</span>
-          <span>Comaex</span>
+          <span>{{name}}</span>
           <span>&bull;</span>
       </th>
   </tr>
@@ -144,6 +145,7 @@ td, th {
 
     </tr>
     <!-- BULLS -->
+    {% if name == 'Comaex' %}
   <tr id='bulls'>
     <td style='width:50%'>
         <span style='color:green'>&bull;</span>
@@ -151,6 +153,7 @@ td, th {
         <span style='color:red'>&bull;</span>
       </td>
   </tr>
+    {% endif %}
     <!-- FOOTER -->
   <tr id='footer'>
       <td style='font-size: 12px'>

@@ -78,5 +78,10 @@ class Clients(models.Model):
     # get errors when mailing
     def get_errors(self):
         return self.error_mailing
+
+
+    # get date of creation
+    def get_date(self):
+        return self.created.strftime("%d %B %Y")
     
 

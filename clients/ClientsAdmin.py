@@ -21,7 +21,7 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
     search_fields = ('company', 'category',)
 
     readonly_fields = (
-        'created',
+        'company_created',
         'uuid',
         'theme_of_mailing',
         'downloaded_files',
@@ -41,7 +41,7 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         (_('Description'), {
             'fields': (
                 'about',
-                ('created', 'enable_mailing', 'interested', 'preorder', 'flag'),
+                ('company_created', 'enable_mailing', 'interested', 'preorder', 'flag'),
             ),
         }),
         (_('Actions'), {
@@ -80,6 +80,12 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
 
     change_actions = ('send_to_client', )
 
+
+    def company_created(self, instance):
+        return format_html("<b>{}</b>",
+                           '{}'.format(instance.get_date())
+                           )
+    
 
     def theme_of_mailing(self, instance):
         return format_html("<b>{}</b>",

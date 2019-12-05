@@ -4,7 +4,7 @@
 
 <td>
     <div id=main>
-    <h3>Предложение сотрудничества</h3>
+    <h3>{{heading}}</h3>
      
           {% for key in content %}
             
@@ -36,9 +36,10 @@
     
          <br>
            
-    <a href="{{url}}/email/unsubscribe/{{unsubscribe}}" class="btn danger" title="отписаться от рассылки" target="_blank">Отписаться</a>
-           <a href="{{url}}/email/interested/{{interested}}" class="btn success" title="оценить идею" target="_blank">Интересно</a>
-           <a href="{{url}}/email/preorder/{{preorder}}" class="btn order" title="сделать предзаказ" target="_blank">Предзаказ</a>
+    <a href="{{url}}/email/unsubscribe/{{unsubscribe}}" class="btn danger" title="отписаться от рассылки" target="_blank">{{unsub}}</a>
+           <a href="{{url}}/email/interested/{{interested}}" class="btn success" title="оценить идею" target="_blank">{{inter}}</a>
+           <a href="{{url}}/email/preorder/{{preorder}}" class="btn order" title="сделать предзаказ" target="_blank">{{preord}}</a>
+         
     </div>
 </td>
 

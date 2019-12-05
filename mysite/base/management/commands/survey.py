@@ -8,7 +8,7 @@ import multiprocessing
 from multiprocessing import Process, Pool, Lock, Event, TimeoutError
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
-from mysite.base.tasks import CycleOne, CycleTwo, CycleThree, CycleFour, CycleFive
+from mysite.base.tasks import CycleOne, CycleTwo, CycleThree, CycleFour, CycleFive, CycleSix
                         
 
 #logger = logging.getLogger('base.survey')
@@ -96,6 +96,21 @@ class SurveyFive(Process):
         self.running = False
 
 
+class SurveySix(Process):
+    def __init__(self):
+        Process.__init__(self)
+        self.lock = Lock()
+        self.running = True
+
+    def run(self):
+        while self.running:
+            CycleSix(self)
+            time.sleep (settings.SURVEY_TIME_SIX)
+        
+    def stop(self):
+        self.running = False
+
+
 class Command(BaseCommand):
     help = 'Cycle running script'
 
@@ -112,12 +127,14 @@ class Command(BaseCommand):
             c = SurveyThree()
             d = SurveyFour()
             e = SurveyFive()
+            f = SurveySix()
             a.start()
             b.start()
             c.start()
             d.start()
             e.start()
-            e.join()
+            f.start()
+            f.join()
         except KeyboardInterrupt:
             print('SURVEY script KeyboardInterrupt action...')
             a.terminate()
@@ -125,6 +142,7 @@ class Command(BaseCommand):
             c.terminate()
             d.terminate()
             e.terminate()
+            f.terminate()
             pass
 
 
