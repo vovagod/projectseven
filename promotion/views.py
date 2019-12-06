@@ -30,8 +30,13 @@ def promotionview(request, email=None, category=None):
         raise Http404("Client with this email does not exist")
     msg = {}
     msg.update(settings.MSG)
-    if category == 'SFUGD':
-        msg.update(settings.SFUGD)
+    
+    #if category == 'SFUGD':
+        #msg.update(settings.SFUGD)
+    
+    if hasattr(settings, category):
+        msg.update(getattr(settings, category))
+        
     msg.update({'guest':_('Гость'),
                 'content':Promotion.objects.obj_contents(category),
                 'unsubscribe': client,

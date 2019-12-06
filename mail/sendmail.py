@@ -11,15 +11,15 @@ from clients.models import Clients
 
 def theme_search(data):
     data_list = data.split(' ')
-    credentials = [_('логин'), _('пароль'), _('вход'), _('данные'), _('входа')]
-    callme = [_('заинтересовала'), _('позвоните'), _('позвони'), _('позвонить'), _('интересно'), _('свяжитесь')]
-    success = _("Ваш запрос успешно отправлен!")
-    message = {'common':_('Мы получили ваше сообщение и свяжемся с вами в ближайшее время.'),}
+    credentials = settings.CREDENTIALS
+    callme = settings.CALLME
+    success = settings.SUCCESS
+    message = settings.MESSAGE_COMMON
     if any(n in data_list for n in credentials):
-        message = {'credentials':_('Для входа используйте логин: user, пароль: user12345.'),}
-        success = _("Данные для входа отправлены вам на почту.")
+        message = settings.MESSAGE_CREDENTIALS
+        success = settings.MESSAGE_SUCCESS
     if any(n in data_list for n in callme):
-        message = {'callme':_('Мы свяжемся свами в ближайший час.'),}
+        message = settings.CALLME
     return message, success
 
 
@@ -27,7 +27,8 @@ def send_mail(subject, to, message, guest, template):
     from_email = settings.FROM
     html_file = get_template('base/'+template+'.html')
     try:
-        client = Clients.objects.get_pk(to)
+        #client = Clients.objects.get_pk(to)
+        client = Clients.objects.get(email=to)
     except Clients.DoesNotExist:
         try:
             admin = User.objects.get(username=to)
@@ -36,13 +37,18 @@ def send_mail(subject, to, message, guest, template):
             client = None
         except User.DoesNotExist:
             raise Http404("Such user does not exist")
-    
-    msg = settings.MSG
+        
+    msg = {}
+    msg.update(settings.MSG)
+
+    if hasattr(settings, client.category):
+        msg.update(getattr(settings, client.category))
+        
     msg.update({'guest': guest,
                 'content': message,
-                'unsubscribe': client,
-                'interested': client,
-                'preorder': client,
+                'unsubscribe': client.uuid,
+                'interested': client.uuid,
+                'preorder': client.uuid,
                 })
     text_content = 'This is an important message'
     html_content = html_file.render(msg)

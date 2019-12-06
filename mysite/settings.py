@@ -65,8 +65,9 @@ MIDDLEWARE = [
 ]
 
 
-#APPEND_SLASH = True
+# Manager data
 MANAGERS = ['chim73@mail.ru',]
+
 ROOT_URLCONF = 'mysite.urls'
 
 
@@ -165,7 +166,7 @@ CATEGORIES = (
     )
 
 
-# Scheduler settings
+# Scheduler subjects and templates
 SUBJECT_ONE = 'Business proposition'
 SUBJECT_TWO = 'Business proposition'
 SUBJECT_THREE = 'Business proposition'
@@ -204,6 +205,16 @@ INTRODUCTION = _("<p style='text-align:justify'>&ensp;Пожалуйста за�
 ASTERISK = _("<p style='font-size: 14px; color:gray'>*измените, если не соответствует</p>")
 
 
+# Theme search phrases
+CREDENTIALS = [_('логин'), _('пароль'), _('вход'), _('данные'), _('входа')]
+CALLME = [_('заинтересовала'), _('позвоните'), _('позвони'), _('позвонить'), _('интересно'), _('свяжитесь')]
+SUCCESS = _("Ваш запрос успешно отправлен!")
+MESSAGE_COMMON = {'common':_('Мы получили ваше сообщение и свяжемся с вами в ближайшее время.'),}
+MESSAGE_CREDENTIALS = {'credentials':_('Для входа используйте логин: user, пароль: user12345.'),}
+MESSAGE_SUCCESS = _("Данные для входа отправлены вам на почту.")
+MESSAGE_CALLME = {'callme':_('Мы свяжемся свами в ближайший час.'),}
+
+
 # Comaex email template content
 PHONE = '+7(985)482-85-88'
 EMAIL_ADDRESS = 'comaex.info@yandex.ru'
@@ -228,13 +239,14 @@ RAW_IMAGE_ROOT = os.path.join(BASE_DIR, 'static', 'media/raw_image')
 LOGO_IMAGE = os.path.join(BASE_DIR, 'static', 'media/logo.jpg')
 
 
-# email template settings
+# Email template settings
 PATH = 'https://'+DOMAIN+'/static/media/'
 if DEBUG:
     PATH = '/media/'
     MEDIA_URL = '/media/'
     DOMAIN = '127.0.0.1:8000'
-# Comaex email template data
+    
+# Comaex (HVAC, IoT, Smart Home) email template data
 MSG = {'letter':PATH+'letter.png',
         'url':'https://'+DOMAIN,
         'logo': PATH+'logo.png',
