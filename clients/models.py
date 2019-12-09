@@ -27,38 +27,40 @@ class ClientsManager(models.Manager):
 
 class Clients(models.Model):
     uuid           = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, 
-                                      help_text=_("Номер UUID"))
-    company        = models.CharField(max_length=120, verbose_name=_('Имя компании'))
-    slug           = models.SlugField(unique=False, verbose_name=_('Слаг'), help_text=_("Слаг.."))
-    address        = models.CharField(max_length=240, blank=True, verbose_name=_('Адрес компании'))
-    email          = models.EmailField(max_length=120, unique=True,  verbose_name=_('Эл.почта'))
-    email2         = models.EmailField(max_length=120, blank=True, null=True, verbose_name=_('Эл.почта2'))
-    phone          = models.CharField(max_length=120, blank=True, verbose_name=_('Телефон'))
-    about          = models.TextField(max_length=500, blank=True, verbose_name=_('О компании'))
-    area           = models.CharField(max_length=120, blank=True, verbose_name=_('Сфера деятельности'))
+                                      help_text=_("UUID Number"))
+    company        = models.CharField(max_length=120, verbose_name=_('Company name'))
+    slug           = models.SlugField(unique=False, verbose_name=_('Slug'), help_text=_("Slug"))
+    address        = models.CharField(max_length=240, blank=True, verbose_name=_('Company address'))
+    email          = models.EmailField(max_length=120, unique=True,  verbose_name=_('Company email'))
+    email2         = models.EmailField(max_length=120, blank=True, null=True, verbose_name=_('Contact email'))
+    phone          = models.CharField(max_length=120, blank=True, verbose_name=_('Phone'))
+    about          = models.TextField(max_length=500, blank=True, verbose_name=_('About company'))
+    area           = models.CharField(max_length=120, blank=True, verbose_name=_('Field of activity'))
     category       = models.CharField(max_length=30, default='HVAC', choices=settings.CATEGORIES,
-                                      verbose_name=_('Категория'), help_text=_("Выберете категорию деятельности"))
-    persons        = models.CharField(max_length=120, blank=True, verbose_name=_('Лица компании'))
-    created        = models.DateTimeField(auto_now_add=True, verbose_name=_('Создана'))
-    enable_mailing = models.BooleanField(default=True, verbose_name=_('Рассылка'))
-    interested     = models.BooleanField(default=False, verbose_name=_('Интерес'))
-    preorder       = models.BooleanField(default=False, verbose_name=_('Предзаказ'))
-    counter        = models.PositiveSmallIntegerField(default=0, verbose_name=_('Счетчик  отправок'),
-                                                      help_text=_("Количество оправленных писем"))
-    error_mailing  = models.CharField(max_length=360, blank=True, default='Ошибок нет',
-                                      verbose_name=_('Отчет об ошибке отправки'))
+                                      verbose_name=_('Category'), help_text=_("Select category"))
+    language       = models.CharField(max_length=30, default='RU', choices=settings.LANG,
+                                      verbose_name=_('Language'), help_text=_("Select language"))
+    persons        = models.CharField(max_length=120, blank=True, verbose_name=_('Company persons'))
+    created        = models.DateTimeField(auto_now_add=True, verbose_name=_('Created'))
+    enable_mailing = models.BooleanField(default=True, verbose_name=_('Emailing'))
+    interested     = models.BooleanField(default=False, verbose_name=_('Interest'))
+    preorder       = models.BooleanField(default=False, verbose_name=_('Preorder'))
+    counter        = models.PositiveSmallIntegerField(default=0, verbose_name=_('Email counter'),
+                                                      help_text=_("Number of email sent"))
+    error_mailing  = models.CharField(max_length=360, blank=True, default='None',
+                                      verbose_name=_('Emailing report'))
     file           = models.FileField(upload_to=upload_image_path, blank=True, null=True,
-                                      verbose_name=_('Файл'), help_text=_("Файл данных клиента"))
-    filepath       = models.CharField(max_length=120, blank=True, verbose_name=_('Путь в папке загр.файлов'))
-    flag           = models.BooleanField(default=False, verbose_name=_('Флаг'))
+                                      verbose_name=_('File'), help_text=_("File from client"))
+    filepath       = models.CharField(max_length=120, blank=True, verbose_name=_('Path to downloaded files'))
+    flag           = models.BooleanField(default=False, verbose_name=_('Flag'))
 
     objects = ClientsManager()
 
 
     class Meta:
         app_label = 'clients'
-        verbose_name = _('Клиенты')
-        verbose_name_plural = _('Клиенты')
+        verbose_name = _('Clients')
+        verbose_name_plural = _('Clients')
 
 
     def __str__(self):

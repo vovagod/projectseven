@@ -29,7 +29,7 @@ urlpatterns = [
     path('home/', include('mysite.base.urls'), name='mysite-home'),
     path('', BaseRedirectView.as_view(), name='mysite-index'),
     path('email', emailview),  # test view
-    path('promotion/<email>/<category>', promotionview),  # test view
+    path('promotion/<email>/<category>/<lang>', promotionview),  # test view
     path('email/', include('clients.urls'), name='mysite-clients'),
     path('uploads/<folder>/<file>', download),
 ]

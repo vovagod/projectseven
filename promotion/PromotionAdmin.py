@@ -16,9 +16,9 @@ class ImageInline(admin.StackedInline):
     
 
 class PromotionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'category', 'title','timestamp' ]
-    fields = (('category', 'title'),
-              ('slug'),
+    list_display = ['id', 'category', 'language', 'title','timestamp' ]
+    fields = (('category', 'language'),
+              ('title', 'slug'),
               ('subtitle', 'sentence'),
               ('description'),
               ('urllink', 'flag'),
@@ -39,7 +39,6 @@ class PromotionAdmin(admin.ModelAdmin):
         for instance in instances:
             instance.desc_html = markdown(instance.description)
             instance.save()
-            print('SAVE_FORMSET:{}'.format(instance.desc_html))
         formset.save_m2m()
 
 

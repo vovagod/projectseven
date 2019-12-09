@@ -59,12 +59,12 @@ class ClientsActionView(DetailView):
             raise Http404("Client does not exist")
         if action == 'unsubscribe':
             Clients.objects.filter(uuid=uuid).update(enable_mailing=False)
-            self.action = _('Вы успешно отписались от рассылки')
+            self.action = settings.ACTION_UNSUBSCRIBE
         if action == 'interested':
             Clients.objects.filter(uuid=uuid).update(interested=True)
-            self.action = _('Благодарим вас за оценку!')
+            self.action = settings.ACTION_INTERESTED
         if action == 'success':
-            self.action = _('Спасибо, ваш предзаказ получен!')
+            self.action = settings.ACTION_SUCCESS
         return self.obj
 
     def get_context_data(self, **kwargs):

@@ -1,4 +1,5 @@
 {% load i18n %}
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -120,18 +121,17 @@ td, th {
 </head>
 <body>
     
+   
 <table class='fixed'>
      <col width="width:100%" />
      <col width="48px" />
      <col width="130px" />
     <!-- HEADER -->
   <tr id='header'>
-    <th style='text-align: left'><a href="{{url}}" title="{% trans 'Посетить сайт' %}" target="_blank"><img src="{{logo}}" alt="{{alt}}"></a></th>
+    <th style='text-align: left'><a href="{{url}}" title="{% trans 'Visit website' %}" target="_blank"><img src="{{logo}}" alt="{{alt}}"></a></th>
       <th style='text-align: right'><img src="{{letter}}" alt="{{alt}}"></th>
-      <th style='font-size: 12px'>{% trans "Служба сообщений" %}
-          <span>&bull;</span>
-          <span>{{name}}</span>
-          <span>&bull;</span>
+      <th style='font-size: 12px'>{% trans "Email service" %}
+          <span>&bull; {{name}} &bull;</span>
       </th>
   </tr>
 </table>
@@ -161,7 +161,7 @@ td, th {
           <span><img src="{{address}}"> {{addr}}<br>
           <span id="symbol" style='color:red'><img src="{{phone}}"></span>&nbsp;{{mobile}} &nbsp;&bull;&nbsp;
           <span id="symbol"><img src="{{email}}"></span> {{mail}} &nbsp;&bull;&nbsp;
-          <span id="symbol"><img src="{{website}}"></span> <a href="{{url}}" title='Посетить сайт' target="_blank">&nbsp;{{domain}}</a></span><br>
+          <span id="symbol"><img src="{{website}}"></span> <a href="{{url}}" title="{% trans 'Visit website' %}" target="_blank">&nbsp;{{domain}}</a></span><br>
       </td>
   </tr>
 </table>

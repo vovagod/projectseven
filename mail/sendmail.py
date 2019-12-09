@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from django.utils import translation
 from django.http import Http404
 from django.template.loader import get_template
 from smtplib import SMTPException
@@ -23,20 +24,26 @@ def theme_search(data):
     return message, success
 
 
-def send_mail(subject, to, message, guest, template):
+def send_mail(subject, to, message, guest, template, lang='ru'):
+
+    translation.activate(lang)
+    
     from_email = settings.FROM
     html_file = get_template('base/'+template+'.html')
-    try:
-        #client = Clients.objects.get_pk(to)
-        client = Clients.objects.get(email=to)
-    except Clients.DoesNotExist:
-        try:
-            admin = User.objects.get(username=to)
-            to = admin.email
-            guest = admin.username
-            client = None
-        except User.DoesNotExist:
-            raise Http404("Such user does not exist")
+
+    client = Clients.objects.get(email=to)
+    
+    #try:
+        ##client = Clients.objects.get_pk(to)
+        #client = Clients.objects.get(email=to)
+    #except Clients.DoesNotExist:
+        #try:
+            #admin = User.objects.get(username=to)
+            #to = admin.email
+            #guest = admin.username
+            #client = None
+        #except User.DoesNotExist:
+            #raise Http404("Such user does not exist")
         
     msg = {}
     msg.update(settings.MSG)
@@ -50,7 +57,7 @@ def send_mail(subject, to, message, guest, template):
                 'interested': client.uuid,
                 'preorder': client.uuid,
                 })
-    text_content = 'This is an important message'
+    text_content = _('This is an important message')
     html_content = html_file.render(msg)
 
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])

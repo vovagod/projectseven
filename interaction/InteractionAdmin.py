@@ -33,15 +33,15 @@ class ContactAdmin(DjangoObjectActions, admin.ModelAdmin):
         corr = Correspondence(id=corr_id, person_id_id=obj.id,
                               name=obj.fullname, email=obj.email,
                               phone=obj.phone,
-                              theme='Переписка'
+                              theme=_('Correspondence')
                               )
         corr.save()
         messages.info(request, _("Write a message to..."))
         return redirect(reverse_lazy('admin:interaction_correspondence_change', args=[corr_id,]))
 
     
-    responce_to_person.label = "Write to person"  # optional
-    responce_to_person.short_description = "Submit this article"  # optional
+    responce_to_person.label = _("Write to person") 
+    responce_to_person.short_description = _("Submit this article")  # optional
 
     change_actions = ('responce_to_person', )
 
@@ -77,7 +77,6 @@ class CorrespondenceAdmin(admin.ModelAdmin):
 
 
     def save_model(self, request, obj, form, change):
-        print('SAVE_MODEL:{}'.format(obj.action))
         if obj.action:
             messages.error(request, _("The message was already sent, try another..."))
             return

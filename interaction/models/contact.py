@@ -3,21 +3,21 @@ from django.utils.translation import ugettext as _
 
 
 class Contact(models.Model):
-    fullname  = models.CharField(max_length=120, verbose_name=_('Полное имя'))
-    email     = models.EmailField(max_length=120, verbose_name=_('Эл.почта'))
-    phone     = models.CharField(max_length=120, blank=True, verbose_name=_('Телефон'))
-    content   = models.CharField(max_length=500, blank=True, verbose_name=_('Содержание'))
-    subject   = models.CharField(max_length=120, blank=True, verbose_name=_('Предмет запроса'))
-    ipaddr    = models.CharField(max_length=120, blank=True, verbose_name=_('IP адрес'))
-    timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата'))
-    flag      = models.BooleanField(default=False, verbose_name=_('Флаг'))
+    fullname  = models.CharField(max_length=120, verbose_name=_('Full name'))
+    email     = models.EmailField(max_length=120, verbose_name=_('Email'))
+    phone     = models.CharField(max_length=120, blank=True, verbose_name=_('Phone'))
+    content   = models.CharField(max_length=500, blank=True, verbose_name=_('Content'))
+    subject   = models.CharField(max_length=120, blank=True, verbose_name=_('Subject of inquiry'))
+    ipaddr    = models.CharField(max_length=120, blank=True, verbose_name=_('IP address'))
+    timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'))
+    flag      = models.BooleanField(default=False, verbose_name=_('Flag'))
 
 
     class Meta:
         app_label = 'interaction'
         ordering = ['id']
-        verbose_name = _('Входящие сообщения')
-        verbose_name_plural = _('Входящие сообщения')
+        verbose_name = _('Incoming messages')
+        verbose_name_plural = _('Incoming messages')
 
 
     def __str__(self):

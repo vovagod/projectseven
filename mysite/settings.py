@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'clients',
     'promotion',
     'scheduler',
-    
 ]
 
 
@@ -56,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -144,11 +144,16 @@ EMAIL_PORT = 587
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = False
-USE_TZ = False
+USE_L10N = True # was false
+USE_TZ = False  # was false
+
+
+LOCALE_PATHS = (
+    BASE_DIR + '/mysite/locale',
+    )
 
 
 # DateTime format
@@ -166,19 +171,31 @@ CATEGORIES = (
     )
 
 
-# Scheduler subjects and templates
-SUBJECT_ONE = 'Business proposition'
-SUBJECT_TWO = 'Business proposition'
-SUBJECT_THREE = 'Business proposition'
-SUBJECT_FOUR = 'Business proposition'
-SUBJECT_FIVE = 'Business proposition'
-SUBJECT_SIX = 'Business proposition'
-TEMPLATE_ONE = 'proposition'
-TEMPLATE_TWO = 'proposition'
-TEMPLATE_THREE = 'proposition'
-TEMPLATE_FOUR = 'proposition'
-TEMPLATE_FIVE = 'proposition'
-TEMPLATE_SIX = 'proposition' 
+# Language tuple
+LANG = (
+    ('RU', 'RU'), #[0][0]
+    ('EN', 'EN'), #[1][0]
+    )
+
+
+# Subjects and templates for mail
+SUBJECT_MAIL = {
+    'HVAC':_('Business proposition'),
+    'Smart Home':_('Business proposition'),
+    'IoT':_('Business proposition'),
+    'Facebook':_('Business proposition'),
+    'Mathematics':_('Business proposition'),
+    'SFUGD':_('Business proposition'),
+    }
+
+TEMPLATE_MAIL = {
+    'HVAC':'proposition',
+    'Smart Home':'proposition',
+    'IoT':'proposition',
+    'Facebook':'proposition',
+    'Mathematics':'proposition',
+    'SFUGD':'proposition',
+    }
 
 
 # Tick interval(must be 3600 sec)
@@ -189,44 +206,53 @@ SURVEY_TIME_FOUR = 30
 SURVEY_TIME_FIVE = 40 
 SURVEY_TIME_SIX = 50 
 
+
 # Valid extensions list
 VALID_EXTENSIONS = ['pdf', 'doc', 'docx', 'jpg', 'png', 'xlsx', 'xls']
 
 
 # Preorder form context
-INTRODUCTION = _("<p style='text-align:justify'>&ensp;Пожалуйста заполните поля формы. "
-      "В последнем поле прикрепите файл(ы) со списком контролируемых параметров в виде"
-      " листа Модбас-переменных вашего контроллера. "
-      "Прикрепите в том же поле файл(ы) с мнемосхемами устройств в удобной для вас форме. "
-      "На основании полученной информации, мы создадим рабочие мнемосхемы и вместе с переменными "
-      "введем эти данные в сервер и пришлем вам ссылку на реальное рабочее приложение вашего заказа. "
-      "После вам останется только установить сервер на объекте и запустить его в работу.</p>"
+INTRODUCTION = _("<p style='text-align:justify'>&ensp;Please fill in the form fields. "
+      "In the last field, attach the file(s) with a list of controlled parameters in the form"
+      " of a sheet of Modbas variables of your controller. "
+      "Attach the file(s) with device mnemonics in the same field in the form convenient for you. "
+      "Based on the information received, we will create working mnemonic diagrams and, together with the variables, "
+      "enter this data into the server and send you a link to the real working application of your order. "
+      "After you just have to install the server on the object and start it in work.</p>"
      )
-ASTERISK = _("<p style='font-size: 14px; color:gray'>*измените, если не соответствует</p>")
+ASTERISK = _("<p style='font-size: 14px; color:gray'>*change if not matching</p>")
 
 
-# Theme search phrases
-CREDENTIALS = [_('логин'), _('пароль'), _('вход'), _('данные'), _('входа')]
-CALLME = [_('заинтересовала'), _('позвоните'), _('позвони'), _('позвонить'), _('интересно'), _('свяжитесь')]
-SUCCESS = _("Ваш запрос успешно отправлен!")
-MESSAGE_COMMON = {'common':_('Мы получили ваше сообщение и свяжемся с вами в ближайшее время.'),}
-MESSAGE_CREDENTIALS = {'credentials':_('Для входа используйте логин: user, пароль: user12345.'),}
-MESSAGE_SUCCESS = _("Данные для входа отправлены вам на почту.")
-MESSAGE_CALLME = {'callme':_('Мы свяжемся свами в ближайший час.'),}
+# Search phrases and response messages
+CREDENTIALS = [_('login'), _('password'), _('enter'), _('data')]
+CALLME = [_('interested'), _('please'), _('call'), _('me')]
+SUCCESS = _("Your request has been sent successfully!")
+MESSAGE_COMMON = {'common':_('We have received your message and will contact you shortly.'),}
+MESSAGE_CREDENTIALS = {'credentials':_('To enter use login: user, password: user12345.'),}
+MESSAGE_SUCCESS = _("Login data sent to your email.")
+MESSAGE_CALLME = {'callme':_('We will contact you in the next hour.'),}
 
+# Client action messages
+ACTION_UNSUBSCRIBE = _('You have successfully unsubscribed from the emailing')
+ACTION_INTERESTED = _('Thank you for rating!')
+ACTION_SUCCESS = _('Thank you, your pre-order has been received!')
+
+# Contact form phrases
+PHRASE_ONE = _('I am interested, please contact me')
+PHRASE_TWO = _('Please send me login details for Comaex Demo')
 
 # Comaex email template content
 PHONE = '+7(985)482-85-88'
 EMAIL_ADDRESS = 'comaex.info@yandex.ru'
 COMAEX_DEMO = 'http://comaex.ddns.net'
-ADDRESS = _('Москва, Сиреневый бульвар 32')
-FOOTER_TITLE = _('Супервизор-сервера Comaex')
+ADDRESS = _('Moscow, Sirenevy bulvar 32')
+FOOTER_TITLE = _('Supervisor-server Comaex')
 
 
 # SFUGD email template content
 SFUGD_DOMAIN = 'www.fold-up-door.com'
 SFUGD_SITE = 'http://www.fold-up-door.com'
-SFUGD_TITLE = _('Компактные ворота SFUGD')
+SFUGD_TITLE = _('Compact door SFUGD')
 
 
 # Static files (CSS, JavaScript, Images)
@@ -263,10 +289,10 @@ MSG = {'letter':PATH+'letter.png',
         'debug':DEBUG,
         'name': 'Comaex',
         'alt': 'Comaex server',
-        'heading': _('Предложение сотрудничества'),
-        'unsub':_('Отписаться'),
-        'inter':_('Интересно'),
-        'preord':_('Предзаказ'),
+        'heading': _('Business proposition'),
+        'unsub':_('Unsubscribe'),
+        'inter':_('Interesting'),
+        'preord':_('Pre-order'),
         }
 
 # SFUGD email template data
@@ -277,7 +303,7 @@ SFUGD = {'url':'http://'+SFUGD_DOMAIN,
         'title':SFUGD_TITLE,
         'name': 'SFUGD',
         'alt': 'Compact door',
-        'heading': _('Компактные ворота. Патент США 8327908'),
-        'preord':_('Контакт'),
+        'heading': _('Compact door. Patent US8327908'),
+        'preord':_('Contact'),
         }
 

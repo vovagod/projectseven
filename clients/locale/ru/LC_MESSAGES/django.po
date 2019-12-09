@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-08 21:27+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: ClientsAdmin.py:35
+msgid "Client"
+msgstr "Клиент"
+
+#: ClientsAdmin.py:43
+msgid "Description"
+msgstr "Описание"
+
+#: ClientsAdmin.py:49
+msgid "Actions"
+msgstr "Действия"
+
+#: ClientsAdmin.py:57
+msgid "Mailing"
+msgstr "Рассылка"
+
+#: ClientsAdmin.py:73
+msgid "Promotion on this language does not exist"
+msgstr "Промоции на этом языкене существует"
+
+#: ClientsAdmin.py:77
+msgid "There was an error sending an email: "
+msgstr "Возникла ошибка при отправке сообщения: "
+
+#: ClientsAdmin.py:81
+msgid "Message was successfully sent to client"
+msgstr "Сообщение было успешно отправлено клиенту"
+
+#: ClientsAdmin.py:84
+msgid "Send message to client"
+msgstr "Отправить сообщение клиенту"
+
+#: ClientsAdmin.py:85
+msgid "Submit message"
+msgstr "Подтвердить сообщение"
+
+#: ClientsAdmin.py:101
+msgid "theme of mailing"
+msgstr "тема рассылки"
+
+#: ClientsAdmin.py:106 ClientsAdmin.py:114 ClientsAdmin.py:123
+#: ClientsAdmin.py:132
+msgid "None"
+msgstr "Нету"
+
+#: ClientsAdmin.py:109
+msgid "mailing errors"
+msgstr "ошибки рассылки"
+
+#: ClientsAdmin.py:116
+msgid "Available"
+msgstr "Имеются"
+
+#: ClientsAdmin.py:118
+msgid "Errors"
+msgstr "Ошибки"
+
+#: ClientsAdmin.py:126
+msgid "path to folder"
+msgstr "путь к папке"
+
+#: ClientsAdmin.py:136
+msgid "Download file"
+msgstr ""
+
+#: ClientsAdmin.py:141
+msgid "List of downloaded files"
+msgstr "Список загруженных файлов"
+
+#: forms.py:12
+msgid "Company name * "
+msgstr "Имя компании * "
+
+#: forms.py:14
+msgid "Contact person"
+msgstr "Контактное лицо"
+
+#: forms.py:14
+msgid "Peter Smith"
+msgstr "Иванов Иван"
+
+#: forms.py:16 models.py:33
+msgid "Company address"
+msgstr "Адрес компании"
+
+#: forms.py:16
+msgid "Moscow, Red Square 123"
+msgstr "Москва, ул. Абвгдейка 123"
+
+#: forms.py:18
+msgid "Email * "
+msgstr "Эл.почта * "
+
+#: forms.py:21
+msgid "Phone * "
+msgstr "Телефон * "
+
+#: forms.py:23
+msgid "Select files in the formats: pdf, doc, docx, jpg, png, xlsx, xls"
+msgstr "Выберете файлы в формате: pdf, doc, docx, jpg, png, xlsx, xls"
+
+#: models.py:30
+msgid "UUID Number"
+msgstr "Номер UUID"
+
+#: models.py:31
+msgid "Company name"
+msgstr "Имя компании"
+
+#: models.py:32
+msgid "Slug"
+msgstr "Слаг"
+
+#: models.py:34
+msgid "Company email"
+msgstr "Эл.почта компании"
+
+#: models.py:35
+msgid "Contact email"
+msgstr "Эл.почта персоны"
+
+#: models.py:36
+msgid "Phone"
+msgstr "Телефон"
+
+#: models.py:37
+msgid "About company"
+msgstr "О компании"
+
+#: models.py:38
+msgid "Field of activity"
+msgstr "Сфера деятельности"
+
+#: models.py:40
+msgid "Category"
+msgstr "Категория"
+
+#: models.py:40
+msgid "Select category"
+msgstr "Выберете категорию"
+
+#: models.py:42
+msgid "Language"
+msgstr "Язык"
+
+#: models.py:42
+msgid "Select language"
+msgstr "Выберете язык"
+
+#: models.py:43
+msgid "Company persons"
+msgstr "Лица компании"
+
+#: models.py:44
+msgid "Created"
+msgstr "Создан"
+
+#: models.py:45
+msgid "Emailing"
+msgstr "Рассылка"
+
+#: models.py:46
+msgid "Interest"
+msgstr "Интерес"
+
+#: models.py:47
+msgid "Preorder"
+msgstr "Предзаказ"
+
+#: models.py:48
+msgid "Email counter"
+msgstr "Счетчик рассылок"
+
+#: models.py:49
+msgid "Number of email sent"
+msgstr "Число отправленных сообщений"
+
+#: models.py:51
+msgid "Emailing report"
+msgstr "Отчет отправки"
+
+#: models.py:53
+msgid "File"
+msgstr "Файл"
+
+#: models.py:53
+msgid "File from client"
+msgstr "Файл от клиента"
+
+#: models.py:54
+msgid "Path to downloaded files"
+msgstr "Путь к загруженным файлам"
+
+#: models.py:55
+msgid "Flag"
+msgstr "Флаг"
+
+#: models.py:62 models.py:63
+msgid "Clients"
+msgstr "Клиенты"
+
+#~ msgid "Flug"
+#~ msgstr "Флаг"

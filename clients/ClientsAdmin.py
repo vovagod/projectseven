@@ -16,7 +16,8 @@ from mail.sendmail import send_mail
 
 
 class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
-    list_display = ['company', 'category', 'email', 'phone', 'enable_mailing', 'interested', 'preorder',]
+    list_display = ['company', 'category', 'language', 'email', 'phone',
+                    'enable_mailing', 'interested', 'preorder', 'errors']
 
     search_fields = ('company', 'category',)
 
@@ -33,7 +34,8 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
     fieldsets = (
         (_('Client'), {
             'fields': (
-                ('category', 'uuid'),
+                ('category', 'language'),
+                ('uuid'),
                 ('company', 'slug'),
                 ('email', 'phone'),
             )
@@ -63,20 +65,24 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
 
 
     def send_to_client(self, request, obj):
-        subject = 'Business proposition'
-        template = 'proposition'
-        message = Promotion.objects.obj_contents(obj.category)
-        err = send_mail(subject, obj.email, message, obj.company, template)
-        if err:
-            messages.error(request, _('There was an error sending an email: '))
-            messages.add_message(request, messages.ERROR, str(err)[1:-2])
+        subject = settings.SUBJECT_MAIL.get(obj.category,)
+        template = settings.TEMPLATE_MAIL.get(obj.category,)
+        
+        message = Promotion.objects.obj_contents(obj.category, obj.language)
+        if message is None:
+            messages.error(request, _('Promotion on this language does not exist'))
         else:
-            Clients.objects.filter(uuid=obj.uuid).update(counter=obj.counter+1)
-            messages.info(request, _("Message was successfully sent to client"))
+            err = send_mail(subject, obj.email, message, obj.company, template, obj.language)
+            if err:
+                messages.error(request, _('There was an error sending an email: '))
+                messages.add_message(request, messages.ERROR, str(err)[1:-2])
+            else:
+                Clients.objects.filter(uuid=obj.uuid).update(counter=obj.counter+1)
+                messages.info(request, _("Message was successfully sent to client"))
         return redirect(reverse_lazy('admin:clients_clients_change', args=[obj.uuid,]))
     
-    send_to_client.label = "Send message to client"  # optional
-    send_to_client.short_description = "Submit message"  # optional
+    send_to_client.label = _("Send message to client")  
+    send_to_client.short_description = _("Submit message")  
 
     change_actions = ('send_to_client', )
 
@@ -102,6 +108,15 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
                            
     mailing_errors.short_description = _("mailing errors")
 
+
+    def errors(self, obj):
+        if obj.error_mailing == 'None':
+            return ("%s" % _('None'))
+        else:
+            return ("%s" % _('Available'))
+        
+    errors.short_description = _('Errors')
+    
 
     def path_to_folder(self, instance):
         return format_html("<b>{}</b>",

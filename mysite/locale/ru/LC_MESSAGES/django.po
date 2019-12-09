@@ -1,0 +1,156 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-08 21:00+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: settings.py:183 settings.py:184 settings.py:185 settings.py:186
+#: settings.py:187 settings.py:188 settings.py:292 settings1.py:183
+#: settings1.py:184 settings1.py:185 settings1.py:186 settings1.py:187
+#: settings1.py:188
+msgid "Business proposition"
+msgstr "Предложение сотрудничества"
+
+#: settings.py:215
+msgid ""
+"<p style='text-align:justify'>&ensp;Please fill in the form fields. In the "
+"last field, attach the file(s) with a list of controlled parameters in the "
+"form of a sheet of Modbas variables of your controller. Attach the file(s) "
+"with device mnemonics in the same field in the form convenient for you. "
+"Based on the information received, we will create working mnemonic diagrams "
+"and, together with the variables, enter this data into the server and send "
+"you a link to the real working application of your order. After you just "
+"have to install the server on the object and start it in work.</p>"
+msgstr ""
+"<p style='text-align:justify'>&ensp;Пожалуйста заполните поля формы. "
+"В последнем поле прикрепите файл(ы) со списком контролируемых параметров в виде"
+" листа Модбас-переменных вашего контроллера. "
+"Прикрепите в том же поле файл(ы) с мнемосхемами устройств в удобной для вас форме. "
+"На основании полученной информации, мы создадим рабочие мнемосхемы и вместе с переменными "
+"введем эти данные в сервер и пришлем вам ссылку на реальное рабочее приложение вашего заказа. "
+"После вам останется только установить сервер на объекте и запустить его в работу.</p>"
+
+#: settings.py:223
+msgid "<p style='font-size: 14px; color:gray'>*change if not matching</p>"
+msgstr "<p style='font-size: 14px; color:gray'>*измените, если не соответствует</p>"
+
+#: settings.py:227
+msgid "login"
+msgstr "логин"
+
+#: settings.py:227
+msgid "password"
+msgstr "пароль"
+
+#: settings.py:227
+msgid "enter"
+msgstr "ввод"
+
+#: settings.py:227
+msgid "data"
+msgstr "дата"
+
+#: settings.py:228
+msgid "interested"
+msgstr "заинтересован"
+
+#: settings.py:228
+msgid "please"
+msgstr "пожалуйста"
+
+#: settings.py:228
+msgid "call"
+msgstr "звонить"
+
+#: settings.py:228
+msgid "me"
+msgstr "я"
+
+#: settings.py:229
+msgid "Your request has been sent successfully!"
+msgstr "Ваш запрос был успешно отправлен!"
+
+#: settings.py:230
+msgid "We have received your message and will contact you shortly."
+msgstr "Мы получили ваше сообщение и вскоре свяжемся с вами."
+
+#: settings.py:231
+msgid "To enter use login: user, password: user12345."
+msgstr "Для входа используйте логин: user, пароль: user12345."
+
+#: settings.py:232
+msgid "Login data sent to your email."
+msgstr "Данные отправлены вам на почту."
+
+#: settings.py:233
+msgid "We will contact you in the next hour."
+msgstr "Мы свяжемся с вами в ближайший час."
+
+#: settings.py:236
+msgid "You have successfully unsubscribed from the emailing"
+msgstr "Вы успешно отписались от рассылки"
+
+#: settings.py:237
+msgid "Thank you for rating!"
+msgstr "Благодарим за оценку!"
+
+#: settings.py:238
+msgid "Thank you, your pre-order has been received!"
+msgstr "Спасибо, ваш предзаказ получен!"
+
+#: settings.py:241
+msgid "I am interested, please contact me"
+msgstr "Мне интересно, свяжитесь со мной пожалуйста"
+
+#: settings.py:242
+msgid "Please send me login details for Comaex Demo"
+msgstr "Пожалуйста пришлите мне данные входа в Comaex Demo"
+
+#: settings.py:248
+msgid "Moscow, Sirenevy bulvar 32"
+msgstr "Москва, Сиреневый бульвар 32"
+
+#: settings.py:249
+msgid "Supervisor-server Comaex"
+msgstr "Супервизор-сервер Comaex"
+
+#: settings.py:255
+msgid "Compact door SFUGD"
+msgstr "Компактные ворота SFUGD"
+
+#: settings.py:293
+msgid "Unsubscribe"
+msgstr "Отписаться"
+
+#: settings.py:294
+msgid "Interesting"
+msgstr "Интересно"
+
+#: settings.py:295
+msgid "Pre-order"
+msgstr "Предзаказ"
+
+#: settings.py:306
+msgid "Compact door. Patent US8327908"
+msgstr "Компактные ворота. Патент US8327908"
+
+#: settings.py:307
+msgid "Contact"
+msgstr "Контакт"
+

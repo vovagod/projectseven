@@ -35,16 +35,16 @@ class MenuManager(models.Manager):
         
 
 class Menu(models.Model):
-    title  = models.CharField(max_length=120, unique=True, verbose_name=_('Заголовок'),
-                              help_text=_("Введите название раздела меню"))
-    slug   = models.CharField(max_length=120, unique=True, verbose_name=_('Слаг'),
-                              help_text=_("Введите раздел меню латинницей в формате: '#about'"))
+    title  = models.CharField(max_length=120, unique=True, verbose_name=_('Title'),
+                              help_text=_("Enter menu title"))
+    slug   = models.CharField(max_length=120, unique=True, verbose_name=_('Slug'),
+                              help_text=_("Enter menu name in format: '#about'"))
     mark   = models.PositiveSmallIntegerField(default=0, blank=True, null=True,
-                                              verbose_name=_('Метка'),
-                                                       help_text=_("1-вывод заголовков для аутентиф. пользователей, 2-для неаутентиф."))
-    fafa   = models.CharField(max_length=50, blank=True, verbose_name=_('Иконка'),
-                              help_text=_("Ввод иконки в формате 'fa fa-cog'"))
-    color  = models.CharField(max_length=50, blank=True, verbose_name=_('Цвет'))
+                                              verbose_name=_('Mark'),
+                                                       help_text=_("1-output of headers for authentic.users, 2-for unauthentic."))
+    fafa   = models.CharField(max_length=50, blank=True, verbose_name=_('Icon'),
+                              help_text=_("Enter icon in format: 'fa fa-cog'"))
+    color  = models.CharField(max_length=50, blank=True, verbose_name=_('Color'))
 
     objects = MenuManager()
     
@@ -54,8 +54,8 @@ class Menu(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = _('Горизонтальное меню')
-        verbose_name_plural = _('Горизонтальное меню')
+        verbose_name = _('Horizontal menu')
+        verbose_name_plural = _('Horizontal menu')
 
     def __str__(self):
         return self.title
@@ -70,16 +70,16 @@ class SubMenuManager(models.Manager):
 
 class SubMenu(models.Model):
     submenu  = models.ForeignKey(Menu, to_field='title', on_delete=models.CASCADE,
-                                 verbose_name=_('Меню'), help_text=_("Выберете раздел меню"))
-    subtitle = models.CharField(max_length=120, unique=True, verbose_name=_('Подменю'),
-                                help_text=_("Введите название раздела подменю"))
-    subslug  = models.CharField(max_length=120, unique=True, verbose_name=_('Слаг'),
-                                help_text=_("Введите подменю латинницей в формате: '#about'"))
-    submark  = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Метка подменю'),
-                                                help_text=_("1-подменю будет выведено"))
-    subfafa  = models.CharField(max_length=50, blank=True, verbose_name=_('Иконка подменю'),
-                                help_text=_("Ввод иконки в формате 'fa fa-cog'"))
-    subcolor = models.CharField(max_length=50, blank=True, verbose_name=_('Цвет'))
+                                 verbose_name=_('Menu'), help_text=_("Select menu"))
+    subtitle = models.CharField(max_length=120, unique=True, verbose_name=_('Submenu'),
+                                help_text=_("Enter submenu title"))
+    subslug  = models.CharField(max_length=120, unique=True, verbose_name=_('Slug'),
+                                help_text=_("Enter submenu name in format: '#about'"))
+    submark  = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Submenu mark'),
+                                                help_text=_("1-Submenu will be displayed"))
+    subfafa  = models.CharField(max_length=50, blank=True, verbose_name=_('Submenu icon'),
+                                help_text=_("Enter icon in format: 'fa fa-cog'"))
+    subcolor = models.CharField(max_length=50, blank=True, verbose_name=_('color'))
 
     objects = SubMenuManager()
     
@@ -89,8 +89,8 @@ class SubMenu(models.Model):
 
     class Meta:
         ordering = ['id']
-        verbose_name = _('Вертикальное подменю')
-        verbose_name_plural = _('Вертикальное подменю')
+        verbose_name = _('Vertical submenu')
+        verbose_name_plural = _('Vertical submenu')
 
     def __str__(self):
         return self.subtitle
@@ -99,39 +99,39 @@ class SubMenu(models.Model):
 
 class Base(models.Model):
     menu        = models.ForeignKey(SubMenu, to_field='subtitle', on_delete=models.CASCADE,  # rename to submenu
-                                        verbose_name=_('Подменю'), help_text=_("Выберете раздел подменю"))
-    title       = models.CharField(max_length=120, verbose_name=_('Заголовок'),
-                                       help_text=_("Введите заголовок контекста"))
-    slug        = models.SlugField(unique=False, verbose_name=_('Слаг'),
-                                       help_text=_("Слаг.."))
-    subtitle    = models.CharField(max_length=120, blank=True, verbose_name=_('Подзаголовок'),
-                                   help_text=_("Введите подзаголовок контекста"))
-    sentence    = models.CharField(max_length=120, blank=True, verbose_name=_('Предложение'),
-                                   help_text=_("Введите предложение"))
-    description = models.TextField(verbose_name=_('Текст'), help_text=_("Введите текст"))
+                                        verbose_name=_('Submenu'), help_text=_("Select submenu"))
+    title       = models.CharField(max_length=120, verbose_name=_('Title'),
+                                       help_text=_("Enter title"))
+    slug        = models.SlugField(unique=False, verbose_name=_('Slug'),
+                                       help_text=_("Slug"))
+    subtitle    = models.CharField(max_length=120, blank=True, verbose_name=_('Subtitle'),
+                                   help_text=_("Enter subtitle"))
+    sentence    = models.CharField(max_length=120, blank=True, verbose_name=_('Sentence'),
+                                   help_text=_("Enter sentence"))
+    description = models.TextField(verbose_name=_('Text'), help_text=_("Enter text"))
     desc_html   = models.TextField(blank=True, editable=True)
     image       = models.ImageField(upload_to=upload_image_path, blank=True, null=True,
-                                    verbose_name=_('Изображение'), help_text=_("Выберете изображение"))
-    filenum     = models.PositiveSmallIntegerField(default=0, verbose_name=_('Файл'),
-                                                       help_text=_("Номер файла"))
-    urllink     = models.URLField(max_length=200, blank=True, verbose_name=_('Ссылка'),
-                                  help_text=_("Введите ссылку на ресурс"))
-    timestamp   = models.DateTimeField(auto_now_add=True, verbose_name=_('Дата'), help_text=_("Дата/время создания контекста"))
-    flag        = models.BooleanField(default=False, verbose_name=_('Флаг'),
-                                          help_text=_("Флаг..")) 
-    data1       = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные1'),
-                                       help_text=_("Введите дополнительные данные 1"))
-    data2       = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные2'),
-                                       help_text=_("Введите дополнительные данные 2"))
-    data3       = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные3'),
-                                       help_text=_("Введите дополнительные данные 3"))
-    data4       = models.CharField(max_length=50, blank=True, verbose_name=_('Доп.данные4'),
-                                       help_text=_("Введите дополнительные данные 4"))
+                                    verbose_name=_('Image'), help_text=_("Select image"))
+    filenum     = models.PositiveSmallIntegerField(default=0, verbose_name=_('File'),
+                                                       help_text=_("File number"))
+    urllink     = models.URLField(max_length=200, blank=True, verbose_name=_('URL link'),
+                                  help_text=_("Enter URL link"))
+    timestamp   = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'), help_text=_("Date/time of cretion"))
+    flag        = models.BooleanField(default=False, verbose_name=_('Flag'),
+                                          help_text=_("Flag")) 
+    data1       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data1'),
+                                       help_text=_("Enter additional data 1"))
+    data2       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data2'),
+                                       help_text=_("Enter additional data 2"))
+    data3       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data3'),
+                                       help_text=_("Enter additional data 3"))
+    data4       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data4'),
+                                       help_text=_("Enter additional data 4"))
     
     class Meta:
         ordering = ['id']
-        verbose_name = _('Содержание страницы')
-        verbose_name_plural = _('Содержание страницы')
+        verbose_name = _('Page content')
+        verbose_name_plural = _('Page content')
 
 
     def save(self):
@@ -167,22 +167,22 @@ class Image(models.Model):
     name        = models.ForeignKey(Base, on_delete=models.CASCADE,
                                     related_name='images', blank=True, null=True)
     image       = models.ImageField(upload_to=upload_image_path, null=True, blank=True,
-                                    verbose_name=_('Изображение'), help_text=_("Выберете изображение"))
-    slug        = models.SlugField(unique=False, default='imageslug', verbose_name=_('Слаг'),
-                                   help_text=_("Слаг.."))
-    title       = models.CharField(max_length=120, blank=True, verbose_name=_('Заголовок'),
-                                   help_text=_("Введите заголовок"))
-    sentence    = models.CharField(max_length=120, blank=True, verbose_name=_('Предложение'),
-                                   help_text=_("Введите предложение"))
-    description = models.TextField(verbose_name=_('Текст'), help_text=_("Введите текст"))
+                                    verbose_name=_('Image'), help_text=_("Select image"))
+    slug        = models.SlugField(unique=False, default='imageslug', verbose_name=_('Slug'),
+                                   help_text=_("Slug"))
+    title       = models.CharField(max_length=120, blank=True, verbose_name=_('Title'),
+                                   help_text=_("Enter title"))
+    sentence    = models.CharField(max_length=120, blank=True, verbose_name=_('Sentence'),
+                                   help_text=_("Enter sentence"))
+    description = models.TextField(verbose_name=_('Text'), help_text=_("Enter text"))
     desc_html   = models.TextField(blank=True, editable=True)
 
     objects = ImageManager()
 
 
     class Meta:
-        verbose_name = _('Изображения дополнительно')
-        verbose_name_plural = _('Изображения дополнительно')
+        verbose_name = _('Additional images')
+        verbose_name_plural = _('Additional images')
 
 
     def __str__(self):

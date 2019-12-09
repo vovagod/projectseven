@@ -13,17 +13,17 @@ from ipware import get_client_ip
 
 class ContactForm(forms.Form):
     
-    fullname   = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Полное имя")}))
-    email      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Электронная почта")}),
+    fullname   = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Full name")}))
+    email      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Email")}),
                                  validators=[validate_email])
-    phone      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Телефон")}))
+    phone      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Phone")}))
     content    = forms.CharField()
 
 
     def __init__(self, request, *args, **kwargs):
         self.request = request
         choice_list = kwargs.pop('data_list', None)
-        placeholder = _("Введите сообщение или выберете из списка...")
+        placeholder = _("Enter a message or select from the list...")
         autocomplete = "off"
         super(ContactForm, self).__init__(*args, **kwargs)
         self.fields['content'].widget = ListTextWidget(data_list=choice_list, name='choice-list',
@@ -36,7 +36,7 @@ class ContactForm(forms.Form):
         data = self.cleaned_data
 
         if data.get('email') is None:
-            raise forms.ValidationError("Enter a valid email address", code='email_error')
+            raise forms.ValidationError(_("Enter a valid email address"), code='email_error')
 
         ip, is_routable = get_client_ip(self.request)
         if ip is None:
@@ -54,7 +54,7 @@ class ContactForm(forms.Form):
         subject, m = theme_search(data.get('content'))
         message = Contact(fullname=data['fullname'], email=data['email'],
                           phone=data['phone'], content=data['content'],
-                          ipaddr=ipaddr or 'Unable to get IP address',
+                          ipaddr=ipaddr or _('Unable to get IP address'),
                           subject=list(subject.keys())[0],
                           )
         message.save(force_insert=True)
@@ -62,7 +62,7 @@ class ContactForm(forms.Form):
    
 
     def send_email(self, message):
-        subject, to = 'Request confirmation', self.cleaned_data.get("email")
+        subject, to = _('Request confirmation'), self.cleaned_data.get("email")
         guest, template = self.cleaned_data["fullname"], 'confirmation'
         send_mail(subject, to, message, guest, template)
         return

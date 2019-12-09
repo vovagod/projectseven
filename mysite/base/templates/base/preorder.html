@@ -4,7 +4,7 @@
 
 <td>
     <div class="container">
-    <h3>Форма предзаказа</h3>
+    <h3>{% trans 'Pre-order form' %}</h3>
         {{introduction}}<br>
         
     <form method='POST' enctype="multipart/form-data" style="padding-top:16px">
@@ -24,7 +24,7 @@
           {% endif %}
         
           {{asterisk}}
-        <input type="submit" value="Отправить"><br>  
+        <input type="submit" value="{% trans 'Send' %}"><br>  
    </form>
         
     </div>

@@ -9,18 +9,18 @@ app_name = 'clients'
 
 class PreorderForm(forms.Form):
     
-    company = forms.CharField(label=_("Имя компании * "),
+    company = forms.CharField(label=_("Company name * "),
                               widget=forms.TextInput(attrs={"required":True}))
-    persons = forms.CharField(label="Контактное лицо", widget=forms.TextInput(attrs={"placeholder": _("Иванов Иван"),
+    persons = forms.CharField(label=_("Contact person"), widget=forms.TextInput(attrs={"placeholder": _("Peter Smith"),
                                                                                      "required":True}))
-    address = forms.CharField(label="Адрес компании", widget=forms.TextInput(attrs={"placeholder": _("Москва, ул.Абвгдейка, 123"),
+    address = forms.CharField(label=_("Company address"), widget=forms.TextInput(attrs={"placeholder": _("Moscow, Red Square 123"),
                                                                                     "required":True}))
-    email2  = forms.EmailField(label=_("Эл.почта * "),
+    email2  = forms.EmailField(label=_("Email * "),
                                widget=forms.TextInput(attrs={"required":True}),
                                validators=[validate_email])
-    phone   = forms.CharField(label=_("Телефон * "),
+    phone   = forms.CharField(label=_("Phone * "),
                               widget=forms.TextInput(attrs={"required":True}))
-    file    = forms.FileField(label=_("Выберете файлы в формате pdf, doc, docx, jpg, png, xlsx, xls"),
+    file    = forms.FileField(label=_("Select files in the formats: pdf, doc, docx, jpg, png, xlsx, xls"),
                               widget=forms.ClearableFileInput(attrs={'multiple': True, "required":True}))
 
 

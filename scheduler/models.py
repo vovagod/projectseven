@@ -7,21 +7,21 @@ from django.utils.translation import ugettext as _
 class Scheduler(models.Model):
    
     id         = models.AutoField(primary_key=True)
-    category   = models.CharField(max_length=30, unique=True, choices=settings.CATEGORIES, verbose_name=_('Категория рассылки'),
-                                  help_text=_("Выберете название категории"))
-    tick       = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Количество тиков'),
-                                                  help_text=_("Введите количесво тиков, 1 тик равен 1 часу"))
-    counter    = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Счетчик тиков'),
-                                                  help_text=_("Подсчет тиков"))
-    event      = models.CharField(max_length=120, null=True, blank=True,  verbose_name=_('Событие'),
-                                  help_text=_("События в планировщике"))
-    processing = models.CharField(max_length=120, null=True, default='None',  verbose_name=_('Обработка'),
-                                  help_text=_("Время обработки"))
+    category   = models.CharField(max_length=30, unique=True, choices=settings.CATEGORIES, verbose_name=_('Category'),
+                                  help_text=_("Select category name"))
+    tick       = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Ticks'),
+                                                  help_text=_("Enter ticks number, 1 tick-1 hour, 0-stop"))
+    counter    = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Tick counter'),
+                                                  help_text=_("Tick count"))
+    event      = models.CharField(max_length=120, null=True, blank=True,  verbose_name=_('Status'),
+                                  help_text=_("Scheduler status"))
+    processing = models.CharField(max_length=120, null=True, default='None',  verbose_name=_('Processing'),
+                                  help_text=_("Processing time"))
 
     class Meta:
         ordering = ['id']
-        verbose_name = _('Планировщик')
-        verbose_name_plural = _('Планировщик')
+        verbose_name = _('Scheduler')
+        verbose_name_plural = _('Scheduler')
 
 
     def __str__(self):

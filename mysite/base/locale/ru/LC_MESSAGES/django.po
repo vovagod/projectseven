@@ -1,0 +1,294 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-08 21:01+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: forms.py:16
+msgid "Full name"
+msgstr "Полное имя"
+
+#: forms.py:17
+msgid "Email"
+msgstr "Эл.почта"
+
+#: forms.py:19
+msgid "Phone"
+msgstr "Телефон"
+
+#: forms.py:26
+msgid "Enter a message or select from the list..."
+msgstr "Введите сообщение или выберете из списка..."
+
+#: forms.py:39
+msgid "Enter a valid email address"
+msgstr "Введите корректный адрес эл.почты"
+
+#: forms.py:57
+msgid "Unable to get IP address"
+msgstr "Невозможно получить IP адрес"
+
+#: forms.py:65
+msgid "Request confirmation"
+msgstr "Подтверждение запроса"
+
+#: models.py:38 models.py:103 models.py:173
+msgid "Title"
+msgstr "Заголовок"
+
+#: models.py:39
+msgid "Enter menu title"
+msgstr "Введите заголовок меню"
+
+#: models.py:40 models.py:76 models.py:105 models.py:106 models.py:171
+#: models.py:172
+msgid "Slug"
+msgstr "Слаг"
+
+#: models.py:41
+msgid "Enter menu name in format: '#about'"
+msgstr "Введите имя меню в формате: '#about'"
+
+#: models.py:43
+msgid "Mark"
+msgstr "Метка"
+
+#: models.py:44
+msgid "1-output of headers for authentic.users, 2-for unauthentic."
+msgstr "1-вывод заголовков для аутентиф.пользователей, 2-для неаутентиф."
+
+#: models.py:45
+msgid "Icon"
+msgstr "Иконка"
+
+#: models.py:46 models.py:81
+msgid "Enter icon in format: 'fa fa-cog'"
+msgstr "Введите иконку в формате: 'fa fa-cog'"
+
+#: models.py:47
+msgid "Color"
+msgstr "Цвет"
+
+#: models.py:57 models.py:58
+msgid "Horizontal menu"
+msgstr "Горизонтальное меню"
+
+#: models.py:73
+msgid "Menu"
+msgstr "Меню"
+
+#: models.py:73
+msgid "Select menu"
+msgstr "Выберете меню"
+
+#: models.py:74 models.py:102
+msgid "Submenu"
+msgstr "Подменю"
+
+#: models.py:75
+msgid "Enter submenu title"
+msgstr "Введите заголовок подменю"
+
+#: models.py:77
+msgid "Enter submenu name in format: '#about'"
+msgstr "Введите имя подменю в формате: '#about'"
+
+#: models.py:78
+msgid "Submenu mark"
+msgstr "Метка подменю"
+
+#: models.py:79
+msgid "1-Submenu will be displayed"
+msgstr "1-подменю будет выведено"
+
+#: models.py:80
+msgid "Submenu icon"
+msgstr "Подменю иконка"
+
+#: models.py:82
+msgid "color"
+msgstr "цвет"
+
+#: models.py:92 models.py:93
+msgid "Vertical submenu"
+msgstr "Вертикальное подменю"
+
+#: models.py:102
+msgid "Select submenu"
+msgstr "Выберете подменю"
+
+#: models.py:104 models.py:174
+msgid "Enter title"
+msgstr "Введите заголовок"
+
+#: models.py:107
+msgid "Subtitle"
+msgstr "Подменю"
+
+#: models.py:108
+msgid "Enter subtitle"
+msgstr "Введите подменю"
+
+#: models.py:109 models.py:175
+msgid "Sentence"
+msgstr "Предложение"
+
+#: models.py:110 models.py:176
+msgid "Enter sentence"
+msgstr "Введите предложение"
+
+#: models.py:111 models.py:177
+msgid "Text"
+msgstr "Текст"
+
+#: models.py:111 models.py:177
+msgid "Enter text"
+msgstr "Введите текст"
+
+#: models.py:114 models.py:170
+msgid "Image"
+msgstr "Изображение"
+
+#: models.py:114 models.py:170
+msgid "Select image"
+msgstr "Выберете изображение"
+
+#: models.py:115
+msgid "File"
+msgstr "Файл"
+
+#: models.py:116
+msgid "File number"
+msgstr "Номер файла"
+
+#: models.py:117
+msgid "URL link"
+msgstr "URL ссылка"
+
+#: models.py:118
+msgid "Enter URL link"
+msgstr "Введите URL ссылку"
+
+#: models.py:119
+msgid "Date"
+msgstr "Дата"
+
+#: models.py:119
+msgid "Date/time of cretion"
+msgstr "Дата/время создания"
+
+#: models.py:120 models.py:121
+msgid "Flag"
+msgstr "Флаг"
+
+#: models.py:122
+msgid "Add.data1"
+msgstr "Доп.данные1"
+
+#: models.py:123
+msgid "Enter additional data 1"
+msgstr "Введите доп.данные 1"
+
+#: models.py:124
+msgid "Add.data2"
+msgstr "Доп.данные2"
+
+#: models.py:125
+msgid "Enter additional data 2"
+msgstr "Введите доп.данные 2"
+
+#: models.py:126
+msgid "Add.data3"
+msgstr "Доп.данные3"
+
+#: models.py:127
+msgid "Enter additional data 3"
+msgstr "Введите доп.данные 3"
+
+#: models.py:128
+msgid "Add.data4"
+msgstr "Доп.данные4"
+
+#: models.py:129
+msgid "Enter additional data 4"
+msgstr "Введите доп.данные 4"
+
+#: models.py:133 models.py:134
+msgid "Page content"
+msgstr "Содержание страницы"
+
+#: models.py:184 models.py:185
+msgid "Additional images"
+msgstr "Дополнительные изображения"
+
+#: tasks.py:29
+msgid "Tick is 0. Scheduler stopped"
+msgstr "Тик равен 0. Планировщик остановлен"
+
+#: tasks.py:29 tasks.py:60
+msgid "None"
+msgstr "Нету"
+
+#: tasks.py:34
+msgid "Client does not exists"
+msgstr "Клиент не существует"
+
+#: tasks.py:52
+msgid "Promotion does not exists"
+msgstr "Промоция не существует"
+
+#: tasks.py:65
+msgid "Scheduler works"
+msgstr "Планировщик работает"
+
+#: templates/base/action.html:5
+msgid "Дорогой,"
+msgstr ""
+
+#: templates/base/action.html:9
+msgid "закройте окно браузера если не сработала кнопка"
+msgstr ""
+
+#: templates/base/email.html:131
+msgid "Посетить сайт"
+msgstr ""
+
+#: templates/base/email.html:133
+msgid "Служба сообщений"
+msgstr ""
+
+#: templates/base/home.html:260
+msgid "Звоните нам: +7 985 482-85-88"
+msgstr ""
+
+#: templates/base/home.html:260
+msgid "Пишите нам по вопросам сотрудничества, техническим, запросу пароля на "
+msgstr ""
+
+#: templates/base/home.html:260
+msgid " и другим:"
+msgstr ""
+
+#: templates/base/home.html:275
+msgid "Отправить"
+msgstr ""
+
+#: views.py:30
+msgid "Гость"
+msgstr ""
