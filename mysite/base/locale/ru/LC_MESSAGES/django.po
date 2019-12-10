@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-08 21:01+0300\n"
+"POT-Creation-Date: 2019-12-09 12:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -257,38 +257,100 @@ msgstr "Промоция не существует"
 msgid "Scheduler works"
 msgstr "Планировщик работает"
 
-#: templates/base/action.html:5
-msgid "Дорогой,"
-msgstr ""
+#: templates/base/action.html:5 templates/base/confirmation.html:5
+msgid "Dear, "
+msgstr "Дорогой, "
+
+#: templates/base/action.html:8
+msgid "Close the window"
+msgstr "Закройте окно"
+
+#: templates/base/action.html:8
+msgid "Close"
+msgstr "Закрыть"
 
 #: templates/base/action.html:9
-msgid "закройте окно браузера если не сработала кнопка"
-msgstr ""
+msgid "close the browser window if the button did not work"
+msgstr "Закройте окно браузера, если кнопка не сработала"
 
-#: templates/base/email.html:131
-msgid "Посетить сайт"
-msgstr ""
+#: templates/base/alert.html:142 templates/base/email.html:130
+#: templates/base/email.html:163 templates/base/proposition.html:15
+#: templates/base/proposition.html:27
+msgid "Visit website"
+msgstr "Посетить сайт"
 
-#: templates/base/email.html:133
-msgid "Служба сообщений"
-msgstr ""
+#: templates/base/base.html:116
+msgid "To the start"
+msgstr "К началу"
+
+#: templates/base/confirmation.html:7
+msgid "Thank you for your interest to our technology."
+msgstr "Спасибо за ваш интерес к нашей технологии."
+
+#: templates/base/confirmation.html:9
+msgid "Go to login page of"
+msgstr "Перейти на cтраницу входа"
+
+#: templates/base/confirmation.html:12
+msgid "Regards, Comaex Team"
+msgstr "С уважением, команда Comaex"
+
+#: templates/base/email.html:132
+msgid "Email service"
+msgstr "Служба рассылки"
+
+#: templates/base/home.html:126
+msgid "Close window"
+msgstr "Закройте окно"
+
+#: templates/base/home.html:128
+msgid "Window screenshot"
+msgstr "Скриншот экрана"
+
+#: templates/base/home.html:150
+msgid "Screen of the"
+msgstr "Экран"
+
+#: templates/base/home.html:150
+msgid "Open in new window"
+msgstr "Открыть в новом окне"
+
+#: templates/base/home.html:258
+msgid "Contact"
+msgstr "Контакты"
 
 #: templates/base/home.html:260
-msgid "Звоните нам: +7 985 482-85-88"
-msgstr ""
+msgid "Call us: +7 985 482-85-88"
+msgstr "Звоните нам: +7 985 482-85-88"
 
 #: templates/base/home.html:260
-msgid "Пишите нам по вопросам сотрудничества, техническим, запросу пароля на "
-msgstr ""
+msgid "Write to us about cooperation, technical questions, login in "
+msgstr "Пишие нам по вопросам сотрудничества, техническим, данным входа в "
 
 #: templates/base/home.html:260
-msgid " и другим:"
-msgstr ""
+msgid " and others:"
+msgstr " и другим:"
 
-#: templates/base/home.html:275
-msgid "Отправить"
-msgstr ""
+#: templates/base/home.html:275 templates/base/preorder.html:27
+msgid "Send"
+msgstr "Отправить"
+
+#: templates/base/preorder.html:7
+msgid "Pre-order form"
+msgstr "Форма предзаказа"
+
+#: templates/base/proposition.html:39
+msgid "unsubscribe from emailing"
+msgstr "отписаться от рассылки"
+
+#: templates/base/proposition.html:40
+msgid "evaluate the idea"
+msgstr "оценить идею"
+
+#: templates/base/proposition.html:41
+msgid "make pre-opder"
+msgstr "сделать предзаказ"
 
 #: views.py:30
-msgid "Гость"
-msgstr ""
+msgid "Guest"
+msgstr "Гость"

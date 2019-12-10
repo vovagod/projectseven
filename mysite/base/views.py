@@ -27,7 +27,7 @@ from mail.sendmail import theme_search
 # test view to check mailform
 def emailview(request):
     msg = settings.MSG
-    msg.update({'guest':_('Гость'),
+    msg.update({'guest':_('Guest'),
                 })
     return render_to_response('base/correspondence.html', msg,
                               content_type="text/html")

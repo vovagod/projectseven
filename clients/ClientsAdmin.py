@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.utils import translation
 from django.utils.html import format_html_join, format_html
 from django_object_actions import DjangoObjectActions
 from .models import Clients
@@ -79,8 +80,9 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
             else:
                 Clients.objects.filter(uuid=obj.uuid).update(counter=obj.counter+1)
                 messages.info(request, _("Message was successfully sent to client"))
+        translation.deactivate()
         return redirect(reverse_lazy('admin:clients_clients_change', args=[obj.uuid,]))
-    
+   
     send_to_client.label = _("Send message to client")  
     send_to_client.short_description = _("Submit message")  
 

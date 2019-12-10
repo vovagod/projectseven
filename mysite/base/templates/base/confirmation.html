@@ -1,15 +1,15 @@
 {% extends "base/email.html" %}
-
+{% load i18n %}
 {% block core %}
 
-<td><h4>Дорогой, {{guest}}</h4>
+<td><h4>{% trans 'Dear, ' %} {{guest}}</h4>
           {% for key, value in content.items %}
-          <p>&emsp;Спасибо за интерес к нашей технологии. {{value}}</p>
+          <p>&emsp;{% trans 'Thank you for your interest to our technology.' %} {{value}}</p>
           {% if key == 'credentials' %}
-          <p>Перейти на страницу входа <a href="{{comaex_demo}}" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>
+          <p>{% trans 'Go to login page of' %} <a href="{{comaex_demo}}" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>
           {% endif %}
           {% endfor %}
-          <p style='margin: 15px 0px 0px 0px'>С уважением, Команда Comaex</p>
+          <p style='margin: 15px 0px 0px 0px'>{% trans 'Regards, Comaex Team' %}</p>
       </td>
 
 {% endblock core %}

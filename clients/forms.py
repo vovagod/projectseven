@@ -1,5 +1,7 @@
 from django import forms
 from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.http import Http404
 from django.utils.translation import ugettext as _
 from .models import Clients
 
@@ -29,7 +31,10 @@ class PreorderForm(forms.Form):
         self.instance = kwargs.pop('instance', None)
         self.request = request
         self.uuid = self.request.path_info.strip('/').split('/')[-1]
-        instance = Clients.objects.get(uuid=self.uuid)
+        try:
+            instance = Clients.objects.get(uuid=self.uuid)
+        except ValidationError:
+            raise Http404(_("Client with such UUID does not exist")) 
         super(PreorderForm, self).__init__(*args, **kwargs)
         self.initial['company'] = instance.company
         self.initial['persons'] = instance.persons or None

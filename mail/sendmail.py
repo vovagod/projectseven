@@ -27,35 +27,38 @@ def theme_search(data):
 def send_mail(subject, to, message, guest, template, lang='ru'):
 
     translation.activate(lang)
-    
+    #with translation.override(lang):
+        
     from_email = settings.FROM
     html_file = get_template('base/'+template+'.html')
-
-    client = Clients.objects.get(email=to)
     
-    #try:
-        ##client = Clients.objects.get_pk(to)
-        #client = Clients.objects.get(email=to)
-    #except Clients.DoesNotExist:
-        #try:
-            #admin = User.objects.get(username=to)
-            #to = admin.email
-            #guest = admin.username
-            #client = None
-        #except User.DoesNotExist:
-            #raise Http404("Such user does not exist")
+    client_category, client_uuid = 'None', None
+    #client = Clients.objects.get(email=to)
+    try:
+        #client = Clients.objects.get_pk(to)
+        client = Clients.objects.get(email=to)
+        client_category, client_uuid = client.category, client.uuid
+    except Clients.DoesNotExist:
+        try:
+            admin = User.objects.get(username=to)
+            to = admin.email
+            guest = admin.username
+            client = None
+        except User.DoesNotExist:
+            raise Http404("Such user does not exist")
         
     msg = {}
     msg.update(settings.MSG)
 
-    if hasattr(settings, client.category):
-        msg.update(getattr(settings, client.category))
+    if hasattr(settings, client_category):
+        msg.update(getattr(settings, client_category))
         
     msg.update({'guest': guest,
                 'content': message,
-                'unsubscribe': client.uuid,
-                'interested': client.uuid,
-                'preorder': client.uuid,
+                'unsubscribe': client_uuid,
+                'interested': client_uuid,
+                'preorder': client_uuid,
+                'lang': lang.lower(),
                 })
     text_content = _('This is an important message')
     html_content = html_file.render(msg)
