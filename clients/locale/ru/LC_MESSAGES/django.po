@@ -38,7 +38,7 @@ msgstr "Рассылка"
 
 #: ClientsAdmin.py:73
 msgid "Promotion on this language does not exist"
-msgstr "Промоции на этом языкене существует"
+msgstr "Промоция на этом языке не существует"
 
 #: ClientsAdmin.py:77
 msgid "There was an error sending an email: "
@@ -83,7 +83,7 @@ msgstr "путь к папке"
 
 #: ClientsAdmin.py:136
 msgid "Download file"
-msgstr ""
+msgstr "Загрузить файл"
 
 #: ClientsAdmin.py:141
 msgid "List of downloaded files"

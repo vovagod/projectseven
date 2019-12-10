@@ -56,19 +56,19 @@ msgstr "логин"
 
 #: settings.py:227
 msgid "password"
-msgstr "пароль"
+msgstr "входа"
 
 #: settings.py:227
 msgid "enter"
-msgstr "ввод"
+msgstr "пришлите"
 
 #: settings.py:227
 msgid "data"
-msgstr "дата"
+msgstr "данные"
 
 #: settings.py:228
 msgid "interested"
-msgstr "заинтересован"
+msgstr "интересно"
 
 #: settings.py:228
 msgid "please"
@@ -76,11 +76,11 @@ msgstr "пожалуйста"
 
 #: settings.py:228
 msgid "call"
-msgstr "звонить"
+msgstr "свяжитесь"
 
 #: settings.py:228
 msgid "me"
-msgstr "я"
+msgstr "мной"
 
 #: settings.py:229
 msgid "Your request has been sent successfully!"

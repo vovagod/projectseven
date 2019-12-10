@@ -22,6 +22,24 @@
     <a href="/" class="w3-bar-item w3-btn" style="padding: 4px 10px 4px 10px">
         <img src="{% static 'css/logo.png'  %}" alt="Comaex supervisor server"></a>
       
+     
+      
+<!--<form style="display:inline-block; padding:12px 0px 12px 15px;" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}" />
+    <select style="width:60px" name="language" onchange="this.form.submit()">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+</form>-->
+     
+      
+      
     <!-- Right-sided navbar links -->
     <div id="barMenu" class="w3-right w3-hide-small">
    

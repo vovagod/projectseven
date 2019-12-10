@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*',]
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'mysite.base.middleware.LanguageMiddleware',
+    #'mysite.base.middleware.LanguageMiddleware',
 ]
 
 
@@ -152,6 +152,10 @@ USE_I18N = True
 USE_L10N = True # was false
 USE_TZ = False  # was false
 
+LANGUAGES = [
+    ('ru', _('RU')),
+    ('en', _('EN')),
+]
 
 LOCALE_PATHS = (
     BASE_DIR + '/mysite/locale',
@@ -229,10 +233,10 @@ ASTERISK = _("<p style='font-size: 14px; color:gray'>*change if not matching</p>
 CREDENTIALS = [_('login'), _('password'), _('enter'), _('data')]
 CALLME = [_('interested'), _('please'), _('call'), _('me')]
 SUCCESS = _("Your request has been sent successfully!")
-MESSAGE_COMMON = {'common':_('We have received your message and will contact you shortly.'),}
-MESSAGE_CREDENTIALS = {'credentials':_('To enter use login: user, password: user12345.'),}
+MESSAGE_COMMON = {'common':_('We have received your message and will contact you shortly.')}
+MESSAGE_CREDENTIALS = {'credentials':_('To enter use login: user, password: user12345.')}
 MESSAGE_SUCCESS = _("Login data sent to your email.")
-MESSAGE_CALLME = {'callme':_('We will contact you in the next hour.'),}
+MESSAGE_CALLME = {'callme':_('We will contact you in the next hour.')}
 
 # Client action messages
 ACTION_UNSUBSCRIBE = _('You have successfully unsubscribed from the emailing')

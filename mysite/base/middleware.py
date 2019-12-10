@@ -12,10 +12,8 @@ class LanguageMiddleware:
         # if language set to default in format 'en-us'
         if settings.LANGUAGE_CODE == 'en-us':
             user_language = str(request.META['HTTP_ACCEPT_LANGUAGE'][:2])
-            print('LANGUAGE_CODE_IF:{}'.format(user_language))
         else:
             user_language = settings.LANGUAGE_CODE
-            print('LANGUAGE_CODE_ELSE:{}'.format(user_language))
             
         translation.activate(user_language)
         request.session[translation.LANGUAGE_SESSION_KEY] = user_language

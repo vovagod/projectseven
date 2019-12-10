@@ -301,10 +301,10 @@ msgstr "Служба рассылки"
 
 #: templates/base/home.html:126
 msgid "Close window"
-msgstr "Закройте окно"
+msgstr "Закрыть окно"
 
 #: templates/base/home.html:128
-msgid "Window screenshot"
+msgid "Screenshot of"
 msgstr "Скриншот экрана"
 
 #: templates/base/home.html:150

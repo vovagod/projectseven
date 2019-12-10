@@ -23,9 +23,15 @@ from mysite.base.views import BaseRedirectView, emailview
 from promotion.views import promotionview
 from clients.views import download
 
+
 app_name = 'mysite'
 
-urlpatterns = i18n_patterns(
+
+urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
+    ]
+
+urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('home/', include('mysite.base.urls'), name='mysite-home'),
     path('', BaseRedirectView.as_view(), name='mysite-index'),
