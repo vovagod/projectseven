@@ -11,6 +11,7 @@ from django.urls import reverse
 from collections import namedtuple
 from mysite.mixins import RequestFormAttachMixin
 from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from .models import Clients
 from .forms import PreorderForm
 from mail.sendmail import send_mail
@@ -74,7 +75,7 @@ class ClientsActionView(DetailView):
         return context
 
 
-
+# for test, use example: '.../email/preorder/5605abb0-d0a0-4da8-a5f1-9869f7f498c2'
 class ClientsPreorderView(RequestFormAttachMixin, FormView):
 
     form_class = PreorderForm
@@ -120,7 +121,12 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
         return get_common_context(context)
 
     def form_valid(self, form):
-        message = {'text':'Client with uuid: '+self.uuid+' has made a preorder. Congratulation!'}
+        phrase = format_html("<h4>Client with UUID: <a href='http://{}/admin/clients/clients/{}/change/'>{}</a> has made a preorder.</h4>",
+                             '{}'.format(settings.DOMAIN),
+                             '{}'.format(self.uuid),
+                             '{}'.format(self.uuid),
+                             )
+        message = {'text': phrase}
         err = send_mail('Preorder made', 'admin', message, 'Admin', 'correspondence')
         if err:
             Clients.objects.filter(uuid=self.uuid).update(error_mailing=str(err)[1:-2])

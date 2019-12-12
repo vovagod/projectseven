@@ -18,6 +18,7 @@ from mysite.mixins import RequestFormAttachMixin
 from mysite.base.forms import ContactForm
 
 
+
 from .models import Base, Menu, SubMenu, Image
 from interaction.models import Contact
 from mail.sendmail import theme_search
@@ -69,7 +70,7 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
     def form_valid(self, form):
         message, self.success_message = theme_search(form.cleaned_data['content'])
-        form.send_email(message)
+        form.send_email(message1)
         return super(BaseView, self).form_valid(form)
 
 

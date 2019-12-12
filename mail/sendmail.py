@@ -12,7 +12,6 @@ from clients.models import Clients
 
 def theme_search(data):
     data_list = data.split(' ')
-    print('DATA-LIST:{}'.format(data_list))
     credentials = settings.CREDENTIALS
     callme = settings.CALLME
     success = settings.SUCCESS
@@ -22,7 +21,6 @@ def theme_search(data):
         success = settings.MESSAGE_SUCCESS
     if any(n in data_list for n in callme):
         message = settings.MESSAGE_CALLME
-    print('MESSAGE:{}, SUCCESS:{}'.format(message, success))
     return message, success
 
 

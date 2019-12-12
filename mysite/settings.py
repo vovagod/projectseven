@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+#import sys
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -66,8 +67,10 @@ MIDDLEWARE = [
 ]
 
 
-# Manager data
+# Admin, Manager data
 MANAGERS = ['chim73@mail.ru',]
+ADMINS = [('Comaex', 'gva008@gmail.com'), ('Comaex', 'chim73@mail.ru')]
+SERVER_EMAIL = 'comaex.info@comaex.info'
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -149,8 +152,8 @@ LANGUAGE_CODE = 'ru'
 #LANGUAGE_CODE = 'en'
 TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = True # was false
-USE_TZ = False  # was false
+USE_L10N = True 
+USE_TZ = False  
 
 LANGUAGES = [
     ('ru', _('RU')),
@@ -164,6 +167,52 @@ LOCALE_PATHS = (
 
 # DateTime format
 DATETIME_FORMAT = 'd-m-Y H:i' 
+
+#DEFAULT_EXCEPTION_REPORTER_FILTER = 'mysite.base.customfilter.CustomExceptionReporterFilter'
+
+from mysite.base.customfilter import CustomExceptionReporterFilter
+
+#@sensitive_post_parameters()
+def skip_extra_data(record):
+    print('RECORD:{}'.format(record.exc_info))
+    request = record.request
+    exc_value = record.exc_info
+    #exc_type, exc_value, tb = record.exc_info()
+    request.exception_reporter_filter = CustomExceptionReporterFilter(request, exc_type, exc_value, tb)
+    return True
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+    'skip_extra_data': {
+        '()': 'django.utils.log.CallbackFilter',
+        'callback': skip_extra_data,
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            #'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['skip_extra_data'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': False,
+            #'exception_reporter_filter': 'mysite.base.customfilter.CustomExceptionReporterFilter',
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins', 'console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    }
+    }
 
 
 # User settings
