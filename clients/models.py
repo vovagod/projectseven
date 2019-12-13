@@ -1,9 +1,11 @@
 import os
 import glob
 import uuid
+import locale
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext as _
+
 
 
 def get_filename_ext(filepath):
@@ -42,6 +44,7 @@ class Clients(models.Model):
                                       verbose_name=_('Language'), help_text=_("Select language"))
     persons        = models.CharField(max_length=120, blank=True, verbose_name=_('Company persons'))
     created        = models.DateTimeField(auto_now_add=True, verbose_name=_('Created'))
+    last_post      = models.DateTimeField(blank=True, null=True, verbose_name=_('Last post'))
     enable_mailing = models.BooleanField(default=True, verbose_name=_('Emailing'))
     interested     = models.BooleanField(default=False, verbose_name=_('Interest'))
     preorder       = models.BooleanField(default=False, verbose_name=_('Preorder'))
@@ -84,6 +87,7 @@ class Clients(models.Model):
 
     # get date of creation
     def get_date(self):
+        locale.setlocale(locale.LC_ALL, '')
         return self.created.strftime("%d %B %Y")
     
 

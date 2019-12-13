@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-#import sys
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -25,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*',]
@@ -103,10 +102,22 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
+#}
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'projectseven_db',
+        'USER': 'admin',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -153,7 +164,7 @@ LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True 
-USE_TZ = False  
+USE_TZ = True  
 
 LANGUAGES = [
     ('ru', _('RU')),
@@ -168,41 +179,26 @@ LOCALE_PATHS = (
 # DateTime format
 DATETIME_FORMAT = 'd-m-Y H:i' 
 
-#DEFAULT_EXCEPTION_REPORTER_FILTER = 'mysite.base.customfilter.CustomExceptionReporterFilter'
-
-from mysite.base.customfilter import CustomExceptionReporterFilter
-
-#@sensitive_post_parameters()
-def skip_extra_data(record):
-    print('RECORD:{}'.format(record.exc_info))
-    request = record.request
-    exc_value = record.exc_info
-    #exc_type, exc_value, tb = record.exc_info()
-    request.exception_reporter_filter = CustomExceptionReporterFilter(request, exc_type, exc_value, tb)
-    return True
-
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+
     'filters': {
-    'skip_extra_data': {
-        '()': 'django.utils.log.CallbackFilter',
-        'callback': skip_extra_data,
+    'require_debug_false': {
+        '()': 'django.utils.log.RequireDebugFalse',
         }
     },
     'handlers': {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            #'formatter': 'simple'
         },
         'mail_admins': {
             'level': 'ERROR',
-            'filters': ['skip_extra_data'],
-            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+            'class': 'mysite.base.customfilter.CustomAdminEmailHandler',
             'include_html': False,
-            #'exception_reporter_filter': 'mysite.base.customfilter.CustomExceptionReporterFilter',
         }
     },
     'loggers': {
@@ -233,7 +229,7 @@ LANG = (
     )
 
 
-# Subjects and templates for mail
+# Subjects and templates for emailing
 SUBJECT_MAIL = {
     'HVAC':_('Business proposition'),
     'Smart Home':_('Business proposition'),
@@ -253,7 +249,7 @@ TEMPLATE_MAIL = {
     }
 
 
-# Tick interval(must be 3600 sec)
+# Tick intervals (must be 3600 sec)
 SURVEY_TIME_ONE = 36
 SURVEY_TIME_TWO = 10
 SURVEY_TIME_THREE = 20
@@ -278,7 +274,7 @@ INTRODUCTION = _("<p style='text-align:justify'>&ensp;Please fill in the form fi
 ASTERISK = _("<p style='font-size: 14px; color:gray'>*change if not matching</p>")
 
 
-# Search phrases and response messages
+# Search phrases and responses messages
 CREDENTIALS = [_('login'), _('password'), _('enter'), _('data')]
 CALLME = [_('interested'), _('please'), _('call'), _('me')]
 SUCCESS = _("Your request has been sent successfully!")

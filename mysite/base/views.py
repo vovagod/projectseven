@@ -70,7 +70,7 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
     def form_valid(self, form):
         message, self.success_message = theme_search(form.cleaned_data['content'])
-        form.send_email(message1)
+        form.send_email(message)
         return super(BaseView, self).form_valid(form)
 
 

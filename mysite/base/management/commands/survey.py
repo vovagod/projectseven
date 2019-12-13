@@ -112,7 +112,7 @@ class SurveySix(Process):
 
 
 class Command(BaseCommand):
-    help = 'Cycle running script'
+    help = 'Cycles running script'
 
     def survey(self, *args):
        pass

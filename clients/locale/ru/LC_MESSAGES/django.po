@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-08 21:27+0300\n"
+"POT-Creation-Date: 2019-12-12 14:45+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,106 +20,114 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ClientsAdmin.py:35
+#: ClientsAdmin.py:36
 msgid "Client"
 msgstr "Клиент"
 
-#: ClientsAdmin.py:43
+#: ClientsAdmin.py:44
 msgid "Description"
 msgstr "Описание"
 
-#: ClientsAdmin.py:49
+#: ClientsAdmin.py:50
 msgid "Actions"
 msgstr "Действия"
 
-#: ClientsAdmin.py:57
+#: ClientsAdmin.py:58
 msgid "Mailing"
 msgstr "Рассылка"
 
-#: ClientsAdmin.py:73
+#: ClientsAdmin.py:74
 msgid "Promotion on this language does not exist"
 msgstr "Промоция на этом языке не существует"
 
-#: ClientsAdmin.py:77
+#: ClientsAdmin.py:78
 msgid "There was an error sending an email: "
 msgstr "Возникла ошибка при отправке сообщения: "
 
-#: ClientsAdmin.py:81
+#: ClientsAdmin.py:82
 msgid "Message was successfully sent to client"
 msgstr "Сообщение было успешно отправлено клиенту"
 
-#: ClientsAdmin.py:84
+#: ClientsAdmin.py:86
 msgid "Send message to client"
 msgstr "Отправить сообщение клиенту"
 
-#: ClientsAdmin.py:85
+#: ClientsAdmin.py:87
 msgid "Submit message"
 msgstr "Подтвердить сообщение"
 
-#: ClientsAdmin.py:101
+#: ClientsAdmin.py:97
+msgid "company created"
+msgstr "дата создания"
+
+#: ClientsAdmin.py:105
 msgid "theme of mailing"
 msgstr "тема рассылки"
 
-#: ClientsAdmin.py:106 ClientsAdmin.py:114 ClientsAdmin.py:123
-#: ClientsAdmin.py:132
+#: ClientsAdmin.py:110 ClientsAdmin.py:118 ClientsAdmin.py:127
+#: ClientsAdmin.py:136
 msgid "None"
 msgstr "Нету"
 
-#: ClientsAdmin.py:109
+#: ClientsAdmin.py:113
 msgid "mailing errors"
 msgstr "ошибки рассылки"
 
-#: ClientsAdmin.py:116
+#: ClientsAdmin.py:120
 msgid "Available"
 msgstr "Имеются"
 
-#: ClientsAdmin.py:118
+#: ClientsAdmin.py:122
 msgid "Errors"
 msgstr "Ошибки"
 
-#: ClientsAdmin.py:126
+#: ClientsAdmin.py:130
 msgid "path to folder"
 msgstr "путь к папке"
 
-#: ClientsAdmin.py:136
+#: ClientsAdmin.py:140
 msgid "Download file"
 msgstr "Загрузить файл"
 
-#: ClientsAdmin.py:141
+#: ClientsAdmin.py:145
 msgid "List of downloaded files"
 msgstr "Список загруженных файлов"
 
-#: forms.py:12
+#: forms.py:14
 msgid "Company name * "
 msgstr "Имя компании * "
 
-#: forms.py:14
+#: forms.py:16
 msgid "Contact person"
 msgstr "Контактное лицо"
 
-#: forms.py:14
+#: forms.py:16
 msgid "Peter Smith"
 msgstr "Иванов Иван"
 
-#: forms.py:16 models.py:33
+#: forms.py:18 models.py:33
 msgid "Company address"
 msgstr "Адрес компании"
 
-#: forms.py:16
+#: forms.py:18
 msgid "Moscow, Red Square 123"
 msgstr "Москва, ул. Абвгдейка 123"
 
-#: forms.py:18
+#: forms.py:20
 msgid "Email * "
 msgstr "Эл.почта * "
 
-#: forms.py:21
+#: forms.py:23
 msgid "Phone * "
 msgstr "Телефон * "
 
-#: forms.py:23
+#: forms.py:25
 msgid "Select files in the formats: pdf, doc, docx, jpg, png, xlsx, xls"
 msgstr "Выберете файлы в формате: pdf, doc, docx, jpg, png, xlsx, xls"
+
+#: forms.py:37
+msgid "Client with such UUID does not exist"
+msgstr ""
 
 #: models.py:30
 msgid "UUID Number"

@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.apps import apps
 
+
 # automatic registration module
 models = apps.get_models()
 for model in models:

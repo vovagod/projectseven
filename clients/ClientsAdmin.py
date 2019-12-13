@@ -94,6 +94,8 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
                            '{}'.format(instance.get_date())
                            )
     
+    company_created.short_description = _("company created")
+    
 
     def theme_of_mailing(self, instance):
         return format_html("<b>{}</b>",
