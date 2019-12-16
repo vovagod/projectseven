@@ -17,7 +17,7 @@ from mail.sendmail import send_mail
 
 
 class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
-    list_display = ['company', 'category', 'language', 'email', 'phone',
+    list_display = ['company', 'category', 'language', 'email', 'phone', 'counter',
                     'enable_mailing', 'interested', 'preorder', 'errors']
 
     search_fields = ('company', 'category',)
@@ -29,6 +29,7 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         'downloaded_files',
         'mailing_errors',
         'path_to_folder',
+        'last_post',
     )
     
 
@@ -36,8 +37,8 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         (_('Client'), {
             'fields': (
                 ('category', 'language'),
-                ('uuid'),
                 ('company', 'slug'),
+                ('address', 'uuid'),
                 ('email', 'phone'),
             )
         }),
@@ -57,7 +58,8 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         }),
         (_('Mailing'), {
             'fields': (
-                'theme_of_mailing', 
+                'theme_of_mailing',
+                'last_post',
             ),
         }),
         )
@@ -91,10 +93,18 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
 
     def company_created(self, instance):
         return format_html("<b>{}</b>",
-                           '{}'.format(instance.get_date())
+                           '{}'.format(instance.get_date(instance.created))
                            )
     
     company_created.short_description = _("company created")
+
+
+    def last_post(self, instance):
+        return format_html("<b>{}</b>",
+                           '{}'.format(instance.get_date(instance.last_post))
+                           )
+    
+    last_post.short_description = _("last post")
     
 
     def theme_of_mailing(self, instance):

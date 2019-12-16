@@ -99,26 +99,38 @@ STATICFILES_DIRS = ( BASE_DIR + '/mysite/base/static/',
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+DATABASE_ROUTERS = ['mysite.base.router.Router']
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 #DATABASES = {
-    #'default': {
+    #'default': {},
+    #'database_ru': {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
+    #},
 #}
 
 
 DATABASES = {
-    'default': {
+    'default': {},
+    'database_ru': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'projectseven_db',
         'USER': 'admin',
         'PASSWORD': '12345',
         'HOST': '127.0.0.1',
         'PORT': '5432',
-    }
+    },
+    
+    'database_en': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'projectseven_en',
+        'USER': 'admin_en',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    },
 }
 
 
@@ -128,6 +140,7 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -161,14 +174,15 @@ EMAIL_PORT = 587
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 LANGUAGE_CODE = 'ru'
 #LANGUAGE_CODE = 'en'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_L10N = True 
-USE_TZ = True  
+USE_TZ = True 
+
 
 LANGUAGES = [
-    ('ru', _('RU')),
-    ('en', _('EN')),
+    ('ru', _('Russian')),
+    ('en', _('English')),
 ]
 
 LOCALE_PATHS = (

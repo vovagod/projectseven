@@ -5,6 +5,7 @@ import locale
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext as _
+#from mysite.base.langinfo import LangInfo
 
 
 
@@ -69,25 +70,21 @@ class Clients(models.Model):
     def __str__(self):
         return self.company
 
-
     # get theme of mailing
     def get_theme(self):
         return self.category
-
 
     # get path of file
     def get_filepath(self):
         return self.filepath
 
-
     # get errors when mailing
     def get_errors(self):
         return self.error_mailing
 
-
-    # get date of creation
-    def get_date(self):
+    # get date of creation/last_post
+    def get_date(self, obj):
         locale.setlocale(locale.LC_ALL, '')
-        return self.created.strftime("%d %B %Y")
-    
+        return obj.strftime("%d %B %Y")
+
 

@@ -3,6 +3,7 @@ from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from .contact import Contact
+#from mysite.base.langinfo import LangInfo
 from mail.sendmail import send_mail
 from markdown import markdown
 

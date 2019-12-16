@@ -58,7 +58,7 @@ msgstr "Введите подзаголовок"
 
 #: models.py:51 models.py:121
 msgid "Sentence"
-msgstr ""
+msgstr "Предложение"
 
 #: models.py:52 models.py:122
 msgid "Enter a sentence"
@@ -70,7 +70,7 @@ msgstr "Текст"
 
 #: models.py:53 models.py:123
 msgid "Enter a text"
-msgstr ""
+msgstr "Введите текст"
 
 #: models.py:56 models.py:116
 msgid "Image"

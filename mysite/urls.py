@@ -19,16 +19,33 @@ from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.conf.urls.static import static
+
+from django.http import HttpResponseRedirect
+from django.urls import reverse, resolve
+from django.views.i18n import set_language
+
 from mysite.base.views import BaseRedirectView, emailview
 from promotion.views import promotionview
 from clients.views import download
 
+#from .urls import setlang
 
-app_name = 'mysite'
+app_name = 'mysite'    
+
+
+def setlang(request):
+    try:
+        del request.session['_lanuage']
+    except KeyError:
+        pass
+    print('We are in setlang')
+    return HttpResponseRedirect(reverse(set_language))
+    #return resolve('i18n/setlang/')
 
 
 urlpatterns = [
-    path('i18n/', include('django.conf.urls.i18n')),
+    #path('i18n/', include('django.conf.urls.i18n')),
+    path('i18n/setlang/', setlang, name='set_language'),
     ]
 
 urlpatterns += i18n_patterns(
@@ -44,4 +61,3 @@ urlpatterns += i18n_patterns(
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

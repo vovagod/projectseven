@@ -16,7 +16,7 @@ from django.core.cache import cache
 
 from mysite.mixins import RequestFormAttachMixin
 from mysite.base.forms import ContactForm
-
+from mysite.base.models import LangInfo
 
 
 from .models import Base, Menu, SubMenu, Image
@@ -41,6 +41,8 @@ class BaseRedirectView(RedirectView):
     url = '/home/'
 
     def get_redirect_url(self, *args, **kwargs):
+        #lang = LangInfo.objects.first()
+        #print('REDIRECT_LANG:{}'.format(lang.language))
         cache.set('part', kwargs.get('part'), 9)
         return super(BaseRedirectView, self).get_redirect_url(*args, **kwargs)
 
@@ -59,7 +61,8 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
     def get_context_data(self, *args, **kwargs):
         part = cache.get('part')
-        cache.clear()
+        #cache.clear()
+        cache.delete('part')
         context = super(BaseView, self).get_context_data(*args, **kwargs)
         context['part'] = part
         context['menus'] = Menu.objects.obj_auth(self.request)
@@ -69,8 +72,8 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
 
     def form_valid(self, form):
-        message, self.success_message = theme_search(form.cleaned_data['content'])
-        form.send_email(message)
+        info, self.success_message = theme_search(form.cleaned_data['content'])
+        form.send_email(info)
         return super(BaseView, self).form_valid(form)
 
 

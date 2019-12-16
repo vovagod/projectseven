@@ -61,7 +61,7 @@
              </div>
               <div class="w3-half w3-padding-large">
                   <p class="loop11 w3-center"><b>{{image.sentence}}</b></p>
-                  <p class="loop11 w3-left-align">{% filter linebreaksbr %}{{image.description|linebreaksbr}}{% endfilter %}</p>
+                  <p class="loop11 w3-left-align">{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
               </div>
         </div>
   </div>
@@ -71,36 +71,6 @@
 {% endfor %}
 </div>
 {% endif %}
-
-
-
-{% if content.submenu.subslug == '#price' %}
-<!-- PRICE MODULE -->
-<div id="technology" class="w3-container w3-padding w3-white" style="padding-top:16px">
-{% for about in content.base %}
-<p class="loop8 w3-center">{% ifchanged %}{{ about.title }}{% endifchanged %}</p>
-<p class="loop9 w3-center w3-large">{% ifchanged %}{{about.subtitle}}{% endifchanged %}</p>
-<p class="loop10 w3-left w3-large">{% ifchanged %}{{about.sentence}}{% endifchanged %}</p>
-<div class="w3-left">
-    <p class="loop11">{{ about.description }}</p>
-</div>
-{% endfor %}
-</div>
-{% endif %}
-
-{% if content.submenu.subslug == '#price_images' %}
-<!-- PRICE IMAGES MODULE-->
- <div class="w3-row-padding w3-center" style="margin-top:64px">
-     {% for image in content.base %}
-     <div class="w3-quarter">
-       <i class="{{image.sentence}} w3-margin-bottom w3-jumbo"></i>
-         <p class="loop8 w3-large">{{image.title}}</p>
-       <p class="loop11">{{image.description}}</p>
-     </div>
-     {% endfor %}
-</div>
-{% endif %}
-
 
 
 {% if content.submenu.subslug == '#specification' %}
@@ -239,6 +209,33 @@ style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" ti
   </div>
 {% endif %}
 
+
+{% if content.submenu.subslug == '#price' %}
+<!-- PRICE MODULE -->
+<div id="technology" class="w3-container w3-padding w3-white" style="padding-top:16px">
+{% for about in content.base %}
+<p class="loop8 w3-center">{% ifchanged %}{{ about.title }}{% endifchanged %}</p>
+<p class="loop9 w3-center w3-large">{% ifchanged %}{{about.subtitle}}{% endifchanged %}</p>
+<p class="loop10 w3-left w3-large">{% ifchanged %}{{about.sentence}}{% endifchanged %}</p>
+<div class="w3-left">
+    <p class="loop11">{{ about.description }}</p>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+
+{% if content.submenu.subslug == '#price_images' %}
+<!-- PRICE IMAGES MODULE-->
+ <div class="w3-row-padding w3-center" style="margin-top:64px">
+     {% for image in content.base %}
+     <div class="w3-quarter">
+       <i class="{{image.sentence}} w3-margin-bottom w3-jumbo"></i>
+         <p class="loop8 w3-large">{{image.title}}</p>
+       <p class="loop11">{{image.description}}</p>
+     </div>
+     {% endfor %}
+</div>
+{% endif %}
 
 
 {% if content.submenu.subslug == '#contact' %}

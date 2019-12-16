@@ -7,6 +7,7 @@ from django.core.files import File
 from django.utils.translation import ugettext as _
 from collections import OrderedDict
 from markdown import markdown
+#from .langinfo import LangInfo
 
 
 
@@ -24,6 +25,10 @@ def upload_image_path(instance, filename):
 
 def default_image_path():
     return '{}/no_image.png'.format(settings.MEDIA_ROOT)
+
+
+class LangInfo(models.Model):
+    language = models.CharField(max_length=100, default='en')
     
 
 class MenuManager(models.Manager):

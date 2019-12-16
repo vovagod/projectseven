@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-09 12:12+0300\n"
+"POT-Creation-Date: 2019-12-14 18:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,31 +20,31 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: forms.py:16
-msgid "Full name"
-msgstr "Полное имя"
-
-#: forms.py:17
-msgid "Email"
-msgstr "Эл.почта"
-
-#: forms.py:19
-msgid "Phone"
-msgstr "Телефон"
-
-#: forms.py:26
+#: forms.py:25
 msgid "Enter a message or select from the list..."
 msgstr "Введите сообщение или выберете из списка..."
 
-#: forms.py:39
+#: forms.py:33
+msgid "Phone"
+msgstr "Телефон"
+
+#: forms.py:34
+msgid "Email"
+msgstr "Эл.почта"
+
+#: forms.py:35
+msgid "Full name"
+msgstr "Полное имя"
+
+#: forms.py:43
 msgid "Enter a valid email address"
 msgstr "Введите корректный адрес эл.почты"
 
-#: forms.py:57
+#: forms.py:61
 msgid "Unable to get IP address"
 msgstr "Невозможно получить IP адрес"
 
-#: forms.py:65
+#: forms.py:69
 msgid "Request confirmation"
 msgstr "Подтверждение запроса"
 
@@ -273,13 +273,13 @@ msgstr "Закрыть"
 msgid "close the browser window if the button did not work"
 msgstr "Закройте окно браузера, если кнопка не сработала"
 
-#: templates/base/alert.html:142 templates/base/email.html:130
-#: templates/base/email.html:163 templates/base/proposition.html:15
+#: templates/base/alert.html:142 templates/base/email.html:131
+#: templates/base/email.html:164 templates/base/proposition.html:15
 #: templates/base/proposition.html:27
 msgid "Visit website"
 msgstr "Посетить сайт"
 
-#: templates/base/base.html:116
+#: templates/base/base.html:134
 msgid "To the start"
 msgstr "К началу"
 
@@ -295,43 +295,43 @@ msgstr "Перейти на cтраницу входа"
 msgid "Regards, Comaex Team"
 msgstr "С уважением, команда Comaex"
 
-#: templates/base/email.html:132
+#: templates/base/email.html:133
 msgid "Email service"
 msgstr "Служба рассылки"
 
-#: templates/base/home.html:126
+#: templates/base/home.html:96
 msgid "Close window"
 msgstr "Закрыть окно"
 
-#: templates/base/home.html:128
+#: templates/base/home.html:98
 msgid "Screenshot of"
 msgstr "Скриншот экрана"
 
-#: templates/base/home.html:150
+#: templates/base/home.html:120
 msgid "Screen of the"
 msgstr "Экран"
 
-#: templates/base/home.html:150
+#: templates/base/home.html:120
 msgid "Open in new window"
 msgstr "Открыть в новом окне"
 
-#: templates/base/home.html:258
+#: templates/base/home.html:255
 msgid "Contact"
 msgstr "Контакты"
 
-#: templates/base/home.html:260
+#: templates/base/home.html:257
 msgid "Call us: +7 985 482-85-88"
 msgstr "Звоните нам: +7 985 482-85-88"
 
-#: templates/base/home.html:260
+#: templates/base/home.html:257
 msgid "Write to us about cooperation, technical questions, login in "
 msgstr "Пишие нам по вопросам сотрудничества, техническим, данным входа в "
 
-#: templates/base/home.html:260
+#: templates/base/home.html:257
 msgid " and others:"
 msgstr " и другим:"
 
-#: templates/base/home.html:275 templates/base/preorder.html:27
+#: templates/base/home.html:272 templates/base/preorder.html:27
 msgid "Send"
 msgstr "Отправить"
 
@@ -351,6 +351,6 @@ msgstr "оценить идею"
 msgid "make pre-opder"
 msgstr "сделать предзаказ"
 
-#: views.py:30
+#: views.py:31
 msgid "Guest"
 msgstr "Гость"

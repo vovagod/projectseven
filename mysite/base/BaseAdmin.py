@@ -58,6 +58,7 @@ class BaseAdmin(admin.ModelAdmin):
             instance.desc_html = markdown(instance.description)
             instance.save()
         formset.save_m2m()
+
         
 
 def str_to_class(str):

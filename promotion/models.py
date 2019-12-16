@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 from django.http import Http404
 from collections import OrderedDict
 from markdown import markdown
+#from mysite.base.langinfo import LangInfo
 
 
 

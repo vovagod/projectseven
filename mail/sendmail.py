@@ -5,6 +5,7 @@ from django.utils.translation import ugettext as _
 from django.utils import translation
 from django.http import Http404
 from django.template.loader import get_template
+from datetime import datetime
 from smtplib import SMTPException
 from clients.models import Clients
 
@@ -34,18 +35,19 @@ def send_mail(subject, to, message, guest, template, lang='ru'):
     
     client_category, client_uuid = 'None', None
     #client = Clients.objects.get(email=to)
-    try:
-        #client = Clients.objects.get_pk(to)
-        client = Clients.objects.get(email=to)
-        client_category, client_uuid = client.category, client.uuid
-    except Clients.DoesNotExist:
+    if subject != 'no-reply':
         try:
-            admin = User.objects.get(username=to)
-            to = admin.email
-            guest = admin.username
-            client = None
-        except User.DoesNotExist:
-            raise Http404("Such user does not exist")
+            #client = Clients.objects.get_pk(to)
+            client = Clients.objects.get(email=to)
+            client_category, client_uuid = client.category, client.uuid
+        except Clients.DoesNotExist:
+            try:
+                admin = User.objects.get(username=to)
+                to = admin.email
+                guest = admin.username
+                client = None
+            except User.DoesNotExist:
+                raise Http404("Such user does not exist")
         
     msg = {}
     msg.update(settings.MSG)
@@ -68,6 +70,7 @@ def send_mail(subject, to, message, guest, template, lang='ru'):
     err = None
     try:
         msg.send()
+        Clients.objects.filter(uuid=client_uuid).update(last_post=datetime.today())
     except SMTPException as e:
         err = e
     return err

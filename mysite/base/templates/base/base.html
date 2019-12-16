@@ -24,7 +24,7 @@
       
      
       
-<!--<form style="display:inline-block; padding:12px 0px 12px 15px;" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+<form style="display:inline-block; padding:10px 0px 10px 15px;" action="{% url 'set_language' %}" method="post">{% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}" />
     <select style="width:60px" name="language" onchange="this.form.submit()">
         {% get_current_language as LANGUAGE_CODE %}
@@ -36,7 +36,7 @@
             </option>
         {% endfor %}
     </select>
-</form>-->
+</form>
      
       
       

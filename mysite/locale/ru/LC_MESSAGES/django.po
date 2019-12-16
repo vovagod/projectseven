@@ -108,7 +108,7 @@ msgstr "Вы успешно отписались от рассылки"
 
 #: settings.py:237
 msgid "Thank you for rating!"
-msgstr "Благодарим за оценку!"
+msgstr "Благодарим вас за оценку!"
 
 #: settings.py:238
 msgid "Thank you, your pre-order has been received!"

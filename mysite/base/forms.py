@@ -13,10 +13,9 @@ from ipware import get_client_ip
 
 class ContactForm(forms.Form):
     
-    fullname   = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Full name")}))
-    email      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Email")}),
-                                 validators=[validate_email])
-    phone      = forms.CharField(widget=forms.TextInput(attrs={"placeholder": _("Phone")}))
+    fullname   = forms.CharField()
+    email      = forms.CharField(validators=[validate_email])
+    phone      = forms.CharField()
     content    = forms.CharField()
 
 
@@ -24,12 +23,17 @@ class ContactForm(forms.Form):
         self.request = request
         choice_list = kwargs.pop('data_list', None)
         placeholder = _("Enter a message or select from the list...")
+        
         autocomplete = "off"
         super(ContactForm, self).__init__(*args, **kwargs)
         self.fields['content'].widget = ListTextWidget(data_list=choice_list, name='choice-list',
                                                        placeholder=placeholder,
                                                        autocomplete=autocomplete,
                                                        )
+        self.fields['phone'].widget = forms.TextInput(attrs={'placeholder':_("Phone")})
+        self.fields['email'].widget = forms.TextInput(attrs={'placeholder':_("Email")})
+        self.fields['fullname'].widget = forms.TextInput(attrs={'placeholder':_("Full name")})
+        
 
     def clean(self, *args):
         cleaned_data = super(ContactForm, self).clean()
@@ -58,11 +62,13 @@ class ContactForm(forms.Form):
                           subject=list(subject.keys())[0],
                           )
         message.save(force_insert=True)
+        #info, success = theme_search(cleaned_data['content'])
+        #self.send_email(info)
         return self.cleaned_data
    
 
     def send_email(self, message):
-        subject, to = _('Request confirmation'), self.cleaned_data.get("email")
+        subject, to = _('no-reply'), self.cleaned_data.get("email")
         guest, template = self.cleaned_data["fullname"], 'confirmation'
         send_mail(subject, to, message, guest, template)
         return
