@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.utils import translation
 from django.http import Http404
 from django.template.loader import get_template
+
 from datetime import datetime
 from smtplib import SMTPException
 from clients.models import Clients
@@ -28,13 +29,10 @@ def theme_search(data):
 def send_mail(subject, to, message, guest, template, lang='ru'):
 
     translation.activate(lang)
-    #with translation.override(lang):
-        
     from_email = settings.FROM
     html_file = get_template('base/'+template+'.html')
     
     client_category, client_uuid = 'None', None
-    #client = Clients.objects.get(email=to)
     if subject != 'no-reply':
         try:
             #client = Clients.objects.get_pk(to)

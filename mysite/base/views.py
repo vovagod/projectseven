@@ -1,24 +1,18 @@
-import time
-from datetime import datetime, timedelta
-from django.utils import timezone
-from django.utils.translation import ugettext as _
-
+#import time
+#from datetime import datetime, timedelta
+#from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.base import RedirectView
 from django.views.generic.edit import FormView
-
 from django.shortcuts import render_to_response # remove after
 from django.conf import settings
-
 from django.http import HttpResponseRedirect
 from django.core.cache import cache
 
 from mysite.mixins import RequestFormAttachMixin
 from mysite.base.forms import ContactForm
-from mysite.base.models import LangInfo
-
-
 from .models import Base, Menu, SubMenu, Image
 from interaction.models import Contact
 from mail.sendmail import theme_search
@@ -41,8 +35,6 @@ class BaseRedirectView(RedirectView):
     url = '/home/'
 
     def get_redirect_url(self, *args, **kwargs):
-        #lang = LangInfo.objects.first()
-        #print('REDIRECT_LANG:{}'.format(lang.language))
         cache.set('part', kwargs.get('part'), 9)
         return super(BaseRedirectView, self).get_redirect_url(*args, **kwargs)
 
@@ -61,7 +53,6 @@ class BaseView(RequestFormAttachMixin, SuccessMessageMixin, FormView):
 
     def get_context_data(self, *args, **kwargs):
         part = cache.get('part')
-        #cache.clear()
         cache.delete('part')
         context = super(BaseView, self).get_context_data(*args, **kwargs)
         context['part'] = part

@@ -2,7 +2,7 @@ from django import forms
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.http import Http404
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from .models import Clients
 
 

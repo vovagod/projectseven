@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 import time
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+
 from django.conf import settings
 from scheduler.models import Scheduler
 from clients.models import Clients

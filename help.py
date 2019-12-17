@@ -111,6 +111,12 @@
     
     pip install psycopg2
 
+    database dump:
+    pg_dump -h localhost -U admin_en -d projectseven_en > /home/vova/projectseven/projectseven_en.sql
+
+    database restore:
+    pg_restore -d projectseven_ru -h localhost -U admin_ru /home/vova/projectseven/projectseven_db.sql
+
     for tests.py: alter user blogger createdb;
 
     FATAL CONNECTION, increase max_connection and shared_buffers:

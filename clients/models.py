@@ -4,8 +4,7 @@ import uuid
 import locale
 from django.db import models
 from django.conf import settings
-from django.utils.translation import ugettext as _
-#from mysite.base.langinfo import LangInfo
+from django.utils.translation import ugettext_lazy as _
 
 
 

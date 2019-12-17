@@ -24,15 +24,15 @@
       
      
       
-<form style="display:inline-block; padding:10px 0px 10px 15px;" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+<form style="display:inline-block; padding:12px 0px 12px 10px;" action="{% url 'set_language' %}" method="post">{% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}" />
-    <select style="width:60px" name="language" onchange="this.form.submit()">
+    <select id="langSwitch" style="width:60px" name="language" onchange="this.form.submit()">
         {% get_current_language as LANGUAGE_CODE %}
         {% get_available_languages as LANGUAGES %}
         {% get_language_info_list for LANGUAGES as languages %}
         {% for language in languages %}
             <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-                {{ language.name_local }} ({{ language.code }})
+                {{ language.code|upper }}
             </option>
         {% endfor %}
     </select>
@@ -45,7 +45,7 @@
    
     {% for menu, submenu in menus.items %}
 <a id="m{{forloop.counter}}" {% if not submenu %} href="{{ menu.get_absolute_url }}" {% endif %}
-class="loop1 w3-button w3-bar-item w3-hover-white"><b style="border-bottom:2px solid" onclick="myUser({{forloop.counter}})" class="w3-hover-text-indigo w3-border-white w3-hover-border-indigo" data-attr="w3-text-indigo w3-border-indigo"><i class='{{menu.fafa}}' aria-hidden="true"></i>&nbsp;&nbsp;
+class="loop1 w3-button w3-bar-item w3-hover-white" style="padding-left: 14px;"><b style="border-bottom:2px solid" onclick="myUser({{forloop.counter}})" class="w3-hover-text-indigo w3-border-white w3-hover-border-indigo" data-attr="w3-text-indigo w3-border-indigo"><i class='{{menu.fafa}}' aria-hidden="true"></i>&nbsp;&nbsp;
 {% if menu.slug == 'user' %}{{user}}{% else %}{{menu.title}}{% endif %}
     {% if submenu %}&nbsp;<i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>{% endif %}</b></a>
         

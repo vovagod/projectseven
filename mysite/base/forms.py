@@ -4,7 +4,9 @@ from django.core.validators import validate_email
 #from django.contrib.gis.geoip import GeoIP
 from django.template import Context
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
+from django.utils import translation
+
 from interaction.models import Contact
 from .fields import ListTextWidget
 from mail.sendmail import send_mail, theme_search
@@ -62,15 +64,14 @@ class ContactForm(forms.Form):
                           subject=list(subject.keys())[0],
                           )
         message.save(force_insert=True)
-        #info, success = theme_search(cleaned_data['content'])
-        #self.send_email(info)
         return self.cleaned_data
    
 
     def send_email(self, message):
         subject, to = _('no-reply'), self.cleaned_data.get("email")
         guest, template = self.cleaned_data["fullname"], 'confirmation'
-        send_mail(subject, to, message, guest, template)
+        lang = translation.get_language()
+        send_mail(subject, to, message, guest, template, lang)
         return
 
 

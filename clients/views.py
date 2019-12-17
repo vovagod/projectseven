@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 from django.contrib import messages
 from django.conf import settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from collections import namedtuple

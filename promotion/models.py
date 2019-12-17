@@ -2,11 +2,11 @@ import os
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.http import Http404
+
 from collections import OrderedDict
 from markdown import markdown
-#from mysite.base.langinfo import LangInfo
 
 
 

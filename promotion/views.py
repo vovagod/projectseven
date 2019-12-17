@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.conf import settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.utils import translation
 from django.http import Http404
 from clients.models import Clients

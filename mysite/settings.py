@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'mysite.base.middleware.LanguageMiddleware',
+    'mysite.base.middleware.LanguageMiddleware',
 ]
 
 
@@ -101,11 +101,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASE_ROUTERS = ['mysite.base.router.Router']
 
+
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 #DATABASES = {
     #'default': {},
     #'database_ru': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #},
+    #'database_en': {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     #},
@@ -122,7 +127,6 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
     },
-    
     'database_en': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'projectseven_en',
@@ -289,8 +293,8 @@ ASTERISK = _("<p style='font-size: 14px; color:gray'>*change if not matching</p>
 
 
 # Search phrases and responses messages
-CREDENTIALS = [_('login'), _('password'), _('enter'), _('data')]
-CALLME = [_('interested'), _('please'), _('call'), _('me')]
+CREDENTIALS = [_('login'), _('password'), _('details'), _('send')]
+CALLME = [_('interested'), _('contact'), _('call'), _('me')]
 SUCCESS = _("Your request has been sent successfully!")
 MESSAGE_COMMON = {'common':_('We have received your message and will contact you shortly.')}
 MESSAGE_CREDENTIALS = {'credentials':_('To enter use login: user, password: user12345.')}
