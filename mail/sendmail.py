@@ -55,9 +55,10 @@ def send_mail(subject, to, message, guest, template, lang='ru'):
         
     msg.update({'guest': guest,
                 'content': message,
-                'unsubscribe': client_uuid,
-                'interested': client_uuid,
-                'preorder': client_uuid,
+                'category': client_category,
+                'uuid': client_uuid,
+                #'interested': client_uuid,
+                #'preorder': client_uuid,
                 'lang': lang.lower(),
                 })
     text_content = _('This is an important message')

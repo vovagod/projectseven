@@ -117,6 +117,9 @@
     database restore:
     pg_restore -d projectseven_ru -h localhost -U admin_ru /home/vova/projectseven/projectseven_db.sql
 
+    working method from psql:
+        psql databasename -f exportfilename.sql
+    
     for tests.py: alter user blogger createdb;
 
     FATAL CONNECTION, increase max_connection and shared_buffers:

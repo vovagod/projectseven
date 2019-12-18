@@ -10,6 +10,7 @@ class ImageInline(admin.StackedInline):
     extra = 1
     fields = (('name', 'image'),
               ('title', 'sentence'),
+              ('urllink'),
               ('description'),
               )
     exclude = ('slug',)

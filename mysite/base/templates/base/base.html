@@ -23,7 +23,6 @@
         <img src="{% static 'css/logo.png'  %}" alt="Comaex supervisor server"></a>
       
      
-      
 <form style="display:inline-block; padding:12px 0px 12px 10px;" action="{% url 'set_language' %}" method="post">{% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}" />
     <select id="langSwitch" style="width:60px" name="language" onchange="this.form.submit()">
@@ -38,7 +37,6 @@
     </select>
 </form>
      
-      
       
     <!-- Right-sided navbar links -->
     <div id="barMenu" class="w3-right w3-hide-small">

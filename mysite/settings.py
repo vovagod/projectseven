@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'mysite.base.middleware.LanguageMiddleware',
+    'mysite.middleware.LanguageMiddleware',
 ]
 
 
@@ -99,7 +99,7 @@ STATICFILES_DIRS = ( BASE_DIR + '/mysite/base/static/',
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-DATABASE_ROUTERS = ['mysite.base.router.Router']
+DATABASE_ROUTERS = ['mysite.router.Router']
 
 
 # Database
@@ -215,7 +215,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
-            'class': 'mysite.base.customfilter.CustomAdminEmailHandler',
+            'class': 'mysite.customfilter.CustomAdminEmailHandler',
             'include_html': False,
         }
     },
@@ -343,6 +343,7 @@ if DEBUG:
     
 # Comaex (HVAC, IoT, Smart Home) email template data
 MSG = {'letter':PATH+'letter.png',
+        'host':'https://'+DOMAIN,
         'url':'https://'+DOMAIN,
         'logo': PATH+'logo.png',
         'website':PATH+'website.png',
@@ -359,20 +360,20 @@ MSG = {'letter':PATH+'letter.png',
         'name': 'Comaex',
         'alt': 'Comaex server',
         'heading': _('Business proposition'),
-        'unsub':_('Unsubscribe'),
-        'inter':_('Interesting'),
-        'preord':_('Pre-order'),
+        'unsubscribe':_('Unsubscribe'),
+        'interest':_('Interesting'),
+        'preorder':_('Pre-order'),
         }
 
 # SFUGD email template data
 SFUGD = {'url':'http://'+SFUGD_DOMAIN,
         'logo': PATH+'sfugd.png',
-        'comaex_demo':COMAEX_DEMO,
+        #'comaex_demo':COMAEX_DEMO,
         'domain':SFUGD_DOMAIN,
         'title':SFUGD_TITLE,
         'name': 'SFUGD',
         'alt': 'Compact door',
         'heading': _('Compact door. Patent US8327908'),
-        'preord':_('Contact'),
+        'buy':_('Buy'),
         }
 

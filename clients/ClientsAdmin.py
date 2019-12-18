@@ -37,8 +37,8 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         (_('Client'), {
             'fields': (
                 ('category', 'language'),
-                ('company', 'slug'),
                 ('address', 'uuid'),
+                ('company', 'slug'),
                 ('email', 'phone'),
             )
         }),
