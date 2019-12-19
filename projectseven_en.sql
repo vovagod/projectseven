@@ -306,7 +306,8 @@ CREATE TABLE public.base_image (
     sentence character varying(120) NOT NULL,
     description text NOT NULL,
     name_id integer,
-    desc_html text NOT NULL
+    desc_html text NOT NULL,
+    urllink character varying(200) NOT NULL
 );
 
 
@@ -331,39 +332,6 @@ ALTER TABLE public.base_image_id_seq OWNER TO admin_en;
 --
 
 ALTER SEQUENCE public.base_image_id_seq OWNED BY public.base_image.id;
-
-
---
--- Name: base_langinfo; Type: TABLE; Schema: public; Owner: admin_en
---
-
-CREATE TABLE public.base_langinfo (
-    id integer NOT NULL,
-    language character varying(100) NOT NULL
-);
-
-
-ALTER TABLE public.base_langinfo OWNER TO admin_en;
-
---
--- Name: base_langinfo_id_seq; Type: SEQUENCE; Schema: public; Owner: admin_en
---
-
-CREATE SEQUENCE public.base_langinfo_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.base_langinfo_id_seq OWNER TO admin_en;
-
---
--- Name: base_langinfo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: admin_en
---
-
-ALTER SEQUENCE public.base_langinfo_id_seq OWNED BY public.base_langinfo.id;
 
 
 --
@@ -470,6 +438,8 @@ CREATE TABLE public.clients_clients (
     preorder boolean NOT NULL,
     language character varying(30) NOT NULL,
     last_post timestamp with time zone,
+    bid integer NOT NULL,
+    CONSTRAINT clients_clients_bid_check CHECK ((bid >= 0)),
     CONSTRAINT clients_clients_counter_check CHECK ((counter >= 0))
 );
 
@@ -688,13 +658,13 @@ ALTER SEQUENCE public.interaction_correspondence_id_seq OWNED BY public.interact
 
 CREATE TABLE public.promotion_image (
     id integer NOT NULL,
-    image character varying(100),
     slug character varying(50) NOT NULL,
     title character varying(120) NOT NULL,
     sentence character varying(120) NOT NULL,
     description text NOT NULL,
     desc_html text NOT NULL,
-    name_id integer
+    name_id integer,
+    urllink character varying(200) NOT NULL
 );
 
 
@@ -870,13 +840,6 @@ ALTER TABLE ONLY public.base_image ALTER COLUMN id SET DEFAULT nextval('public.b
 -- Name: id; Type: DEFAULT; Schema: public; Owner: admin_en
 --
 
-ALTER TABLE ONLY public.base_langinfo ALTER COLUMN id SET DEFAULT nextval('public.base_langinfo_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: admin_en
---
-
 ALTER TABLE ONLY public.base_menu ALTER COLUMN id SET DEFAULT nextval('public.base_menu_id_seq'::regclass);
 
 
@@ -1044,7 +1007,7 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 51, true);
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$100000$awaKUAXoIUK4$uSZhMYHqsUDZkHLmaQy68NLGSPlq8+1ZTOScYWB/YI4=	2019-12-16 20:37:16.437455+03	t	admin			gva008@gmail.com	t	t	2019-12-14 11:49:48.06374+03
+1	pbkdf2_sha256$100000$awaKUAXoIUK4$uSZhMYHqsUDZkHLmaQy68NLGSPlq8+1ZTOScYWB/YI4=	2019-12-17 22:44:44.588708+03	t	admin			gva008@gmail.com	t	t	2019-12-14 11:49:48.06374+03
 \.
 
 
@@ -1102,12 +1065,12 @@ COPY public.base_base (id, title, slug, subtitle, sentence, description, desc_ht
 16	HVAC Systems	application-images			&emsp; This is the direction of climate systems - heating, ventilation, air conditioning. A very popular area for the application of supervisor technologies, since any commercial or industrial facility from the basement to the roof is equipped with HVAC equipment that needs to be monitored. This technology is called object scheduling. The Comaex server is perfectly suited for this purpose, since any HVAC equipment has controllers with its standard software, for a lot of which Comaex has ready-made templates and visualization mimics.	<p>&emsp; This is the direction of climate systems - heating, ventilation, air conditioning. A very popular area for the application of supervisor technologies, since any commercial or industrial facility from the basement to the roof is equipped with HVAC equipment that needs to be monitored. This technology is called object scheduling. The Comaex server is perfectly suited for this purpose, since any HVAC equipment has controllers with its standard software, for a lot of which Comaex has ready-made templates and visualization mimics.</p>	application-images/app1.jpg	0		2019-12-14 15:22:37.038922+03	f					Application images
 17	Smart Home	application-images			&emsp; Monitoring security, climate and the ability to manage the engineering systems of a dwelling has recently become increasingly interesting. The Comaex server is able to fully provide this feature, since it can exchange data with any controllers. In addition, ready-made configuration templates for complex devices, such as ventilation and heating equipment, as well as mimic diagrams for them are already available in the server repositories. This greatly facilitates and accelerates the creation of a smart home.	<p>&emsp; Monitoring security, climate and the ability to manage the engineering systems of a dwelling has recently become increasingly interesting. The Comaex server is able to fully provide this feature, since it can exchange data with any controllers. In addition, ready-made configuration templates for complex devices, such as ventilation and heating equipment, as well as mimic diagrams for them are already available in the server repositories. This greatly facilitates and accelerates the creation of a smart home.</p>	application-images/app2.jpg	0		2019-12-14 15:24:02.454075+03	f					Application images
 18	Internet of Things	application-images			&emsp; A new direction in the digital world, where the main idea is to provide any electronic device with access to the global Internet. The technology finds practical application in the fields of obtaining data from various sensors and counters. It has great growth potential, but is constrained by a natural obstacle in the form of exhaustion of IP addresses of ipv4 protocol. Therefore, the transfer of data to IoT devices is difficult, since for this each device must have its own individual IP address. Comaex can solve this problem because it is physically a hub - it has one external IP address interacting with hundreds of internal devices in both directions.	<p>&emsp; A new direction in the digital world, where the main idea is to provide any electronic device with access to the global Internet. The technology finds practical application in the fields of obtaining data from various sensors and counters. It has great growth potential, but is constrained by a natural obstacle in the form of exhaustion of IP addresses of ipv4 protocol. Therefore, the transfer of data to IoT devices is difficult, since for this each device must have its own individual IP address. Comaex can solve this problem because it is physically a hub - it has one external IP address interacting with hundreds of internal devices in both directions.</p>	application-images/app3.jpg	0		2019-12-14 15:25:33.156561+03	f					Application images
-5	Supervisor Server Comaex	comaex			&emsp; Comaex server is a supervisor level monitoring and control system for HVAC systems, smart home and Internet facilities. It is a <a onclick="document.getElementById('id01').style.display='block'" style="color:red; cursor: pointer;"> compact device </a>, designed to connect to controllers: <ul style = "font-style: italic;"> <li> light control; </li> <li> control of various drives - blinds or locks for example; </li> <li> data transmission from various sensors - movement , temperature, humidity, pressure, etc .; </li> <li> the transmission of information from resource meters - water, gas, electricity; </li> <li> management of complex engineering equipment -ventilation machines, heat points, boilers and other microprocessor-controlled devices. </li> </ul> &emsp; Data exchange with controllers is carried out using the Modbus RTU protocol, the server can be connected to control devices via cable or wirelessly using <a onclick = "document.getElementById ('id02'). style.display = 'block'" style = "color: red; cursor: pointer;"> radio module </a>. <br>\r\n&emsp; Entering the device’s device configuration parameters is done manually through the admin panel or by downloading a special xls-file. This file is a data entry template and allows you to start the supervisor server in a matter of minutes. Together with the configuration file, mnemonic diagrams of objects are added to create visualization pages. After entering this data, an automatic object management interface is formed and the server is ready to work. <br>\r\n&emsp; The control interface is available on a computer, smartphone or tablet. At the same time, the device can operate both in the local Wi-Fi network of the object and from the global Internet. <br>\r\n&emsp; The server has a capacity of up to 1000 data points and up to 20 slave devices, which is more than enough for most objects. You can see the real sample in the work here: <a href = "http://comaex.ddns.net" style = "color: red; cursor: pointer;" target = "_ blank"> Comaex Demo </a>. If you don’t have login information, request it via <a href="#contact" style="color:red; cursor: pointer;"> Contacts </a>.	<p>&emsp; Comaex server is a supervisor level monitoring and control system for HVAC systems, smart home and Internet facilities. It is a <a onclick="document.getElementById('id01').style.display='block'" style="color:red; cursor: pointer;"> compact device </a>, designed to connect to controllers: <ul style = "font-style: italic;"> <li> light control; </li> <li> control of various drives - blinds or locks for example; </li> <li> data transmission from various sensors - movement , temperature, humidity, pressure, etc .; </li> <li> the transmission of information from resource meters - water, gas, electricity; </li> <li> management of complex engineering equipment -ventilation machines, heat points, boilers and other microprocessor-controlled devices. </li> </ul> &emsp; Data exchange with controllers is carried out using the Modbus RTU protocol, the server can be connected to control devices via cable or wirelessly using <a onclick = "document.getElementById ('id02'). style.display = 'block'" style = "color: red; cursor: pointer;"> radio module </a>. <br>\n&emsp; Entering the device’s device configuration parameters is done manually through the admin panel or by downloading a special xls-file. This file is a data entry template and allows you to start the supervisor server in a matter of minutes. Together with the configuration file, mnemonic diagrams of objects are added to create visualization pages. After entering this data, an automatic object management interface is formed and the server is ready to work. <br>\n&emsp; The control interface is available on a computer, smartphone or tablet. At the same time, the device can operate both in the local Wi-Fi network of the object and from the global Internet. <br>\n&emsp; The server has a capacity of up to 1000 data points and up to 20 slave devices, which is more than enough for most objects. You can see the real sample in the work here: <a href = "http://comaex.ddns.net" style = "color: red; cursor: pointer;" target = "_ blank"> Comaex Demo </a>. If you don’t have login information, request it via <a href="#contact" style="color:red; cursor: pointer;"> Contacts </a>.</p>	comaex/no_image.jpg	0		2019-12-14 13:06:03.186414+03	f					Comaex
 6	Specification	specification			&emsp; Comaex has a full range of supervisor functions, such as: control, management, recording, visualization, alarm, reports. <br>\r\n&emsp; The function <a href="#control" style="color:red; cursor: pointer;"> Control </a> is responsible for receiving data, such as temperature, pressure, etc. from remote devices and displaying them on the interface screen. Another important part of the control is receiving signals <a href="#alarms" style="color:red; cursor: pointer;"> Alarms </a> or <a href = "# events" style = "color: red; cursor : pointer; "> Events </a> that occurred with the devices of the object.\r\n&emsp; Function <a href="#management" style="color:red; cursor: pointer;"> Control </a> transmits control signals, for example, enable / disable, as well as data in the form <a href = " #setpoint "style =" color: red; cursor: pointer; "> Setpoints </a>, for example, set the room temperature. <br>\r\n&emsp; In addition to exchanging data with devices, the server records information. These are the sections <a href="#charts" style="color:red; cursor: pointer:"> Charts </a> and <a href="#events" style="color:red; cursor: pointer;"> Archive of events </a> of the interface. In the Charts section, information from control sensors is displayed, and in the Events archive section, events of the control object are recorded. All recorded information can be printed in PDF format. <br>\r\n&emsp; The next important interface function is the <a href="#visualization" style="color:red; cursor: pointer;"> Visualization </a> section, which displays a mnemonic diagram of a device or object to which all control information and elements are displayed facility management. This is a visual and convenient function for instantly assessing the state of an object. <br>\r\n&emsp; To view all the devices and all their parameters, there is a section <a href="#all" style="color:red; cursor: pointer;"> ALL </a> located in the first line of the left menu. <br>\r\n&emsp; And finally, the Alarm function will inform you about an emergency event by mail or SMS message on your mobile phone. It can be any event that needs to be known immediately in order to take action in time. <br>\r\n&emsp; Below is a description of each functional state and screenshots of the interface screens are shown:	<p>&emsp; Comaex has a full range of supervisor functions, such as: control, management, recording, visualization, alarm, reports. <br>\n&emsp; The function <a href="#control" style="color:red; cursor: pointer;"> Control </a> is responsible for receiving data, such as temperature, pressure, etc. from remote devices and displaying them on the interface screen. Another important part of the control is receiving signals <a href="#alarms" style="color:red; cursor: pointer;"> Alarms </a> or <a href = "# events" style = "color: red; cursor : pointer; "> Events </a> that occurred with the devices of the object.\n&emsp; Function <a href="#management" style="color:red; cursor: pointer;"> Control </a> transmits control signals, for example, enable / disable, as well as data in the form <a href = " #setpoint "style =" color: red; cursor: pointer; "> Setpoints </a>, for example, set the room temperature. <br>\n&emsp; In addition to exchanging data with devices, the server records information. These are the sections <a href="#charts" style="color:red; cursor: pointer:"> Charts </a> and <a href="#events" style="color:red; cursor: pointer;"> Archive of events </a> of the interface. In the Charts section, information from control sensors is displayed, and in the Events archive section, events of the control object are recorded. All recorded information can be printed in PDF format. <br>\n&emsp; The next important interface function is the <a href="#visualization" style="color:red; cursor: pointer;"> Visualization </a> section, which displays a mnemonic diagram of a device or object to which all control information and elements are displayed facility management. This is a visual and convenient function for instantly assessing the state of an object. <br>\n&emsp; To view all the devices and all their parameters, there is a section <a href="#all" style="color:red; cursor: pointer;"> ALL </a> located in the first line of the left menu. <br>\n&emsp; And finally, the Alarm function will inform you about an emergency event by mail or SMS message on your mobile phone. It can be any event that needs to be known immediately in order to take action in time. <br>\n&emsp; Below is a description of each functional state and screenshots of the interface screens are shown:</p>	specification/no_image.jpg	0		2019-12-14 13:47:52.20612+03	f					Specification
 7	Monitoring	control	Section Monitoring	An example of the "Parter" screen	&emsp; We begin our introduction to the Comaex server interface using the “Control” page as an example. A menu is located on the left side of the screen, where the first line is a link to the "ALL" page, which displays all the observed parameters of all devices. The following is a list of categories of objects that combine the devices monitored by the server. Colored circles to the left of devices / objects show their current status: green - no accidents, yellow - warning, red - accident.\r\n&emsp; By clicking on the “Control” tab, you will be redirected to the specified page on which a table of values ​​of the monitored parameters is displayed. Information is updated at intervals of 2-5 seconds.	<p>&emsp; We begin our introduction to the Comaex server interface using the “Control” page as an example. A menu is located on the left side of the screen, where the first line is a link to the "ALL" page, which displays all the observed parameters of all devices. The following is a list of categories of objects that combine the devices monitored by the server. Colored circles to the left of devices / objects show their current status: green - no accidents, yellow - warning, red - accident.\n&emsp; By clicking on the “Control” tab, you will be redirected to the specified page on which a table of values ​​of the monitored parameters is displayed. Information is updated at intervals of 2-5 seconds.</p>	specification-images/control_2.jpg	0		2019-12-14 14:02:31.602542+03	f	blue		fa fa-thermometer-full		Specification images
 8	Control	management	Section Control	An example of ''Recuperator"screen	&emsp; Selecting the desired device in the left menu and clicking on the "Management" tab will take you to this page. Here you can send the selected command to the “Recuperator” device (highlighted in blue in the device menu) by clicking on the “Change” field.\r\n&emsp; After the command has been confirmed, the status will be reversed.	<p>&emsp; Selecting the desired device in the left menu and clicking on the "Management" tab will take you to this page. Here you can send the selected command to the “Recuperator” device (highlighted in blue in the device menu) by clicking on the “Change” field.\n&emsp; After the command has been confirmed, the status will be reversed.</p>	management/management_1_b4R8DFF.jpg	0		2019-12-14 14:22:32.078815+03	f	blue		fa fa-toggle-on		Specification images
 9	Setpoints	setpoint	Section Setpoints	An example of "Parter"screen	&emsp; The “Settings” page is intended for changing the parameters that must be entered into the selected device. Additionally, the page contains a selector for selecting the step for changing the value - “count interval”.\r\n&emsp; After entering a new value, it is necessary to confirm it by clicking on the "confirm" field.	<p>&emsp; The “Settings” page is intended for changing the parameters that must be entered into the selected device. Additionally, the page contains a selector for selecting the step for changing the value - “count interval”.\n&emsp; After entering a new value, it is necessary to confirm it by clicking on the "confirm" field.</p>	setpoint/setpoints_1_UsbTakR.jpg	0		2019-12-14 14:27:18.507528+03	f	blue		fa fa-sliders		Specification images
 10	Alarms	alarms	Section Alarms	An example of "Recuperator" screen	&emsp; By clicking on the “Accidents” tab, you will be redirected to this page. A list of alarms for the selected device / object is displayed here. Their status is updated at intervals of 2 seconds.	<p>&emsp; By clicking on the “Accidents” tab, you will be redirected to this page. A list of alarms for the selected device / object is displayed here. Their status is updated at intervals of 2 seconds.</p>	alarms/alarms_1_iZuUeya.jpg	0		2019-12-14 14:30:58.502446+03	f	blue		fa fa-bell-o		Specification images
+5	Supervisor Server Comaex	comaex			&emsp; Comaex server is a supervisor level monitoring and control system for HVAC systems, smart home and Internet facilities. It is a <a onclick="document.getElementById('id01').style.display='block'" style="color:red; cursor: pointer;"> compact device </a>, designed to connect to controllers: <ul style = "font-style: italic;"> <li> light control; </li> <li> control of various drives - blinds or locks for example; </li> <li> data transmission from various sensors - movement , temperature, humidity, pressure, etc .; </li> <li> the transmission of information from resource meters - water, gas, electricity; </li> <li> management of complex engineering equipment -ventilation machines, heat points, boilers and other microprocessor-controlled devices. </li> </ul> &emsp; Data exchange with controllers is carried out using the Modbus RTU protocol, the server can be connected to control devices via cable or wirelessly using <a onclick = "document.getElementById ('id02'). style.display = 'block'" style = "color: red; cursor: pointer;"> radio module </a>. <br><p>&emsp; Entering the device’s device configuration parameters is done manually through the admin panel or by downloading a special xls-file. This file is a data entry template and allows you to start the supervisor server in a matter of minutes. Together with the configuration file, mnemonic diagrams of objects are added to create visualization pages. After entering this data, an automatic object management interface is formed and the server is ready to work. <br>\r\n&emsp; The control interface is available on a computer, smartphone or tablet. At the same time, the device can operate both in the local Wi-Fi network of the object and from the global Internet. <br>\r\n&emsp; The server has a capacity of up to 1000 data points and up to 20 slave devices, which is more than enough for most objects. You can see the real sample in the work here: <a href = "http://comaex.ddns.net" style = "color: red; cursor: pointer;" target = "_ blank"> Comaex Demo </a>. If you don’t have login information, request it via <a href="#contact" style="color:red; cursor: pointer;"> Contacts </a>.</p>	<p>&emsp; Comaex server is a supervisor level monitoring and control system for HVAC systems, smart home and Internet facilities. It is a <a onclick="document.getElementById('id01').style.display='block'" style="color:red; cursor: pointer;"> compact device </a>, designed to connect to controllers: <ul style = "font-style: italic;"> <li> light control; </li> <li> control of various drives - blinds or locks for example; </li> <li> data transmission from various sensors - movement , temperature, humidity, pressure, etc .; </li> <li> the transmission of information from resource meters - water, gas, electricity; </li> <li> management of complex engineering equipment -ventilation machines, heat points, boilers and other microprocessor-controlled devices. </li> </ul> &emsp; Data exchange with controllers is carried out using the Modbus RTU protocol, the server can be connected to control devices via cable or wirelessly using <a onclick = "document.getElementById ('id02'). style.display = 'block'" style = "color: red; cursor: pointer;"> radio module </a>. <br><p>&emsp; Entering the device’s device configuration parameters is done manually through the admin panel or by downloading a special xls-file. This file is a data entry template and allows you to start the supervisor server in a matter of minutes. Together with the configuration file, mnemonic diagrams of objects are added to create visualization pages. After entering this data, an automatic object management interface is formed and the server is ready to work. <br>\n&emsp; The control interface is available on a computer, smartphone or tablet. At the same time, the device can operate both in the local Wi-Fi network of the object and from the global Internet. <br>\n&emsp; The server has a capacity of up to 1000 data points and up to 20 slave devices, which is more than enough for most objects. You can see the real sample in the work here: <a href = "http://comaex.ddns.net" style = "color: red; cursor: pointer;" target = "_ blank"> Comaex Demo </a>. If you don’t have login information, request it via <a href="#contact" style="color:red; cursor: pointer;"> Contacts </a>.</p></p>	comaex/no_image.jpg	0		2019-12-14 13:06:03.186414+03	f					Comaex
 \.
 
 
@@ -1122,12 +1085,12 @@ SELECT pg_catalog.setval('public.base_base_id_seq', 18, true);
 -- Data for Name: base_image; Type: TABLE DATA; Schema: public; Owner: admin_en
 --
 
-COPY public.base_image (id, image, slug, title, sentence, description, name_id, desc_html) FROM stdin;
-1	comaex/Mini_PC_1.jpg	comaex	Supervisor Server Comaex	Specifications:	<ul><li>Processor: Intel Dual Core i5-4200Y</li><li>RAM: RAM4GB</li><li>ROM: SSD30GB</li><li>Interface: 4 * USB3.0, 2 * USB2.0, 1000Mbps BaseT LAN, 802.11 b/g/n WiFi</li><li>Case type: aluminum heat sink</li><li>Dimensions: 133x124x40 mm</li></ul>	5	<ul><li>Processor: Intel Dual Core i5-4200Y</li><li>RAM: RAM4GB</li><li>ROM: SSD30GB</li><li>Interface: 4 * USB3.0, 2 * USB2.0, 1000Mbps BaseT LAN, 802.11 b/g/n WiFi</li><li>Case type: aluminum heat sink</li><li>Dimensions: 133x124x40 mm</li></ul>
-2	comaex/E800_DTU.jpg	comaex	Radio module E800-DTU	Specifications:	<ul><li>Operating frequency: 433 MHz</li><li>Transmit Power: 30 dBm</li><li>Transfer rate: 1.2-115.2 kbps</li><li>antenna type: SMA-K</li><li>comm interface: RS232 / RS485</li><li>communication range: 2500 m</li><li>dimensions: 66x66x21 mm</li></ul>	5	<ul><li>Operating frequency: 433 MHz</li><li>Transmit Power: 30 dBm</li><li>Transfer rate: 1.2-115.2 kbps</li><li>antenna type: SMA-K</li><li>comm interface: RS232 / RS485</li><li>communication range: 2500 m</li><li>dimensions: 66x66x21 mm</li></ul>
-3	charts/charts_2_3TTeS9f.jpg	charts		An example of "Recuperator" screen. The output mode of the table of values.	&emsp; This screenshot shows the output of the table of values ​​of the selected parameter. The output of the table is possible both in static mode and in dynamic mode “REAL TIME”.	11	<p>&emsp; This screenshot shows the output of the table of values ​​of the selected parameter. The output of the table is possible both in static mode and in dynamic mode “REAL TIME”.</p>
-5	visualization/vizualization_3_DFLnKOR.jpg	visualization		An example of "Recuperator" screen.	&emsp; This screenshot shows an example of the “Parterre” object with the following functionality:\r\n&emsp; &emsp; - temperature, humidity, electricity, gas, cold and hot water meters (value),\r\n&emsp; &emsp; - motion sensors, smoke sensors, fire (event),\r\n&emsp; &emsp; - blinds, door locks, lighting (control),\r\n&emsp; &emsp; - temperature, humidity (settings)	13	<p>&emsp; This screenshot shows an example of the “Parterre” object with the following functionality:\n&emsp; &emsp; - temperature, humidity, electricity, gas, cold and hot water meters (value),\n&emsp; &emsp; - motion sensors, smoke sensors, fire (event),\n&emsp; &emsp; - blinds, door locks, lighting (control),\n&emsp; &emsp; - temperature, humidity (settings)</p>
-4	charts/charts_3_C2aNcJZ.jpg	charts		An example of "Recuperator" screen. Chart overlay mode.	&emsp; In this screenshot, three graphs are displayed in the overlay mode. You can add up to 2 additional parameters to the main schedule only if the recording intervals are equal.	11	<p>&emsp; In this screenshot, three graphs are displayed in the overlay mode. You can add up to 2 additional parameters to the main schedule only if the recording intervals are equal.</p>
+COPY public.base_image (id, image, slug, title, sentence, description, name_id, desc_html, urllink) FROM stdin;
+1	comaex/Mini_PC_1.jpg	comaex	Supervisor Server Comaex	Specifications:	<ul><li>Processor: Intel Dual Core i5-4200Y</li><li>RAM: RAM4GB</li><li>ROM: SSD30GB</li><li>Interface: 4 * USB3.0, 2 * USB2.0, 1000Mbps BaseT LAN, 802.11 b/g/n WiFi</li><li>Case type: aluminum heat sink</li><li>Dimensions: 133x124x40 mm</li></ul>	5	<ul><li>Processor: Intel Dual Core i5-4200Y</li><li>RAM: RAM4GB</li><li>ROM: SSD30GB</li><li>Interface: 4 * USB3.0, 2 * USB2.0, 1000Mbps BaseT LAN, 802.11 b/g/n WiFi</li><li>Case type: aluminum heat sink</li><li>Dimensions: 133x124x40 mm</li></ul>	
+2	comaex/E800_DTU.jpg	comaex	Radio module E800-DTU	Specifications:	<ul><li>Operating frequency: 433 MHz</li><li>Transmit Power: 30 dBm</li><li>Transfer rate: 1.2-115.2 kbps</li><li>antenna type: SMA-K</li><li>comm interface: RS232 / RS485</li><li>communication range: 2500 m</li><li>dimensions: 66x66x21 mm</li></ul>	5	<ul><li>Operating frequency: 433 MHz</li><li>Transmit Power: 30 dBm</li><li>Transfer rate: 1.2-115.2 kbps</li><li>antenna type: SMA-K</li><li>comm interface: RS232 / RS485</li><li>communication range: 2500 m</li><li>dimensions: 66x66x21 mm</li></ul>	
+3	charts/charts_2_3TTeS9f.jpg	charts		An example of "Recuperator" screen. The output mode of the table of values.	&emsp; This screenshot shows the output of the table of values ​​of the selected parameter. The output of the table is possible both in static mode and in dynamic mode “REAL TIME”.	11	<p>&emsp; This screenshot shows the output of the table of values ​​of the selected parameter. The output of the table is possible both in static mode and in dynamic mode “REAL TIME”.</p>	
+5	visualization/vizualization_3_DFLnKOR.jpg	visualization		An example of "Recuperator" screen.	&emsp; This screenshot shows an example of the “Parterre” object with the following functionality:\r\n&emsp; &emsp; - temperature, humidity, electricity, gas, cold and hot water meters (value),\r\n&emsp; &emsp; - motion sensors, smoke sensors, fire (event),\r\n&emsp; &emsp; - blinds, door locks, lighting (control),\r\n&emsp; &emsp; - temperature, humidity (settings)	13	<p>&emsp; This screenshot shows an example of the “Parterre” object with the following functionality:\n&emsp; &emsp; - temperature, humidity, electricity, gas, cold and hot water meters (value),\n&emsp; &emsp; - motion sensors, smoke sensors, fire (event),\n&emsp; &emsp; - blinds, door locks, lighting (control),\n&emsp; &emsp; - temperature, humidity (settings)</p>	
+4	charts/charts_3_C2aNcJZ.jpg	charts		An example of "Recuperator" screen. Chart overlay mode.	&emsp; In this screenshot, three graphs are displayed in the overlay mode. You can add up to 2 additional parameters to the main schedule only if the recording intervals are equal.	11	<p>&emsp; In this screenshot, three graphs are displayed in the overlay mode. You can add up to 2 additional parameters to the main schedule only if the recording intervals are equal.</p>	
 \.
 
 
@@ -1136,21 +1099,6 @@ COPY public.base_image (id, image, slug, title, sentence, description, name_id, 
 --
 
 SELECT pg_catalog.setval('public.base_image_id_seq', 5, true);
-
-
---
--- Data for Name: base_langinfo; Type: TABLE DATA; Schema: public; Owner: admin_en
---
-
-COPY public.base_langinfo (id, language) FROM stdin;
-\.
-
-
---
--- Name: base_langinfo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_en
---
-
-SELECT pg_catalog.setval('public.base_langinfo_id_seq', 1, false);
 
 
 --
@@ -1183,11 +1131,11 @@ COPY public.base_submenu (id, subtitle, subslug, submark, subfafa, subcolor, sub
 4	Specification images	#specification_images	0			Specification
 5	Application	#application	1			Application
 6	Application images	#application_images	0			Application
-7	Portfolio	#portfolio	1			Application
-8	Cost	#price	1			Application
-9	Cost images	#price_images	0			Application
 10	Contact	#contact	1			Info
-11	News	#news	1			Info
+11	News	#news	0			Info
+7	Portfolio	portfolio	0			Application
+8	Cost	price	0			Application
+9	Cost images	price_images	0			Application
 \.
 
 
@@ -1202,7 +1150,7 @@ SELECT pg_catalog.setval('public.base_submenu_id_seq', 11, true);
 -- Data for Name: clients_clients; Type: TABLE DATA; Schema: public; Owner: admin_en
 --
 
-COPY public.clients_clients (company, email, phone, about, area, persons, created, enable_mailing, interested, flag, category, counter, uuid, error_mailing, file, slug, address, email2, filepath, preorder, language, last_post) FROM stdin;
+COPY public.clients_clients (company, email, phone, about, area, persons, created, enable_mailing, interested, flag, category, counter, uuid, error_mailing, file, slug, address, email2, filepath, preorder, language, last_post, bid) FROM stdin;
 \.
 
 
@@ -1257,6 +1205,13 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 44	2019-12-14 15:25:33.158126+03	18	Internet of Things	1	[{"added": {}}]	8	1
 45	2019-12-14 16:29:13.072544+03	11	Charts	2	[{"changed": {"name": "\\u0414\\u043e\\u043f\\u043e\\u043b\\u043d\\u0438\\u0442\\u0435\\u043b\\u044c\\u043d\\u044b\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u044f", "fields": ["image"], "object": ""}}]	8	1
 46	2019-12-14 16:33:58.387394+03	11	Charts	2	[{"changed": {"name": "\\u0414\\u043e\\u043f\\u043e\\u043b\\u043d\\u0438\\u0442\\u0435\\u043b\\u044c\\u043d\\u044b\\u0435 \\u0438\\u0437\\u043e\\u0431\\u0440\\u0430\\u0436\\u0435\\u043d\\u0438\\u044f", "fields": ["image"], "object": ""}}]	8	1
+47	2019-12-16 21:13:17.722715+03	7	Portfolio	2	[{"changed": {"fields": ["submark"]}}]	10	1
+48	2019-12-16 21:13:23.726311+03	8	Cost	2	[{"changed": {"fields": ["submark"]}}]	10	1
+49	2019-12-16 21:13:30.145195+03	11	News	2	[{"changed": {"fields": ["submark"]}}]	10	1
+50	2019-12-16 21:15:32.386106+03	7	Portfolio	2	[{"changed": {"fields": ["subslug"]}}]	10	1
+51	2019-12-16 21:15:38.89486+03	8	Cost	2	[{"changed": {"fields": ["subslug"]}}]	10	1
+52	2019-12-16 21:16:54.46265+03	9	Cost images	2	[{"changed": {"fields": ["subslug"]}}]	10	1
+53	2019-12-17 22:45:22.871591+03	5	Supervisor Server Comaex	2	[{"changed": {"fields": ["description"]}}]	8	1
 \.
 
 
@@ -1264,7 +1219,7 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_en
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 46, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 53, true);
 
 
 --
@@ -1386,6 +1341,17 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 80	promotion	0011_remove_image_language	2019-12-15 11:53:38.945084+03
 81	scheduler	0011_remove_scheduler_language	2019-12-15 11:53:39.000961+03
 82	base	0013_langinfo	2019-12-15 11:56:07.900634+03
+83	base	0014_delete_langinfo	2019-12-17 20:21:10.450117+03
+84	base	0015_auto_20191217_1256	2019-12-17 20:21:11.404635+03
+85	clients	0023_auto_20191217_1256	2019-12-17 20:21:11.555258+03
+86	interaction	0012_auto_20191217_2019	2019-12-17 20:21:11.768624+03
+87	promotion	0012_auto_20191217_1256	2019-12-17 20:21:11.976315+03
+88	promotion	0013_image_urllink	2019-12-17 20:21:12.568953+03
+89	scheduler	0012_auto_20191217_2019	2019-12-17 20:21:12.631406+03
+90	base	0016_auto_20191217_2159	2019-12-17 21:59:52.027276+03
+91	promotion	0014_auto_20191217_2159	2019-12-17 21:59:52.148717+03
+92	clients	0024_clients_bid	2019-12-18 00:17:17.760478+03
+93	clients	0025_auto_20191218_2253	2019-12-18 22:53:12.38395+03
 \.
 
 
@@ -1393,7 +1359,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_en
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 82, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 93, true);
 
 
 --
@@ -1609,6 +1575,7 @@ dh7byoe34pxe2xucus12ud7trvyw45al	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzg
 ztn61kqe6c6ozwdqwujhu53k3izo5jvn	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 16:20:28.531618+03
 fc7c749sg1mp1ojrlm34xqoxbtbrpqpc	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 16:20:28.567658+03
 4l4uxj8y9bo5vrhpxhs1p3qx84eqqtgu	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 16:20:28.573848+03
+956l6eynrf22g85m33lmnl4holrzykox	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-30 21:19:31.925061+03
 epvonohit48kf3joouml5qtq9w2w7bl7	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 16:28:50.940385+03
 wh3ul9lo1yrpezv3eolxohw3aeosih40	NzUwNTNkZWRkMjkyYzlmOWVkMjdkYTg1NjE5YjM4MDRkZDlmZjhlYTp7Il9hdXRoX3VzZXJfaGFzaCI6IjQzMjRjZDBkOGFjNWNkYWI0OTdiYTlmMzA5ZmFiOGVmOTcxODM1NzEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9sYW5ndWFnZSI6ImVuIiwiX2F1dGhfdXNlcl9pZCI6IjEifQ==	2019-12-28 16:29:13.442517+03
 lnnhu8zs3wqmj3jx7d52xa78zwxy3qrn	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 16:29:13.752843+03
@@ -1811,6 +1778,7 @@ vdlo6utead6osdylzckust6ygdnrs06i	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzg
 1str3b0dqtckb73eu1msf9mf6lnjdsys	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 18:04:19.366423+03
 no2ohx2rpqe60flefcmoxmguf01eegei	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 18:04:19.420188+03
 o9byu5nfnqspgl19wu5wp61jbky8gdyh	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 18:04:19.432298+03
+d8b98q17l1f5w2iwtulgzfpsrcu4nlgm	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-30 21:19:31.719941+03
 redwque84ff5mi5yksf7jy9gxgq7zrbh	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 18:13:01.679956+03
 xo9m3cogcybxh25thyyhzojebbdbnupg	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 18:25:51.118192+03
 m2h538x0y45qu09qvnwqpuyxfybnpc0g	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 18:25:56.526144+03
@@ -1895,6 +1863,8 @@ m4i693eq2nmiaon7f0akbe13nqso3ziv	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzg
 w2gh7zioidrozxi6o85x1c2lhd65q2t0	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 20:38:40.259704+03
 bf0i23d9rba3zdkempjvb7vbal9uqj01	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 20:38:40.26932+03
 hky72651qrhe6df7zilrr6pq1vyah15r	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 20:38:40.280225+03
+x0ub2qeukpbs54xb2kjxtip54njyx6tv	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-30 21:19:31.846317+03
+erv7y63449wvwmr05dlcxcowai3cbbw4	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-30 21:19:32.055073+03
 kwfib9o0749sk4mqlei0hq7j274p5kti	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 20:38:40.305553+03
 3rnlt09o2jj7jrrlvaql2jrcbceg0ty8	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 20:38:40.335785+03
 5ck7jsjsoozytxq8i91xwef1t5z0nzv3	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 20:38:40.362325+03
@@ -1968,7 +1938,7 @@ hg9u9e9c058csvpu3sa7ctdmro2yoasa	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzg
 eo0g2qbatqm90rhvtrbh95164keuy24q	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-29 10:03:43.476116+03
 vk35bdlnxxpwkiwj0b4e7sij6ry3sjrq	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-29 10:05:35.315983+03
 2otl0ds4u2g80bwiltj1ef8lhsnm6bnq	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-29 10:05:38.951363+03
-7k8zfu9k5ilqh6e7vmm8pgm9srkh25d3	YjBhZmU4OWMwNDZjMDg0NWM4N2I2ZDYzZWIzOTZlYzkyNzgwNjVhZTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2xhbmd1YWdlIjoicnUiLCJfYXV0aF91c2VyX2hhc2giOiI0MzI0Y2QwZDhhYzVjZGFiNDk3YmE5ZjMwOWZhYjhlZjk3MTgzNTcxIiwiX2F1dGhfdXNlcl9pZCI6IjEifQ==	2019-12-30 20:54:47.738581+03
+onsw6mrz0vughiauxbzosbueysrc4aln	OGNjZDdkMDU3MDdhZjU4MzJiZjc0YWRiMTYxZjViMTU1NTQxN2Q4NDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiMDI2ODY3MzM0MWM2NjMzNmYxYzY3Y2NhMWE5MjQ2MGU4OTA2MDA1OSIsIl9sYW5ndWFnZSI6ImVuIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQifQ==	2020-01-01 23:53:19.667436+03
 \.
 
 
@@ -1984,6 +1954,10 @@ COPY public.interaction_contact (id, fullname, email, phone, content, ipaddr, "t
 5	Vladimir	chim73@mail.ru	+7(985)4828588	Please send me login details for Comaex Demo	127.0.0.1	2019-12-14 18:42:01.967444+03	f	callme
 6	Vladimir	chim73@mail.ru	+7(985)4828588	Please send me login details for Comaex Demo	127.0.0.1	2019-12-14 22:44:35.520171+03	f	callme
 7	Vladimir	chim73@mail.ru	+7(985)4828588	Please send me login details for Comaex Demo	127.0.0.1	2019-12-16 20:40:26.510383+03	f	callme
+8	Vladimir	chim73@mail.ru	+7(985)4828588	Please send me login details for Comaex Demo	127.0.0.1	2019-12-16 23:04:24.665404+03	f	callme
+9	Vladimir	chim73@mail.ru	+7(985)4828588	Please send me login details for Comaex Demo	127.0.0.1	2019-12-16 23:33:45.387577+03	f	callme
+10	Vladimir	chim73@mail.ru	+7(985)4828588	Please send me login details for Comaex Demo	127.0.0.1	2019-12-16 23:44:58.942477+03	f	callme
+11	Vladimir	innotech@yandex.ru	+7(985)4828588	Please send me login details for Comaex Demo	127.0.0.1	2019-12-16 23:50:53.843967+03	f	callme
 \.
 
 
@@ -1991,7 +1965,7 @@ COPY public.interaction_contact (id, fullname, email, phone, content, ipaddr, "t
 -- Name: interaction_contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_en
 --
 
-SELECT pg_catalog.setval('public.interaction_contact_id_seq', 7, true);
+SELECT pg_catalog.setval('public.interaction_contact_id_seq', 11, true);
 
 
 --
@@ -2013,7 +1987,7 @@ SELECT pg_catalog.setval('public.interaction_correspondence_id_seq', 1, false);
 -- Data for Name: promotion_image; Type: TABLE DATA; Schema: public; Owner: admin_en
 --
 
-COPY public.promotion_image (id, image, slug, title, sentence, description, desc_html, name_id) FROM stdin;
+COPY public.promotion_image (id, slug, title, sentence, description, desc_html, name_id, urllink) FROM stdin;
 \.
 
 
@@ -2164,14 +2138,6 @@ ALTER TABLE ONLY public.base_base
 
 ALTER TABLE ONLY public.base_image
     ADD CONSTRAINT base_image_pkey PRIMARY KEY (id);
-
-
---
--- Name: base_langinfo_pkey; Type: CONSTRAINT; Schema: public; Owner: admin_en
---
-
-ALTER TABLE ONLY public.base_langinfo
-    ADD CONSTRAINT base_langinfo_pkey PRIMARY KEY (id);
 
 
 --

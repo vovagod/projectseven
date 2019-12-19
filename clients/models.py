@@ -50,7 +50,7 @@ class Clients(models.Model):
     preorder       = models.BooleanField(default=False, verbose_name=_('Preorder'))
     counter        = models.PositiveSmallIntegerField(default=0, verbose_name=_('Email counter'),
                                                       help_text=_("Number of email sent"))
-    bid            = models.PositiveIntegerField(default=0, verbose_name=_('Bid'),
+    bid            = models.PositiveIntegerField(default=10000, verbose_name=_('Bid'),
                                                  help_text=_("Bid made by client"))
     error_mailing  = models.CharField(max_length=360, blank=True, default='None',
                                       verbose_name=_('Emailing report'))

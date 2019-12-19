@@ -34,8 +34,23 @@ def handle_uploaded_file(path, f):
             destination.write(chunk)
 
 
-def get_common_context(context):
-    msg = settings.MSG
+def get_common_context(category, context):
+    print('GET_COMMON_CONTEXT:{}'.format(category))
+    msg = {}
+    msg.update(settings.MSG)
+
+    if hasattr(settings, category):
+        msg.update(getattr(settings, category))
+        
+    #msg.update({'guest': guest,
+                #'content': message,
+                #'category': client_category,
+                #'uuid': client_uuid,
+                #'interested': client_uuid,
+                #'preorder': client_uuid,
+                #'lang': lang.lower(),
+                #})
+    #msg = settings.MSG
     context['title'] = msg['title']
     context['addr'] = msg['addr']
     context['mobile'] = msg['mobile']
@@ -64,14 +79,16 @@ class ClientsActionView(DetailView):
         if action == 'interested':
             Clients.objects.filter(uuid=uuid).update(interested=True)
             self.action = settings.ACTION_INTERESTED
-        if action == 'success':
-            self.action = settings.ACTION_SUCCESS
+        if action == 'preorder':
+            self.action = settings.ACTION_PREORDER
+        if action == 'bid':
+            self.action = settings.ACTION_BID
         return self.obj
 
     def get_context_data(self, **kwargs):
         context = super(ClientsActionView, self).get_context_data(**kwargs)
         context['action'] = self.action
-        get_common_context(context)
+        get_common_context(self.obj.category, context)
         return context
 
 
@@ -118,7 +135,7 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
         context = super(ClientsPreorderView, self).get_context_data(*args, **kwargs)
         context['introduction'] = mark_safe(settings.INTRODUCTION)
         context['asterisk'] = mark_safe(settings.ASTERISK)
-        return get_common_context(context)
+        return get_common_context('None', context)
 
     def form_valid(self, form):
         phrase = format_html("<h4>Client with UUID: <a href='http://{}/admin/clients/clients/{}/change/'>{}</a> has made a preorder.</h4>",
@@ -132,7 +149,7 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
             Clients.objects.filter(uuid=self.uuid).update(error_mailing=str(err)[1:-2])
         # finalize this script later
         Clients.objects.filter(uuid=self.uuid).update(preorder=True)
-        return HttpResponseRedirect(reverse('clients:action', args=('success', self.uuid,)))
+        return HttpResponseRedirect(reverse('clients:action', args=('preorder', self.uuid,)))
 
     def form_invalid(self, form):
         return HttpResponseRedirect(reverse('clients:preorder', args=(self.uuid,)))
@@ -143,7 +160,7 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
 class ClientsBuyView(RequestFormAttachMixin, FormView):
 
     form_class = BuyForm
-    template_name = 'base/buy.html'
+    template_name = 'base/preorder.html'
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -155,50 +172,52 @@ class ClientsBuyView(RequestFormAttachMixin, FormView):
             except Clients.DoesNotExist:
                 raise Http404("Client does not exist")
             data = form.cleaned_data
-            instance.address=data['address']
+            instance.address=data['company']
             instance.persons = data['persons']
             instance.phone = data['phone']
             instance.email2 = data['email2']
-            path = settings.MEDIA_ROOT+'/uploads/{company}/'.format(company=instance.slug)
-            instance.filepath = path
+            instance.bid = data['bid']
+            #self.category = instance.category
+            #path = settings.MEDIA_ROOT+'/uploads/{company}/'.format(company=instance.slug)
+            #instance.filepath = path
             instance.save()
-            pathlib.Path(path).mkdir(parents=True, exist_ok=True)
+            #pathlib.Path(path).mkdir(parents=True, exist_ok=True)
             
-            file_validator = FileExtensionValidator(settings.VALID_EXTENSIONS)
-            for f in files:
-                try:
-                    file_validator(File(name=str(f)))
-                except ValidationError as e:
-                    err = '; '.join(e)
-                    messages.add_message(request, messages.INFO, err)
-                    return self.form_invalid(form)
-                handle_uploaded_file(path+'{filename}'.format(filename=str(f)), f)
+            #file_validator = FileExtensionValidator(settings.VALID_EXTENSIONS)
+            #for f in files:
+                #try:
+                    #file_validator(File(name=str(f)))
+                #except ValidationError as e:
+                    #err = '; '.join(e)
+                    #messages.add_message(request, messages.INFO, err)
+                    #return self.form_invalid(form)
+                #handle_uploaded_file(path+'{filename}'.format(filename=str(f)), f)
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ClientsPreorderView, self).get_context_data(*args, **kwargs)
+        context = super(ClientsBuyView, self).get_context_data(*args, **kwargs)
         context['introduction'] = mark_safe(settings.INTRODUCTION)
         context['asterisk'] = mark_safe(settings.ASTERISK)
-        return get_common_context(context)
+        return get_common_context('None', context)
 
     def form_valid(self, form):
-        phrase = format_html("<h4>Client with UUID: <a href='http://{}/admin/clients/clients/{}/change/'>{}</a> has made a preorder.</h4>",
+        phrase = format_html("<h4>Client with UUID: <a href='http://{}/admin/clients/clients/{}/change/'>{}</a> has made a bid.</h4>",
                              '{}'.format(settings.DOMAIN),
                              '{}'.format(self.uuid),
                              '{}'.format(self.uuid),
                              )
         message = {'text': phrase}
-        err = send_mail('Preorder made', 'admin', message, 'Admin', 'correspondence')
+        err = send_mail('Bid made', 'admin', message, 'Admin', 'correspondence')
         if err:
             Clients.objects.filter(uuid=self.uuid).update(error_mailing=str(err)[1:-2])
         # finalize this script later
         Clients.objects.filter(uuid=self.uuid).update(preorder=True)
-        return HttpResponseRedirect(reverse('clients:action', args=('success', self.uuid,)))
+        return HttpResponseRedirect(reverse('clients:action', args=('bid', self.uuid,)))
 
     def form_invalid(self, form):
-        return HttpResponseRedirect(reverse('clients:preorder', args=(self.uuid,)))
+        return HttpResponseRedirect(reverse('clients:buy', args=(self.uuid,)))
 
 
 

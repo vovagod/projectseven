@@ -14,9 +14,9 @@ class PreorderForm(forms.Form):
     company = forms.CharField(label=_("Company name * "),
                               widget=forms.TextInput(attrs={"required":True}))
     persons = forms.CharField(label=_("Contact person"), widget=forms.TextInput(attrs={"placeholder": _("Peter Smith"),
-                                                                                     "required":True}))
+                                                                                       "required":True}))
     address = forms.CharField(label=_("Company address"), widget=forms.TextInput(attrs={"placeholder": _("Moscow, Red Square 123"),
-                                                                                    "required":True}))
+                                                                                        "required":True}))
     email2  = forms.EmailField(label=_("Email * "),
                                widget=forms.TextInput(attrs={"required":True}),
                                validators=[validate_email])
@@ -28,6 +28,7 @@ class PreorderForm(forms.Form):
 
 
     def __init__(self, request, *args, **kwargs):
+        
         self.instance = kwargs.pop('instance', None)
         self.request = request
         self.uuid = self.request.path_info.strip('/').split('/')[-1]
@@ -43,34 +44,16 @@ class PreorderForm(forms.Form):
         self.initial['phone'] = instance.phone
 
 
-class BuyForm(forms.Form):
+
+class BuyForm(PreorderForm):
     
-    company = forms.CharField(label=_("Company name * "),
-                              widget=forms.TextInput(attrs={"required":False}))
-    persons = forms.CharField(label=_("Contact person"), widget=forms.TextInput(attrs={"placeholder": _("Peter Smith"),
-                                                                                     "required":True}))
-    email2  = forms.EmailField(label=_("Email * "),
-                               widget=forms.TextInput(attrs={"required":False}),
-                               validators=[validate_email])
-    phone   = forms.CharField(label=_("Phone * "),
-                              widget=forms.TextInput(attrs={"required":True}))
-    #bid     = 
+    bid     = forms.IntegerField(label=_("Your bid, USD"),
+                                 widget=forms.NumberInput(attrs={"placeholder": 10000,
+                                                                 "required":True}))
+    address = None
+    file    = None
+                                                
 
-
-
-    def __init__(self, request, *args, **kwargs):
-        self.instance = kwargs.pop('instance', None)
-        self.request = request
-        self.uuid = self.request.path_info.strip('/').split('/')[-1]
-        try:
-            instance = Clients.objects.get(uuid=self.uuid)
-        except ValidationError:
-            raise Http404(_("Client with such UUID does not exist")) 
-        super(BuyForm, self).__init__(*args, **kwargs)
-        self.initial['company'] = instance.company
-        self.initial['persons'] = instance.persons or None
-        self.initial['email2'] = instance.email
-        self.initial['phone'] = instance.phone
                                                 
 
 

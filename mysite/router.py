@@ -4,9 +4,10 @@ from django.utils import translation
 class Router(object):
     
     def db_for_read(self, model, **hints):
-        lang = translation.get_language()[:2]
-        #print('META_IN_DB:{}'.format(model._meta.app_label))
-        #print('LANG_IN_DB:{}'.format(lang))
+        try:
+            lang = translation.get_language()[:2]
+        except TypeError:
+            lang = 'ru'
         if model._meta.app_label == 'sessions':
             return 'database_en'
         if lang == 'en':
@@ -15,8 +16,10 @@ class Router(object):
         
 
     def db_for_write(self, model, **hints):
-        
-        lang = translation.get_language()[:2]
+        try:
+            lang = translation.get_language()[:2]
+        except TypeError:
+            lang = 'ru'
         if model._meta.app_label == 'sessions':
             return 'database_en'
         if lang == 'en':

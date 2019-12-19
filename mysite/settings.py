@@ -304,7 +304,8 @@ MESSAGE_CALLME = {'callme':_('We will contact you in the next hour.')}
 # Client action messages
 ACTION_UNSUBSCRIBE = _('You have successfully unsubscribed from the emailing')
 ACTION_INTERESTED = _('Thank you for rating!')
-ACTION_SUCCESS = _('Thank you, your pre-order has been received!')
+ACTION_PREORDER = _('Thank you, your pre-order has been received!')
+ACTION_BID = _('Thank you, we got your bid!')
 
 # Contact form phrases
 PHRASE_ONE = _('I am interested, please contact me')
