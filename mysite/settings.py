@@ -281,7 +281,7 @@ VALID_EXTENSIONS = ['pdf', 'doc', 'docx', 'jpg', 'png', 'xlsx', 'xls']
 
 
 # Preorder form context
-INTRODUCTION = _("<p style='text-align:justify'>&ensp;Please fill in the form fields. "
+PREORDER = _("<p style='text-align:justify'>&ensp;Please fill in the form fields. "
       "In the last field, attach the file(s) with a list of controlled parameters in the form"
       " of a sheet of Modbas variables of your controller. "
       "Attach the file(s) with device mnemonics in the same field in the form convenient for you. "
@@ -289,6 +289,16 @@ INTRODUCTION = _("<p style='text-align:justify'>&ensp;Please fill in the form fi
       "enter this data into the server and send you a link to the real working application of your order. "
       "After you just have to install the server on the object and start it in work.</p>"
      )
+
+BID = _("<p style='text-align:justify'>&ensp;Please fill in the form fields. "
+      "In the last field, attach the file(s) with a list of controlled parameters in the form"
+      " of a sheet of Modbas variables of your controller. "
+      "Attach the file(s) with device mnemonics in the same field in the form convenient for you. "
+      "Based on the information received, we will create working mnemonic diagrams and, together with the variables, "
+      "enter this data into the server and send you a link to the real working application of your order. "
+      "After you just have to install the server on the object and start it in work.</p>"
+     )
+
 ASTERISK = _("<p style='font-size: 14px; color:gray'>*change if not matching</p>")
 
 
@@ -361,6 +371,7 @@ MSG = {'letter':PATH+'letter.png',
         'name': 'Comaex',
         'alt': 'Comaex server',
         'heading': _('Business proposition'),
+        'shape':_('Pre-order form'),
         'unsubscribe':_('Unsubscribe'),
         'interest':_('Interesting'),
         'preorder':_('Pre-order'),
@@ -375,6 +386,7 @@ SFUGD = {'url':'http://'+SFUGD_DOMAIN,
         'name': 'SFUGD',
         'alt': 'Compact door',
         'heading': _('Compact door. Patent US8327908'),
+        'shape': _('Bid form'),
         'buy':_('Buy'),
         }
 

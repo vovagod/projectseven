@@ -1,5 +1,7 @@
 import sys
 from django.contrib import admin
+from django.utils import translation
+from django.conf import settings
 from .models import Scheduler
 
 
@@ -22,6 +24,11 @@ class SchedulerAdmin(admin.ModelAdmin):
               ('event'),
               ('processing'),
               )
+
+    def has_module_permission(self, request):
+        if translation.get_language_from_request(request, check_path=True) != settings.LANGUAGE_CODE:
+            return False
+        return True
    
 
 def str_to_class(str):

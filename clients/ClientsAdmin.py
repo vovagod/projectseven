@@ -152,7 +152,14 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
                              ) for f in glob.glob(path+"*.*"))
                            )
                            
-    downloaded_files.short_description = _("List of downloaded files")  
+    downloaded_files.short_description = _("List of downloaded files")
+
+
+    def has_module_permission(self, request):
+        if translation.get_language_from_request(request, check_path=True) != settings.LANGUAGE_CODE:
+            return False
+        return True
+
 
 
 

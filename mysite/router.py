@@ -9,8 +9,8 @@ class Router(object):
         except TypeError:
             lang = 'ru'
         if model._meta.app_label == 'sessions':
-            return 'database_en'
-        if lang == 'en':
+            return 'database_ru'
+        if lang == 'en' and model._meta.app_label == 'base':
             return 'database_en'
         return 'database_ru'
         
@@ -21,8 +21,8 @@ class Router(object):
         except TypeError:
             lang = 'ru'
         if model._meta.app_label == 'sessions':
-            return 'database_en'
-        if lang == 'en':
+            return 'database_ru'
+        if lang == 'en' and model._meta.app_label == 'base':
             return 'database_en'
         return 'database_ru'
 

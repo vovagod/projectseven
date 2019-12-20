@@ -15,6 +15,7 @@ def upload_image_path(instance, filename):
     return '{category}/{final_filename}'.format(category=instance.slug, final_filename=final_filename)
 
 
+
 class CommonImage(models.Model):
    
     image       = models.ImageField(upload_to=upload_image_path, null=True, blank=True,
@@ -39,9 +40,9 @@ class CommonImage(models.Model):
 class CommonBase(models.Model):
 
     title       = models.CharField(max_length=120, verbose_name=_('Title'),
-                                       help_text=_("Enter title"))
+                                   help_text=_("Enter title"))
     slug        = models.SlugField(unique=False, verbose_name=_('Slug'),
-                                       help_text=_("Slug"))
+                                   help_text=_("Slug"))
     subtitle    = models.CharField(max_length=120, blank=True, verbose_name=_('Subtitle'),
                                    help_text=_("Enter subtitle"))
     sentence    = models.CharField(max_length=120, blank=True, verbose_name=_('Sentence'),
@@ -56,15 +57,15 @@ class CommonBase(models.Model):
                                   help_text=_("Enter URL link"))
     timestamp   = models.DateTimeField(auto_now_add=True, verbose_name=_('Date'), help_text=_("Date/time of cretion"))
     flag        = models.BooleanField(default=False, verbose_name=_('Flag'),
-                                          help_text=_("Flag")) 
+                                      help_text=_("Flag")) 
     data1       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data1'),
-                                       help_text=_("Enter additional data 1"))
+                                   help_text=_("Enter additional data 1"))
     data2       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data2'),
-                                       help_text=_("Enter additional data 2"))
+                                   help_text=_("Enter additional data 2"))
     data3       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data3'),
-                                       help_text=_("Enter additional data 3"))
+                                   help_text=_("Enter additional data 3"))
     data4       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data4'),
-                                       help_text=_("Enter additional data 4"))
+                                   help_text=_("Enter additional data 4"))
 
     class Meta:
         abstract = True

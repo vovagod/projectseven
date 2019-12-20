@@ -1,5 +1,7 @@
 import sys
 from django.contrib import admin
+from django.utils import translation
+from django.conf import settings
 from markdown import markdown
 from .models import Promotion, Image
 
@@ -41,6 +43,12 @@ class PromotionAdmin(admin.ModelAdmin):
             instance.desc_html = markdown(instance.description)
             instance.save()
         formset.save_m2m()
+
+
+    def has_module_permission(self, request):
+        if translation.get_language_from_request(request, check_path=True) != settings.LANGUAGE_CODE:
+            return False
+        return True
 
 
 def str_to_class(str):

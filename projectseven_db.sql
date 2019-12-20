@@ -658,13 +658,14 @@ ALTER SEQUENCE public.interaction_correspondence_id_seq OWNED BY public.interact
 
 CREATE TABLE public.promotion_image (
     id integer NOT NULL,
+    image character varying(100),
     slug character varying(50) NOT NULL,
     title character varying(120) NOT NULL,
     sentence character varying(120) NOT NULL,
+    urllink character varying(200) NOT NULL,
     description text NOT NULL,
     desc_html text NOT NULL,
-    name_id integer,
-    urllink character varying(200) NOT NULL
+    name_id integer
 );
 
 

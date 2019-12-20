@@ -35,7 +35,9 @@ class PreorderForm(forms.Form):
         try:
             instance = Clients.objects.get(uuid=self.uuid)
         except ValidationError:
-            raise Http404(_("Client with such UUID does not exist")) 
+            raise Http404(_("Client with such UUID does not exist"))
+        except Clients.DoesNotExist:
+            raise Http404(_("Client does not exist")) 
         super(PreorderForm, self).__init__(*args, **kwargs)
         self.initial['company'] = instance.company
         self.initial['persons'] = instance.persons or None

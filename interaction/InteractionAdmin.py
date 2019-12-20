@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils import translation
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from markdown import markdown
 from django_object_actions import DjangoObjectActions
@@ -46,6 +48,13 @@ class ContactAdmin(DjangoObjectActions, admin.ModelAdmin):
     change_actions = ('responce_to_person', )
 
 
+    def has_module_permission(self, request):
+        if translation.get_language_from_request(request, check_path=True) != settings.LANGUAGE_CODE:
+            return False
+        return True
+    
+
+
 
     
 class CorrespondenceAdmin(admin.ModelAdmin):
@@ -85,6 +94,12 @@ class CorrespondenceAdmin(admin.ModelAdmin):
             return
         messages.info(request, _("The message was sent successfully..."))
         obj.save()
+
+
+    def has_module_permission(self, request):
+        if translation.get_language_from_request(request, check_path=True) != settings.LANGUAGE_CODE:
+            return False
+        return True
         
 
 
