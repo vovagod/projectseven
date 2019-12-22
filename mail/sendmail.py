@@ -6,7 +6,8 @@ from django.utils import translation
 from django.http import Http404
 from django.template.loader import get_template
 
-from datetime import datetime
+from django.utils import timezone
+#import pytz
 from smtplib import SMTPException
 from clients.models import Clients
 
@@ -21,12 +22,13 @@ def theme_search(data):
     if any(n in data_list for n in credentials):
         message = settings.MESSAGE_CREDENTIALS
         success = settings.MESSAGE_SUCCESS
+        return message, success
     if any(n in data_list for n in callme):
         message = settings.MESSAGE_CALLME
     return message, success
 
 
-def send_mail(subject, to, message, guest, template, lang='ru'):
+def send_mail(subject, to, message, guest, template, lang=settings.LANGUAGE_CODE):
 
     translation.activate(lang)
     from_email = settings.FROM
@@ -57,8 +59,6 @@ def send_mail(subject, to, message, guest, template, lang='ru'):
                 'content': message,
                 'category': client_category,
                 'uuid': client_uuid,
-                #'interested': client_uuid,
-                #'preorder': client_uuid,
                 'lang': lang.lower(),
                 })
     text_content = _('This is an important message')
@@ -69,7 +69,7 @@ def send_mail(subject, to, message, guest, template, lang='ru'):
     err = None
     try:
         msg.send()
-        Clients.objects.filter(uuid=client_uuid).update(last_post=datetime.today())
+        Clients.objects.filter(uuid=client_uuid).update(last_post=timezone.now())
     except SMTPException as e:
         err = e
     return err

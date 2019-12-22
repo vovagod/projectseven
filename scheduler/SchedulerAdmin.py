@@ -8,7 +8,7 @@ from .models import Scheduler
 
 class SchedulerAdmin(admin.ModelAdmin):
     
-    list_display = ['id', 'category', 'tick','counter', 'event', 'processing' ]
+    list_display = ['id', 'category', 'tick', 'event', 'processing' ]
 
     readonly_fields = (
         'id',
@@ -20,7 +20,7 @@ class SchedulerAdmin(admin.ModelAdmin):
     fields = (('id'),
               ('category'),
               ('tick'),
-              ('counter'),
+              #('counter'),
               ('event'),
               ('processing'),
               )

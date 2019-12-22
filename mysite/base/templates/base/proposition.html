@@ -31,11 +31,10 @@
           {% endfor %}
           {% endfor %}
           {% endif %}
-        
           {% endfor %}
     
          <br>
-           
+   
     <a href="{{host}}/email/unsubscribe/{{uuid}}" class="btn danger" title="{% trans 'unsubscribe from emailing' %}" target="_blank">{{unsubscribe}}</a>
     <a href="{{host}}/email/interested/{{uuid}}" class="btn success" title="{% trans 'evaluate the idea' %}" target="_blank">{{interest}}</a>
         {% if category == 'HVAC' %}

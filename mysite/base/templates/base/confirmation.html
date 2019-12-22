@@ -4,7 +4,7 @@
 
 <td><h4>{% trans 'Dear, ' %} {{guest}}</h4>
           {% for key, value in content.items %}
-          <p>&emsp;{% trans 'Thank you for your interest to our technology.' %} {{value}}</p>
+          <p>&emsp;{% trans 'Thank you for your interest to our technology.' %} {{value|safe}}</p>
           {% if key == 'credentials' %}
           <p>{% trans 'Go to login page of' %} <a href="{{comaex_demo}}" style="cursor:pointer" target="_blank">Comaex Demo</a>.</p>
           {% endif %}

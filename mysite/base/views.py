@@ -1,6 +1,3 @@
-#import time
-#from datetime import datetime, timedelta
-#from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin

@@ -1,6 +1,7 @@
 from django import forms
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.conf import settings
 from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
 from .models import Clients
@@ -19,7 +20,8 @@ class PreorderForm(forms.Form):
                                                                                         "required":True}))
     email2  = forms.EmailField(label=_("Email * "),
                                widget=forms.TextInput(attrs={"required":True}),
-                               validators=[validate_email])
+                               #validators=[validate_email]
+                               )
     phone   = forms.CharField(label=_("Phone * "),
                               widget=forms.TextInput(attrs={"required":True}))
     file    = forms.FileField(label=_("Select files in the formats: pdf, doc, docx, jpg, png, xlsx, xls"),
@@ -42,16 +44,16 @@ class PreorderForm(forms.Form):
         self.initial['company'] = instance.company
         self.initial['persons'] = instance.persons or None
         self.initial['address'] = instance.address or None
-        self.initial['email2'] = instance.email
-        self.initial['phone'] = instance.phone
+        self.initial['email2']  = instance.email
+        self.initial['phone']   = instance.phone
 
 
 
 class BuyForm(PreorderForm):
     
     bid     = forms.IntegerField(label=_("Your bid, USD"),
-                                 widget=forms.NumberInput(attrs={"placeholder": 10000,
-                                                                 "required":True}))
+                                 widget=forms.NumberInput(attrs={"placeholder": settings.MIN_VALUE, "required":True,
+                                                                 "min":settings.MIN_VALUE, "max": settings.MAX_VALUE}))
     address = None
     file    = None
                                                 

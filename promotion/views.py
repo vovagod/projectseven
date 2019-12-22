@@ -32,7 +32,7 @@ def promotionview(request, email=None, category=None, lang=None):
     if promotion is None:
         raise Http404("Promotion of this category does not exist")
     try:
-        client = Clients.objects.get_pk(email)
+        client = Clients.objects.get(email=email)
     except Clients.DoesNotExist:
         raise Http404("Client with this email does not exist")
     
@@ -44,9 +44,9 @@ def promotionview(request, email=None, category=None, lang=None):
         
     msg.update({'guest':_('Guest'),
                 'content': promotion,
-                'unsubscribe': client,
-                'interested': client,
-                'preorder': client,
+                'category': client.category,
+                'uuid': client.uuid,
+                'lang': lang.lower(),
                 })
 
     return render_to_response('base/proposition.html', msg,

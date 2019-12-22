@@ -439,7 +439,9 @@ CREATE TABLE public.clients_clients (
     language character varying(30) NOT NULL,
     last_post timestamp with time zone,
     bid integer NOT NULL,
+    count smallint NOT NULL,
     CONSTRAINT clients_clients_bid_check CHECK ((bid >= 0)),
+    CONSTRAINT clients_clients_count_check CHECK ((count >= 0)),
     CONSTRAINT clients_clients_counter_check CHECK ((counter >= 0))
 );
 
@@ -1008,7 +1010,7 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 51, true);
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$100000$1EdKk0LQWvIq$tcJhxXNlgpeVrQt1uQ5qulpHwz0dSfgRBfEKyb3gRIs=	2019-12-18 21:33:09.213621+03	t	admin			gva008@gmail.com	t	t	2019-12-12 21:20:11.404664+03
+1	pbkdf2_sha256$100000$1EdKk0LQWvIq$tcJhxXNlgpeVrQt1uQ5qulpHwz0dSfgRBfEKyb3gRIs=	2019-12-22 17:19:45.462732+03	t	admin			gva008@gmail.com	t	t	2019-12-12 21:20:11.404664+03
 \.
 
 
@@ -1151,8 +1153,11 @@ SELECT pg_catalog.setval('public.base_submenu_id_seq', 11, true);
 -- Data for Name: clients_clients; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.clients_clients (company, email, phone, about, area, persons, created, enable_mailing, interested, flag, category, counter, uuid, error_mailing, file, slug, address, email2, filepath, preorder, language, last_post, bid) FROM stdin;
-Computer LTD	innotech@yandex.ru	+7(985)4828588			Facking Facker	2019-12-14 21:19:50.766516+03	t	f	f	HVAC	0	f1ad8ff7-18d3-469f-b26e-ef8b399c0605	None		computer-ltd	Computer LTD	innotech@yandex.ru		t	RU	2019-12-14 21:20:20.567745+03	4
+COPY public.clients_clients (company, email, phone, about, area, persons, created, enable_mailing, interested, flag, category, counter, uuid, error_mailing, file, slug, address, email2, filepath, preorder, language, last_post, bid, count) FROM stdin;
+Innotech	innotech@yandex.ru	+7(985)4828588				2019-12-22 21:36:25.68772+03	f	f	f	SFUGD	0	bd3c12bc-4228-46c4-bc5c-9d04e0e97025			innotech	Innotech	\N		f	RU	\N	10000	0
+Computer LTD	chim73@mail.ru	+7(985)4828588				2019-12-22 21:36:25.872788+03	f	f	f	HVAC	0	e3e34eef-aea5-47e8-8d96-ab20a06fa1df			computer-ltd	Moscow, big street 23	\N		f	RU	\N	10000	0
+GVA008	gva008@gmail.com	+7(985)4828588				2019-12-22 21:36:25.944883+03	f	f	f	HVAC	0	e52dee80-375d-4869-8040-dc5972fa71d2			gva008	Москва, Сиреневый бульвар 32	\N		f	RU	\N	10000	0
+ГК РОВЕН	msk@rowen.ru	+7 (495) 646-23-90	ГК РОВЕН — ведущий российский производитель и надежный поставщик вентиляционного оборудования.\nКомпания РОВЕН предлагает эффективные решения для создания микроклимата в помещениях различного типа с 2002 года.			2019-12-22 21:36:25.993882+03	f	f	f	HVAC	0	52ba09c3-1440-4984-857b-36340ef4ce03			гк-ровен	г. Москва,ул. Южнопортовая,д.7 стр.7 оф. 403	\N		f	RU	\N	10000	0
 \.
 
 
@@ -1233,6 +1238,84 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 70	2019-12-17 22:43:09.784587+03	5	Супервизор-сервер Comaex	2	[{"changed": {"fields": ["description"]}}]	8	1
 71	2019-12-17 22:43:46.21503+03	5	Супервизор-сервер Comaex	2	[{"changed": {"fields": ["description"]}}]	8	1
 72	2019-12-17 22:44:27.281719+03	5	Супервизор-сервер Comaex	2	[{"changed": {"fields": ["description"]}}]	8	1
+73	2019-12-20 00:06:29.152554+03	1	HVAC	1	[{"added": {}}]	15	1
+74	2019-12-20 00:06:45.696293+03	1	HVAC	2	[{"changed": {"fields": ["image"]}}]	15	1
+75	2019-12-20 00:07:17.878609+03	1	HVAC	3		15	1
+76	2019-12-20 00:07:30.708382+03	f1ad8ff7-18d3-469f-b26e-ef8b399c0605	Computer LTD	3		13	1
+77	2019-12-21 10:39:46.957265+03	2	HVAC	1	[{"added": {}}, {"added": {"object": "\\u041e \\u043f\\u0440\\u043e\\u0434\\u0443\\u043a\\u0442\\u0435", "name": "Additional image"}}]	15	1
+78	2019-12-21 10:41:37.980092+03	2	HVAC	2	[{"added": {"object": "\\u041d\\u0430\\u0448\\u0435 \\u043f\\u0440\\u0435\\u0434\\u043b\\u043e\\u0436\\u0435\\u043d\\u0438\\u0435", "name": "Additional image"}}, {"added": {"object": "\\u041f\\u0440\\u0435\\u0438\\u043c\\u0443\\u0449\\u0435\\u0441\\u0442\\u0432\\u0430", "name": "Additional image"}}, {"added": {"object": "\\u0412\\u0430\\u0448\\u0430 \\u0432\\u044b\\u0433\\u043e\\u0434\\u0430", "name": "Additional image"}}, {"added": {"object": "\\u0418\\u043d\\u0444\\u043e\\u0440\\u043c\\u0430\\u0446\\u0438\\u044f \\u0434\\u043b\\u044f \\u0438\\u0437\\u0443\\u0447\\u0435\\u043d\\u0438\\u044f", "name": "Additional image"}}]	15	1
+79	2019-12-21 10:42:32.007583+03	cae0d8eb-0bb1-4478-b93e-34e990bf6a61	Computer LTD	1	[{"added": {}}]	13	1
+80	2019-12-21 10:43:16.581641+03	2022d696-62ed-4cc8-a6f0-9747495220fa	GVA008	1	[{"added": {}}]	13	1
+81	2019-12-21 10:43:30.621223+03	cae0d8eb-0bb1-4478-b93e-34e990bf6a61	Computer LTD	2	[{"changed": {"fields": ["email"]}}]	13	1
+82	2019-12-21 10:43:46.689558+03	dddaf662-5ce8-4e7f-a6f6-67fbcb0a8a4a	Innotech	1	[{"added": {}}]	13	1
+83	2019-12-21 10:47:36.250052+03	3	HVAC	1	[{"added": {}}, {"added": {"object": "About product", "name": "Additional image"}}, {"added": {"object": "What we offer", "name": "Additional image"}}, {"added": {"object": "Advantages", "name": "Additional image"}}, {"added": {"object": "Your benefit", "name": "Additional image"}}, {"added": {"object": "Information for learning", "name": "Additional image"}}]	15	1
+84	2019-12-21 11:41:32.773376+03	dddaf662-5ce8-4e7f-a6f6-67fbcb0a8a4a	Innotech	2	[{"changed": {"fields": ["language"]}}]	13	1
+85	2019-12-21 12:19:02.020217+03	1	HVAC	1	[{"added": {}}]	16	1
+86	2019-12-21 13:21:58.97921+03	1	HVAC	2	[{"changed": {"fields": ["tick"]}}]	16	1
+87	2019-12-21 13:31:36.896295+03	1	HVAC	2	[{"changed": {"fields": ["tick"]}}]	16	1
+88	2019-12-21 13:33:15.948512+03	1	HVAC	2	[{"changed": {"fields": ["tick"]}}]	16	1
+89	2019-12-21 17:55:46.027572+03	1	HVAC	2	[{"changed": {"fields": ["tick"]}}]	16	1
+90	2019-12-21 18:26:43.23128+03	4	SFUGD	1	[{"added": {}}, {"added": {"name": "Additional image", "object": ""}}]	15	1
+91	2019-12-21 18:27:09.52172+03	dddaf662-5ce8-4e7f-a6f6-67fbcb0a8a4a	Innotech	2	[{"changed": {"fields": ["category", "language"]}}]	13	1
+92	2019-12-22 14:29:33.457958+03	dddaf662-5ce8-4e7f-a6f6-67fbcb0a8a4a	Innotech	3		13	1
+93	2019-12-22 14:29:33.903627+03	cae0d8eb-0bb1-4478-b93e-34e990bf6a61	Computer LTD	3		13	1
+94	2019-12-22 14:29:33.914613+03	2022d696-62ed-4cc8-a6f0-9747495220fa	GVA008	3		13	1
+95	2019-12-22 17:38:27.093737+03	b35bcca4-8700-4aef-a698-838f5e94c145	Innotech	3		13	1
+96	2019-12-22 17:38:27.250142+03	36b229d8-f9f5-4b43-853b-f9ac957a94fe	Computer LTD	3		13	1
+97	2019-12-22 17:38:41.623837+03	15830abd-4447-4269-87ed-2c9149d61a80	Innotech	1	new through import_export	13	1
+98	2019-12-22 17:38:41.634059+03	a25e63a8-4e92-45cf-a616-bf6b73041270	Computer LTD	1	new through import_export	13	1
+99	2019-12-22 17:38:41.645043+03	00438a4d-a37c-40dc-945a-50e8bd5f484b	GVA008	1	new through import_export	13	1
+100	2019-12-22 18:42:25.962443+03	a25e63a8-4e92-45cf-a616-bf6b73041270	Computer LTD	3		13	1
+101	2019-12-22 18:42:26.087398+03	15830abd-4447-4269-87ed-2c9149d61a80	Innotech	3		13	1
+102	2019-12-22 18:42:26.131533+03	00438a4d-a37c-40dc-945a-50e8bd5f484b	GVA008	3		13	1
+103	2019-12-22 18:42:38.580078+03	5922d3c2-a46a-4a54-8d73-31cbe145f6c3	Innotech	1	new through import_export	13	1
+104	2019-12-22 18:42:38.589777+03	5175eff6-294b-4de6-b079-869c87d4fa2f	Computer LTD	1	new through import_export	13	1
+105	2019-12-22 18:42:38.600749+03	e5b0b3ed-7d62-44a8-83ca-1eda65ee1b40	GVA008	1	new through import_export	13	1
+106	2019-12-22 18:47:42.516548+03	e5b0b3ed-7d62-44a8-83ca-1eda65ee1b40	GVA008	3		13	1
+107	2019-12-22 18:47:42.691009+03	5922d3c2-a46a-4a54-8d73-31cbe145f6c3	Innotech	3		13	1
+108	2019-12-22 18:47:42.757201+03	5175eff6-294b-4de6-b079-869c87d4fa2f	Computer LTD	3		13	1
+109	2019-12-22 18:47:55.15074+03	ec547418-ad6e-4e23-a775-a10c1c2e4dee	Innotech	1	new through import_export	13	1
+110	2019-12-22 18:47:55.160669+03	f26192c7-af32-4786-b012-c37f54183965	Computer LTD	1	new through import_export	13	1
+111	2019-12-22 18:47:55.17173+03	5e23dadc-ea0c-4f36-b1bf-9ea69f980ef6	GVA008	1	new through import_export	13	1
+112	2019-12-22 18:49:00.897347+03	f26192c7-af32-4786-b012-c37f54183965	Computer LTD	3		13	1
+113	2019-12-22 18:49:01.042159+03	ec547418-ad6e-4e23-a775-a10c1c2e4dee	Innotech	3		13	1
+114	2019-12-22 18:49:01.09706+03	5e23dadc-ea0c-4f36-b1bf-9ea69f980ef6	GVA008	3		13	1
+115	2019-12-22 18:49:14.205721+03	a4c26fb9-73d1-438a-853f-4d0c74db7be4	Innotech	1	new through import_export	13	1
+116	2019-12-22 18:49:14.215826+03	0ec42a7d-bc6c-495a-851b-05e8f034d305	Computer LTD	1	new through import_export	13	1
+117	2019-12-22 18:49:14.226827+03	6786a59f-7056-43df-aefc-74d39e3ae2c5	GVA008	1	new through import_export	13	1
+118	2019-12-22 19:12:29.544692+03	a4c26fb9-73d1-438a-853f-4d0c74db7be4	Innotech	3		13	1
+119	2019-12-22 19:12:29.795279+03	6786a59f-7056-43df-aefc-74d39e3ae2c5	GVA008	3		13	1
+120	2019-12-22 19:12:29.80572+03	0ec42a7d-bc6c-495a-851b-05e8f034d305	Computer LTD	3		13	1
+121	2019-12-22 19:12:42.144097+03	61a1cdd6-6e52-405d-85aa-e80bcf0fe436	Innotech	1	new through import_export	13	1
+122	2019-12-22 19:12:42.154273+03	37f14b7a-4dc4-4335-9d2a-53516b4acbe3	Computer LTD	1	new through import_export	13	1
+123	2019-12-22 19:12:42.16521+03	43280844-7c22-4e6d-87eb-145ace411f6d	GVA008	1	new through import_export	13	1
+124	2019-12-22 19:12:42.176299+03	57b26246-0433-40b0-87ef-071fb598d52f	ГК РОВЕН	1	new through import_export	13	1
+125	2019-12-22 19:14:16.573163+03	61a1cdd6-6e52-405d-85aa-e80bcf0fe436	Innotech	3		13	1
+126	2019-12-22 19:14:16.672873+03	57b26246-0433-40b0-87ef-071fb598d52f	ГК РОВЕН	3		13	1
+127	2019-12-22 19:14:16.716233+03	43280844-7c22-4e6d-87eb-145ace411f6d	GVA008	3		13	1
+128	2019-12-22 19:14:16.848387+03	37f14b7a-4dc4-4335-9d2a-53516b4acbe3	Computer LTD	3		13	1
+129	2019-12-22 19:14:56.881062+03	609b9b47-2b4e-4840-a190-1032f646d533	Innotech	1	new through import_export	13	1
+130	2019-12-22 19:14:56.920398+03	83295202-a128-4116-b586-df556ffbfd96	Computer LTD	1	new through import_export	13	1
+131	2019-12-22 19:14:56.931425+03	aacfbed1-5f6d-4dca-963f-911e0bb242ba	GVA008	1	new through import_export	13	1
+132	2019-12-22 19:14:56.942506+03	5fd03742-423b-4559-9d7e-7bcff83d8c0f	ГК РОВЕН	1	new through import_export	13	1
+133	2019-12-22 20:03:05.95254+03	b8c54ec5-b4ab-4589-92cb-fabf18341e1c	Innotech1	1	new through import_export	13	1
+134	2019-12-22 20:03:06.016308+03	29a2cd62-65c6-4333-8321-3eab551feaa9	Computer LTD1	1	new through import_export	13	1
+135	2019-12-22 20:03:06.027214+03	f8d26a9e-57ad-4503-8342-6221af246752	GVA0081	1	new through import_export	13	1
+136	2019-12-22 20:03:06.038271+03	b3dd2700-aa87-493e-abd4-96dcb2ae633c	ГК РОВЕН1	1	new through import_export	13	1
+137	2019-12-22 20:03:57.69505+03	83295202-a128-4116-b586-df556ffbfd96	Computer LTD	3		13	1
+138	2019-12-22 20:03:57.76571+03	609b9b47-2b4e-4840-a190-1032f646d533	Innotech	3		13	1
+139	2019-12-22 20:03:57.776379+03	5fd03742-423b-4559-9d7e-7bcff83d8c0f	ГК РОВЕН	3		13	1
+140	2019-12-22 20:03:57.787304+03	29a2cd62-65c6-4333-8321-3eab551feaa9	Computer LTD1	3		13	1
+141	2019-12-22 20:44:40.19054+03	f8d26a9e-57ad-4503-8342-6221af246752	GVA0081	3		13	1
+142	2019-12-22 20:44:40.367888+03	eea077a2-3fb6-4d7f-8b79-c53bb09b4935	Innotech1	3		13	1
+143	2019-12-22 20:44:40.400901+03	c4914cbd-396b-46d5-9f04-ef8432db6e0f	Computer LTD1	3		13	1
+144	2019-12-22 20:44:40.411849+03	b8c54ec5-b4ab-4589-92cb-fabf18341e1c	Innotech1	3		13	1
+145	2019-12-22 20:44:40.423679+03	b3dd2700-aa87-493e-abd4-96dcb2ae633c	ГК РОВЕН1	3		13	1
+146	2019-12-22 20:44:40.43388+03	aacfbed1-5f6d-4dca-963f-911e0bb242ba	GVA008	3		13	1
+147	2019-12-22 21:36:26.003882+03	bd3c12bc-4228-46c4-bc5c-9d04e0e97025	Innotech	1	new through import_export	13	1
+148	2019-12-22 21:36:26.012322+03	e3e34eef-aea5-47e8-8d96-ab20a06fa1df	Computer LTD	1	new through import_export	13	1
+149	2019-12-22 21:36:26.023281+03	e52dee80-375d-4869-8040-dc5972fa71d2	GVA008	1	new through import_export	13	1
+150	2019-12-22 21:36:26.03428+03	52ba09c3-1440-4984-857b-36340ef4ce03	ГК РОВЕН	1	new through import_export	13	1
 \.
 
 
@@ -1240,7 +1323,7 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 72, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 150, true);
 
 
 --
@@ -1373,6 +1456,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 91	promotion	0014_auto_20191217_2159	2019-12-17 21:59:57.424511+03
 92	clients	0024_clients_bid	2019-12-18 00:17:23.274951+03
 93	clients	0025_auto_20191218_2253	2019-12-18 22:53:07.243487+03
+94	clients	0026_auto_20191221_1314	2019-12-21 13:14:41.962713+03
 \.
 
 
@@ -1380,7 +1464,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 93, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 94, true);
 
 
 --
@@ -1718,6 +1802,11 @@ apjb86en8s054fpsa254lnd65197atz5	Y2UwY2Q0ZWU4MmE2MDg2NmNmOTYxZjFlOGE4OWVhMzU4Nzd
 zgnyi6r1p0obm7yht14f2bcnnifi89q5	MjUzOTgyNzNiNDIyZGQ4N2E1M2I1OGM5NjE3YzJmMDEwNjhkYTJmYjp7Il9hdXRoX3VzZXJfaGFzaCI6IjAyNjg2NzMzNDFjNjYzMzZmMWM2N2NjYTFhOTI0NjBlODkwNjAwNTkiLCJfbGFuZ3VhZ2UiOiJydSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEifQ==	2019-12-28 12:21:54.261259+03
 h0hy1qo3kwnwnelheu9rgj5tz4uwd9o5	MjUzOTgyNzNiNDIyZGQ4N2E1M2I1OGM5NjE3YzJmMDEwNjhkYTJmYjp7Il9hdXRoX3VzZXJfaGFzaCI6IjAyNjg2NzMzNDFjNjYzMzZmMWM2N2NjYTFhOTI0NjBlODkwNjAwNTkiLCJfbGFuZ3VhZ2UiOiJydSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEifQ==	2019-12-28 12:47:38.252065+03
 0mi2hqsdb7jh8rt7nc1gq0n5zp8v2dsf	NGUwMjI4ZGFkMDdiOWMxZTc4Y2MyNThmMmZkNzY2YmNkOTU0ZTU1NDp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfbGFuZ3VhZ2UiOiJydSIsIl9hdXRoX3VzZXJfaGFzaCI6IjAyNjg2NzMzNDFjNjYzMzZmMWM2N2NjYTFhOTI0NjBlODkwNjAwNTkifQ==	2019-12-28 15:22:47.515968+03
+n3txtnonhlxl3f04f3w2nx694wz4u2gj	MDAzM2FjZmE5ZjU1MTFiODgxNjNjY2FkMGMyZWJhZGFhNTg1ZWRkZjp7Il9hdXRoX3VzZXJfaGFzaCI6IjAyNjg2NzMzNDFjNjYzMzZmMWM2N2NjYTFhOTI0NjBlODkwNjAwNTkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIiwiX2xhbmd1YWdlIjoicnUifQ==	2020-01-04 23:45:08.861314+03
+560mw08wc6eoip2q31ptxwoadqno4swe	ODJiMDkzZjVmZjQ0NGI3ODdkYjllY2MxMzk0ZjRkMWFiZDkzYzAyODp7Il9sYW5ndWFnZSI6InJ1IiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjAyNjg2NzMzNDFjNjYzMzZmMWM2N2NjYTFhOTI0NjBlODkwNjAwNTkifQ==	2020-01-05 16:50:29.186611+03
+wt1detbagvdc1nc1nani2tf8s6amony6	Yzc5NTkxYTRlY2JlNzkxMWRhYzcwZWUwZjNhNjA0M2RhZTFjM2NlNDp7Il9sYW5ndWFnZSI6InJ1IiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiIwMjY4NjczMzQxYzY2MzM2ZjFjNjdjY2ExYTkyNDYwZTg5MDYwMDU5IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQifQ==	2020-01-05 13:21:08.171323+03
+6x4crsbmd0yp57nuwuzsgwpaqnkonc6q	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2020-01-05 12:55:39.925065+03
+psu8fy0e8y3zp56tmicph5dwriez1k30	ZjAxNDA3OTEzZmQ3ZWI1Nzc4ZWMyY2E5MDk4NmU0MWUyZTkwMGZiODp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiMDI2ODY3MzM0MWM2NjMzNmYxYzY3Y2NhMWE5MjQ2MGU4OTA2MDA1OSIsIl9sYW5ndWFnZSI6ImVuIiwiX2F1dGhfdXNlcl9pZCI6IjEifQ==	2020-01-05 21:36:51.5778+03
 \.
 
 
@@ -1733,6 +1822,7 @@ COPY public.interaction_contact (id, fullname, email, phone, content, ipaddr, "t
 15	Владимир Годовалов	chim73@mail.ru	+7(985)4828588	Пожалуйста пришлите мне данные входа в Comaex Demo	127.0.0.1	2019-12-14 22:11:31.903413+03	f	credentials
 16	Владимир Годовалов	chim73@mail.ru	+7(985)4828588	Пожалуйста пришлите мне данные входа в Comaex Demo	127.0.0.1	2019-12-16 23:03:53.436005+03	f	credentials
 17	Владимир Годовалов	innotech@yandex.ru	+7(985)4828588	Пожалуйста пришлите мне данные входа в Comaex Demo	127.0.0.1	2019-12-17 00:02:46.831005+03	f	credentials
+18	Владимир Годовалов	chim73@mail.ru	+7(985)4828588	Пожалуйста пришлите мне данные входа в Comaex Demo	127.0.0.1	2019-12-21 23:02:51.688821+03	f	credentials
 \.
 
 
@@ -1740,7 +1830,7 @@ COPY public.interaction_contact (id, fullname, email, phone, content, ipaddr, "t
 -- Name: interaction_contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.interaction_contact_id_seq', 17, true);
+SELECT pg_catalog.setval('public.interaction_contact_id_seq', 18, true);
 
 
 --
@@ -1762,7 +1852,18 @@ SELECT pg_catalog.setval('public.interaction_correspondence_id_seq', 1, false);
 -- Data for Name: promotion_image; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.promotion_image (id, slug, title, sentence, description, desc_html, name_id, urllink) FROM stdin;
+COPY public.promotion_image (id, image, slug, title, sentence, urllink, description, desc_html, name_id) FROM stdin;
+1	hvac/email_image2_UQHYe7j.jpg	hvac	О продукте			&ensp;Сервер подключается к контроллерам управления оборудованием и осуществляет функции мониторинга, управления, записи информации, сигнализации состояний, визуализацию устройств. Вот примеры интерфейса функционала:	<p>&ensp;Сервер подключается к контроллерам управления оборудованием и осуществляет функции мониторинга, управления, записи информации, сигнализации состояний, визуализацию устройств. Вот примеры интерфейса функционала:</p>	2
+2		hvac	Наше предложение			&ensp;Мы предлагаем на условиях OEM-соглашения поставлять вашей компании сервера Comaex под логотипом вашей компании. Мы разработаем листы параметров конфигурации ваших устройств и мнемосхемы визуализаций. Вам останется только загружать файлы объектов и подключать устройства к серверу.	<p>&ensp;Мы предлагаем на условиях OEM-соглашения поставлять вашей компании сервера Comaex под логотипом вашей компании. Мы разработаем листы параметров конфигурации ваших устройств и мнемосхемы визуализаций. Вам останется только загружать файлы объектов и подключать устройства к серверу.</p>	2
+3		hvac	Преимущества			<ul style='text-align:left'><li><b>Низкая цена устройства</b> - от 23000 рублей;</li><li><b>Высокая производительность</b> – контроль до 1000 переменных и до 20 слейв-устройств;</li><li><b>Быстрый ввод в эксплуатацию</b>. Достаточно ввести файл конфигурации объекта, соеденить сервер со слейв-устройствами с помощью кабеля или радиомодулей и настроить роутер объекта на доступ к серверу с глобального интернета если необходимо;</li><li><b>Не нужен стационарный ПК</b>, интерфейс доступен в любом браузере;</li><li><b>LAN и WAN доступ</b>.</li></ul>	<ul style='text-align:left'><li><b>Низкая цена устройства</b> - от 23000 рублей;</li><li><b>Высокая производительность</b> – контроль до 1000 переменных и до 20 слейв-устройств;</li><li><b>Быстрый ввод в эксплуатацию</b>. Достаточно ввести файл конфигурации объекта, соеденить сервер со слейв-устройствами с помощью кабеля или радиомодулей и настроить роутер объекта на доступ к серверу с глобального интернета если необходимо;</li><li><b>Не нужен стационарный ПК</b>, интерфейс доступен в любом браузере;</li><li><b>LAN и WAN доступ</b>.</li></ul>	2
+4		hvac	Ваша выгода			<ul style='text-align:left'><li><b>Конкурентные преимущества</b>. Ваше HVAC оборудование уже поставляется с готовой, полнофункциональной системой диспетчеризации;</li><li><b>Минимальные затраты на ввод в эксплуатацию</b>;</li><li><b>Высокая маржинальность</b>. Благодаря низкой цене продажи, вы можете вводить свою целесообразную наценку;</li><li><b>Нет необходимости в собственной разработке</b>. Сервера поставляются под вашим логотипом, а наша команда профессионалов отвечает за продукт.</li></ul>	<ul style='text-align:left'><li><b>Конкурентные преимущества</b>. Ваше HVAC оборудование уже поставляется с готовой, полнофункциональной системой диспетчеризации;</li><li><b>Минимальные затраты на ввод в эксплуатацию</b>;</li><li><b>Высокая маржинальность</b>. Благодаря низкой цене продажи, вы можете вводить свою целесообразную наценку;</li><li><b>Нет необходимости в собственной разработке</b>. Сервера поставляются под вашим логотипом, а наша команда профессионалов отвечает за продукт.</li></ul>	2
+5		hvac	Информация для изучения			<ul style='text-align:left'><li>Более детальное описание технологии: <a href='http://www.comaex.info' title='Посетить сайт' target='_blank'>comaex.info</a>;</li><li>Реальный сервер в работе:  <a href='http://comaex.ddns.net' title='Comaex Demo' target='_blank'>comaex.ddns.net</a>. Даные для входа: логин-<b>user</b>, пароль-<b>user12345.</b></li></ul>	<ul style='text-align:left'><li>Более детальное описание технологии: <a href='http://www.comaex.info' title='Посетить сайт' target='_blank'>comaex.info</a>;</li><li>Реальный сервер в работе:  <a href='http://comaex.ddns.net' title='Comaex Demo' target='_blank'>comaex.ddns.net</a>. Даные для входа: логин-<b>user</b>, пароль-<b>user12345.</b></li></ul>	2
+6	hvac/email_image2_ofeeebJ.jpg	hvac	About product			&ensp;The server connects to the equipment controllers and performs the functions of monitoring, control, recording information, signaling states, visualizing devices. Here are the examples of the functional interface:	<p>&ensp;The server connects to the equipment controllers and performs the functions of monitoring, control, recording information, signaling states, visualizing devices. Here are the examples of the functional interface:</p>	3
+7		hvac	What we offer			&ensp;We offer, under the terms of an OEM agreement, to supply your company with Comaex servers under your company logo. We will develop configuration sheets for your devices and visualization mimics. You just have to upload the object files and connect the devices to the server.	<p>&ensp;We offer, under the terms of an OEM agreement, to supply your company with Comaex servers under your company logo. We will develop configuration sheets for your devices and visualization mimics. You just have to upload the object files and connect the devices to the server.</p>	3
+8		hvac	Advantages			<ul style = 'text-align: left'> <li> <b> Low device price </b> - from 23,000 rubles; </li> <li> <b> High performance </b> - control up to 1000 variables and up to 20 slaves; </li> <li> <b> Quick commissioning </b>. It is enough to enter the object configuration file, connect the server to the slave devices using a cable or radio modules and configure the object router to access the server from the global Internet if necessary; </li> <li> <b> No need for a stationary PC </b>, the interface is accessible in any browser; </li> <li> <b> LAN and WAN access </b>. </li> </ul>	<ul style = 'text-align: left'> <li> <b> Low device price </b> - from 23,000 rubles; </li> <li> <b> High performance </b> - control up to 1000 variables and up to 20 slaves; </li> <li> <b> Quick commissioning </b>. It is enough to enter the object configuration file, connect the server to the slave devices using a cable or radio modules and configure the object router to access the server from the global Internet if necessary; </li> <li> <b> No need for a stationary PC </b>, the interface is accessible in any browser; </li> <li> <b> LAN and WAN access </b>. </li> </ul>	3
+9		hvac	Your benefit			<ul style = 'text-align: left'> <li> <b> Competitive Advantages </b>. Your HVAC equipment is already supplied with a ready-made fully-functional dispatch system </li> <li> <b> Minimum commissioning costs </b> </li> <li> <b> High margin </b>. Due to the low selling price, you can enter your own reasonable margin </li> <li> <b> No need for your own development </b>. Servers are delivered under your logo, and our team of professionals is responsible for the product. </li> </ul>	<ul style = 'text-align: left'> <li> <b> Competitive Advantages </b>. Your HVAC equipment is already supplied with a ready-made fully-functional dispatch system </li> <li> <b> Minimum commissioning costs </b> </li> <li> <b> High margin </b>. Due to the low selling price, you can enter your own reasonable margin </li> <li> <b> No need for your own development </b>. Servers are delivered under your logo, and our team of professionals is responsible for the product. </li> </ul>	3
+10		hvac	Information for learning			<ul style = 'text-align: left'> <li> A more detailed description of the technology: <a href='http://www.comaex.info' title='Visit the site 'target='_blank'> comaex.info </a> </li> <li> The real server is at work: <a href='http://comaex.ddns.net' title='Comaex Demo' target='_blank'> comaex.ddns.net </a>. Login- <b> user </b>, password- <b> user12345. </b> </li> </ul>	<ul style = 'text-align: left'> <li> A more detailed description of the technology: <a href='http://www.comaex.info' title='Visit the site 'target='_blank'> comaex.info </a> </li> <li> The real server is at work: <a href='http://comaex.ddns.net' title='Comaex Demo' target='_blank'> comaex.ddns.net </a>. Login- <b> user </b>, password- <b> user12345. </b> </li> </ul>	3
+11	sfugd/garage_door_JEmGz5T.jpg	sfugd				Bla bla bla	<p>Bla bla bla</p>	4
 \.
 
 
@@ -1770,7 +1871,7 @@ COPY public.promotion_image (id, slug, title, sentence, description, desc_html, 
 -- Name: promotion_image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.promotion_image_id_seq', 1, false);
+SELECT pg_catalog.setval('public.promotion_image_id_seq', 11, true);
 
 
 --
@@ -1778,6 +1879,9 @@ SELECT pg_catalog.setval('public.promotion_image_id_seq', 1, false);
 --
 
 COPY public.promotion_promotion (id, category, title, slug, subtitle, sentence, description, desc_html, image, filenum, urllink, "timestamp", flag, data1, data2, data3, data4, language) FROM stdin;
+2	HVAC	О нас	hvac			&ensp;Мы занимаемся разработкой супервизор – серверов <a href='http://www.comaex.info' title='Посетить сайт' target='_blank'>Comaex</a>, предназначенных для формирования информационной среды объекта. Так он выглядит:	<p>&ensp;Мы занимаемся разработкой супервизор – серверов <a href='http://www.comaex.info' title='Посетить сайт' target='_blank'>Comaex</a>, предназначенных для формирования информационной среды объекта. Так он выглядит:</p>	hvac/Mini_PC_1.jpg	0		2019-12-21 10:39:46.948588+03	f					RU
+3	HVAC	About Us	hvac			&ensp;We are developing a supervisor server <a href='http://www.comaex.info' title='Visit the site 'target='_blank'> Comaex </a>, designed to form the information environment of the object. So it looks like:	<p>&ensp;We are developing a supervisor server <a href='http://www.comaex.info' title='Visit the site 'target='_blank'> Comaex </a>, designed to form the information environment of the object. So it looks like:</p>	hvac/Mini_PC_1_1hs6qAt.jpg	0		2019-12-21 10:47:36.161966+03	f					EN
+4	SFUGD	Компактные ворота. Патент США 8327908	sfugd			Бла бла бла	<p>Бла бла бла</p>	sfugd/car_garage_em0llnt.jpg	0		2019-12-21 18:26:43.220189+03	f					RU
 \.
 
 
@@ -1785,7 +1889,7 @@ COPY public.promotion_promotion (id, category, title, slug, subtitle, sentence, 
 -- Name: promotion_promotion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.promotion_promotion_id_seq', 1, false);
+SELECT pg_catalog.setval('public.promotion_promotion_id_seq', 4, true);
 
 
 --
@@ -1793,6 +1897,7 @@ SELECT pg_catalog.setval('public.promotion_promotion_id_seq', 1, false);
 --
 
 COPY public.scheduler_scheduler (id, category, tick, counter, event, processing) FROM stdin;
+1	HVAC	4	0	Планировщик работает	0.12
 \.
 
 
@@ -1800,7 +1905,7 @@ COPY public.scheduler_scheduler (id, category, tick, counter, event, processing)
 -- Name: scheduler_scheduler_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('public.scheduler_scheduler_id_seq', 1, false);
+SELECT pg_catalog.setval('public.scheduler_scheduler_id_seq', 1, true);
 
 
 --

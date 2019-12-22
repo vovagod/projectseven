@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-08 21:02+0300\n"
+"POT-Creation-Date: 2019-12-21 22:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,55 +20,55 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: InteractionAdmin.py:36
+#: InteractionAdmin.py:38
 msgid "Correspondence"
 msgstr "Корреспонденция"
 
-#: InteractionAdmin.py:39
+#: InteractionAdmin.py:41
 msgid "Write a message to..."
 msgstr "Написать сообщение..."
 
-#: InteractionAdmin.py:43
+#: InteractionAdmin.py:45
 msgid "Write to person"
 msgstr "Написать клиенту"
 
-#: InteractionAdmin.py:44
+#: InteractionAdmin.py:46
 msgid "Submit this article"
 msgstr "Подтведить эту статью"
 
-#: InteractionAdmin.py:60
+#: InteractionAdmin.py:69
 msgid "Write responce"
 msgstr "Написать ответ"
 
-#: InteractionAdmin.py:68
+#: InteractionAdmin.py:77
 msgid "Responce status"
 msgstr "Статус ответа"
 
-#: InteractionAdmin.py:72
+#: InteractionAdmin.py:81
 msgid "Sent time"
 msgstr "Время отправки"
 
-#: InteractionAdmin.py:81
+#: InteractionAdmin.py:90
 msgid "The message was already sent, try another..."
 msgstr "Это сообщение уже было отправлено, попробуйте другое..."
 
-#: InteractionAdmin.py:84
+#: InteractionAdmin.py:93
 msgid "Email message was not entered, try again..."
 msgstr "Текст сообщения не был введен, попробуйте снова..."
 
-#: InteractionAdmin.py:86
+#: InteractionAdmin.py:95
 msgid "The message was sent successfully..."
 msgstr "Сообщение было успешно отправлено..."
 
-#: models/contact.py:6 models/correspondence.py:14
+#: models/contact.py:6 models/correspondence.py:15
 msgid "Full name"
 msgstr "Полное имя"
 
-#: models/contact.py:7 models/correspondence.py:15
+#: models/contact.py:7 models/correspondence.py:16
 msgid "Email"
 msgstr "Эл.почта"
 
-#: models/contact.py:8 models/correspondence.py:16
+#: models/contact.py:8 models/correspondence.py:17
 msgid "Phone"
 msgstr "Телефон"
 
@@ -84,11 +84,11 @@ msgstr "Предмет запроса"
 msgid "IP address"
 msgstr "IP адрес"
 
-#: models/contact.py:12 models/correspondence.py:22
+#: models/contact.py:12 models/correspondence.py:23
 msgid "Date"
 msgstr "Дата"
 
-#: models/contact.py:13 models/correspondence.py:24
+#: models/contact.py:13 models/correspondence.py:25
 msgid "Flag"
 msgstr "Флаг"
 
@@ -96,30 +96,30 @@ msgstr "Флаг"
 msgid "Incoming messages"
 msgstr "Входящие сообщения"
 
-#: models/correspondence.py:13
+#: models/correspondence.py:14
 msgid "Person ID"
 msgstr "ID персоны"
 
-#: models/correspondence.py:17
+#: models/correspondence.py:18
 msgid "Letter content"
 msgstr "Содержание письма"
 
-#: models/correspondence.py:19
+#: models/correspondence.py:20
 msgid "Letter theme"
 msgstr "Тема письма"
 
-#: models/correspondence.py:20
+#: models/correspondence.py:21
 msgid "Letter subject"
 msgstr "Предмет письма"
 
-#: models/correspondence.py:21
+#: models/correspondence.py:22
 msgid "Feedback"
 msgstr "Обратная связь"
 
-#: models/correspondence.py:23
+#: models/correspondence.py:24
 msgid "Message sent"
 msgstr "Сообщение отправлено"
 
-#: models/correspondence.py:30 models/correspondence.py:31
+#: models/correspondence.py:31 models/correspondence.py:32
 msgid "Forwarded correspondence"
 msgstr "Отправленная корреспонденция"

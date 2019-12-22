@@ -439,7 +439,9 @@ CREATE TABLE public.clients_clients (
     language character varying(30) NOT NULL,
     last_post timestamp with time zone,
     bid integer NOT NULL,
+    count smallint NOT NULL,
     CONSTRAINT clients_clients_bid_check CHECK ((bid >= 0)),
+    CONSTRAINT clients_clients_count_check CHECK ((count >= 0)),
     CONSTRAINT clients_clients_counter_check CHECK ((counter >= 0))
 );
 
@@ -1151,7 +1153,7 @@ SELECT pg_catalog.setval('public.base_submenu_id_seq', 11, true);
 -- Data for Name: clients_clients; Type: TABLE DATA; Schema: public; Owner: admin_en
 --
 
-COPY public.clients_clients (company, email, phone, about, area, persons, created, enable_mailing, interested, flag, category, counter, uuid, error_mailing, file, slug, address, email2, filepath, preorder, language, last_post, bid) FROM stdin;
+COPY public.clients_clients (company, email, phone, about, area, persons, created, enable_mailing, interested, flag, category, counter, uuid, error_mailing, file, slug, address, email2, filepath, preorder, language, last_post, bid, count) FROM stdin;
 \.
 
 
@@ -1353,6 +1355,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 91	promotion	0014_auto_20191217_2159	2019-12-17 21:59:52.148717+03
 92	clients	0024_clients_bid	2019-12-18 00:17:17.760478+03
 93	clients	0025_auto_20191218_2253	2019-12-18 22:53:12.38395+03
+94	clients	0026_auto_20191221_1314	2019-12-21 13:14:36.36681+03
 \.
 
 
@@ -1360,7 +1363,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_en
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 93, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 94, true);
 
 
 --
@@ -1483,6 +1486,8 @@ a6okyxh46215bnk5qp7hyerhiqbmfmz8	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzg
 guzat5kbdqop939zemzni8ck00e20nkz	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 14:02:36.693076+03
 i4l2j0e43z409nrvomv3hiq7qpt2v6zv	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 14:02:36.743945+03
 lrg0i6kdzu7a4wsuebfy04n2ebp0kmf3	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 14:02:36.747641+03
+7m55k56cyvgalz6hsqd11cyk30lyw53o	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.110114+03
+50qcfy1ccj65vgdj2sj4sgujtg1mezwy	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.183162+03
 b9nb9gj3wa6w39iiy0zvc6xbfljj5lkg	ZWNmYWJlYWZmNDBkZWQ5ODJlNzJjNDVmODQzMzU0NjRmOTQ5NGQ0Mzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfbGFuZ3VhZ2UiOiJlbiIsIl9hdXRoX3VzZXJfaGFzaCI6IjQzMjRjZDBkOGFjNWNkYWI0OTdiYTlmMzA5ZmFiOGVmOTcxODM1NzEifQ==	2019-12-28 14:30:58.921101+03
 iowc7yhjj58leg2ij285lkgzzo67215w	ZWNmYWJlYWZmNDBkZWQ5ODJlNzJjNDVmODQzMzU0NjRmOTQ5NGQ0Mzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfbGFuZ3VhZ2UiOiJlbiIsIl9hdXRoX3VzZXJfaGFzaCI6IjQzMjRjZDBkOGFjNWNkYWI0OTdiYTlmMzA5ZmFiOGVmOTcxODM1NzEifQ==	2019-12-28 14:38:10.591361+03
 yps2xp98cvajvrk55vy8q45n7tda2mdy	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:06:32.781169+03
@@ -1518,8 +1523,6 @@ ywf5sfewz1rrb3sdfsuo81fb4xh33ckg	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzg
 x21oh4hxefq6hdd0mjy4ql2096lfvyzf	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.084652+03
 hofbcudiup85hoxutm4q7l5dzkz1ha5n	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.089723+03
 bfifyj5chsfg9c8l9ltripa2aeiozjwy	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.101897+03
-7m55k56cyvgalz6hsqd11cyk30lyw53o	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.110114+03
-50qcfy1ccj65vgdj2sj4sgujtg1mezwy	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.183162+03
 n7wllnss6e454zjry8d9esjctgis6f6e	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.206105+03
 t1u496d6djrv2tq2gmv9nyhyx18qmu2z	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.24443+03
 6261i1galaqz51burm9op4j5p7m1pyy2	MGU0Njk1NWEzZDIxOWQ5NWE5YjE0NDI3ODJjM2FkNzFiNzgzZjBhMDp7Il9sYW5ndWFnZSI6ImVuIn0=	2019-12-28 15:25:36.24071+03
@@ -1988,7 +1991,7 @@ SELECT pg_catalog.setval('public.interaction_correspondence_id_seq', 1, false);
 -- Data for Name: promotion_image; Type: TABLE DATA; Schema: public; Owner: admin_en
 --
 
-COPY public.promotion_image (id, slug, title, sentence, description, desc_html, name_id, urllink) FROM stdin;
+COPY public.promotion_image (id, image, slug, title, sentence, urllink, description, desc_html, name_id) FROM stdin;
 \.
 
 

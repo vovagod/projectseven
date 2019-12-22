@@ -9,15 +9,29 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.utils import translation
 from django.utils.html import format_html_join, format_html
+
 from django_object_actions import DjangoObjectActions
+
 from .models import Clients
 from promotion.models import Promotion
 from mail.sendmail import send_mail
 
+from import_export import fields, resources
+from import_export.admin import ImportExportModelAdmin
 
 
-class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
-    list_display = ['company', 'category', 'language', 'email', 'phone', 'counter',
+class ClientsResource(resources.ModelResource):
+
+    class Meta:
+        model = Clients
+        fields = ('company', 'address', 'email', 'email2', 'phone', 'about',
+                  'category', 'language', 'persons', 'enable_mailing',
+                  )
+
+
+class ClientsAdmin(ImportExportModelAdmin, DjangoObjectActions, admin.ModelAdmin):
+    resource_class = ClientsResource
+    list_display = ['company', 'category', 'language', 'email', 'phone', 'count',
                     'enable_mailing', 'interested', 'preorder', 'errors']
 
     search_fields = ('company', 'category',)
@@ -30,6 +44,7 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         'mailing_errors',
         'path_to_folder',
         'last_post',
+        'emails_sent',
     )
     
 
@@ -37,8 +52,8 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         (_('Client'), {
             'fields': (
                 ('category', 'language'),
-                ('address', 'uuid'),
                 ('company', 'slug'),
+                ('address', 'uuid'),
                 ('email', 'phone'),
             )
         }),
@@ -60,6 +75,7 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
             'fields': (
                 'theme_of_mailing',
                 'last_post',
+                'emails_sent',
             ),
         }),
         )
@@ -77,7 +93,7 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
         else:
             err = send_mail(subject, obj.email, message, obj.company, template, obj.language)
             if err:
-                messages.error(request, _('There was an error sending an email: '))
+                messages.error(request, _('There was an error sending the email: '))
                 messages.add_message(request, messages.ERROR, str(err)[1:-2])
             else:
                 Clients.objects.filter(uuid=obj.uuid).update(counter=obj.counter+1)
@@ -123,8 +139,16 @@ class ClientsAdmin(DjangoObjectActions, admin.ModelAdmin):
     mailing_errors.short_description = _("mailing errors")
 
 
+    def emails_sent(self, instance):
+        return format_html("<b>{}</b>",
+                           '{}'.format(instance.get_count())
+                           )
+                           
+    emails_sent.short_description = _("number of emails sent")
+
+
     def errors(self, obj):
-        if obj.error_mailing == 'None':
+        if obj.error_mailing == '':
             return ("%s" % _('None'))
         else:
             return ("%s" % _('Available'))

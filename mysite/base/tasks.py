@@ -59,7 +59,7 @@ class Schedule(object):
             if err:
                 cl.update(error_mailing=str(err)[1:-2])
             else:
-                cl.update(counter=0, error_mailing=_('None'))
+                cl.update(counter=0, count=client.count+1, error_mailing= '')
             self.l.release()
         
         end = time.time()

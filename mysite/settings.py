@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*',]
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
     'mysite.base',
     'interaction',
     'clients',
@@ -101,12 +102,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASE_ROUTERS = ['mysite.router.Router']
 
+IMPORT_EXPORT_USE_TRANSACTIONS = False
+
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 #DATABASES = {
     #'default': {},
-    #'database_ru': {
+    #'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     #},
@@ -268,16 +271,21 @@ TEMPLATE_MAIL = {
 
 
 # Tick intervals (must be 3600 sec)
-SURVEY_TIME_ONE = 36
-SURVEY_TIME_TWO = 10
-SURVEY_TIME_THREE = 20
-SURVEY_TIME_FOUR = 30
-SURVEY_TIME_FIVE = 40 
-SURVEY_TIME_SIX = 50 
+SURVEY_TIME_ONE = 3600 # HVAC
+SURVEY_TIME_TWO = 10  # Smart Home
+SURVEY_TIME_THREE = 20  # IoT
+SURVEY_TIME_FOUR = 30  # Facebook
+SURVEY_TIME_FIVE = 40  # Mathematics
+SURVEY_TIME_SIX = 50  # SFUGD
 
 
 # Valid extensions list
 VALID_EXTENSIONS = ['pdf', 'doc', 'docx', 'jpg', 'png', 'xlsx', 'xls']
+
+
+# Field values
+MIN_VALUE = 10000
+MAX_VALUE = 1000000
 
 
 # Preorder form context
@@ -291,12 +299,8 @@ PREORDER = _("<p style='text-align:justify'>&ensp;Please fill in the form fields
      )
 
 BID = _("<p style='text-align:justify'>&ensp;Please fill in the form fields. "
-      "In the last field, attach the file(s) with a list of controlled parameters in the form"
-      " of a sheet of Modbas variables of your controller. "
-      "Attach the file(s) with device mnemonics in the same field in the form convenient for you. "
-      "Based on the information received, we will create working mnemonic diagrams and, together with the variables, "
-      "enter this data into the server and send you a link to the real working application of your order. "
-      "After you just have to install the server on the object and start it in work.</p>"
+      "In the last field enter the price for which you are ready to buy the invention."
+      "After receiving your bid, we will contact you and discuss the details of the transaction.</p>"
      )
 
 ASTERISK = _("<p style='font-size: 14px; color:gray'>*change if not matching</p>")
@@ -307,7 +311,7 @@ CREDENTIALS = [_('login'), _('password'), _('details'), _('send')]
 CALLME = [_('interested'), _('contact'), _('call'), _('me')]
 SUCCESS = _("Your request has been sent successfully!")
 MESSAGE_COMMON = {'common':_('We have received your message and will contact you shortly.')}
-MESSAGE_CREDENTIALS = {'credentials':_('To enter use login: user, password: user12345.')}
+MESSAGE_CREDENTIALS = {'credentials':_('To enter use login: <b>user</b>, password: <b>user12345</b>.')}
 MESSAGE_SUCCESS = _("Login data sent to your email.")
 MESSAGE_CALLME = {'callme':_('We will contact you in the next hour.')}
 
@@ -354,7 +358,7 @@ if DEBUG:
     
 # Comaex (HVAC, IoT, Smart Home) email template data
 MSG = {'letter':PATH+'letter.png',
-        'host':'https://'+DOMAIN,
+        'host':'https://'+DOMAIN,  # make https
         'url':'https://'+DOMAIN,
         'logo': PATH+'logo.png',
         'website':PATH+'website.png',
@@ -380,7 +384,6 @@ MSG = {'letter':PATH+'letter.png',
 # SFUGD email template data
 SFUGD = {'url':'http://'+SFUGD_DOMAIN,
         'logo': PATH+'sfugd.png',
-        #'comaex_demo':COMAEX_DEMO,
         'domain':SFUGD_DOMAIN,
         'title':SFUGD_TITLE,
         'name': 'SFUGD',

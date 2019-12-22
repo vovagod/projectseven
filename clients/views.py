@@ -82,13 +82,14 @@ class ClientsActionView(DetailView):
             raise Http404("Such UUID does not exist")
         except Clients.DoesNotExist:
             raise Http404("Client does not exist")
+        translation.activate(self.obj.language.lower())
         if action == 'unsubscribe':
             Clients.objects.filter(uuid=uuid).update(enable_mailing=False)
             self.action = settings.ACTION_UNSUBSCRIBE
         if action == 'interested':
             Clients.objects.filter(uuid=uuid).update(interested=True)
             self.action = settings.ACTION_INTERESTED
-        if action == 'preorder':
+        if action == 'pre-order':
             self.action = settings.ACTION_PREORDER
         if action == 'bid':
             self.action = settings.ACTION_BID
@@ -142,15 +143,19 @@ class ClientsPreorderView(RequestFormAttachMixin, FormView):
 
 
     def get_context_data(self, *args, **kwargs):
-        category = Clients.objects.get(uuid=self.kwargs['uuid']).category
+        try:
+            client = Clients.objects.get(uuid=self.kwargs['uuid'])
+        except Clients.DoesNotExist:
+            raise Http404("Client does not exist")
+        translation.activate(client.language.lower())
         context = super(ClientsPreorderView, self).get_context_data(*args, **kwargs)
         context['introduction'] = mark_safe(settings.PREORDER)
         context['asterisk'] = mark_safe(settings.ASTERISK)
-        return get_common_context(category, context)
+        return get_common_context(client.category, context)
 
     def form_valid(self, form):
         common_valid(self, 'preorder')
-        return HttpResponseRedirect(reverse('clients:action', args=('preorder', self.uuid,)))
+        return HttpResponseRedirect(reverse('clients:action', args=('pre-order', self.uuid,)))
 
     def form_invalid(self, form):
         return HttpResponseRedirect(reverse('clients:preorder', args=(self.uuid,)))
@@ -186,20 +191,21 @@ class ClientsBuyView(RequestFormAttachMixin, FormView):
 
     def get_context_data(self, *args, **kwargs):
         try:
-            category = Clients.objects.get(uuid=self.kwargs['uuid']).category
+            client = Clients.objects.get(uuid=self.kwargs['uuid'])
         except Clients.DoesNotExist:
             raise Http404("Client does not exist")
+        translation.activate(client.language.lower())
         context = super(ClientsBuyView, self).get_context_data(*args, **kwargs)
         context['introduction'] = mark_safe(settings.BID)
         context['asterisk'] = mark_safe(settings.ASTERISK)
-        return get_common_context(category, context)
+        return get_common_context(client.category, context)
 
     def form_valid(self, form):
         common_valid(self, 'bid')
         return HttpResponseRedirect(reverse('clients:action', args=('bid', self.uuid,)))
 
     def form_invalid(self, form):
-        return HttpResponseRedirect(reverse('clients:buy', args=(self.uuid,)))
+        return super(ClientsBuyView, self).form_invalid(form)
 
 
 
