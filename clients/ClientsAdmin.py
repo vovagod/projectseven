@@ -17,7 +17,7 @@ from promotion.models import Promotion
 from mail.sendmail import send_mail
 
 from import_export import fields, resources
-from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ImportExportMixin
 
 
 class ClientsResource(resources.ModelResource):
@@ -29,7 +29,7 @@ class ClientsResource(resources.ModelResource):
                   )
 
 
-class ClientsAdmin(ImportExportModelAdmin, DjangoObjectActions, admin.ModelAdmin):
+class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     resource_class = ClientsResource
     list_display = ['company', 'category', 'language', 'email', 'phone', 'count',
                     'enable_mailing', 'interested', 'preorder', 'errors']
@@ -61,6 +61,7 @@ class ClientsAdmin(ImportExportModelAdmin, DjangoObjectActions, admin.ModelAdmin
             'fields': (
                 'about',
                 ('company_created', 'enable_mailing', 'interested', 'preorder', 'flag'),
+                'bid',
             ),
         }),
         (_('Actions'), {

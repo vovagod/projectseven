@@ -239,7 +239,7 @@ msgstr "Ставка"
 
 #: models.py:56
 msgid "Bid made by client"
-msgstr "Отправить сообщение клиенту"
+msgstr "Ставка, сделанная клиентом"
 
 #: models.py:58
 msgid "Emailing report"

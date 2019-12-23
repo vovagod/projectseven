@@ -1,0 +1,33 @@
+{% extends "base/alert.html" %}
+{% load i18n %}
+{% block core %}
+
+<td>
+    <div class="container">
+    <h3>{{shape}}</h3>
+        {{introduction}}<br>
+        
+    <form method='POST' enctype="multipart/form-data" style="padding-top:16px">
+      {% csrf_token %}
+       {% for field in form %}
+             {{ field.errors }}
+          {{ field.label_tag }}
+               {{ field }}
+       {% endfor %}
+          
+           {% if messages %}
+            <ul class="messages">
+               {% for message in messages %}
+                 <li class="alert" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+               {% endfor %}
+            </ul>
+          {% endif %}
+        
+          {{asterisk}}
+        <input type="submit" value="{% trans 'Send' %}"><br>  
+   </form>
+        
+    </div>
+</td>
+
+{% endblock core %}

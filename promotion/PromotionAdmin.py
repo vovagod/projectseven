@@ -2,9 +2,9 @@ import sys
 from django.contrib import admin
 from django.utils import translation
 from django.conf import settings
+
 from markdown import markdown
 from .models import Promotion, Image
-
 
 
 class ImageInline(admin.StackedInline):
@@ -14,6 +14,7 @@ class ImageInline(admin.StackedInline):
               ('title', 'sentence'),
               ('urllink'),
               ('description'),
+              ('data1', 'data2'),
               )
     exclude = ('slug',)
     

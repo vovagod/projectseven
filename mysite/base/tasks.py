@@ -28,7 +28,7 @@ class Schedule(object):
             return
         
         if sch.tick == 0:
-            sch_q.update(event=_('Tick is 0. Scheduler stopped'), processing=_('None')) 
+            sch_q.update(event=_('Tick is 0. Scheduler stopped'), processing=_('No data')) 
             return
     
         clients = Clients.objects.filter(enable_mailing=True, category=self.category)
@@ -72,7 +72,7 @@ class Schedule(object):
 def CycleOne(self):
     cycle = Schedule(self.lock, settings.CATEGORIES[0][0])
     res = cycle.cycle()
-    #print("CYCLE_ONE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    print("CYCLE_ONE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
     return res
 
 
@@ -80,7 +80,7 @@ def CycleOne(self):
 def CycleTwo(self):
     cycle = Schedule(self.lock, settings.CATEGORIES[1][0])
     res = cycle.cycle()
-    #print("CYCLE_TWO, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    print("CYCLE_TWO, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
     return res
 
 
@@ -88,7 +88,7 @@ def CycleTwo(self):
 def CycleThree(self):
     cycle = Schedule(self.lock, settings.CATEGORIES[2][0])
     res = cycle.cycle()
-    #print("CYCLE_THREE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    print("CYCLE_THREE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
     return res
 
 
@@ -96,7 +96,7 @@ def CycleThree(self):
 def CycleFour(self):
     cycle = Schedule(self.lock, settings.CATEGORIES[3][0])
     res = cycle.cycle()
-    #print("CYCLE_FOUR, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    print("CYCLE_FOUR, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
     return res
 
 
@@ -104,7 +104,7 @@ def CycleFour(self):
 def CycleFive(self):
     cycle = Schedule(self.lock, settings.CATEGORIES[4][0])
     res = cycle.cycle()
-    #print("CYCLE_FIVE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    print("CYCLE_FIVE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
     return res
 
 
@@ -112,6 +112,6 @@ def CycleFive(self):
 def CycleSix(self):
     cycle = Schedule(self.lock, settings.CATEGORIES[5][0])
     res = cycle.cycle()
-    #print("CYCLE_SIX, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    print("CYCLE_SIX, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
     return res
 

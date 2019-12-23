@@ -1,0 +1,148 @@
+{% load i18n %}
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    
+table.fixed { 
+    table-layout:fixed; 
+    }
+table.fixed td {
+    overflow: hidden;
+    }
+    
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  text-align: center;
+   padding: 5px;
+    line-height: 1.7;
+}
+    th.span {
+        color:blue;
+    }
+    h4 {
+        padding-top: 10px;
+    }
+    p {
+        text-align: left;
+        margin: 10px 0px 10px 0px;
+    }
+    #footer {
+       /* border-style: solid; */
+        border-color: gainsboro;
+        border-width: 2px 0px 0px 0px;
+        margin-top: 7px;
+    } 
+    #bulls{
+        font-size: 36px;
+    }
+    #symbol{
+        font-size: 12px;
+    }
+    
+.messages {
+  width: 100%;
+  background-color:lightyellow;
+  padding: 12px 20px;
+  margin: 16px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+    
+    button.close{
+        border: 2px solid black;
+        background-color: lightyellow;
+        color: black;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        display:inline-block;
+        text-decoration: none;
+        margin: 5px 10px 5px 10px; 
+    }
+    
+input[type=text], input[type=number],
+    input[type=file], select {
+  width: 100%;
+  color: blue;
+  font-weight: 500;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  font-weight: 700;
+  background-color: #2196F3;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: blue;
+}
+    
+label{
+    display: block;
+    text-align: left;
+    color: gray;
+    }
+
+div.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+   
+</style>
+    
+</head>
+<body>
+     {% language lang %}
+<table class='fixed'>
+     <col width="width:100%" />
+    <!-- BODY -->
+  <tr id='center'>
+      
+      {% block core %}{% endblock core %}
+
+    </tr>
+    <!-- BULLS -->
+  <tr id='bulls'>
+    <td style='width:50%'>
+        <span style='color:green'>&bull;</span>
+        <span style='color:yellow'>&bull;</span>
+        <span style='color:red'>&bull;</span>
+      </td>
+  </tr>
+    <!-- FOOTER -->
+  <tr id='footer'>
+      <td style='font-size: 12px'>
+          <span>{{title}}</span><br>
+          <span><img src="{{address}}"> {{addr}}<br>
+          <span id="symbol" style='color:red'><img src="{{phone}}"></span>&nbsp;{{mobile}} &nbsp;&bull;&nbsp;
+          <span id="symbol"><img src="{{email}}"></span> {{mail}} &nbsp;&bull;&nbsp;
+          <span id="symbol"><img src="{{website}}"></span> <a href="{{host}}" title="{% trans 'Visit website' %}" target="_blank">&nbsp;{{domain}}</a></span><br>
+      </td>
+  </tr>
+</table>
+ {% endlanguage %}
+</body>
+</html>

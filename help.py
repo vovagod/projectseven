@@ -96,7 +96,10 @@
 
 4. Creation and configuration Postgresql:
 
-    sudo apt install postgresql
+   
+    sudo apt-get install postgresql
+    sudo apt-get install python-psycopg2
+    sudo apt-get install libpq-dev
 
     enter under root: sudo su postgres
     farther command: psql
@@ -302,6 +305,13 @@ sudo nano /etc/ssh/sshd_config
  ssh webscada@rps-01
 # AWS SSH
 sudo ssh -i /home/vova/projectseven/aws_key.pem ubuntu@ec2-34-226-39-94.compute-1.amazonaws.com
+
+# get file from aws to local:
+sudo scp -i /home/vova/projectseven/aws_key.pem ubuntu@ec2-34-226-39-94.compute-1.amazonaws.com:/home/ubuntu/projectseven/projectseven_db.sql
+/home/vova/projectseven/mysite
+
+# put file to aws:
+sudo scp -i /home/vova/projectseven/aws_key.pem /home/vova/projectseven/custom.py ubuntu@ec2-34-226-39-94.compute-1.amazonaws.com:/home/ubuntu/projectseven
 
 #       $OpenBSD: sshd_config,v 1.101 2017/03/14 07:19:07 djm Exp $
 

@@ -30,6 +30,10 @@ class CommonImage(models.Model):
                                   help_text=_("Enter URL link"))
     description = models.TextField(verbose_name=_('Text'), help_text=_("Enter a text"))
     desc_html   = models.TextField(blank=True, editable=True)
+    data1       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data1'),
+                                   help_text=_("Enter additional data 1"))
+    data2       = models.CharField(max_length=50, blank=True, verbose_name=_('Add.data2'),
+                                   help_text=_("Enter additional data 2"))
 
 
     class Meta:

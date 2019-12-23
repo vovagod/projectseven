@@ -1,0 +1,281 @@
+{% extends 'base/base.html' %}
+{% load i18n %}
+
+{% block home %}
+
+
+{% for content in contents|dictsort:"submenu.id" %}
+
+{% if content.submenu.subslug == '#slider' %}
+
+<div id="headerSpin" class="w3-center" style="margin-top:85px; display:block">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+    <p class="loop9 w3-center">Загрузка...</p>
+</div>
+
+<div id="headerShow" class="w3-content w3-display-container" style="max-width:1024px; margin-top:50px; display:none">
+<!-- SLIDER MODULE -->
+{% for slide in content.base %}
+    <img class="mySlides w3-animate-opacity" src="{{ slide.image.url }}" alt="{{ slide.description }}" style="width:100%">
+     <div class="myText" style="font-weight:bold;">
+        <p class="loop3 w3-display-position" style="color:{{slide.data1}}; margin-top:0px">{% filter linebreaksbr %}{{slide.title|linebreaksbr}}{% endfilter %}</p>
+        <p class="loop4 w3-display-position" data-data4="{{slide.data4}}">
+       <a href="{{slide.get_slider_url}}" class="w3-btn w3-padding-small w3-round-large w3-left-align" style="background-color:{{slide.data3}}; color:{{slide.data2}}; font-style: italic" target="{% if not slide.flag %}_blank{% else %}_self{% endif %}">{% filter linebreaksbr %}{{slide.description|linebreaksbr}}{% endfilter %}&rarr;</a></p>
+    </div>
+{% endfor %}
+  <div class="loop5 w3-center w3-container w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+     {% for circle in content.base %}
+        <div class="arrow-left w3-left w3-hover-text-yellow" onclick="plusDivs(-1)">&#10094;</div>
+           <div class="arrow-right w3-right w3-hover-text-yellow" onclick="plusDivs(1)">&#10095;</div>
+        <span class="demo" onclick="currentDiv({{forloop.counter}})"></span>
+     {% endfor %}
+  </div>  
+</div>
+{% endif %}
+
+
+{% if content.submenu.subslug == '#about' %}
+<!-- ABOUT MODULE -->
+<div id="about" class="w3-container w3-card w3-section w3-white" style="padding-top:16px">
+{% for about in content.base %}
+<p class="loop8 w3-center">{% ifchanged %}{{ about.title }}{% endifchanged %}</p>
+    <div style="padding: 0px 24px 12px 24px">
+      <p class="loop9 w3-center">{% ifchanged %}{{about.subtitle}}{% endifchanged %}</p>
+        <h5>{% ifchanged %}{{about.sentence}}{% endifchanged %}</h5>
+        <code class="loop11">{% filter linebreaksbr %}{{about.desc_html|safe|linebreaksbr}}{% endfilter %}</code>
+    </div>
+    
+    
+{% for image in images %}
+{% if image.name_id == about.id %}
+<!--  MODAL1  -->
+<div id="id0{{forloop.counter}}" class="w3-modal">
+  <div class="w3-modal-content">
+      <span onclick="document.getElementById('id0{{forloop.counter}}').style.display='none'"
+        class="w3-button w3-display-topright">&#10060;</span>
+         <div class="w3-row w3-container">
+            <div class="w3-half w3-animate-zoom w3-padding-16">
+                {% if image.image %}
+             <img src="{{image.image.url}}" title="{{image.title}}" style="width:100%">{% endif %}
+                <p class="loop10 w3-center w3-text-indigo"><b>{{image.title}}</b></p>
+             </div>
+              <div class="w3-half w3-padding-large">
+                  <p class="loop11 w3-center"><b>{{image.sentence}}</b></p>
+                  <p class="loop11 w3-left-align">{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
+              </div>
+        </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endfor %}
+</div>
+{% endif %}
+
+
+{% if content.submenu.subslug == '#specification' %}
+<!-- SPECIFICATIONS MODULE -->
+<div id="specification" class="w3-container w3-card w3-white" style="padding-top:16px; margin-top:16px">
+{% for about in content.base %}
+<p class="loop8 w3-center">{% ifchanged %}{{ about.title }}{% endifchanged %}</p>
+     <div style="padding: 0px 24px 12px 24px">
+        <p class="loop9">{% ifchanged %}{{about.subtitle}}{% endifchanged %}</p>
+          <p class="loop10">{% ifchanged %}{{about.sentence}}{% endifchanged %}</p>
+         <code class="loop11">{% filter linebreaksbr %}{{about.desc_html|safe|linebreaksbr}}{% endfilter %}</code>
+     </div>
+{% endfor %}
+</div>
+{% endif %}
+
+{% if content.submenu.subslug == '#specification_images' %}
+<!-- SPECIFICATIONS IMAGES MODULE -->
+{% for image in content.base %}
+<!-- {Popup screenshots-->
+<div id="image{{forloop.counter}}" class="w3-display-container w3-white w3-margin w3-border w3-border-blue w3-hide-small" style="display: none">
+   
+<span id="screenshot" onclick="this.parentElement.style.display='none'" class="w3-button w3-border w3-border-blue w3-large w3-display-topright" title="{% trans 'Close window' %}">&#10060;</span>
+<img src="{{image.image.url}}" alt="{{image.title}}" style="width:100%" class="w3-animate-zoom">
+    <p class="loop13 w3-display-middle w3-opacity w3-center w3-text-pink"><b>{% trans 'Screenshot of' %} {{image.title}}</b></p>
+     <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
+         {% if image.sentence %}<p class="loop11 w3-padding"><b>&emsp;{{image.sentence}}</b></p>{% endif %}
+        <code class="loop11 w3-padding">{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</code>
+    </div>
+    
+    {% for image2 in images %}
+    {% if image2.name_id == image.id %}
+    <img src="{{image2.image.url}}" alt="{{image2.title}}" style="width:100%">
+     <div class="w3-panel w3-pale-blue w3-leftbar w3-border-blue">
+         {% if image2.sentence %}<p class="loop11 w3-padding"><b>&emsp;{{image2.sentence}}</b></p>{% endif %}
+        <code class="loop11 w3-padding">{% filter linebreaksbr %}{{image2.desc_html|safe|linebreaksbr}}{% endfilter %}</code>
+    </div>
+    {% endif %}
+    {% endfor %}
+    
+</div>
+
+<!-- Main loop-->
+<div id="{{image.slug}}" class="w3-row-padding w3-white w3-padding-16 w3-container w3-card w3-topbar" style="border-top-width: 2px!important;"> 
+<div class="loop6 w3-display-container w3-third w3-center">
+<img class="Apdemo w3-border w3-border-blue w3-opacity w3-hover-opacity-off" src="{{image.image.url}}" alt="{{image.title}}"
+style="width:100%; cursor:pointer;" onclick="charImage({{forloop.counter}});" title="{% trans 'Screen of the' %} {{image.title}}. {% trans 'Open in new window' %}">
+</div>
+   
+<div class="loop7 w3-twothird">
+<p class="loop8 w3-center" style="color:{{image.data1}}">{{image.title}}</p>
+    <p class="loop9 w3-padding"><i class="{{image.data3}}"></i>&emsp;{{image.subtitle}}</p>
+    <code class="loop11 w3-text-grey">{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr|truncatewords:20}}{% endfilter %}<span style="color:darkblue; cursor:pointer" onclick="charImage({{forloop.counter}})">&rarr;</span></code>
+</div>
+</div>
+{% endfor %}
+{% endif %}
+
+
+{% if content.submenu.subslug == '#application' %}
+<!-- APPLICATION MODULE -->
+<div id="application" class="w3-container w3-card w3-white" style="padding-top:16px; margin-top: 16px">
+{% for about in content.base %}
+<p class="loop8 w3-center">{% ifchanged %}{{ about.title }}{% endifchanged %}</p>
+    <div style="padding: 0px 24px 12px 24px">
+      <p class="loop9">{% ifchanged %}{{about.subtitle}}{% endifchanged %}</p>
+        <p class="loop10">{% ifchanged %}{{about.sentence}}{% endifchanged %}</p>
+          <code class="loop11">{% filter linebreaksbr %}{{about.desc_html|safe|linebreaksbr}}{% endfilter %}</code>
+    </div>
+{% endfor %}
+</div>
+{% endif %}
+
+{% if content.submenu.subslug == '#application_images' %}
+<div class="w3-row-padding" style="margin: 0px -16px 0px -16px">
+    {% for image in content.base %}
+    <div id="application{{forloop.counter}}" class="w3-third" style="margin-top:5px">
+      <div class="w3-card-4">
+          <p class="loop9 w3-center w3-padding" style="margin:0px 0px 0px 0px; color:{{image.data1}}"><b>{{image.title}}</b></p>
+         <img src="{{image.image.url}}" alt="{{image.title}}" style="width:100%">
+          <div id="appText" class="apptext w3-container w3-white">
+            <code class="loop11 appText w3-padding-16">{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</code>
+             <!-- <p><button class="w3-button w3-light-grey w3-block">Contact</button></p> -->
+           </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+
+{% if content.submenu.subslug == '#portfolio' %}
+<!-- PORTFOLIO MODULE (FUTURE DEVELOPMENT) -->
+  <div id="portfolio" class="w3-container" style="padding-top: 50px">
+    <h2 class="w3-text-green">The Apartment</h2>
+    <div class="w3-display-container myApSlides">
+    <img src="/w3images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
+      <div class="w3-display-bottomleft w3-container w3-black">
+        <p>Living Room</p>
+      </div>
+    </div>
+    <!--<div class="w3-display-container myApSlides">
+    <img src="/w3images/diningroom.jpg" style="width:100%;margin-bottom:-6px">
+      <div class="w3-display-bottomleft w3-container w3-black">
+        <p>Dining Room</p>
+      </div>
+    </div>
+    <div class="w3-display-container myApSlides">
+    <img src="/w3images/bedroom.jpg" style="width:100%;margin-bottom:-6px">
+      <div class="w3-display-bottomleft w3-container w3-black">
+        <p>Bedroom</p>
+      </div>
+    </div>
+    <div class="w3-display-container myApSlides">
+    <img src="/w3images/livingroom2.jpg" style="width:100%;margin-bottom:-6px">
+      <div class="w3-display-bottomleft w3-container w3-black">
+        <p>Living Room II</p>
+      </div>
+    </div>-->
+  </div>
+
+  <div class="w3-row-padding w3-section">
+    <div class="w3-col s3">
+      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="" style="width:100%;cursor:pointer" onclick="currentApDiv(1)" title="Living room">
+    </div>
+    <div class="w3-col s3">
+      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="" style="width:100%;cursor:pointer" onclick="currentApDiv(2)" title="Dining room">
+    </div>
+    <div class="w3-col s3">
+      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="" style="width:100%;cursor:pointer" onclick="currentApDiv(3)" title="Bedroom">
+    </div>
+    <div class="w3-col s3">
+      <img class="Apdemo w3-opacity w3-hover-opacity-off" src="" style="width:100%;cursor:pointer" onclick="currentApDiv(4)" title="Second Living Room">
+    </div>
+  </div>
+{% endif %}
+
+
+{% if content.submenu.subslug == '#price' %}
+<!-- PRICE MODULE -->
+<div id="technology" class="w3-container w3-padding w3-white" style="padding-top:16px">
+{% for about in content.base %}
+<p class="loop8 w3-center">{% ifchanged %}{{ about.title }}{% endifchanged %}</p>
+<p class="loop9 w3-center w3-large">{% ifchanged %}{{about.subtitle}}{% endifchanged %}</p>
+<p class="loop10 w3-left w3-large">{% ifchanged %}{{about.sentence}}{% endifchanged %}</p>
+<div class="w3-left">
+    <p class="loop11">{{ about.description }}</p>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+
+{% if content.submenu.subslug == '#price_images' %}
+<!-- PRICE IMAGES MODULE-->
+ <div class="w3-row-padding w3-center" style="margin-top:64px">
+     {% for image in content.base %}
+     <div class="w3-quarter">
+       <i class="{{image.sentence}} w3-margin-bottom w3-jumbo"></i>
+         <p class="loop8 w3-large">{{image.title}}</p>
+       <p class="loop11">{{image.description}}</p>
+     </div>
+     {% endfor %}
+</div>
+{% endif %}
+
+
+{% if content.submenu.subslug == '#contact' %}
+<!-- CONTACT FORM MODULE -->
+<span id="success" style="padding-top:40px"></span>
+{% if messages %}
+
+<div class="w3-panel w3-display-container w3-pale-yellow w3-border">
+    <span class="w3-button w3-medium w3-display-right" onclick="this.parentElement.style.display='none'">&#10060;</span>
+    {% for message in messages %}
+    <p class="loop9">&ensp;{{ message }}</p>
+    {% endfor %}
+    </div>
+    {% endif %}
+    
+ <div id="contact" class="w3-container w3-card-4 w3-section w3-white w3-text-blue" style="padding-top:16px">
+      <p class="loop8 w3-center">{% trans 'Contact' %}</p>
+        <div class="loop10" style="padding: 0px 0px 0px 30px; color:#373538">
+            <ul><li>{% trans "Call us: +7 985 482-85-88" %}</li><li>{% trans "Write to us about cooperation, technical questions, login in " %}<a href="http://comaex.ddns.net" style="color:red; cursor: pointer" target="_blank">Comaex Demo</a>{% trans " and others:" %}</li></ul>
+        </div>
+
+  <form action="" method="post"> {% csrf_token %}
+     <div class="container">
+       {% for field in form %}
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-phone"></i></div>
+           <div class="w3-rest">
+             {{ field.errors }}
+               {{ field }}
+           </div>
+        </div>
+       {% endfor %}
+        <button class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding" type="submit">
+            <strong>{% trans "Send" %}</strong></button><br>
+     </div>
+  </form>
+     
+ </div>
+{% endif %}
+
+{% endfor %}
+
+{% endblock home %}

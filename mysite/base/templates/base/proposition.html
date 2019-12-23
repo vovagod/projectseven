@@ -12,9 +12,9 @@
           {% for item, value in key.items %}
      <h3 id='title'>{{value.title}}</h3>
         <p>{% filter linebreaksbr %}{{value.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
-        <a href="{{value.urllink}}" title="{% trans 'Visit website' %}" target="_blank">
+        <a href="{{value.urllink}}" target="_blank">
             <img id='img' {% if debug %} src="{{value.image.url}}" {% else %} src="{{host}}{{value.image.url}}" {% endif %}
-                 title="{{value.title}}" style="width:100%"></a>
+                 title="{{value.data1}}" style="width:100%"></a>
           {% endfor %}
           {% endif %}
     
@@ -24,9 +24,9 @@
      <h3 id='title'>{{image.title}}</h3>
         <p>{% filter linebreaksbr %}{{image.desc_html|safe|linebreaksbr}}{% endfilter %}</p>
         {% if image.image %}
-        <a href="{{image.image.urllink}}" title="{% trans 'Visit website' %}" target="_blank">
+        <a href="{{image.urllink}}" target="_blank">
             <img id='img' {% if debug %} src="{{image.image.url}}" {% else %} src="{{host}}{{image.image.url}}" {% endif %} 
-                 title="{{image.title}}" style="width:100%"></a>
+                 title="{{image.data1}}" style="width:100%"></a>
         {% endif %}
           {% endfor %}
           {% endfor %}

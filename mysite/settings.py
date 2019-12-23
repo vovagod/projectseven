@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*',]
@@ -299,7 +299,7 @@ PREORDER = _("<p style='text-align:justify'>&ensp;Please fill in the form fields
      )
 
 BID = _("<p style='text-align:justify'>&ensp;Please fill in the form fields. "
-      "In the last field enter the price for which you are ready to buy the invention."
+      "In the last field enter the price for which you are ready to buy the invention. "
       "After receiving your bid, we will contact you and discuss the details of the transaction.</p>"
      )
 
@@ -328,6 +328,7 @@ PHRASE_TWO = _('Please send me login details for Comaex Demo')
 # Comaex email template content
 PHONE = '+7(985)482-85-88'
 EMAIL_ADDRESS = 'comaex.info@yandex.ru'
+SFUGD_ADDRESS = 'gva008@gmail.com'
 COMAEX_DEMO = 'http://comaex.ddns.net'
 ADDRESS = _('Moscow, Sirenevy bulvar 32')
 FOOTER_TITLE = _('Supervisor-server Comaex')
