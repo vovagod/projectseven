@@ -307,7 +307,9 @@ CREATE TABLE public.base_image (
     description text NOT NULL,
     name_id integer,
     desc_html text NOT NULL,
-    urllink character varying(200) NOT NULL
+    urllink character varying(200) NOT NULL,
+    data1 character varying(50) NOT NULL,
+    data2 character varying(50) NOT NULL
 );
 
 
@@ -440,6 +442,7 @@ CREATE TABLE public.clients_clients (
     last_post timestamp with time zone,
     bid integer NOT NULL,
     count smallint NOT NULL,
+    country character varying(120) NOT NULL,
     CONSTRAINT clients_clients_bid_check CHECK ((bid >= 0)),
     CONSTRAINT clients_clients_count_check CHECK ((count >= 0)),
     CONSTRAINT clients_clients_counter_check CHECK ((counter >= 0))
@@ -667,7 +670,9 @@ CREATE TABLE public.promotion_image (
     urllink character varying(200) NOT NULL,
     description text NOT NULL,
     desc_html text NOT NULL,
-    name_id integer
+    name_id integer,
+    data1 character varying(50) NOT NULL,
+    data2 character varying(50) NOT NULL
 );
 
 
@@ -1011,6 +1016,7 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 51, true);
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
 1	pbkdf2_sha256$100000$awaKUAXoIUK4$uSZhMYHqsUDZkHLmaQy68NLGSPlq8+1ZTOScYWB/YI4=	2019-12-17 22:44:44.588708+03	t	admin			gva008@gmail.com	t	t	2019-12-14 11:49:48.06374+03
+2	pbkdf2_sha256$100000$MNb1bVBlPcjq$oXibKI22CrENipva5yPj2xiyPoe1xc8iDy76dQiqIl4=	\N	t	admincomaex			gva008@gmail.com	t	t	2019-12-22 22:29:25.321894+03
 \.
 
 
@@ -1033,7 +1039,7 @@ SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
 -- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_en
 --
 
-SELECT pg_catalog.setval('public.auth_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.auth_user_id_seq', 2, true);
 
 
 --
@@ -1088,12 +1094,12 @@ SELECT pg_catalog.setval('public.base_base_id_seq', 18, true);
 -- Data for Name: base_image; Type: TABLE DATA; Schema: public; Owner: admin_en
 --
 
-COPY public.base_image (id, image, slug, title, sentence, description, name_id, desc_html, urllink) FROM stdin;
-1	comaex/Mini_PC_1.jpg	comaex	Supervisor Server Comaex	Specifications:	<ul><li>Processor: Intel Dual Core i5-4200Y</li><li>RAM: RAM4GB</li><li>ROM: SSD30GB</li><li>Interface: 4 * USB3.0, 2 * USB2.0, 1000Mbps BaseT LAN, 802.11 b/g/n WiFi</li><li>Case type: aluminum heat sink</li><li>Dimensions: 133x124x40 mm</li></ul>	5	<ul><li>Processor: Intel Dual Core i5-4200Y</li><li>RAM: RAM4GB</li><li>ROM: SSD30GB</li><li>Interface: 4 * USB3.0, 2 * USB2.0, 1000Mbps BaseT LAN, 802.11 b/g/n WiFi</li><li>Case type: aluminum heat sink</li><li>Dimensions: 133x124x40 mm</li></ul>	
-2	comaex/E800_DTU.jpg	comaex	Radio module E800-DTU	Specifications:	<ul><li>Operating frequency: 433 MHz</li><li>Transmit Power: 30 dBm</li><li>Transfer rate: 1.2-115.2 kbps</li><li>antenna type: SMA-K</li><li>comm interface: RS232 / RS485</li><li>communication range: 2500 m</li><li>dimensions: 66x66x21 mm</li></ul>	5	<ul><li>Operating frequency: 433 MHz</li><li>Transmit Power: 30 dBm</li><li>Transfer rate: 1.2-115.2 kbps</li><li>antenna type: SMA-K</li><li>comm interface: RS232 / RS485</li><li>communication range: 2500 m</li><li>dimensions: 66x66x21 mm</li></ul>	
-3	charts/charts_2_3TTeS9f.jpg	charts		An example of "Recuperator" screen. The output mode of the table of values.	&emsp; This screenshot shows the output of the table of values ​​of the selected parameter. The output of the table is possible both in static mode and in dynamic mode “REAL TIME”.	11	<p>&emsp; This screenshot shows the output of the table of values ​​of the selected parameter. The output of the table is possible both in static mode and in dynamic mode “REAL TIME”.</p>	
-5	visualization/vizualization_3_DFLnKOR.jpg	visualization		An example of "Recuperator" screen.	&emsp; This screenshot shows an example of the “Parterre” object with the following functionality:\r\n&emsp; &emsp; - temperature, humidity, electricity, gas, cold and hot water meters (value),\r\n&emsp; &emsp; - motion sensors, smoke sensors, fire (event),\r\n&emsp; &emsp; - blinds, door locks, lighting (control),\r\n&emsp; &emsp; - temperature, humidity (settings)	13	<p>&emsp; This screenshot shows an example of the “Parterre” object with the following functionality:\n&emsp; &emsp; - temperature, humidity, electricity, gas, cold and hot water meters (value),\n&emsp; &emsp; - motion sensors, smoke sensors, fire (event),\n&emsp; &emsp; - blinds, door locks, lighting (control),\n&emsp; &emsp; - temperature, humidity (settings)</p>	
-4	charts/charts_3_C2aNcJZ.jpg	charts		An example of "Recuperator" screen. Chart overlay mode.	&emsp; In this screenshot, three graphs are displayed in the overlay mode. You can add up to 2 additional parameters to the main schedule only if the recording intervals are equal.	11	<p>&emsp; In this screenshot, three graphs are displayed in the overlay mode. You can add up to 2 additional parameters to the main schedule only if the recording intervals are equal.</p>	
+COPY public.base_image (id, image, slug, title, sentence, description, name_id, desc_html, urllink, data1, data2) FROM stdin;
+1	comaex/Mini_PC_1.jpg	comaex	Supervisor Server Comaex	Specifications:	<ul><li>Processor: Intel Dual Core i5-4200Y</li><li>RAM: RAM4GB</li><li>ROM: SSD30GB</li><li>Interface: 4 * USB3.0, 2 * USB2.0, 1000Mbps BaseT LAN, 802.11 b/g/n WiFi</li><li>Case type: aluminum heat sink</li><li>Dimensions: 133x124x40 mm</li></ul>	5	<ul><li>Processor: Intel Dual Core i5-4200Y</li><li>RAM: RAM4GB</li><li>ROM: SSD30GB</li><li>Interface: 4 * USB3.0, 2 * USB2.0, 1000Mbps BaseT LAN, 802.11 b/g/n WiFi</li><li>Case type: aluminum heat sink</li><li>Dimensions: 133x124x40 mm</li></ul>			
+2	comaex/E800_DTU.jpg	comaex	Radio module E800-DTU	Specifications:	<ul><li>Operating frequency: 433 MHz</li><li>Transmit Power: 30 dBm</li><li>Transfer rate: 1.2-115.2 kbps</li><li>antenna type: SMA-K</li><li>comm interface: RS232 / RS485</li><li>communication range: 2500 m</li><li>dimensions: 66x66x21 mm</li></ul>	5	<ul><li>Operating frequency: 433 MHz</li><li>Transmit Power: 30 dBm</li><li>Transfer rate: 1.2-115.2 kbps</li><li>antenna type: SMA-K</li><li>comm interface: RS232 / RS485</li><li>communication range: 2500 m</li><li>dimensions: 66x66x21 mm</li></ul>			
+3	charts/charts_2_3TTeS9f.jpg	charts		An example of "Recuperator" screen. The output mode of the table of values.	&emsp; This screenshot shows the output of the table of values ​​of the selected parameter. The output of the table is possible both in static mode and in dynamic mode “REAL TIME”.	11	<p>&emsp; This screenshot shows the output of the table of values ​​of the selected parameter. The output of the table is possible both in static mode and in dynamic mode “REAL TIME”.</p>			
+5	visualization/vizualization_3_DFLnKOR.jpg	visualization		An example of "Recuperator" screen.	&emsp; This screenshot shows an example of the “Parterre” object with the following functionality:\r\n&emsp; &emsp; - temperature, humidity, electricity, gas, cold and hot water meters (value),\r\n&emsp; &emsp; - motion sensors, smoke sensors, fire (event),\r\n&emsp; &emsp; - blinds, door locks, lighting (control),\r\n&emsp; &emsp; - temperature, humidity (settings)	13	<p>&emsp; This screenshot shows an example of the “Parterre” object with the following functionality:\n&emsp; &emsp; - temperature, humidity, electricity, gas, cold and hot water meters (value),\n&emsp; &emsp; - motion sensors, smoke sensors, fire (event),\n&emsp; &emsp; - blinds, door locks, lighting (control),\n&emsp; &emsp; - temperature, humidity (settings)</p>			
+4	charts/charts_3_C2aNcJZ.jpg	charts		An example of "Recuperator" screen. Chart overlay mode.	&emsp; In this screenshot, three graphs are displayed in the overlay mode. You can add up to 2 additional parameters to the main schedule only if the recording intervals are equal.	11	<p>&emsp; In this screenshot, three graphs are displayed in the overlay mode. You can add up to 2 additional parameters to the main schedule only if the recording intervals are equal.</p>			
 \.
 
 
@@ -1153,7 +1159,7 @@ SELECT pg_catalog.setval('public.base_submenu_id_seq', 11, true);
 -- Data for Name: clients_clients; Type: TABLE DATA; Schema: public; Owner: admin_en
 --
 
-COPY public.clients_clients (company, email, phone, about, area, persons, created, enable_mailing, interested, flag, category, counter, uuid, error_mailing, file, slug, address, email2, filepath, preorder, language, last_post, bid, count) FROM stdin;
+COPY public.clients_clients (company, email, phone, about, area, persons, created, enable_mailing, interested, flag, category, counter, uuid, error_mailing, file, slug, address, email2, filepath, preorder, language, last_post, bid, count, country) FROM stdin;
 \.
 
 
@@ -1356,6 +1362,12 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 92	clients	0024_clients_bid	2019-12-18 00:17:17.760478+03
 93	clients	0025_auto_20191218_2253	2019-12-18 22:53:12.38395+03
 94	clients	0026_auto_20191221_1314	2019-12-21 13:14:36.36681+03
+95	base	0002_auto_20191223_2229	2019-12-23 22:30:02.901547+03
+96	clients	0027_auto_20191222_1726	2019-12-23 22:30:02.909551+03
+97	clients	0028_auto_20191222_1914	2019-12-23 22:30:02.924248+03
+98	promotion	0002_auto_20191223_2229	2019-12-23 22:30:03.033759+03
+99	clients	0029_clients_country	2019-12-24 14:18:56.034171+03
+100	clients	0029_auto_20191223_2045	2019-12-24 23:07:48.642657+03
 \.
 
 
@@ -1363,7 +1375,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin_en
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 94, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 100, true);
 
 
 --
@@ -1991,7 +2003,7 @@ SELECT pg_catalog.setval('public.interaction_correspondence_id_seq', 1, false);
 -- Data for Name: promotion_image; Type: TABLE DATA; Schema: public; Owner: admin_en
 --
 
-COPY public.promotion_image (id, image, slug, title, sentence, urllink, description, desc_html, name_id) FROM stdin;
+COPY public.promotion_image (id, image, slug, title, sentence, urllink, description, desc_html, name_id, data1, data2) FROM stdin;
 \.
 
 

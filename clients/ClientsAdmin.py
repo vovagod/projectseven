@@ -24,17 +24,18 @@ class ClientsResource(resources.ModelResource):
 
     class Meta:
         model = Clients
-        fields = ('company', 'address', 'email', 'email2', 'phone', 'about',
+        fields = ('company', 'address', 'country', 'area', 'email', 'email2', 'phone', 'about',
                   'category', 'language', 'persons', 'enable_mailing',
                   )
 
 
 class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     resource_class = ClientsResource
-    list_display = ['company', 'category', 'language', 'email', 'phone', 'count',
+    list_display = ['company', 'country', 'area', 'category', 'language', 'email', 'phone', 'count',
                     'enable_mailing', 'interested', 'preorder', 'errors']
 
-    search_fields = ('company', 'category',)
+    search_fields = ('about',)
+    list_filter = ('category', 'country', 'area', 'enable_mailing', 'preorder')
 
     readonly_fields = (
         'company_created',
@@ -53,6 +54,7 @@ class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
             'fields': (
                 ('category', 'language'),
                 ('company', 'slug'),
+                ('country', 'area'),
                 ('address', 'uuid'),
                 ('email', 'phone'),
             )

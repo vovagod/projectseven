@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-21 22:22+0300\n"
+"POT-Creation-Date: 2019-12-24 21:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,84 +20,84 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: ClientsAdmin.py:38
+#: ClientsAdmin.py:52
 msgid "Client"
 msgstr "Клиент"
 
-#: ClientsAdmin.py:46
+#: ClientsAdmin.py:61
 msgid "Description"
 msgstr "Описание"
 
-#: ClientsAdmin.py:52
+#: ClientsAdmin.py:68
 msgid "Actions"
 msgstr "Действия"
 
-#: ClientsAdmin.py:60
+#: ClientsAdmin.py:76
 msgid "Mailing"
 msgstr "Рассылка"
 
-#: ClientsAdmin.py:78
+#: ClientsAdmin.py:94
 msgid "Promotion on this language does not exist"
 msgstr "Промоция на этом языке не существует"
 
-#: ClientsAdmin.py:82
-msgid "There was an error sending an email: "
+#: ClientsAdmin.py:98
+msgid "There was an error sending the email: "
 msgstr "Возникла ошибка при отправке сообщения: "
 
-#: ClientsAdmin.py:86
+#: ClientsAdmin.py:102
 msgid "Message was successfully sent to client"
 msgstr "Сообщение было успешно отправлено клиенту"
 
-#: ClientsAdmin.py:90
+#: ClientsAdmin.py:106
 msgid "Send message to client"
 msgstr "Отправить сообщение клиенту"
 
-#: ClientsAdmin.py:91
+#: ClientsAdmin.py:107
 msgid "Submit message"
 msgstr "Подтвердить сообщение"
 
-#: ClientsAdmin.py:101
+#: ClientsAdmin.py:117
 msgid "company created"
 msgstr "дата создания"
 
-#: ClientsAdmin.py:109
+#: ClientsAdmin.py:125
 msgid "last post"
 msgstr "последняя отправка"
 
-#: ClientsAdmin.py:117
+#: ClientsAdmin.py:133
 msgid "theme of mailing"
 msgstr "тема рассылки"
 
-#: ClientsAdmin.py:122 ClientsAdmin.py:138 ClientsAdmin.py:147
-#: ClientsAdmin.py:156
+#: ClientsAdmin.py:138 ClientsAdmin.py:154 ClientsAdmin.py:163
+#: ClientsAdmin.py:172
 msgid "None"
 msgstr "Нету"
 
-#: ClientsAdmin.py:125
+#: ClientsAdmin.py:141
 msgid "mailing errors"
 msgstr "ошибки рассылки"
 
-#: ClientsAdmin.py:133
+#: ClientsAdmin.py:149
 msgid "number of emails sent"
 msgstr "число отправленных сообщений"
 
-#: ClientsAdmin.py:140
+#: ClientsAdmin.py:156
 msgid "Available"
 msgstr "Имеются"
 
-#: ClientsAdmin.py:142
+#: ClientsAdmin.py:158
 msgid "Errors"
 msgstr "Ошибки"
 
-#: ClientsAdmin.py:150
+#: ClientsAdmin.py:166
 msgid "path to folder"
 msgstr "путь к папке"
 
-#: ClientsAdmin.py:160
+#: ClientsAdmin.py:176
 msgid "Download file"
 msgstr "Загрузить файл"
 
-#: ClientsAdmin.py:165
+#: ClientsAdmin.py:181
 msgid "List of downloaded files"
 msgstr "Список загруженных файлов"
 
@@ -113,7 +113,7 @@ msgstr "Контактное лицо"
 msgid "Peter Smith"
 msgstr "Иванов Иван"
 
-#: forms.py:19 models.py:35
+#: forms.py:19 models.py:37
 msgid "Company address"
 msgstr "Адрес компании"
 
@@ -145,125 +145,132 @@ msgstr "Клиент не существует"
 msgid "Your bid, USD"
 msgstr "Ваша ставка, USD"
 
-#: models.py:32
+#: models.py:33
 msgid "UUID Number"
 msgstr "Номер UUID"
 
-#: models.py:33
+#: models.py:34
 msgid "Company name"
 msgstr "Имя компании"
 
-#: models.py:34
+#: models.py:35
 msgid "Slug"
 msgstr "Слаг"
 
 #: models.py:36
+msgid "Country"
+msgstr "Страна"
+
+#: models.py:38
 msgid "Company email"
 msgstr "Эл.почта компании"
 
-#: models.py:37
+#: models.py:39
 msgid "Contact email"
 msgstr "Эл.почта персоны"
 
-#: models.py:38
+#: models.py:40
 msgid "Phone"
 msgstr "Телефон"
 
-#: models.py:39
+#: models.py:41
 msgid "About company"
 msgstr "О компании"
 
-#: models.py:40
-msgid "Field of activity"
-msgstr "Сфера деятельности"
-
 #: models.py:42
+msgid "Area"
+msgstr "Сфера"
+
+#: models.py:44
 msgid "Category"
 msgstr "Категория"
 
-#: models.py:42
+#: models.py:44
 msgid "Select category"
 msgstr "Выберете категорию"
 
-#: models.py:44
+#: models.py:46
 msgid "Language"
 msgstr "Язык"
 
-#: models.py:44
+#: models.py:46
 msgid "Select language"
 msgstr "Выберете язык"
 
-#: models.py:45
+#: models.py:47
 msgid "Company persons"
 msgstr "Лица компании"
 
-#: models.py:46
+#: models.py:48
 msgid "Created"
 msgstr "Создан"
 
-#: models.py:47
+#: models.py:49
 msgid "Last post"
 msgstr "Последняя отправка"
 
-#: models.py:48
+#: models.py:50
 msgid "Emailing"
 msgstr "Рассылка"
 
-#: models.py:49
+#: models.py:51
 msgid "Interest"
 msgstr "Интерес"
 
-#: models.py:50
+#: models.py:52
 msgid "Preorder"
 msgstr "Предзаказ"
 
-#: models.py:51
+#: models.py:53
 msgid "Tick counter"
 msgstr "Счетчик тиков"
 
-#: models.py:52
+#: models.py:54
 msgid "Number of tick made"
 msgstr "Число сделанных тиков"
 
-#: models.py:53
+#: models.py:55
 msgid "Email counter"
-msgstr "Счетчик рассылок"
+msgstr "Рассылки"
 
-#: models.py:54
+#: models.py:56
 msgid "Number of email sent"
 msgstr "Число отправленных сообщений"
 
-#: models.py:55
+#: models.py:57
 msgid "Bid"
 msgstr "Ставка"
 
-#: models.py:56
+#: models.py:58
 msgid "Bid made by client"
 msgstr "Ставка, сделанная клиентом"
 
-#: models.py:58
+#: models.py:60
 msgid "Emailing report"
 msgstr "Отчет отправки"
 
-#: models.py:60
+#: models.py:62
 msgid "File"
 msgstr "Файл"
 
-#: models.py:60
+#: models.py:62
 msgid "File from client"
 msgstr "Файл от клиента"
 
-#: models.py:61
+#: models.py:63
 msgid "Path to downloaded files"
 msgstr "Путь к загруженным файлам"
 
-#: models.py:62
+#: models.py:64
 msgid "Flag"
 msgstr "Флаг"
 
-#: models.py:69 models.py:70
+#: models.py:71 models.py:72
 msgid "Clients"
 msgstr "Клиенты"
+
+#~ msgid "Field of activity"
+#~ msgstr "Сфера деятельности"
 
 #~ msgid "Flug"
 #~ msgstr "Флаг"
