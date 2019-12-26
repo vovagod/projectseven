@@ -1,0 +1,10 @@
+{% extends "base/email.html" %}
+{% block core %}
+{% for key, value in content.items %}
+      <td>      
+          {% if key == 'text' %}
+            {% filter linebreaksbr %}{{value|safe|linebreaksbr}}{% endfilter %}
+          {% endif %}
+      </td>
+{% endfor %}
+{% endblock core %}

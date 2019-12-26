@@ -53,8 +53,8 @@ class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
         (_('Client'), {
             'fields': (
                 ('category', 'language'),
-                ('company', 'slug'),
                 ('country', 'area'),
+                ('company', 'slug'),
                 ('address', 'uuid'),
                 ('email', 'phone'),
             )
@@ -104,7 +104,7 @@ class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
         translation.deactivate()
         return redirect(reverse_lazy('admin:clients_clients_change', args=[obj.uuid,]))
    
-    send_to_client.label = _("Send message to client")  
+    send_to_client.label = _("Send promotion to client")  
     send_to_client.short_description = _("Submit message")  
 
     change_actions = ('send_to_client', )

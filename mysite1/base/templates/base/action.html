@@ -1,0 +1,12 @@
+{% extends "base/alert.html" %}
+{% load i18n %}
+{% block core %}
+
+<td><br><h3>{% trans "Dear, " %} {{object.company}}</h3>
+    <h3>{{action}}</h3><br>
+    <button type="button" class="close"
+        onclick="javascript:window.close('','_parent','');" title="{% trans 'Close the window' %}">{% trans 'Close' %}</button>
+    <p style="font-size: 11px; text-align: center">{% trans "close the browser window if the button did not work" %}</p>
+      </td>
+
+{% endblock core %}

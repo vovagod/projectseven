@@ -1,9 +1,8 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 import time
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
 from django.conf import settings
+
 from scheduler.models import Scheduler
 from clients.models import Clients
 from promotion.models import Promotion
@@ -32,7 +31,7 @@ class Schedule(object):
             return
     
         clients = Clients.objects.filter(enable_mailing=True, category=self.category)
-        if clients is None:  #test it !
+        if len(clients) == 0:
             sch_q.update(event=_('Client does not exists'))
             return
         
@@ -47,20 +46,21 @@ class Schedule(object):
                 cl.update(counter=client.counter+1)
                 continue
             self.l.acquire()
+            try:
+                promotion = [list(p.values()) for p in lan if next(iter(p))==client.language]
             
-            promotion = [list(p.values()) for p in lan if next(iter(p))==client.language]
+                if len(promotion) == 0:
+                    cl.update(error_mailing=_('Promotion does not exists'))
+                    continue
             
-            if len(promotion) == 0:
-                cl.update(error_mailing=_('Promotion does not exists'))
-                continue
-            
-            err = send_mail(self.subject, client.email, promotion[0][0],
-                            client.company, self.template, client.language)
-            if err:
-                cl.update(error_mailing=str(err)[1:-2])
-            else:
-                cl.update(counter=0, count=client.count+1, error_mailing= '')
-            self.l.release()
+                err = send_mail(self.subject, client.email, promotion[0][0],
+                                client.company, self.template, client.language)
+                if err:
+                    cl.update(error_mailing=str(err)[1:-2])
+                else:
+                    cl.update(counter=0, count=client.count+1, error_mailing= '')
+            finally:
+                self.l.release()
         
         end = time.time()
         res = end - start
@@ -68,50 +68,10 @@ class Schedule(object):
         return res
 
 
-# HVAC scheduler
-def CycleOne(self):
-    cycle = Schedule(self.lock, settings.CATEGORIES[0][0])
+
+def CycleOne(self, category):
+    cycle = Schedule(self.lock, category)
     res = cycle.cycle()
-    print("CYCLE_ONE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
-    return res
-
-
-# Smat Home scheduler
-def CycleTwo(self):
-    cycle = Schedule(self.lock, settings.CATEGORIES[1][0])
-    res = cycle.cycle()
-    print("CYCLE_TWO, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
-    return res
-
-
-# IoT scheduler
-def CycleThree(self):
-    cycle = Schedule(self.lock, settings.CATEGORIES[2][0])
-    res = cycle.cycle()
-    print("CYCLE_THREE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
-    return res
-
-
-# Facebook scheduler
-def CycleFour(self):
-    cycle = Schedule(self.lock, settings.CATEGORIES[3][0])
-    res = cycle.cycle()
-    print("CYCLE_FOUR, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
-    return res
-
-
-# Mathematics scheduler
-def CycleFive(self):
-    cycle = Schedule(self.lock, settings.CATEGORIES[4][0])
-    res = cycle.cycle()
-    print("CYCLE_FIVE, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
-    return res
-
-
-# SFUGD scheduler
-def CycleSix(self):
-    cycle = Schedule(self.lock, settings.CATEGORIES[5][0])
-    res = cycle.cycle()
-    print("CYCLE_SIX, START: {}, DELAY: {}".format(datetime.now(tz=timezone.utc), res))
+    print("SYRVEY, category:{}, start:{}, delay:{}".format(category, datetime.now(), res))
     return res
 

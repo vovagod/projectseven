@@ -33,17 +33,19 @@ class Clients(models.Model):
                                       help_text=_("UUID Number"))
     company        = models.CharField(max_length=120, verbose_name=_('Company name'))
     slug           = models.SlugField(unique=False, verbose_name=_('Slug'), help_text=_("Slug"))
-    country        = models.CharField(max_length=120, blank=True, default='', verbose_name=_('Country'))
+    country        = models.CharField(max_length=120, choices=settings.COUNTRY, default='Russia',
+                                      verbose_name=_('Country'))
     address        = models.CharField(max_length=240, blank=True, default='Unknown', verbose_name=_('Company address'))
     email          = models.EmailField(max_length=120, unique=True,  verbose_name=_('Company email'))
     email2         = models.EmailField(max_length=120, blank=True, null=True, verbose_name=_('Contact email'))
     phone          = models.CharField(max_length=120, blank=True, verbose_name=_('Phone'))
     about          = models.TextField(max_length=500, blank=True, default='', verbose_name=_('About company'))
-    area           = models.CharField(max_length=120, blank=True, verbose_name=_('Area'))
+    area           = models.CharField(max_length=120, choices=settings.AREA,
+                                      default='Manufacture', verbose_name=_('Area'))
     category       = models.CharField(max_length=30, default='HVAC', choices=settings.CATEGORIES,
-                                      verbose_name=_('Category'), help_text=_("Select category"))
+                                      verbose_name=_('Category'), help_text=_("Select emailing category"))
     language       = models.CharField(max_length=30, default='RU', choices=settings.LANG,
-                                      verbose_name=_('Language'), help_text=_("Select language"))
+                                      verbose_name=_('Language'), help_text=_("Select emailing language"))
     persons        = models.CharField(max_length=120, blank=True, default='', verbose_name=_('Company persons'))
     created        = models.DateTimeField(auto_now_add=True, verbose_name=_('Created'))
     last_post      = models.DateTimeField(blank=True, null=True, verbose_name=_('Last post'))

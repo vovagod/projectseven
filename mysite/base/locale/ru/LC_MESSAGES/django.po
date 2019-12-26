@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-23 10:48+0300\n"
+"POT-Creation-Date: 2019-12-25 15:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,246 +20,245 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: forms.py:27
+#: base/forms.py:27
 msgid "Enter a message or select from the list..."
 msgstr "Введите сообщение или выберете из списка..."
 
-#: forms.py:35
+#: base/forms.py:35
 msgid "Phone"
 msgstr "Телефон"
 
-#: forms.py:36
+#: base/forms.py:36
 msgid "Email"
 msgstr "Эл.почта"
 
-#: forms.py:37
+#: base/forms.py:37
 msgid "Full name"
 msgstr "Полное имя"
 
-#: forms.py:45
+#: base/forms.py:45
 msgid "Enter a valid email address"
 msgstr "Введите корректный адрес эл.почты"
 
-#: forms.py:63
+#: base/forms.py:63
 msgid "Unable to get IP address"
 msgstr "Невозможно получить IP адрес"
 
-#: forms.py:71
+#: base/forms.py:71
 msgid "no-reply"
 msgstr "no-reply"
 
-#: models.py:29
+#: base/models.py:29
 msgid "Title"
 msgstr "Заголовок"
 
-#: models.py:30
+#: base/models.py:30
 msgid "Enter menu title"
 msgstr "Введите заголовок меню"
 
-#: models.py:31 models.py:68
+#: base/models.py:31 base/models.py:68
 msgid "Slug"
 msgstr "Слаг"
 
-#: models.py:32
+#: base/models.py:32
 msgid "Enter menu name in format: '#about'"
 msgstr "Введите имя меню в формате: '#about'"
 
-#: models.py:34
+#: base/models.py:34
 msgid "Mark"
 msgstr "Метка"
 
-#: models.py:35
+#: base/models.py:35
 msgid "1-output of headers for authentic.users, 2-for unauthentic."
 msgstr "1-вывод заголовков для аутентиф.пользователей, 2-для неаутентиф."
 
-#: models.py:36
+#: base/models.py:36
 msgid "Icon"
 msgstr "Иконка"
 
-#: models.py:37 models.py:73
+#: base/models.py:37 base/models.py:73
 msgid "Enter icon in format: 'fa fa-cog'"
 msgstr "Введите иконку в формате: 'fa fa-cog'"
 
-#: models.py:38
+#: base/models.py:38
 msgid "Color"
 msgstr "Цвет"
 
-#: models.py:48 models.py:49
+#: base/models.py:48 base/models.py:49
 msgid "Horizontal menu"
 msgstr "Горизонтальное меню"
 
-#: models.py:65
+#: base/models.py:65
 msgid "Menu"
 msgstr "Меню"
 
-#: models.py:65
+#: base/models.py:65
 msgid "Select menu"
 msgstr "Выберете меню"
 
-#: models.py:66 models.py:95
+#: base/models.py:66 base/models.py:95
 msgid "Submenu"
 msgstr "Подменю"
 
-#: models.py:67
+#: base/models.py:67
 msgid "Enter submenu title"
 msgstr "Введите заголовок подменю"
 
-#: models.py:69
+#: base/models.py:69
 msgid "Enter submenu name in format: '#about'"
 msgstr "Введите имя подменю в формате: '#about'"
 
-#: models.py:70
+#: base/models.py:70
 msgid "Submenu mark"
 msgstr "Метка подменю"
 
-#: models.py:71
+#: base/models.py:71
 msgid "1-Submenu will be displayed"
 msgstr "1-подменю будет выведено"
 
-#: models.py:72
+#: base/models.py:72
 msgid "Submenu icon"
 msgstr "Подменю иконка"
 
-#: models.py:74
+#: base/models.py:74
 msgid "color"
 msgstr "цвет"
 
-#: models.py:84 models.py:85
+#: base/models.py:84 base/models.py:85
 msgid "Vertical submenu"
 msgstr "Вертикальное подменю"
 
-#: models.py:95
+#: base/models.py:95
 msgid "Select submenu"
 msgstr "Выберете подменю"
 
-#: models.py:99 models.py:100
+#: base/models.py:99 base/models.py:100
 msgid "Page content"
 msgstr "Содержание страницы"
 
-#: models.py:141 models.py:142
+#: base/models.py:141 base/models.py:142
 msgid "Additional images"
 msgstr "Дополнительные изображения"
 
-#: tasks.py:31
+#: base/tasks.py:30
 msgid "Tick is 0. Scheduler stopped"
 msgstr "Тик равен 0. Планировщик остановлен"
 
-#: tasks.py:31
+#: base/tasks.py:30
 msgid "No data"
 msgstr "Нет данных"
 
-#: tasks.py:36
+#: base/tasks.py:35
 msgid "Client does not exists"
 msgstr "Клиент не существует"
 
-#: tasks.py:54
+#: base/tasks.py:53
 msgid "Promotion does not exists"
 msgstr "Промоция не существует"
 
-#: tasks.py:67
+#: base/tasks.py:67
 msgid "Scheduler works"
 msgstr "Планировщик работает"
 
-#: templates/base/action.html:5 templates/base/confirmation.html:5
+#: base/templates/base/action.html:5 base/templates/base/confirmation.html:5
 msgid "Dear, "
 msgstr "Дорогой, "
 
-#: templates/base/action.html:8
+#: base/templates/base/action.html:8
 msgid "Close the window"
 msgstr "Закройте окно"
 
-#: templates/base/action.html:8
+#: base/templates/base/action.html:8
 msgid "Close"
 msgstr "Закрыть"
 
-#: templates/base/action.html:9
+#: base/templates/base/action.html:9
 msgid "close the browser window if the button did not work"
 msgstr "Закройте окно браузера, если кнопка не сработала"
 
-#: templates/base/alert.html:142 templates/base/email.html:131
-#: templates/base/email.html:164 templates/base/proposition.html:15
-#: templates/base/proposition.html:27
+#: base/templates/base/alert.html:142 base/templates/base/email.html:131
+#: base/templates/base/email.html:164
 msgid "Visit website"
 msgstr "Посетить сайт"
 
-#: templates/base/base.html:132
+#: base/templates/base/base.html:132
 msgid "To the start"
 msgstr "К началу"
 
-#: templates/base/buy.html:7
+#: base/templates/base/buy.html:7
 msgid "Pre-order form"
 msgstr "Форма предзаказа"
 
-#: templates/base/buy.html:27 templates/base/home.html:272
-#: templates/base/preorder.html:27
+#: base/templates/base/buy.html:27 base/templates/base/home.html:272
+#: base/templates/base/preorder.html:27
 msgid "Send"
 msgstr "Отправить"
 
-#: templates/base/confirmation.html:7
+#: base/templates/base/confirmation.html:7
 msgid "Thank you for your interest to our technology."
 msgstr "Спасибо за ваш интерес к нашей технологии."
 
-#: templates/base/confirmation.html:9
+#: base/templates/base/confirmation.html:9
 msgid "Go to login page of"
 msgstr "Перейти на cтраницу входа"
 
-#: templates/base/confirmation.html:12
+#: base/templates/base/confirmation.html:12
 msgid "Regards, Comaex Team"
 msgstr "С уважением, команда Comaex"
 
-#: templates/base/email.html:133
+#: base/templates/base/email.html:133
 msgid "Email service"
 msgstr "Служба рассылки"
 
-#: templates/base/home.html:96
+#: base/templates/base/home.html:96
 msgid "Close window"
 msgstr "Закрыть окно"
 
-#: templates/base/home.html:98
+#: base/templates/base/home.html:98
 msgid "Screenshot of"
 msgstr "Скриншот экрана"
 
-#: templates/base/home.html:120
+#: base/templates/base/home.html:120
 msgid "Screen of the"
 msgstr "Экран"
 
-#: templates/base/home.html:120
+#: base/templates/base/home.html:120
 msgid "Open in new window"
 msgstr "Открыть в новом окне"
 
-#: templates/base/home.html:255
+#: base/templates/base/home.html:255
 msgid "Contact"
 msgstr "Контакты"
 
-#: templates/base/home.html:257
+#: base/templates/base/home.html:257
 msgid "Call us: +7 985 482-85-88"
 msgstr "Звоните нам: +7 985 482-85-88"
 
-#: templates/base/home.html:257
+#: base/templates/base/home.html:257
 msgid "Write to us about cooperation, technical questions, login in "
 msgstr "Пишие нам по вопросам сотрудничества, техническим, данным входа в "
 
-#: templates/base/home.html:257
+#: base/templates/base/home.html:257
 msgid " and others:"
 msgstr " и другим:"
 
-#: templates/base/proposition.html:38
+#: base/templates/base/proposition.html:38
 msgid "unsubscribe from emailing"
 msgstr "отписаться от рассылки"
 
-#: templates/base/proposition.html:39
+#: base/templates/base/proposition.html:39
 msgid "evaluate the idea"
 msgstr "оценить идею"
 
-#: templates/base/proposition.html:41
+#: base/templates/base/proposition.html:41
 msgid "make pre-opder"
 msgstr "сделать предзаказ"
 
-#: templates/base/proposition.html:44
+#: base/templates/base/proposition.html:44
 msgid "make a bid"
 msgstr "сделать ставку"
 
-#: views.py:22
+#: base/views.py:22
 msgid "Guest"
 msgstr "Гость"
 

@@ -232,7 +232,7 @@ LOGGING = {
     }
 
 
-# User settings
+# Categories for promotion and emailing
 CATEGORIES = (
     ('HVAC', 'HVAC'), #[0][0]
     ('Smart Home', 'Smart Home'), #[1][0]
@@ -242,6 +242,21 @@ CATEGORIES = (
     ('SFUGD', 'SFUGD'), #[5][0]
     )
 
+AREA = (
+    ('Manufacture', _('Manufacture')),
+    ('Retail', _('Retail')),
+    ('Installation', _('Installation')),
+    ('Science', _('Science')),
+)
+
+COUNTRY = (
+    ('Russia', _('Russia')),
+    ('USA', _('USA')),
+    ('Canada', _('Canada')),
+    ('England', _('England')),
+    ('Germany', _('Germany')),
+    ('China', _('China')),
+)
 
 # Language tuple
 LANG = (
@@ -257,7 +272,7 @@ SUBJECT_MAIL = {
     'IoT':_('Business proposition'),
     'Facebook':_('Business proposition'),
     'Mathematics':_('Business proposition'),
-    'SFUGD':_('Business proposition'),
+    'SFUGD':_('Patent for your business'),
     }
 
 TEMPLATE_MAIL = {
@@ -270,13 +285,8 @@ TEMPLATE_MAIL = {
     }
 
 
-# Tick intervals (must be 3600 sec)
-SURVEY_TIME_ONE = 3600 # HVAC
-SURVEY_TIME_TWO = 10  # Smart Home
-SURVEY_TIME_THREE = 20  # IoT
-SURVEY_TIME_FOUR = 30  # Facebook
-SURVEY_TIME_FIVE = 40  # Mathematics
-SURVEY_TIME_SIX = 50  # SFUGD
+# Tick interval (must be 3600 sec)
+SURVEY_TIME_ONE = 60
 
 
 # Valid extensions list
@@ -284,7 +294,7 @@ VALID_EXTENSIONS = ['pdf', 'doc', 'docx', 'jpg', 'png', 'xlsx', 'xls']
 
 
 # Field values
-MIN_VALUE = 10000
+MIN_VALUE = 100000
 MAX_VALUE = 1000000
 
 
@@ -389,8 +399,8 @@ SFUGD = {'url':'http://'+SFUGD_DOMAIN,
         'title':SFUGD_TITLE,
         'name': 'SFUGD',
         'alt': 'Compact door',
-        'heading': _('Compact door. Patent US8327908'),
+        'heading': _('Compact door. Patent US8327908 for SALE'),
         'shape': _('Bid form'),
-        'buy':_('Buy'),
+        'buy':_('Make a bid'),
         }
 
