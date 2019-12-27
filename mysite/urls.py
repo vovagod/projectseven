@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponse
 
 from mysite.base.views import BaseRedirectView, emailview
 from promotion.views import promotionview
@@ -27,6 +28,11 @@ from clients.views import download
 
 app_name = 'mysite'    
 
+
+def response_error_handler(request, exception=None):
+    return HttpResponse(exception, status=403)
+
+handler403 = response_error_handler
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),

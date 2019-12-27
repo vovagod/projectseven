@@ -3,9 +3,12 @@ import glob
 import uuid
 import locale
 from django.db import models
+from django.db import IntegrityError
+from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
+
 
 
 
@@ -80,7 +83,12 @@ class Clients(models.Model):
     def save(self, *args, **kwargs):
         if self.slug =='':
             self.slug = slugify(self.company, allow_unicode=True)
-        super(Clients, self).save(*args, **kwargs)
+        #return super(Clients, self).save(*args, **kwargs)
+        try:
+            return super(Clients, self).save(*args, **kwargs)
+        except IntegrityError as e:
+            #raise PermissionDenied(e)
+            pass
 
     # get theme of mailing
     def get_theme(self):

@@ -15,7 +15,8 @@ class SurveyOne(Process):
 
     def run(self):
         while self.running:
-            for i, category in enumerate(settings.CATEGORIES):
+            for category in settings.CATEGORIES:
+            
                 self.lock_s.acquire()
                 try:
                     CycleOne(self, category[0])

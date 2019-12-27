@@ -10,6 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import translation
 from django.utils.html import format_html_join, format_html
 
+#from django.db import IntegrityError
+
 from django_object_actions import DjangoObjectActions
 
 from .models import Clients
@@ -180,6 +182,14 @@ class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
                            )
                            
     downloaded_files.short_description = _("List of downloaded files")
+
+
+    #def save_model(self, request, obj, form, change):
+        #print('We are in save_model...')
+        #try:
+            #obj.save()
+        #except IntegrityError as e:
+            #messages.error(request, e)
 
 
     def has_module_permission(self, request):

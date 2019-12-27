@@ -32,7 +32,7 @@ class Schedule(object):
     
         clients = Clients.objects.filter(enable_mailing=True, category=self.category)
         if len(clients) == 0:
-            sch_q.update(event=_('Client does not exists'))
+            sch_q.update(event=_('Client does not exist'))
             return
         
         lan = []
