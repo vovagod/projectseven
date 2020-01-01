@@ -117,11 +117,17 @@
     database dump:
     pg_dump -h localhost -U admin_en -d projectseven_en > /home/vova/projectseven/projectseven_en.sql
 
-    database restore:
+    database restore -?:
     pg_restore -d projectseven_ru -h localhost -U admin_ru /home/vova/projectseven/projectseven_db.sql
 
+    restoring:
     working method from psql:
         psql projectseven_db -f /home/vova/projectseven/projectseven_db.sql
+
+    connection to db:
+    psql -h localhost -p 5432 -U admin projectseven_db
+    drop table clients;
+        
     
     for tests.py: alter user blogger createdb;
 

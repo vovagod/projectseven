@@ -10,16 +10,13 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import translation
 from django.utils.html import format_html_join, format_html
 
-#from django.db import IntegrityError
-
 from django_object_actions import DjangoObjectActions
-
-from .models import Clients
+from .models import Clients, ImportDuplication
 from promotion.models import Promotion
 from mail.sendmail import send_mail
-
 from import_export import fields, resources
 from import_export.admin import ImportExportMixin
+
 
 
 class ClientsResource(resources.ModelResource):
@@ -50,7 +47,6 @@ class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
         'emails_sent',
     )
     
-
     fieldsets = (
         (_('Client'), {
             'fields': (
@@ -184,21 +180,29 @@ class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     downloaded_files.short_description = _("List of downloaded files")
 
 
-    #def save_model(self, request, obj, form, change):
-        #print('We are in save_model...')
-        #try:
-            #obj.save()
-        #except IntegrityError as e:
-            #messages.error(request, e)
-
-
     def has_module_permission(self, request):
         if translation.get_language_from_request(request, check_path=True) != settings.LANGUAGE_CODE:
             return False
         return True
 
 
+class ImportDuplicationAdmin(admin.ModelAdmin):
+    
+    list_display = ['id', 'company', 'cause', 'created', 'flag']
 
+    readonly_fields = (
+        'id',
+        'company',
+        'cause',
+        'created',
+    )
+
+    def has_module_permission(self, request):
+        if translation.get_language_from_request(request, check_path=True) != settings.LANGUAGE_CODE:
+            return False
+        return True
+
+    
 
 def str_to_class(str):
     try:

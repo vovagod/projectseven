@@ -9,7 +9,6 @@ class LanguageMiddleware:
 
     def __call__(self, request):
         lang = translation.get_language_from_request(request, check_path=True)
-        #lang = request.LANGUAGE_CODE
         request.session[translation.LANGUAGE_SESSION_KEY] = lang
         
         # Code to be executed for each request before

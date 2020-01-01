@@ -1,11 +1,9 @@
 from django.utils.translation import ugettext_lazy as _
-from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.base import RedirectView
 from django.views.generic.edit import FormView
-from django.shortcuts import render_to_response # remove after
+from django.shortcuts import render_to_response 
 from django.conf import settings
-from django.http import HttpResponseRedirect
 from django.core.cache import cache
 
 from mysite.mixins import RequestFormAttachMixin

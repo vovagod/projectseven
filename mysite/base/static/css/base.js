@@ -155,7 +155,7 @@ for (i = 0; i < fa.length; i++) {
 // Slideshow characteristic Images
 function charImage(im) {
     if (w < 601){ 
-        alert('Мала ширина экрана. Переверните устройство.');
+        alert('Small screen width. Flip device.');
         return; }
     item = document.getElementById("image"+im);
     item.style.display = "block";

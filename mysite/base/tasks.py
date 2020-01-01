@@ -72,6 +72,6 @@ class Schedule(object):
 def CycleOne(self, category):
     cycle = Schedule(self.lock, category)
     res = cycle.cycle()
-    print("SYRVEY, category:{}, start:{}, delay:{}".format(category, datetime.now(), res))
+    #print("SYRVEY, category:{}, start:{}, delay:{}".format(category, datetime.now(), res))
     return res
 

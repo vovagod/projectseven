@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*',]
@@ -369,7 +369,7 @@ if DEBUG:
     
 # Comaex (HVAC, IoT, Smart Home) email template data
 MSG = {'letter':PATH+'letter.png',
-        'host':'https://'+DOMAIN,  # make https
+        'host':'https://'+DOMAIN,  
         'url':'https://'+DOMAIN,
         'logo': PATH+'logo.png',
         'website':PATH+'website.png',
