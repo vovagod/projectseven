@@ -1,4 +1,4 @@
-### A single-page website describing the superviser-server Comaex
+### A single-page website describing the supervisor-server Comaex
 
 #### Technology stack
 
