@@ -11,8 +11,8 @@ class Scheduler(models.Model):
                                   help_text=_("Select category name"))
     tick       = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Ticks'),
                                                   help_text=_("Enter ticks number, 1 tick-1 hour, 0-stop"))
-    counter    = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Tick counter'),
-                                                  help_text=_("Tick count"))
+    counter    = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name=_('Initial tick'),
+                                                  help_text=_("Enter initial tick"))
     event      = models.CharField(max_length=120, null=True, blank=True,  verbose_name=_('Status'),
                                   help_text=_("Scheduler status"))
     processing = models.CharField(max_length=120, null=True, default='None',  verbose_name=_('Processing'),

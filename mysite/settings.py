@@ -21,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'rrrh4^o!qkw!^=h)y455jn68&vi^u@(c%5-xke!$7y0djo#&wq'
+SECRET_KEY = '************************************'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*',]
@@ -68,9 +68,9 @@ MIDDLEWARE = [
 
 
 # Admin, Manager data
-MANAGERS = ['chim73@mail.ru',]
-ADMINS = [('Comaex', 'gva008@gmail.com'), ('Comaex', 'chim73@mail.ru')]
-SERVER_EMAIL = 'comaex.info@comaex.info'
+MANAGERS = ['abc@abc.ru',]
+ADMINS = [('Comaex', 'abc@abc.com'), ('Comaex', 'abc@abc.ru')]
+SERVER_EMAIL = 'abc@abc.info'
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -124,17 +124,17 @@ DATABASES = {
     'default': {},
     'database_ru': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'projectseven_db',
-        'USER': 'admin',
-        'PASSWORD': '12345',
+        'NAME': 'project_db',
+        'USER': '*****,
+        'PASSWORD': '****',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     },
     'database_en': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'projectseven_en',
-        'USER': 'admin_en',
-        'PASSWORD': '12345',
+        'NAME': 'project_en',
+        'USER': '****',
+        'PASSWORD': '*****',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     },
@@ -169,11 +169,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # AWS Email settings
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'email-smtp.us-east-1.amazonaws.com'
-EMAIL_HOST_USER = 'AKIAZ37L3WD4CXMH5AZK' 
-EMAIL_HOST_PASSWORD = 'BPf6zVOe65C+V7LHLsYbNRy59ySdAeMACTsMXaDnWeuh'
+EMAIL_HOST = '***********'
+EMAIL_HOST_USER = '*************' 
+EMAIL_HOST_PASSWORD = '***************'
 SUBJECT = "Amazon SES Email"
-FROM = 'comaex.info@comaex.info'
+FROM = 'abc@abc.info'
 EMAIL_PORT = 587
 
 
@@ -336,18 +336,18 @@ PHRASE_ONE = _('I am interested, please contact me')
 PHRASE_TWO = _('Please send me login details for Comaex Demo')
 
 # Comaex email template content
-PHONE = '+7(985)482-85-88'
-EMAIL_ADDRESS = 'comaex.info@yandex.ru'
-SFUGD_ADDRESS = 'gva008@gmail.com'
-COMAEX_DEMO = 'http://comaex.ddns.net'
-ADDRESS = _('Moscow, Sirenevy bulvar 32')
-FOOTER_TITLE = _('Supervisor-server Comaex')
+PHONE = '+7(123)123-45-67'
+EMAIL_ADDRESS = 'abc@abc.ru'
+SFUGD_ADDRESS = 'abc@abc.com'
+COMAEX_DEMO = 'http://abc.net'
+ADDRESS = _('Moscow, Abcd street, 123')
+FOOTER_TITLE = _('***********')
 
 
 # SFUGD email template content
-SFUGD_DOMAIN = 'www.fold-up-door.com'
-SFUGD_SITE = 'http://www.fold-up-door.com'
-SFUGD_TITLE = _('Compact door SFUGD')
+SFUGD_DOMAIN = 'www.abc.com'
+SFUGD_SITE = 'http://www.abc.com'
+SFUGD_TITLE = _('************')
 
 
 # Static files (CSS, JavaScript, Images)
@@ -399,7 +399,7 @@ SFUGD = {'url':'http://'+SFUGD_DOMAIN,
         'title':SFUGD_TITLE,
         'name': 'SFUGD',
         'alt': 'Compact door',
-        'heading': _('Compact door. Patent US8327908 for SALE'),
+        'heading': _('********************'),
         'shape': _('Bid form'),
         'buy':_('Make a bid'),
         }

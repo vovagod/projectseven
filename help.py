@@ -82,6 +82,9 @@
    git commit -m "Removed folder from repository"
    git push origin master
 
+   #gitignore file
+   sudo nano .gitignore
+
 3. Requirements:
    pip freeze > requirements.txt
    pip install -r requirements.txt

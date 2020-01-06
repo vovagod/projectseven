@@ -13,10 +13,22 @@ from django.utils.html import format_html_join, format_html
 from django_object_actions import DjangoObjectActions
 from .models import Clients, ImportDuplication
 from promotion.models import Promotion
+from scheduler.models import Scheduler
 from mail.sendmail import send_mail
 from import_export import fields, resources
 from import_export.admin import ImportExportMixin
 
+
+
+def set_counter(self, request, queryset):
+    
+    for query in queryset:
+        initial_tick = Scheduler.objects.get(category=query.category)
+        queryset.filter(uuid=query.uuid).update(counter=initial_tick.counter)
+       
+    messages.info(request, _("Counters of selected clients were updated"))
+
+set_counter.short_description = _("Set counters to initial")
 
 
 class ClientsResource(resources.ModelResource):
@@ -30,10 +42,12 @@ class ClientsResource(resources.ModelResource):
 
 class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
     resource_class = ClientsResource
-    list_display = ['company', 'country', 'area', 'category', 'language', 'email', 'phone', 'count',
-                    'enable_mailing', 'interested', 'preorder', 'errors']
+    list_display = ['company', 'country', 'area', 'category', 'language', 'count',
+                    'counter', 'enable_mailing', 'interested', 'preorder', 'errors']
+    
+    actions = [set_counter]
 
-    search_fields = ('about',)
+    search_fields = ('company', 'about',)
     list_filter = ('category', 'country', 'area', 'enable_mailing', 'preorder')
 
     readonly_fields = (
@@ -83,7 +97,7 @@ class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
 
     prepopulated_fields = {'slug': ('company', )}
 
-
+   
     def send_to_client(self, request, obj):
         subject = settings.SUBJECT_MAIL.get(obj.category,)
         template = settings.TEMPLATE_MAIL.get(obj.category,)
@@ -97,7 +111,7 @@ class ClientsAdmin(ImportExportMixin, DjangoObjectActions, admin.ModelAdmin):
                 messages.error(request, _('There was an error sending the email: '))
                 messages.add_message(request, messages.ERROR, str(err)[1:-2])
             else:
-                Clients.objects.filter(uuid=obj.uuid).update(counter=obj.counter+1)
+                Clients.objects.filter(uuid=obj.uuid).update(count=obj.count+1)
                 messages.info(request, _("Message was successfully sent to client"))
         translation.deactivate()
         return redirect(reverse_lazy('admin:clients_clients_change', args=[obj.uuid,]))

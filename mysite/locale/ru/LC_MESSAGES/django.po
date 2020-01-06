@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-25 15:55+0300\n"
+"POT-Creation-Date: 2020-01-05 21:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,60 +141,75 @@ msgstr "Доп.данные4"
 msgid "Enter additional data 4"
 msgstr "Введите доп.данные 4"
 
-#: settings.py:191
+#: settings.py:191 settings1.py:191 settings2.py:191
 msgid "Russian"
 msgstr "Русский"
 
-#: settings.py:192
+#: settings.py:192 settings1.py:192 settings2.py:192
 msgid "English"
 msgstr "Английский"
 
-#: settings.py:246
+#: settings.py:246 settings1.py:246 settings2.py:246
 msgid "Manufacture"
 msgstr "Производство"
 
 #: settings.py:247
+msgid "Parts"
+msgstr "Комплектация"
+
+#: settings.py:248
+msgid "Associates"
+msgstr "Смежники"
+
+#: settings.py:249 settings1.py:247 settings2.py:247
 msgid "Retail"
 msgstr "Продажи"
 
-#: settings.py:248
+#: settings.py:250 settings1.py:248 settings2.py:248
 msgid "Installation"
 msgstr "Инсталляции"
 
-#: settings.py:249
+#: settings.py:251 settings1.py:249 settings2.py:249
 msgid "Science"
 msgstr "Наука"
 
-#: settings.py:253
+#: settings.py:255 settings1.py:253 settings2.py:253
 msgid "Russia"
 msgstr "Россия"
 
-#: settings.py:254
+#: settings.py:256 settings1.py:254 settings2.py:254
 msgid "USA"
 msgstr "США"
 
-#: settings.py:255
+#: settings.py:257 settings1.py:255 settings2.py:255
 msgid "Canada"
 msgstr "Канада"
 
-#: settings.py:256
+#: settings.py:258 settings1.py:256 settings2.py:256
 msgid "England"
 msgstr "Англия"
 
-#: settings.py:257
+#: settings.py:259 settings1.py:257 settings2.py:257
 msgid "Germany"
 msgstr "Германия"
 
-#: settings.py:258
+#: settings.py:260 settings1.py:258 settings2.py:258
 msgid "China"
 msgstr "Китай"
 
-#: settings.py:270 settings.py:271 settings.py:272 settings.py:273
-#: settings.py:274 settings.py:275 settings.py:388
+#: settings.py:272 settings.py:273 settings.py:274 settings.py:275
+#: settings.py:276 settings.py:390 settings1.py:270 settings1.py:271
+#: settings1.py:272 settings1.py:273 settings1.py:274 settings1.py:388
+#: settings2.py:270 settings2.py:271 settings2.py:272 settings2.py:273
+#: settings2.py:274 settings2.py:388
 msgid "Business proposition"
 msgstr "Предложение сотрудничества"
 
-#: settings.py:302
+#: settings.py:277 settings1.py:275 settings2.py:275
+msgid "Patent for your business"
+msgstr ""
+
+#: settings.py:304 settings1.py:302 settings2.py:302
 msgid ""
 "<p style='text-align:justify'>&ensp;Please fill in the form fields. In the "
 "last field, attach the file(s) with a list of controlled parameters in the "
@@ -214,7 +229,7 @@ msgstr ""
 "приложение вашего заказа. После вам останется только установить сервер на "
 "объекте и запустить его в работу.</p>"
 
-#: settings.py:311
+#: settings.py:313 settings1.py:311 settings2.py:311
 msgid ""
 "<p style='text-align:justify'>&ensp;Please fill in the form fields. In the "
 "last field enter the price for which you are ready to buy the invention. "
@@ -225,126 +240,145 @@ msgstr ""
 "последнем поле введите цену за которую вы готовы купить изобретение. Получив "
 "вашу ставку, мы свяжемся с вами и обсудим детали сделки.</p>"
 
-#: settings.py:316
+#: settings.py:318 settings1.py:316 settings2.py:316
 msgid "<p style='font-size: 14px; color:gray'>*change if not matching</p>"
 msgstr ""
 "<p style='font-size: 14px; color:gray'>*измените, если не соответствует</p>"
 
-#: settings.py:320
+#: settings.py:322 settings1.py:320 settings2.py:320
 msgid "login"
 msgstr "логин"
 
-#: settings.py:320
+#: settings.py:322 settings1.py:320 settings2.py:320
 msgid "password"
 msgstr "входа"
 
-#: settings.py:320
+#: settings.py:322 settings1.py:320 settings2.py:320
 msgid "details"
 msgstr ""
 
-#: settings.py:320
+#: settings.py:322 settings1.py:320 settings2.py:320
 msgid "send"
 msgstr ""
 
-#: settings.py:321
+#: settings.py:323 settings1.py:321 settings2.py:321
 msgid "interested"
 msgstr "интересно"
 
-#: settings.py:321
+#: settings.py:323 settings1.py:321 settings2.py:321
 msgid "contact"
 msgstr "Контакт"
 
-#: settings.py:321
+#: settings.py:323 settings1.py:321 settings2.py:321
 msgid "call"
 msgstr "свяжитесь"
 
-#: settings.py:321
+#: settings.py:323 settings1.py:321 settings2.py:321
 msgid "me"
 msgstr "мной"
 
-#: settings.py:322
+#: settings.py:324 settings1.py:322 settings2.py:322
 msgid "Your request has been sent successfully!"
 msgstr "Ваш запрос был успешно отправлен!"
 
-#: settings.py:323
+#: settings.py:325 settings1.py:323 settings2.py:323
 msgid "We have received your message and will contact you shortly."
 msgstr "Мы получили ваше сообщение и вскоре свяжемся с вами."
 
-#: settings.py:324
+#: settings.py:326 settings1.py:324 settings2.py:324
 msgid "To enter use login: <b>user</b>, password: <b>user12345</b>."
 msgstr "Для входа используйте логин: user, пароль: user12345."
 
-#: settings.py:325
+#: settings.py:327 settings1.py:325 settings2.py:325
 msgid "Login data sent to your email."
 msgstr "Данные отправлены вам на почту."
 
-#: settings.py:326
+#: settings.py:328 settings1.py:326 settings2.py:326
 msgid "We will contact you in the next hour."
 msgstr "Мы свяжемся с вами в ближайший час."
 
-#: settings.py:329
+#: settings.py:331 settings1.py:329 settings2.py:329
 msgid "You have successfully unsubscribed from the emailing"
 msgstr "Вы успешно отписались от рассылки"
 
-#: settings.py:330
+#: settings.py:332 settings1.py:330 settings2.py:330
 msgid "Thank you for rating!"
 msgstr "Благодарим вас за оценку!"
 
-#: settings.py:331
+#: settings.py:333 settings1.py:331 settings2.py:331
 msgid "Thank you, your pre-order has been received!"
 msgstr "Спасибо, ваш предзаказ получен!"
 
-#: settings.py:332
+#: settings.py:334 settings1.py:332 settings2.py:332
 msgid "Thank you, we got your bid!"
 msgstr "Спасибо, мы получили вашу ставку!"
 
-#: settings.py:335
+#: settings.py:337 settings1.py:335 settings2.py:335
 msgid "I am interested, please contact me"
 msgstr "Мне интересно, свяжитесь со мной пожалуйста"
 
-#: settings.py:336
+#: settings.py:338 settings1.py:336 settings2.py:336
 msgid "Please send me login details for Comaex Demo"
 msgstr "Пожалуйста пришлите мне данные входа в Comaex Demo"
 
-#: settings.py:343
+#: settings.py:345 settings1.py:343
 msgid "Moscow, Sirenevy bulvar 32"
 msgstr "Москва, Сиреневый бульвар 32"
 
-#: settings.py:344
+#: settings.py:346 settings1.py:344
 msgid "Supervisor-server Comaex"
 msgstr "Супервизор-сервер Comaex"
 
-#: settings.py:350
+#: settings.py:352 settings1.py:350
 msgid "Compact door SFUGD"
 msgstr "Компактные ворота SFUGD"
 
-#: settings.py:389
+#: settings.py:391 settings1.py:389 settings2.py:389
 msgid "Pre-order form"
 msgstr "Форма предзаказа"
 
-#: settings.py:390
+#: settings.py:392 settings1.py:390 settings2.py:390
 msgid "Unsubscribe"
 msgstr "Отписаться"
 
-#: settings.py:391
+#: settings.py:393 settings1.py:391 settings2.py:391
 msgid "Interesting"
 msgstr "Интересно"
 
-#: settings.py:392
+#: settings.py:394 settings1.py:392 settings2.py:392
 msgid "Pre-order"
 msgstr "Предзаказ"
 
-#: settings.py:402
-msgid "Compact door. Patent US8327908"
+#: settings.py:404 settings1.py:402
+msgid "Compact door. Patent US8327908 for SALE"
 msgstr "Компактные ворота. Патент US8327908"
 
-#: settings.py:403
+#: settings.py:405 settings1.py:403 settings2.py:403
 msgid "Bid form"
 msgstr "Форма ставки"
 
-#: settings.py:404
-msgid "Buy"
-msgstr "Купить"
+#: settings.py:406 settings1.py:404 settings2.py:404
+msgid "Make a bid"
+msgstr "Сделать ставку"
+
+#: settings2.py:343
+msgid "Moscow, Abcd street, 123"
+msgstr ""
+
+#: settings2.py:344
+msgid "***********"
+msgstr ""
+
+#: settings2.py:350
+msgid "************"
+msgstr ""
+
+#: settings2.py:402
+msgid "********************"
+msgstr ""
+
+#~ msgid "Buy"
+#~ msgstr "Купить"
 
 #~ msgid "please"
 #~ msgstr "пожалуйста"

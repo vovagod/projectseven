@@ -1,5 +1,6 @@
 *.pyc
 *~
+*.xlsx
 __pycache__
 myvenv
 .DS_Store
@@ -12,3 +13,7 @@ raw_images
 /static/image
 /static/img
 /static/js
+db.sqlite3
+Promotion.odt
+settings1.py
+settings2.py

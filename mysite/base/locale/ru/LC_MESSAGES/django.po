@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-25 15:55+0300\n"
+"POT-Creation-Date: 2020-01-05 21:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,7 +149,9 @@ msgid "No data"
 msgstr "Нет данных"
 
 #: base/tasks.py:35
-msgid "Client does not exists"
+#, fuzzy
+#| msgid "Client does not exists"
+msgid "Client does not exist"
 msgstr "Клиент не существует"
 
 #: base/tasks.py:53
@@ -185,15 +187,6 @@ msgstr "Посетить сайт"
 msgid "To the start"
 msgstr "К началу"
 
-#: base/templates/base/buy.html:7
-msgid "Pre-order form"
-msgstr "Форма предзаказа"
-
-#: base/templates/base/buy.html:27 base/templates/base/home.html:272
-#: base/templates/base/preorder.html:27
-msgid "Send"
-msgstr "Отправить"
-
 #: base/templates/base/confirmation.html:7
 msgid "Thank you for your interest to our technology."
 msgstr "Спасибо за ваш интерес к нашей технологии."
@@ -209,6 +202,10 @@ msgstr "С уважением, команда Comaex"
 #: base/templates/base/email.html:133
 msgid "Email service"
 msgstr "Служба рассылки"
+
+#: base/templates/base/home.html:13
+msgid "Загрузка..."
+msgstr ""
 
 #: base/templates/base/home.html:96
 msgid "Close window"
@@ -242,6 +239,10 @@ msgstr "Пишие нам по вопросам сотрудничества, т
 msgid " and others:"
 msgstr " и другим:"
 
+#: base/templates/base/home.html:272 base/templates/base/preorder.html:27
+msgid "Send"
+msgstr "Отправить"
+
 #: base/templates/base/proposition.html:38
 msgid "unsubscribe from emailing"
 msgstr "отписаться от рассылки"
@@ -258,9 +259,12 @@ msgstr "сделать предзаказ"
 msgid "make a bid"
 msgstr "сделать ставку"
 
-#: base/views.py:22
+#: base/views.py:20
 msgid "Guest"
 msgstr "Гость"
+
+#~ msgid "Pre-order form"
+#~ msgstr "Форма предзаказа"
 
 #~ msgid "None"
 #~ msgstr "Нету"

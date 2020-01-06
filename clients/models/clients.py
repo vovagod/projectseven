@@ -3,7 +3,7 @@ import glob
 import uuid
 import locale
 from django.db import models
-from django.db import IntegrityError
+from django.db import IntegrityError, DataError
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
@@ -89,6 +89,11 @@ class Clients(models.Model):
             inst = ImportDuplication(company=self.company, cause=e)
             inst.save()
             pass
+        except DataError as e:
+            inst = ImportDuplication(company=self.company, cause=e)
+            inst.save()
+            pass
+            
 
     # get theme of mailing
     def get_theme(self):
