@@ -1,32 +1,31 @@
-## A single-page website describing the superviser-server Comaex
+### A single-page website describing the superviser-server Comaex
 
-## Technology stack
+#### Technology stack
 
 - Python 3.5
 - Django 2.0
 - PostgreSQL
 
-### Website is available on link: [httpie](https://www.comaex.info)
+##### Website is available on link: [www.comaex.info](https://www.comaex.info)
 
-#### In this project I use two patches that I want to offer to the community
+##### In this project I use two patches that I want to share with the community
 
-### Patch first
-
-# This non-trivial patch improve Django functionality
-# by providing automatic registration in main admin.py
-# of all admin files of the project
+#### Patch first
 
 
+>This non-trivial patch improve Django functionality
+by providing automatic registration in main admin.py
+of all admin files of the project
 
-##  admin.py module code  ##
+#####  admin.py module code:  
 
-# admin.py
+```python
 import importlib
 from django.contrib import admin
 from django.apps import apps
 
 
-# automatic registration module
+ # automatic registration module
 models = apps.get_models()
 for model in models:
     model_name = str(model.__name__)
@@ -48,14 +47,16 @@ for model in models:
         admin.site.register(model, class_admin)
     except admin.sites.AlreadyRegistered:
         pass
+```
 
+>An application admin file example. Make sure the module
+name looks like ‘BaseAdmin.py’, where the module name
+begins with the application name in uppercase as well
+as the word ‘Admin’
 
-##  an application admin module code  ##
-# make sure the module name looks like 'BaseAdmin.py',
-# where the module name begins with the application
-# name in uppercase as well as the word 'Admin'
+#####  BaseAdmin.py module code:
 
-# BaseAdmin.py
+```python
 import sys
 
 ....
@@ -71,18 +72,18 @@ def str_to_class(str):
     except AttributeError:
         return None
     return obj
+```
 
 
-
-### Patch second
-
-
-# This non-trivial patch improve Django functionality
-# by completely removing extra data, such as request and settings
-# from error email to ADMIN
+#### Patch second
 
 
-# logging settings in settings.py
+>This non-trivial patch improve Django functionality
+by completely removing extra data, such as request and settings
+from error email to ADMIN
+
+##### logging settings in settings.py:
+```python
 ADMINS = [('Example', 'example@example.com')]
 
 LOGGING = {
@@ -114,9 +115,10 @@ LOGGING = {
         },
     }
     }
+```
 
-
-# customfilter.py
+##### customfilter.py:
+```python
 import sys
 from django.views.debug import ExceptionReporter
 from django.utils.log import AdminEmailHandler
@@ -170,10 +172,10 @@ class CustomAdminEmailHandler(AdminEmailHandler):
         message = "%s\n\n%s" % (self.format(no_exc_record), reporter.get_traceback_text())
         html_message = reporter.get_traceback_html() if self.include_html else None
         self.send_mail(subject, message, fail_silently=True, html_message=html_message)
-
+```
         
     
-## License
+### License
                               
-#### Code is licensed under the BSD License. See [LICENSE](https://en.wikipedia.org/wiki/BSD_licenses) for more information.
+##### Code is licensed under the BSD License. See [LICENSE](https://en.wikipedia.org/wiki/BSD_licenses) for more information.
         
