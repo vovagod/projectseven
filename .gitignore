@@ -1,5 +1,7 @@
 *.pyc
 *~
+*.~lock.*
+*.xls
 *.xlsx
 __pycache__
 myvenv
