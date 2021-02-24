@@ -8,6 +8,97 @@
 
 ##### Website is available on link: [www.comaex.info](https://www.comaex.info)
 
+##### Clone the project from repository:
+
+```bash
+git clone https://github.com/vovagod/projectseven.git
+```
+
+##### Enter to projectseven directory and install virtual environment:
+
+```bash
+sudo apt install python3-venv
+```
+##### Run environment:
+
+```bash
+python3 -m venv myvenv
+```
+
+##### Activate environment:
+
+```bash
+source myvenv/bin/activate
+```
+
+##### Install wheel:  
+
+```bash
+pip3 install wheel
+```
+
+##### Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## DataBase deployment
+
+##### Create database projectseven_db:
+
+```bash
+sudo -u postgres bash -c "psql -c \"CREATE DATABASE projectseven_db;\""
+```
+```bash
+sudo -u postgres bash -c "psql -c \"CREATE USER user WITH PASSWORD 'password';\""
+```
+```bash
+sudo -u postgres bash -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE projectseven_db TO user;\""
+```
+
+##### Create database projectseven_en:
+
+```bash
+sudo -u postgres bash -c "psql -c \"CREATE DATABASE projectseven_en;\""
+```
+```bash
+sudo -u postgres bash -c "psql -c \"CREATE USER user WITH PASSWORD 'password';\""
+```
+```bash
+sudo -u postgres bash -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE projectseven_en TO user;\""
+```
+
+##### Make migration database_ru:
+
+```bash
+python manage.py migrate --database=database_ru
+```
+
+##### Make migration database_en:
+
+```bash
+python manage.py migrate --database=database_en
+```
+
+##### Create superuser database_ru:
+
+```bash
+python manage.py createsuperuser --database database_ru --username user
+```
+
+##### Create superuser database_en:
+
+```bash
+python manage.py createsuperuser --database database_en --username user
+```
+
+##### Run project:
+
+```bash
+python manage.py runserver
+```
+
 ##### In this project I use two patches that I want to share with the community
 
 #### Patch first
